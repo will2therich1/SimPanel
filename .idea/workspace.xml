@@ -151,7 +151,7 @@
       <flattenPackages />
       <showMembers />
       <showModules />
-      <showLibraryContents />
+      <showLibraryContents />Main
       <hideEmptyPackages />
       <abbreviatePackageNames />
       <autoscrollToSource />

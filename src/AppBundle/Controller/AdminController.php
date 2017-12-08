@@ -12,7 +12,7 @@ class AdminController extends Controller
     /**
      * @Route("/admin", name="adminHomepage")
      */
-    public function adminIndexAction(Request $request)
+    public function adminIndexAction()
     {
 
         // Get the user entity
