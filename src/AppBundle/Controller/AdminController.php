@@ -15,6 +15,7 @@ class AdminController extends Controller
     public function adminIndexAction(Request $request)
     {
 
+        // Get the user entity
         $user = $this->getUser();
 
 
