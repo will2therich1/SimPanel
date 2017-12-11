@@ -18,7 +18,7 @@
                         <div class="title">
                             <div class="icon"><i class="icon-user-1"></i></div><strong>Panel Users</strong>
                         </div>
-                        <div class="number dashtext-1">4</div>
+                        <div class="number dashtext-1"><a style="color: inherit" href="{{ path('UserAdmin') }}">{{ block.user|e }}</a></div>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="title">
             <div class="icon"><i class="icon-user"></i></div><strong>Panel Admins</strong>
         </div>
-        <div class="number dashtext-2">2</div>
+        <div class="number dashtext-2">{{ block.admin|e }}</div>
     </div>
     </div>
     </div>
@@ -56,4 +56,6 @@
     </div>
     </section>
     <hr>
+            </div>
+
 {% endblock %}

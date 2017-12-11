@@ -231,6 +231,7 @@ class User implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
+
     /**
      * @var int
      */
@@ -244,7 +245,7 @@ class User implements UserInterface
      *
      * @return User
      */
-    public function setAdmin(integer $admin)
+    public function setAdmin($admin)
     {
         $this->admin = $admin;
 

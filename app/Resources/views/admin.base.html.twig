@@ -1,29 +1,62 @@
 {% extends 'base.html.twig' %}
 
+{% block navbar %}
+    <header class="header">
+        <nav class="navbar navbar-expand-lg">
+        <div class="search-panel">
+            <div class="search-inner d-flex align-items-center justify-content-center">
+            <div class="close-btn">Close <i class="fa fa-close"></i></div>
+            <form id="searchForm" action="#">
+                <div class="form-group">
+                    <input type="search" name="search" placeholder="What are you searching for...">
+                    <button type="submit" class="submit">Search</button>
+                </div>
+            </form>
+        </div>
+        </div>
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+        <div class="navbar-header"><a href="#" class="navbar-brand">
+                <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">Posion</strong><strong>Panel</strong></div>
+        <div class="brand-text brand-sm"><strong class="text-primary">P</strong><strong>P</strong></div></a>
+        <button class="sidebar-toggle"><i class="fa fa-long-arrow-left"></i></button>
+        </div>
+        <li class="list-inline-item logout">
+            <a id="account" href="/admin/account" class="nav-link">My Account <i class="icon-user-outline"></i></a></li>
+
+        <li class="list-inline-item logout">
+            <a id="logout" href="{{ path('logout') }}" class="nav-link">Logout <i class="icon-logout"></i></a>
+        </li>
+        </ul>
+        </div>
+        </nav>
+    </header>
+    {% endblock %}
+
+
 {% block sidebar %}
 <div class="d-flex align-items-stretch">
 <nav id="sidebar">
     <div class="sidebar-header d-flex align-items-center">
     <div class="avatar"><img src="img/avatar-6.jpg" alt="..." class="img-fluid rounded-circle"></div>
     <div class="title">
-        <h1 class="h5">{{ name }}</h1>
+        <h1 class="h5">{{ currentUser.name }}</h1>
     </div>
     </div><span class="heading">Main</span>
     <ul class="list-unstyled">
-        <li class="active"><a href="{{ path("adminHomepage") }}"><i class="icon-home"></i>Home</a></li>
-        <li><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Users </a>
+        <li class="{% if active == 'Dash'  %}active{% endif %} "><a href="{{ path("adminHomepage") }}"><i class="icon-home"></i>Home</a></li>
+        <li class="{% if active == 'User'  %}active{% endif %} "><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Users </a>
             <ul id="dashvariants" class="collapse list-unstyled">
-        <li><a href="/admin/users">View Users</a></li>
-        <li><a href="#">Add Users</a></li>
+        <li><a href="{{ path("UserAdmin") }}">View Users</a></li>
+        <li><a href="{{ path('CreateUser') }}">Add Users</a></li>
     </ul>
     </li>
-    <li><a href="#dashvariants-2" aria-expanded="false" data-toggle="collapse"> <i class="icon-light-bulb"></i>Admins </a>
+    <li class="{% if active == 'Admin'  %}active{% endif %} "><a href="#dashvariants-2" aria-expanded="false" data-toggle="collapse"> <i class="icon-light-bulb"></i>Admins </a>
         <ul id="dashvariants-2" class="collapse list-unstyled">
-    <li><a href="/admin/admins">View Admins</a></li>
-    <li><a href="/admin/admins/create">Add Admins</a></li>
+    <li><a href="{{ path('AdminList') }}">View Admins</a></li>
+    <li><a href="{{ path('CreateAdmin') }}">Add Admins</a></li>
     </ul>
     </li>
-    <li><a href="#dashvariants-3" aria-expanded="false" data-toggle="collapse"> <i class="icon-chart"></i>Network </a>
+    <li class="{% if active == 'Network'  %}active{% endif %} "><a href="#dashvariants-3" aria-expanded="false" data-toggle="collapse"> <i class="icon-chart"></i>Network </a>
         <ul id="dashvariants-3" class="collapse list-unstyled">
     <li><a href="/admin/network">View Network Servers</a></li>
     <li><a href="/admin/network/add">Add Network Servers</a></li>
