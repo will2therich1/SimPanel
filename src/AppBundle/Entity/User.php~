@@ -201,9 +201,22 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        $roles = array(
-            'USER_ROLE' => "USER"
-        );
+
+        if ($this->getAdmin() == 1)
+        {
+            $roles = array(
+                'USER_ROLE' => "ROLE_USER",
+                'USER_ROLE_2' => "ROLE_ADMIN",
+            );
+        } else {
+            $roles = array(
+                'USER_ROLE' => "ROLE_USER",
+            );
+
+        }
+
+
+
 
         return $roles;
 
@@ -218,6 +231,7 @@ class User implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
+
     /**
      * @var int
      */
@@ -231,7 +245,7 @@ class User implements UserInterface
      *
      * @return User
      */
-    public function setAdmin(integer $admin)
+    public function setAdmin($admin)
     {
         $this->admin = $admin;
 

@@ -357,6 +357,68 @@ class AdminController extends Controller
         return $this->render('admin/create.admin.admin.html.twig' , $data);
     }
 
+    /**
+     * @Route("/admin/account", name="AdminProfileInfo")
+     */
+    public function adminInfoProfilePage()
+    {
+        $data = [];
+
+        // Get Doctrine
+        $em = $this->getDoctrine()->getEntityManager();
+
+
+        if (isset($_POST['Userusername']) && $_POST['Userusername'] !== ''){
+            $user = $this->getUser();
+
+            $user->setUsername($_POST['Userusername']);
+            $user->setEmail($_POST['email']);
+            $user->setFirstName($_POST['first_name']);
+            $user->setLastName($_POST['last_name']);
+            $data['success'] = 'User Updated';
+        }else{
+            $data['success'] = '';
+        }
+
+        // Create our Data Array
+        $data['currentUser'] = $this->getUserInfo();
+        $data['active'] = 'Dash';
+        $data['tab'] = 'Info';
+        $data['error'] = '';
+
+
+
+
+
+        // replace this example code with whatever you need
+        return $this->render('profiles/admin/information.profile.admin.index.twig' , $data);
+    }
+
+    /**
+     * @Route("/admin/account/password", name="AdminProfilePassword")
+     */
+    public function adminPasswordProfilePage()
+    {
+        $data = [];
+
+        // Get Doctrine
+        $em = $this->getDoctrine()->getEntityManager();
+
+
+        // Create our Data Array
+        $data['currentUser'] = $this->getUserInfo();
+        $data['active'] = 'Dash';
+        $data['tab'] = 'ChangePass';
+        $data['error'] = '';
+        $data['success'] = '';
+
+
+
+
+
+        // replace this example code with whatever you need
+        return $this->render('profiles/admin/password.profile.admin.index.twig' , $data);
+    }
 
 
     /**
@@ -419,10 +481,19 @@ class AdminController extends Controller
         $lastName = $user->getLastName();
         $fullName = $firstName . " " . $lastName;
 
+        $id = $user->getId();
+        $username = $user->getUsername();
+        $email = $user->getEmail();
 
         // Prepare data for page
         $data = [];
+        $data['id'] = $id;
         $data['name'] = $fullName;
+        $data['username'] = $username;
+        $data['email'] = $email;
+        $data['firstName'] = $firstName;
+        $data['lastName'] = $lastName;
+
 
         return $data;
     }
