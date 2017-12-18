@@ -20,8 +20,8 @@
                         <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-link {% if tab == 'Info'  %}active{% endif %}"><a  href="{{ path('AdminProfileInfo') }}">My Information</a></li>
                         <li class='nav-link {% if tab == 'ChangePass'  %}active{% endif %}'><a href = '{{ path('AdminProfilePassword') }}' > Change Password </a >
-                        <li class='nav-link {% if tab == 'API'  %}active{% endif %}' ><a href = '/admin/account/api' > API</a >
-                        <li class='nav-link {% if tab == 'TFA'  %}active{% endif %}'><a href = '/admin/account/tfa' > Two Factor Auth </a >
+                        <li class='nav-link {% if tab == 'API'  %}active{% endif %}' ><a href = '{{ path('AdminProfileAPI') }}' > API</a >
+                        <li class='nav-link {% if tab == 'TFA'  %}active{% endif %}'><a href = '{{ path('AdminProfileTFA') }}' > Two Factor Auth </a >
 
                             </ul >
 

@@ -35,7 +35,7 @@ class AdminController extends Controller
     public function adminUsersPage()
     {
         // Get Doctrine
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->createQueryBuilder();
 
         $get = $_GET;
@@ -115,7 +115,7 @@ class AdminController extends Controller
     public function createUsersPage()
     {
         // Get Doctrine
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
 
         // Create our Data Array
@@ -200,7 +200,7 @@ class AdminController extends Controller
     public function adminsListPage()
     {
         // Get Doctrine
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->createQueryBuilder();
 
         $get = $_GET;
@@ -280,7 +280,7 @@ class AdminController extends Controller
     public function createAdminsPage()
     {
         // Get Doctrine
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
 
         // Create our Data Array
@@ -357,69 +357,6 @@ class AdminController extends Controller
         return $this->render('admin/create.admin.admin.html.twig' , $data);
     }
 
-    /**
-     * @Route("/admin/account", name="AdminProfileInfo")
-     */
-    public function adminInfoProfilePage()
-    {
-        $data = [];
-
-        // Get Doctrine
-        $em = $this->getDoctrine()->getEntityManager();
-
-
-        if (isset($_POST['Userusername']) && $_POST['Userusername'] !== ''){
-            $user = $this->getUser();
-
-            $user->setUsername($_POST['Userusername']);
-            $user->setEmail($_POST['email']);
-            $user->setFirstName($_POST['first_name']);
-            $user->setLastName($_POST['last_name']);
-            $data['success'] = 'User Updated';
-        }else{
-            $data['success'] = '';
-        }
-
-        // Create our Data Array
-        $data['currentUser'] = $this->getUserInfo();
-        $data['active'] = 'Dash';
-        $data['tab'] = 'Info';
-        $data['error'] = '';
-
-
-
-
-
-        // replace this example code with whatever you need
-        return $this->render('profiles/admin/information.profile.admin.index.twig' , $data);
-    }
-
-    /**
-     * @Route("/admin/account/password", name="AdminProfilePassword")
-     */
-    public function adminPasswordProfilePage()
-    {
-        $data = [];
-
-        // Get Doctrine
-        $em = $this->getDoctrine()->getEntityManager();
-
-
-        // Create our Data Array
-        $data['currentUser'] = $this->getUserInfo();
-        $data['active'] = 'Dash';
-        $data['tab'] = 'ChangePass';
-        $data['error'] = '';
-        $data['success'] = '';
-
-
-
-
-
-        // replace this example code with whatever you need
-        return $this->render('profiles/admin/password.profile.admin.index.twig' , $data);
-    }
-
 
     /**
      * @param $url
@@ -473,9 +410,6 @@ class AdminController extends Controller
         // Get the user entity
         $user = $this->getUser();
 
-        // Get our sent variables!
-        $get = $_GET;
-
         // Generate the user information
         $firstName = $user->getFirstName();
         $lastName = $user->getLastName();
@@ -485,7 +419,7 @@ class AdminController extends Controller
         $username = $user->getUsername();
         $email = $user->getEmail();
 
-        // Prepare data for page
+        // Prepare data
         $data = [];
         $data['id'] = $id;
         $data['name'] = $fullName;
@@ -506,7 +440,7 @@ class AdminController extends Controller
      */
     public function getUserCount(){
         // Get Doctine
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->createQueryBuilder();
 
 
@@ -527,7 +461,7 @@ class AdminController extends Controller
      */
     public function getAdminCount(){
         // Get Doctine
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->createQueryBuilder();
 
 
@@ -589,4 +523,6 @@ class AdminController extends Controller
         $dash_str .= $password;
         return $dash_str;
     }
+
+
 }

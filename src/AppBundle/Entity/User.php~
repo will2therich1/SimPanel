@@ -3,12 +3,15 @@
 namespace AppBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use AppBundle\Service\EncryptionService;
 
 /**
  * User
  */
 class User implements UserInterface
 {
+
+
     /**
      * @var int
      */
@@ -261,4 +264,38 @@ class User implements UserInterface
     {
         return $this->admin;
     }
+    /**
+     * @var string
+     */
+    private $apiKey;
+
+
+    /**
+     * Set apiKey
+     *
+     * @param string $apiKey
+     *
+     * @return User
+     */
+    public function setApiKey($apiKey , EncryptionService $encryptionService)
+    {
+        $return = $encryptionService->encrypt($apiKey);
+        $this->apiKey = $return;
+
+        return $this;
+    }
+
+    /**
+     * Get apiKey
+     *
+     * @return string
+     */
+  public function getApiKey(EncryptionService $encryptionService)
+{
+    $key = $this->apiKey;
+
+    $encKey = $encryptionService->decrypt($key);
+
+    return $encKey;
+}
 }

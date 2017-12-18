@@ -38,10 +38,10 @@
             <input autocomplete="off" id="password" type="password" name="password"  required class="input-material">
             <label  for="login-password" class="label-material">Password</label>
         </div>
-        {#<div class="form-group">#}
-            {#<input autocomplete="off" id="login-tfa" type="text" name="form[tfa]" class="input-material">#}
-            {#<label for="login-username" class="label-material">TFA Code (If applicable)</label>#}
-        {#</div>#}
+        <div class="form-group">
+            <input autocomplete="off" id="tfa-code" type="text" name="tfa-code" placeholder="546 655" class="input-material">
+            <label for="tfa-code" class="label-material">TFA Code(If Required)</label>
+        </div>
 
 
         <input id="login" type='submit' name="_submit" class="btn btn-primary" value='Login'> </input>

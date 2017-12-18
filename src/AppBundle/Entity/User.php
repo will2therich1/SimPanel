@@ -3,12 +3,15 @@
 namespace AppBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use AppBundle\Service\EncryptionService;
 
 /**
  * User
  */
 class User implements UserInterface
 {
+
+
     /**
      * @var int
      */
@@ -201,7 +204,6 @@ class User implements UserInterface
 
     public function getRoles()
     {
-
         if ($this->getAdmin() == 1)
         {
             $roles = array(
@@ -260,5 +262,98 @@ class User implements UserInterface
     public function getAdmin()
     {
         return $this->admin;
+    }
+    /**
+     * @var string
+     */
+    private $apiKey;
+
+
+    /**
+     * Set apiKey
+     *
+     * @param string $apiKey
+     *
+     * @return User
+     */
+    public function setApiKey($apiKey , EncryptionService $encryptionService)
+    {
+        $return = $encryptionService->encrypt($apiKey);
+        $this->apiKey = $return;
+
+        return $this;
+    }
+
+    /**
+     * Get apiKey
+     *
+     * @return string
+     */
+  public function getApiKey(EncryptionService $encryptionService)
+{
+    $key = $this->apiKey;
+
+    $encKey = $encryptionService->decrypt($key);
+
+    return $encKey;
+}
+    /**
+     * @var integer
+     */
+    private $tfaStatus;
+
+    /**
+     * @var string
+     */
+    private $tfaSecret;
+
+
+    /**
+     * Set tfaStatus
+     *
+     * @param integer $tfaStatus
+     *
+     * @return User
+     */
+    public function setTfaStatus($tfaStatus)
+    {
+        $this->tfaStatus = $tfaStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get tfaStatus
+     *
+     * @return integer
+     */
+    public function getTfaStatus()
+    {
+        return $this->tfaStatus;
+    }
+
+    /**
+     * Set tfaSecret
+     *
+     * @param string $tfaSecret
+     *
+     * @return User
+     */
+    public function setTfaSecret($tfaSecret)
+    {
+        $this->tfaSecret = $tfaSecret;
+
+        return $this;
+    }
+
+    /**
+     * Get tfaSecret
+     *
+     * @return string
+     */
+    public function getTfaSecret()
+    {
+
+        return $this->tfaSecret;
     }
 }

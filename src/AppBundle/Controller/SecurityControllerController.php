@@ -33,7 +33,7 @@ class SecurityControllerController extends Controller
         // We will check to see if we have been passed any errors.
         if (isset($_GET['login'])) {
             if ($_GET['login'] == 'failed'){
-                $error = "Login Failed, Please check your credentials";
+                $error = "Login Failed, Please check your credentials & your TFA Code if applicable";
             }
         }
 

@@ -32,4 +32,13 @@ AppBundle\Entity\User:
         admin:
             type: integer
             length: 255
+        apiKey:
+            type: string
+            length: 255
+        tfaStatus:
+            type: integer
+            length: 255
+        tfaSecret:
+            type: string
+            length: 255
     lifecycleCallbacks: {  }

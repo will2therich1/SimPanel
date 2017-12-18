@@ -7,6 +7,8 @@
  */
 namespace AppBundle\Security;
 
+use AppBundle\Service\EncryptionService;
+use AppBundle\Service\GoogleAuthenticatorService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,10 +67,26 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
+
         $password = $user->getPassword();
         $postedPassword = $_POST['password'];
         if (password_verify($postedPassword , $password)){
-            return true;
+            if ($user->getTfaStatus() == 1){
+                $tfaPosted = $_POST['tfa-code'];
+                $tfaService = new GoogleAuthenticatorService();
+
+
+                $tfaCheck = $tfaService->verifyCode($user->getTfaSecret() , $tfaPosted);
+                if ($tfaCheck){
+                    return true;
+                }else{
+                    return false;
+                }
+
+
+            }else {
+                return true;
+            }
         }
         return false;
     }
