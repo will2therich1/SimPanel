@@ -70,25 +70,29 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
 
         $password = $user->getPassword();
         $postedPassword = $_POST['password'];
-        if (password_verify($postedPassword , $password)){
-            if ($user->getTfaStatus() == 1){
-                $tfaPosted = $_POST['tfa-code'];
-                $tfaService = new GoogleAuthenticatorService();
+        if ($user->getStatus() == 1) {
+            if (password_verify($postedPassword, $password)) {
+                if ($user->getTfaStatus() == 1) {
+                    $tfaPosted = $_POST['tfa-code'];
+                    $tfaService = new GoogleAuthenticatorService();
 
 
-                $tfaCheck = $tfaService->verifyCode($user->getTfaSecret() , $tfaPosted);
-                if ($tfaCheck){
+                    $tfaCheck = $tfaService->verifyCode($user->getTfaSecret(), $tfaPosted);
+                    if ($tfaCheck) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+
+
+                } else {
                     return true;
-                }else{
-                    return false;
                 }
-
-
-            }else {
-                return true;
             }
+            return false;
+        }else{
+            return false;
         }
-        return false;
     }
 
     /**

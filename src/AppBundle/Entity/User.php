@@ -356,4 +356,35 @@ class User implements UserInterface
 
         return $this->tfaSecret;
     }
+
+    /**
+     * Gets the user info and returns this in an array
+     *
+     * @return array
+     *          Array of user information
+     */
+    public function getUserInfo(){
+
+        // Generate the user information
+        $firstName = $this->getFirstName();
+        $lastName = $this->getLastName();
+        $fullName = $firstName . " " . $lastName;
+
+        $id = $this->getId();
+        $username = $this->getUsername();
+        $email = $this->getEmail();
+
+        // Prepare data
+        $data = [];
+        $data['id'] = $id;
+        $data['name'] = $fullName;
+        $data['username'] = $username;
+        $data['email'] = $email;
+        $data['firstName'] = $firstName;
+        $data['lastName'] = $lastName;
+
+
+        return $data;
+    }
+
 }

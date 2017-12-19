@@ -33,7 +33,7 @@ class SecurityControllerController extends Controller
         // We will check to see if we have been passed any errors.
         if (isset($_GET['login'])) {
             if ($_GET['login'] == 'failed'){
-                $error = "Login Failed, Please check your credentials & your TFA Code if applicable";
+                $error = "Login Failed, Please check your credentials & your TFA Code if applicable \n Your account may also be deactive!";
             }
         }
 
@@ -67,8 +67,7 @@ class SecurityControllerController extends Controller
     public function loginRedirect(Request $request)
     {
         // Get the user and their roles
-        $user = $this->getUser();
-        $roles = $user->getRoles();
+        $roles = $this->getUser()->getRoles();
 
         // Check if they have the admin role
         if (isset($roles['USER_ROLE_2'])){

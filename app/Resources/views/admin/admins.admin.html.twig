@@ -52,14 +52,14 @@
                     <th>{{ user.username|e }}</th>
                     <th>{{ user.email|e }}</th>
                 {%   if user.status == 1 %}
-                <th><a href='./users/{{ user.id|e }}/deactivate' >
+                <th><a class="deactivate" href='./admins/{{ user.id|e }}/deactivate' >
                     Active
                 {% else %}
-                <th><a href='./users/{{ user.id|e }}/activate' >
+                <th><a class="activate" href='./admins/{{ user.id|e }}/activate' >
                     Deactive
                 {% endif %}
                         </a></th>
-                    <th><a href='./users/{{ user.id|e }}'>Edit</a></th>
+                    <th><a href='./admins/{{ user.id|e }}'>Edit</a></th>
                 </tr>
             {% endfor %}
             </tbody>
@@ -77,3 +77,17 @@
         <a href='{{ pages.nextlink }}' class='button next'>Next</a>
     </div>
             {% endblock %}
+        {% block javascripts %}
+
+        <script type="text/javascript">
+
+          $('.deactivate').click(function(){
+            return confirm('Deactivating will mean this user will no longer be able to access the panel');
+          });
+
+          $('.activate').click(function(){
+            return confirm('Activating this user will allow them to access the panel again');
+          });
+
+        </script>
+        {% endblock %}

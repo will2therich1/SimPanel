@@ -35,7 +35,7 @@ class AdminProfileController extends Controller
         }
 
         // Create our Data Array
-        $data['currentUser'] = $this->getUserInfo();
+        $data['currentUser'] = $this->getUser()->getUserInfo();
         $data['active'] = 'Dash';
         $data['tab'] = 'Info';
         $data['error'] = '';
@@ -90,7 +90,7 @@ class AdminProfileController extends Controller
         }
 
         // Create our Data Array
-        $data['currentUser'] = $this->getUserInfo();
+        $data['currentUser'] = $this->getUser()->getUserInfo();
         $data['active'] = 'Dash';
         $data['tab'] = 'ChangePass';
 
@@ -126,7 +126,7 @@ class AdminProfileController extends Controller
         }
 
         // Create our Data Array
-        $data['currentUser'] = $this->getUserInfo();
+        $data['currentUser'] = $this->getUser()->getUserInfo();
         $data['active'] = 'Dash';
         $data['tab'] = 'API';
         $data['currentUser']['apiKey'] = $user->getApiKey(new EncryptionService($encryption_params));
@@ -150,7 +150,7 @@ class AdminProfileController extends Controller
 
 
         // Create our Data Array
-        $data['currentUser'] = $this->getUserInfo();
+        $data['currentUser'] = $this->getUser()->getUserInfo();
         $data['active'] = 'Dash';
         $data['tab'] = 'TFA';
         $data['currentUser']['tfaStatus'] = $user->getTfaStatus();
@@ -211,7 +211,7 @@ class AdminProfileController extends Controller
 
 
         // Create our Data Array
-        $data['currentUser'] = $this->getUserInfo();
+        $data['currentUser'] = $this->getUser()->getUserInfo();
         $data['active'] = 'Dash';
         $data['tab'] = 'TFA';
         $data['tfa']['secret'] = $tfaSecret;
@@ -223,7 +223,7 @@ class AdminProfileController extends Controller
 
 
     /**
-     * Checks if the password is correct for the current user, sueful for additional security checks
+     * Checks if the password is correct for the current user, useful for additional security checks
      *
      * @param $password
      *        Password to verify against.
@@ -240,37 +240,6 @@ class AdminProfileController extends Controller
 
     }
 
-    /**
-     * Gets the user info and returns this in an array
-     *
-     * @return array
-     *          Array of user information
-     */
-    public function getUserInfo(){
-        // Get the user entity
-        $user = $this->getUser();
-
-        // Generate the user information
-        $firstName = $user->getFirstName();
-        $lastName = $user->getLastName();
-        $fullName = $firstName . " " . $lastName;
-
-        $id = $user->getId();
-        $username = $user->getUsername();
-        $email = $user->getEmail();
-
-        // Prepare data
-        $data = [];
-        $data['id'] = $id;
-        $data['name'] = $fullName;
-        $data['username'] = $username;
-        $data['email'] = $email;
-        $data['firstName'] = $firstName;
-        $data['lastName'] = $lastName;
-
-
-        return $data;
-    }
     /**
      * Generates a random password
      *

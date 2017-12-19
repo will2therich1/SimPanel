@@ -19,7 +19,7 @@ class AdminController extends Controller
 
         // Prepare data for page
         $data = [];
-        $data['currentUser'] = $this->getUserInfo();
+        $data['currentUser'] = $this->getUser()->getUserInfo();
         $data['active'] = "Dash";
         $data['block']['user'] = $this->getUserCount();
         $data['block']['admin'] = $this->getAdminCount();
@@ -99,99 +99,15 @@ class AdminController extends Controller
 
         // Create our Data Array
         $data = [];
-        $data['currentUser'] = $this->getUserInfo();
+        $data['currentUser'] = $this->getUser()->getUserInfo();
         $data['users'] = $result;
         $data['pages'] = $this->createPagination('/admin/users' , $offset , $limit);
         $data['active'] = "User";
 
 
         // replace this example code with whatever you need
-        return $this->render('admin/users.admin.html.twig' , $data);
+        return $this->render('admin/users/users.admin.html.twig' , $data);
     }
-
-    /**
-     * @Route("/admin/users/create", name="CreateUser")
-     */
-    public function createUsersPage()
-    {
-        // Get Doctrine
-        $em = $this->getDoctrine()->getManager();
-
-
-        // Create our Data Array
-        $data = [];
-        $data['currentUser'] = $this->getUserInfo();
-        $data['active'] = 'User';
-        $data['success'] = '';
-        $data['error'] = '';
-
-
-        if (isset($_POST['newUserUsername']))
-        {
-            $firstName = $_POST['firstName'];
-            $lastName = $_POST['lastName'];
-            $username = $_POST['newUserUsername'];
-            $email = $_POST['email'];
-
-            $password = $_POST['newUserPassword'];
-            $passwordConfirmation = $_POST['newUserPassword-2'];
-
-
-
-
-            if ($password !== ''){
-
-                if ($password == $passwordConfirmation){
-                    $setPassword = password_hash($password , PASSWORD_DEFAULT);
-                }else{
-                    $data['error'] = "Provided passwords do not match";
-                }
-
-            }else{
-
-                $passwordGen = $this->generatePassword();
-                $setPassword = password_hash($passwordGen , PASSWORD_DEFAULT);
-
-            }
-
-            if ($data['error'] == '') {
-                $user = new User();
-
-                $user->setFirstName($firstName);
-                $user->setLastName($lastName);
-                $user->setEmail($email);
-                $user->setPassword($setPassword);
-                $user->setAdmin(0);
-                $user->setStatus(1);
-                $user->setUsername($username);
-
-                try {
-                    $em->persist($user);
-                    $em->flush();
-                } catch (\Exception $e) {
-                    $data['error'] = "An unknown error occoured, please ensure the username and email are unique";
-                    return $this->render('admin/create.user.admin.html.twig' , $data);
-
-                }
-
-                $data['success'] = "User Created";
-
-            }
-
-
-
-
-            }else{
-
-        }
-
-
-
-
-        // replace this example code with whatever you need
-        return $this->render('admin/create.user.admin.html.twig' , $data);
-    }
-
 
 
     /**
@@ -264,7 +180,7 @@ class AdminController extends Controller
 
         // Create our Data Array
         $data = [];
-        $data['currentUser'] = $this->getUserInfo();
+        $data['currentUser'] = $this->getUser()->getUserInfo();
         $data['users'] = $result;
         $data['pages'] = $this->createPagination('/admin/admins' , $offset , $limit);
         $data['active'] = "Admin";
@@ -274,88 +190,7 @@ class AdminController extends Controller
         return $this->render('admin/admins.admin.html.twig' , $data);
     }
 
-    /**
-     * @Route("/admin/admins/create", name="CreateAdmin")
-     */
-    public function createAdminsPage()
-    {
-        // Get Doctrine
-        $em = $this->getDoctrine()->getManager();
 
-
-        // Create our Data Array
-        $data = [];
-        $data['currentUser'] = $this->getUserInfo();
-        $data['active'] = 'Admin';
-        $data['success'] = '';
-        $data['error'] = '';
-
-
-        if (isset($_POST['newUserUsername']))
-        {
-            $firstName = $_POST['firstName'];
-            $lastName = $_POST['lastName'];
-            $username = $_POST['newUserUsername'];
-            $email = $_POST['email'];
-
-            $password = $_POST['newUserPassword'];
-            $passwordConfirmation = $_POST['newUserPassword-2'];
-
-
-
-
-            if ($password !== ''){
-
-                if ($password == $passwordConfirmation){
-                    $setPassword = password_hash($password , PASSWORD_DEFAULT);
-                }else{
-                    $data['error'] = "Provided passwords do not match";
-                }
-
-            }else{
-
-                $passwordGen = $this->generatePassword();
-                $setPassword = password_hash($passwordGen , PASSWORD_DEFAULT);
-
-            }
-
-            if ($data['error'] == '') {
-                $user = new User();
-
-                $user->setFirstName($firstName);
-                $user->setLastName($lastName);
-                $user->setEmail($email);
-                $user->setPassword($setPassword);
-                $user->setAdmin(1);
-                $user->setStatus(1);
-                $user->setUsername($username);
-
-                try {
-                    $em->persist($user);
-                    $em->flush();
-                } catch (\Exception $e) {
-                    $data['error'] = "An unknown error occoured, please ensure the username and email are unique";
-                    return $this->render('admin/create.user.admin.html.twig' , $data);
-
-                }
-
-                $data['success'] = "Admin Created";
-
-            }
-
-
-
-
-        }else{
-
-        }
-
-
-
-
-        // replace this example code with whatever you need
-        return $this->render('admin/create.admin.admin.html.twig' , $data);
-    }
 
 
     /**
@@ -400,37 +235,6 @@ class AdminController extends Controller
         return $data;
     }
 
-    /**
-     * Gets the user info and returns this in an array
-     *
-     * @return array
-     *          Array of user information
-     */
-    public function getUserInfo(){
-        // Get the user entity
-        $user = $this->getUser();
-
-        // Generate the user information
-        $firstName = $user->getFirstName();
-        $lastName = $user->getLastName();
-        $fullName = $firstName . " " . $lastName;
-
-        $id = $user->getId();
-        $username = $user->getUsername();
-        $email = $user->getEmail();
-
-        // Prepare data
-        $data = [];
-        $data['id'] = $id;
-        $data['name'] = $fullName;
-        $data['username'] = $username;
-        $data['email'] = $email;
-        $data['firstName'] = $firstName;
-        $data['lastName'] = $lastName;
-
-
-        return $data;
-    }
 
     /**
      * Counts the amount of users in the database

@@ -35,10 +35,12 @@ AppBundle\Entity\User:
         apiKey:
             type: string
             length: 255
+            nullable: true
         tfaStatus:
             type: integer
             length: 255
         tfaSecret:
             type: string
             length: 255
+            nullable: true
     lifecycleCallbacks: {  }

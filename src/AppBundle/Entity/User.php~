@@ -204,7 +204,6 @@ class User implements UserInterface
 
     public function getRoles()
     {
-
         if ($this->getAdmin() == 1)
         {
             $roles = array(
@@ -298,4 +297,94 @@ class User implements UserInterface
 
     return $encKey;
 }
+    /**
+     * @var integer
+     */
+    private $tfaStatus;
+
+    /**
+     * @var string
+     */
+    private $tfaSecret;
+
+
+    /**
+     * Set tfaStatus
+     *
+     * @param integer $tfaStatus
+     *
+     * @return User
+     */
+    public function setTfaStatus($tfaStatus)
+    {
+        $this->tfaStatus = $tfaStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get tfaStatus
+     *
+     * @return integer
+     */
+    public function getTfaStatus()
+    {
+        return $this->tfaStatus;
+    }
+
+    /**
+     * Set tfaSecret
+     *
+     * @param string $tfaSecret
+     *
+     * @return User
+     */
+    public function setTfaSecret($tfaSecret)
+    {
+        $this->tfaSecret = $tfaSecret;
+
+        return $this;
+    }
+
+    /**
+     * Get tfaSecret
+     *
+     * @return string
+     */
+    public function getTfaSecret()
+    {
+
+        return $this->tfaSecret;
+    }
+
+    /**
+     * Gets the user info and returns this in an array
+     *
+     * @return array
+     *          Array of user information
+     */
+    public function getUserInfo(){
+
+        // Generate the user information
+        $firstName = $this->getFirstName();
+        $lastName = $this->getLastName();
+        $fullName = $firstName . " " . $lastName;
+
+        $id = $this->getId();
+        $username = $this->getUsername();
+        $email = $this->getEmail();
+
+        // Prepare data
+        $data = [];
+        $data['id'] = $id;
+        $data['name'] = $fullName;
+        $data['username'] = $username;
+        $data['email'] = $email;
+        $data['firstName'] = $firstName;
+        $data['lastName'] = $lastName;
+
+
+        return $data;
+    }
+
 }

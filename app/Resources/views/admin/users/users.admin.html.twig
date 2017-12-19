@@ -9,7 +9,7 @@
                 <div class="block">
                     <div class="title"><strong class="d-block">Search Users</strong><span class="d-block">Search for users</span></div>
                     <div class="block-body">
-                        <form class="form-horizontal" method='get' action='./users'>
+                        <form class="form-horizontal" method='get' action=''>
                             <div class="form-group row">
                             <label class="col-sm-3 form-control-label">Name</label>
                             <div class="col-sm-9">
@@ -52,10 +52,10 @@
                     <th>{{ user.username|e }}</th>
                     <th>{{ user.email|e }}</th>
                 {%   if user.status == 1 %}
-                <th><a href='./users/{{ user.id|e }}/deactivate' >
+                <th><a class="deactivate" href='./users/{{ user.id|e }}/deactivate' >
                     Active
                 {% else %}
-                <th><a href='./users/{{ user.id|e }}/activate' >
+                <th><a class="activate" href='./users/{{ user.id|e }}/activate' >
                     Deactive
                 {% endif %}
                         </a></th>
@@ -76,4 +76,19 @@
         <a href='{{ pages.lastlink }}' class='button prev'>Previous</a>
         <a href='{{ pages.nextlink }}' class='button next'>Next</a>
     </div>
-            {% endblock %}
+        {% endblock %}
+
+        {% block javascripts %}
+
+        <script type="text/javascript">
+
+          $('.deactivate').click(function(){
+            return confirm('Deactivating will mean this user will no longer be able to access the panel');
+          });
+
+          $('.activate').click(function(){
+            return confirm('Activating this user will allow them to access the panel again');
+          });
+
+        </script>
+        {% endblock %}
