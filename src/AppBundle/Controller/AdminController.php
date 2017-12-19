@@ -196,6 +196,9 @@ class AdminController extends Controller
      */
     public function adminNetworkServerListPage()
     {
+        $data = [];
+        $data['success'] = '';
+        $data['error'] = '';
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->createQueryBuilder();
@@ -256,7 +259,6 @@ class AdminController extends Controller
 
 
         // Create our Data Array
-        $data = [];
         $data['currentUser'] = $this->getUser()->getUserInfo();
         $data['pages'] = $this->createPagination('/admin/network' , $offset , $limit);
         $data['servers'] = $result;

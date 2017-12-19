@@ -4,6 +4,13 @@
 {% block body %}
 
         <div class="col-lg-10">
+            {% if success %}
+                <div class="alert alert-success">{{ success }}</div>
+            {% endif %}
+
+            {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
             <div class="block">
                 <div class="title"><strong class="d-block">Create a Network Server</strong><span class="d-block">Add a Network Server</span>
                 </div>

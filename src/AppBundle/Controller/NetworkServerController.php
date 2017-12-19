@@ -59,9 +59,6 @@ class NetworkServerController extends Controller
                     return $this->render('admin/network/create.network.admin.html.twig' , $data);
 
                 }
-
-                $data['success'] = "Admin Created";
-
             }
 
 
@@ -95,10 +92,12 @@ class NetworkServerController extends Controller
         $data['error'] = '';
 
         $server =$this->getDoctrine()->getManager()->getRepository('AppBundle:NetworkServer')->find($request->attributes->get('id'));
+        error_log($server->getId());
 
         $networkManager = new NetworkServerService($this->getEncryptionService() , $server);
+        $connectionStatus = $networkManager->connectionTest();
 
-        if ($networkManager)
+        if ($connectionStatus)
         {
             $server->setConnectionStatus("Connected!");
             $em->persist($server);
@@ -109,7 +108,6 @@ class NetworkServerController extends Controller
             $em->flush();
         }
 
-        $networkManager->connectionTest();
 
 
         // replace this example code with whatever you need

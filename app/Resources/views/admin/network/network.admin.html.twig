@@ -5,6 +5,13 @@
 
     <div class="container-fluid">
         <div class="row">
+            {% if success %}
+                <div class="alert alert-success">{{ success }}</div>
+            {% endif %}
+
+            {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
             <div class="col-lg-12">
                 <div class="block">
                     <div class="title"><strong class="d-block">Search Network Servers</strong><span class="d-block">Search for admins</span></div>
