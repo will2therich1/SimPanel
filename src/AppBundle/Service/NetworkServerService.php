@@ -46,11 +46,13 @@ class NetworkServerService
 
     public function connectionTest()
     {
+        // Set our variables
         $host = $this->server->getIp();
         $loginUser = $this->server->getLoginUser();
         $sshKey = $this->server->getSshKey($this->encryptionService);
         $sshKeyPassword = $this->server->getSshPassword($this->encryptionService);
 
+        // Load our key file
         $keyFile = new RSA();
         $keyFile->loadKey($sshKey);
         if ($sshKeyPassword !== '')
@@ -58,25 +60,21 @@ class NetworkServerService
             $keyFile->setPassword($sshKeyPassword);
         }
 
-        error_log("Starting Connection To The server");
-
+        // Try our connection
         try {
             $connection = new SSH2($host);
             error_log("logging in");
             $connectionTest = $connection->login($loginUser, $keyFile);
             if ($connectionTest)
             {
-                error_log("Returning TRUE");
                 return true;
             }else{
-                error_log("Returning FALSE");
                 return false;
             }
-            } catch (Exception $e) {
+            }catch (Exception $e) {
             return false;
         }
 
-        return false;
     }
 
 

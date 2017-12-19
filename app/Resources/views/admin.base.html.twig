@@ -34,7 +34,7 @@
     </div><span class="heading">Main</span>
     <ul class="list-unstyled">
         <li class="{% if active == 'Dash'  %}active{% endif %} "><a href="{{ path("adminHomepage") }}"><i class="icon-home"></i>Home</a></li>
-        <li class="{% if active == 'User'  %}active{% endif %} "><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Users </a>
+        <li class="{% if active == 'User'  %}active{% endif %} "><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-user-outline"></i>Users </a>
             <ul id="dashvariants" class="collapse list-unstyled">
         <li><a href="{{ path("UserAdmin") }}">View Users</a></li>
         <li><a href="{{ path('CreateUser') }}">Add Users</a></li>
@@ -52,6 +52,49 @@
     <li><a href="{{ path('CreateNetworkServer') }}">Add Network Servers</a></li>
     </ul>
     </li>
+    </ul>
+    <span class="heading">Servers</span>
+    <ul class="list-unstyled">
+        <li class="{% if active == 'Templates'  %}active{% endif %} "><a href="#dashvariants-4" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Templates </a>
+            <ul id="dashvariants-4" class="collapse list-unstyled">
+                <li><a href="{{ path("UserAdmin") }}">Manage Server Templates</a></li>
+                <li><a href="{{ path('CreateUser') }}">Add Server Templates</a></li>
+            </ul>
+        </li>
+        <li class="{% if active == 'GameServers'  %}active{% endif %} "><a href="#dashvariants-5"  aria-expanded="false" data-toggle="collapse"> <i class="icon-cloud"></i> Game Servers</a>
+            <ul id="dashvariants-5" class="collapse list-unstyled">
+                <li><a href="{{ path('AdminList') }}">View Game Servers</a></li>
+                <li><a href="{{ path('CreateAdmin') }}">Add Game Servers</a></li>
+            </ul>
+        </li>
+        <li class="{% if active == 'VoiceServers'  %}active{% endif %} "><a href="#dashvariants-6" aria-expanded="false" data-toggle="collapse"> <i class="icon-list"></i>Voice Servers </a>
+            <ul id="dashvariants-6" class="collapse list-unstyled">
+                <li><a href="{{ path('NetworkServerList') }}">View Voice Servers</a></li>
+                <li><a href="{{ path('CreateNetworkServer') }}">Add Voice Servers</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <span class="heading">Settings</span>
+    <ul class="list-unstyled">
+        <li class="{% if active == 'GeneralSettings'  %}active{% endif %} "><a href="#dashvariants-7" aria-expanded="false" data-toggle="collapse"> <i class="icon-settings"></i>General </a>
+            <ul id="dashvariants-7" class="collapse list-unstyled">
+                <li><a href="{{ path("UserAdmin") }}">Admin Panel Settings</a></li>
+                <li><a href="{{ path('CreateUser') }}">User Panel Settings</a></li>
+            </ul>
+        </li>
+        <li class="{% if active == 'ServerDefaults'  %}active{% endif %} "><a href="#dashvariants-8"  aria-expanded="false" data-toggle="collapse"> <i class="icon-settings-1"></i>Server Defaults</a>
+            <ul id="dashvariants-8" class="collapse list-unstyled">
+                <li><a href="{{ path('AdminList') }}">Game Server Defaults</a></li>
+                <li><a href="{{ path('CreateAdmin') }}">Voice Server Defaults</a></li>
+            </ul>
+        </li>
+        <li class="{% if active == 'NetworkSettings'  %}active{% endif %} "><a href="#dashvariants-9" aria-expanded="false" data-toggle="collapse"> <i class="icon-list-1"></i>Network Settings </a>
+            <ul id="dashvariants-9" class="collapse list-unstyled">
+                <li><a href="{{ path('NetworkServerList') }}">Network Settings</a></li>
+                <li><a href="{{ path('CreateNetworkServer') }}">Downtime Settings</a></li>
+            </ul>
+        </li>
     </ul>
 </nav>
 {% endblock %}
