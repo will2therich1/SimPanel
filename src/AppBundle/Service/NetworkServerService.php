@@ -63,14 +63,10 @@ class NetworkServerService
         // Try our connection
         try {
             $connection = new SSH2($host);
-            error_log("logging in");
             $connectionTest = $connection->login($loginUser, $keyFile);
-            if ($connectionTest)
-            {
-                return true;
-            }else{
-                return false;
-            }
+
+            return $connectionTest;
+
             }catch (Exception $e) {
             return false;
         }
