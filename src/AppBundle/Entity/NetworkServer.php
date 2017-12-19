@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Service\EncryptionService;
+
 /**
  * NetworkServer
  */
@@ -156,9 +158,10 @@ class NetworkServer
      *
      * @return NetworkServer
      */
-    public function setSshKey($sshKey)
+    public function setSshKey($sshKey , EncryptionService $encryptionService)
     {
-        $this->sshKey = $sshKey;
+        $sshEnc = $encryptionService->encrypt($sshKey);
+        $this->sshKey = $sshEnc;
 
         return $this;
     }
@@ -168,9 +171,10 @@ class NetworkServer
      *
      * @return string
      */
-    public function getSshKey()
+    public function getSshKey(EncryptionService $encryptionService)
     {
-        return $this->sshKey;
+        $returnSshKey = $encryptionService->decrypt($this->sshKey);
+        return $returnSshKey;
     }
 
     /**
@@ -195,5 +199,35 @@ class NetworkServer
     public function getConnectionStatus()
     {
         return $this->connectionStatus;
+    }
+    /**
+     * @var string
+     */
+    private $sshPassword;
+
+
+    /**
+     * Set sshPassword
+     *
+     * @param string $sshPassword
+     *
+     * @return NetworkServer
+     */
+    public function setSshPassword($sshPassword , EncryptionService $encryptionService)
+    {
+        $setPassword = $encryptionService->encrypt($sshPassword);
+        $this->sshPassword = $setPassword;
+
+        return $this;
+    }
+
+    /**
+     * Get sshPassword
+     *
+     * @return string
+     */
+    public function getSshPassword(EncryptionService $encryptionService)
+    {
+        return $encryptionService->decrypt($this->sshPassword);
     }
 }

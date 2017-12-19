@@ -17,7 +17,8 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+    encryption:
+        enc_secret:
+        enc_iv:
+        enc_crypto: aes-256-ctr
 
-    enc_secret:
-    enc_iv:
-    enc_crypto:

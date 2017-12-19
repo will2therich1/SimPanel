@@ -25,6 +25,10 @@ AppBundle\Entity\NetworkServer:
             length: 255
         sshKey:
             type: text
+        sshPassword:
+            type: string
+            length: 255
+            nullable: true
         connectionStatus:
             type: string
             length: 255

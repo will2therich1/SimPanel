@@ -289,14 +289,14 @@ class User implements UserInterface
      *
      * @return string
      */
-  public function getApiKey(EncryptionService $encryptionService)
-{
+     public function getApiKey(EncryptionService $encryptionService)
+    {
     $key = $this->apiKey;
 
     $encKey = $encryptionService->decrypt($key);
 
     return $encKey;
-}
+    }
     /**
      * @var integer
      */

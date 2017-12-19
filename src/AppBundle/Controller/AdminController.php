@@ -190,7 +190,80 @@ class AdminController extends Controller
         return $this->render('admin/admins.admin.html.twig' , $data);
     }
 
+    /**
+     * @Route("/admin/network", name="NetworkServerList")
+     */
+    public function adminNetworkServerListPage()
+    {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        $queryBuilder = $em->createQueryBuilder();
 
+
+        $get = $_GET;
+        // Set the offset for queries
+        if (isset($get['offset']) && $get['offset'] !== ''){
+            $offset = $get['offset'];
+        }else{
+            $offset = 0;
+        }
+
+        // Set the limit for queries
+        if (isset($get['limit']) && $get['limit'] !== ''){
+            $limit = $get['limit'];
+        }else{
+            $limit = 10;
+        }
+
+
+        // Create the queries!
+        if (isset($get['name']) && $get['name'] !== ''){
+
+            $queryBuilder->select('u')
+                ->from('AppBundle:NetworkServer', 'ns')
+                ->where('ns.name = :name')
+                ->setMaxResults($limit)
+                ->setFirstResult($offset)
+                ->setParameter('name', $get['name']);
+
+
+            $result = $queryBuilder->getQuery()->execute();
+
+
+        }elseif(isset($get['id']) && $get['id'] !== ''){
+
+            $queryBuilder->select('ns')
+                ->from('AppBundle:NetworkServer', 'ns')
+                ->where('ns.id = :id')
+                ->setMaxResults($limit)
+                ->setFirstResult($offset)
+                ->setParameter('id', $get['id']);
+
+            $result = $queryBuilder->getQuery()->execute();
+
+        }
+
+
+        if (!isset($result)){
+            $queryBuilder->select('ns')
+                ->from('AppBundle:NetworkServer', 'ns')
+                ->setMaxResults($limit)
+                ->setFirstResult($offset);
+
+            $result = $queryBuilder->getQuery()->execute();
+        }
+
+
+        // Create our Data Array
+        $data = [];
+        $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['servers'] = $result;
+        $data['active'] = "Network";
+
+
+        // replace this example code with whatever you need
+        return $this->render('admin/network/network.admin.html.twig' , $data);
+    }
 
 
     /**
