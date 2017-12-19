@@ -66,9 +66,13 @@ class NetworkServerService
             $connectionTest = $connection->login($loginUser, $keyFile);
             if ($connectionTest)
             {
+                error_log("Returning TRUE");
                 return true;
+            }else{
+                error_log("Returning FALSE");
+                return false;
             }
-        } catch (Exception $e) {
+            } catch (Exception $e) {
             return false;
         }
 

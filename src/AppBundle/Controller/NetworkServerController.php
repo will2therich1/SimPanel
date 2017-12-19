@@ -97,7 +97,8 @@ class NetworkServerController extends Controller
         $networkManager = new NetworkServerService($this->getEncryptionService() , $server);
         $connectionStatus = $networkManager->connectionTest();
 
-        if ($connectionStatus)
+        error_log(print_r($connectionStatus));
+        if ($connectionStatus === true)
         {
             $server->setConnectionStatus("Connected!");
             $em->persist($server);
