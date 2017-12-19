@@ -42,6 +42,7 @@
                 <th>IP</th>
                 <th>Connection Status</th>
                 <th>Login user</th>
+                <th>Connection Test</th>
                 <th>Edit</th>
             </thead>
             <tbody>
@@ -52,6 +53,7 @@
                     <th>{{ server.ip|e }}</th>
                     <th>{{ server.connectionStatus|e }}</th>
                     <th>{{ server.loginUser|e }}</th>
+                    <th><a href='./network/{{ server.id|e }}/connectiontest'>Test</a></th>
                     <th><a href='./admins/{{ server.id|e }}'>Edit</a></th>
                 </tr>
             {% endfor %}
@@ -64,11 +66,11 @@
     </div>
     <hr>
 
-    {#<div class='button-bar'>#}
-        {#<a href="{{ path('AdminList') }}" class='button prev'>First Page</a>&nbsp;&nbsp;&nbsp;&nbsp#}
-        {#<a href='{{ pages.lastlink }}' class='button prev'>Previous</a>#}
-        {#<a href='{{ pages.nextlink }}' class='button next'>Next</a>#}
-    {#</div>#}
+    <div class='button-bar'>
+        <a href="{{ path('NetworkServerList') }}" class='button prev'>First Page</a>&nbsp;&nbsp;&nbsp;&nbsp
+        <a href='{{ pages.lastlink }}' class='button prev'>Previous</a>
+        <a href='{{ pages.nextlink }}' class='button next'>Next</a>
+    </div>
             {% endblock %}
         {% block javascripts %}
 

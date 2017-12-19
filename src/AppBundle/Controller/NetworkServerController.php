@@ -6,6 +6,9 @@ use AppBundle\Service\EncryptionService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\NetworkServer;
+use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Service\NetworkServerService;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class NetworkServerController extends Controller
 {
@@ -73,6 +76,44 @@ class NetworkServerController extends Controller
 
         // replace this example code with whatever you need
         return $this->render('admin/network/create.network.admin.html.twig' , $data);
+    }
+
+    /**
+     * @Route("/admin/network/{id}/connectiontest", name="NetworkServerConnectionTest")
+     */
+    public function networkConnectiontest(Request $request)
+    {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+
+
+        // Create our Data Array
+        $data = [];
+        $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['active'] = 'Network';
+        $data['success'] = '';
+        $data['error'] = '';
+
+        $server =$this->getDoctrine()->getManager()->getRepository('AppBundle:NetworkServer')->find($request->attributes->get('id'));
+
+        $networkManager = new NetworkServerService($this->getEncryptionService() , $server);
+
+        if ($networkManager)
+        {
+            $server->setConnectionStatus("Connected!");
+            $em->persist($server);
+            $em->flush();
+        }else{
+            $server->setConnectionStatus("Connection Failed!");
+            $em->persist($server);
+            $em->flush();
+        }
+
+        $networkManager->connectionTest();
+
+
+        // replace this example code with whatever you need
+        return new RedirectResponse('/admin/network');
     }
 
     /**

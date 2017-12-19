@@ -23,6 +23,7 @@ class AdminController extends Controller
         $data['active'] = "Dash";
         $data['block']['user'] = $this->getUserCount();
         $data['block']['admin'] = $this->getAdminCount();
+        $data['block']['network'] = $this->getNetworkServerCount();
 
         // replace this example code with whatever you need
         return $this->render('admin/admin.index.html.twig' , $data);
@@ -257,6 +258,7 @@ class AdminController extends Controller
         // Create our Data Array
         $data = [];
         $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['pages'] = $this->createPagination('/admin/network' , $offset , $limit);
         $data['servers'] = $result;
         $data['active'] = "Network";
 
@@ -349,6 +351,26 @@ class AdminController extends Controller
         $userCountQueryCount = $userCountQuery->getQuery()->getSingleScalarResult();
 
         return $userCountQueryCount;
+    }
+
+    /**
+     * Counts the amount of admins in the database
+     *
+     * @return string
+     *          Returns a string with the amount of admins in the database
+     */
+    public function getNetworkServerCount(){
+        // Get Doctine
+        $em = $this->getDoctrine()->getManager();
+        $queryBuilder = $em->createQueryBuilder();
+
+
+        $networkCountQuery =  $queryBuilder->select('count(u)')
+            ->from('AppBundle:NetworkServer', 'u');
+
+        $networkCountQueryCount = $networkCountQuery->getQuery()->getSingleScalarResult();
+
+        return $networkCountQueryCount;
     }
 
     /**
