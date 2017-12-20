@@ -481,29 +481,13 @@ class AdminController extends Controller
 
         $result = $result[0];
         $id = $result['id'];
-
-        if (empty($returnObject))
-        {
-            $this->setSetting($settingName, '');
-        }
+        
 
         $returnObject = $this->getDoctrine()->getRepository('AppBundle:Settings')->find($id);
 
         return $returnObject;
     }
 
-    public function setSetting($settingName , $settingValue)
-    {
-        $setting = $this->getSetting($settingName);
-
-        $setting->setSettingValue($settingValue);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($setting);
-        $em->flush();
-
-        return;
-
-    }
 
 
 }
