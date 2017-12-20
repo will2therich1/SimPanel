@@ -200,4 +200,34 @@ class NetworkServer
     {
         return $this->connectionStatus;
     }
+    /**
+     * @var string
+     */
+    private $sshPassword;
+
+
+    /**
+     * Set sshPassword
+     *
+     * @param string $sshPassword
+     *
+     * @return NetworkServer
+     */
+    public function setSshPassword($sshPassword , EncryptionService $encryptionService)
+    {
+        $setPassword = $encryptionService->encrypt($sshPassword);
+        $this->sshPassword = $setPassword;
+
+        return $this;
+    }
+
+    /**
+     * Get sshPassword
+     *
+     * @return string
+     */
+    public function getSshPassword(EncryptionService $encryptionService)
+    {
+        return $encryptionService->decrypt($this->sshPassword);
+    }
 }

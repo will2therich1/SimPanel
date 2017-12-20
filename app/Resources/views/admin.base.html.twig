@@ -6,8 +6,8 @@
 
         <div class="container-fluid d-flex align-items-center justify-content-between">
         <div class="navbar-header"><a href="#" class="navbar-brand">
-                <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">Sim</strong><strong>Panel</strong></div>
-        <div class="brand-text brand-sm"><strong class="text-primary">S</strong><strong>P</strong></div></a>
+                <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">{{ branding.panelNamePart1 }}</strong><strong>{{ branding.PanelNamePart2 }}</strong></div>
+        <div class="brand-text brand-sm"><strong class="text-primary">{{ branding.PanelNameShortPart1 }}</strong><strong>{{ branding.PanelNameShortPart2 }}</strong></div></a>
         <button class="sidebar-toggle"><i class="fas fa-bars"></i></button>
         </div>
         <li class="list-inline-item logout">
@@ -80,7 +80,7 @@
         <li class="{% if active == 'GeneralSettings'  %}active{% endif %} "><a href="#dashvariants-7" aria-expanded="false" data-toggle="collapse"> <i class="icon-settings"></i>General </a>
             <ul id="dashvariants-7" class="collapse list-unstyled">
                 <li><a href="{{ path("UserAdmin") }}">Admin Panel Settings</a></li>
-                <li><a href="{{ path('CreateUser') }}">User Panel Settings</a></li>
+                <li><a href="{{ path("BrandingUserSettings") }}">User Panel Settings</a></li>
             </ul>
         </li>
         <li class="{% if active == 'ServerDefaults'  %}active{% endif %} "><a href="#dashvariants-8"  aria-expanded="false" data-toggle="collapse"> <i class="icon-settings-1"></i>Server Defaults</a>

@@ -37,3 +37,8 @@ services:
         class: AppBundle\Service\EncryptionService
         arguments: ['%encryption%']
         public: true
+
+    MaintenanceListener:
+        class: AppBundle\Service\MaintenanceListener
+        tags:
+          - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

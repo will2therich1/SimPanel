@@ -31,4 +31,14 @@ class DefaultController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/Maintenance" , name="Maintenance")
+     */
+    public function maintenanceModePage(Request $request)
+    {
+        $url = $request->getHttpHost();
+        $data['url'] = $url;
+        return $this->render('errorPages/maintenance.mode.html.twig' , $data);
+    }
+
 }

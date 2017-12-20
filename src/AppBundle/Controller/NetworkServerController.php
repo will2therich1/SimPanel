@@ -24,6 +24,7 @@ class NetworkServerController extends Controller
         // Create our Data Array
         $data = [];
         $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['branding'] = $this->getSiteInformation();
         $data['active'] = 'Network';
         $data['success'] = '';
         $data['error'] = '';
@@ -87,6 +88,7 @@ class NetworkServerController extends Controller
         // Create our Data Array
         $data = [];
         $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['branding'] = $this->getSiteInformation();
         $data['active'] = 'Network';
         $data['success'] = '';
         $data['error'] = '';
@@ -122,4 +124,59 @@ class NetworkServerController extends Controller
         $encryption_params = $this->container->getParameter('encryption');
         return new EncryptionService($encryption_params);
     }
+
+    public function getSiteInformation()
+    {
+
+        $returnArray = [];
+        $returnArray['panelName'] = $this->getSetting('PanelName')->getSettingValue();
+        $returnArray['panelNamePart1'] = $this->getSetting('PanelNamePart1')->getSettingValue();
+        $returnArray['PanelNamePart2'] = $this->getSetting('PanelNamePart2')->getSettingValue();
+        $returnArray['PanelNameShortPart1'] = $this->getSetting('PanelNameShortPart1')->getSettingValue();
+        $returnArray['PanelNameShortPart2'] = $this->getSetting('PanelNameShortPart2')->getSettingValue();
+
+        return $returnArray;
+    }
+
+    /**
+     * Returns the Setting Object!
+     *
+     * If the setting dosen't exist then it will be created.
+     *
+     * @param $settingName
+     *          Name of the Setting
+     * @return Settings|mixed
+     */
+    public function getSetting($settingName)
+    {
+        $settings = $this->getDoctrine()->getRepository('AppBundle:Settings');
+        $query = $settings->createQueryBuilder('s');
+        $result = $query->select('s.id')
+            ->where('s.settingName = :setting')
+            ->setParameter('setting' , $settingName)
+            ->getQuery()
+            ->execute();
+
+        if (empty($result))
+        {
+            $newSetting = new Settings();
+            $newSetting->setSettingName($settingName);
+            $newSetting->setSettingValue(0);
+            $newSetting->setSettingUpdatedTime(new \DateTime());
+
+            $this->getDoctrine()->getManager()->persist($newSetting);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $newSetting;
+        }
+
+        $result = $result[0];
+        $id = $result['id'];
+
+
+        $returnObject = $this->getDoctrine()->getRepository('AppBundle:Settings')->find($id);
+
+        return $returnObject;
+    }
+
 }

@@ -66,10 +66,14 @@ class NetworkServerService
             $connectionTest = $connection->login($loginUser, $keyFile);
 
             return $connectionTest;
-
-            }catch (Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
+
+    }
+
+    public function connect()
+    {
 
     }
 
