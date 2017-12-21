@@ -12,6 +12,7 @@ namespace AppBundle\Service;
 class GoogleAuthenticatorService
 {
     protected $_codeLength = 6;
+
     /**
      * Create new secret.
      * 16 characters, randomly chosen from the allowed base32 characters.
@@ -46,10 +47,11 @@ class GoogleAuthenticatorService
         }
         return $secret;
     }
+
     /**
      * Calculate the code, with given secret and point in time.
      *
-     * @param string   $secret
+     * @param string $secret
      * @param int|null $timeSlice
      *
      * @return string
@@ -61,7 +63,7 @@ class GoogleAuthenticatorService
         }
         $secretkey = $this->_base32Decode($secret);
         // Pack time into binary string
-        $time = chr(0).chr(0).chr(0).chr(0).pack('N*', $timeSlice);
+        $time = chr(0) . chr(0) . chr(0) . chr(0) . pack('N*', $timeSlice);
         // Hash it with users secret key
         $hm = hash_hmac('SHA1', $time, $secretkey, true);
         // Use last nipple of result as index/offset
@@ -76,33 +78,36 @@ class GoogleAuthenticatorService
         $modulo = pow(10, $this->_codeLength);
         return str_pad($value % $modulo, $this->_codeLength, '0', STR_PAD_LEFT);
     }
+
     /**
      * Get QR-Code URL for image, from google charts.
      *
      * @param string $name
      * @param string $secret
      * @param string $title
-     * @param array  $params
+     * @param array $params
      *
      * @return string
      */
     public function getQRCodeGoogleUrl($name, $secret, $title = null, $params = array())
     {
-        $width = !empty($params['width']) && (int) $params['width'] > 0 ? (int) $params['width'] : 200;
-        $height = !empty($params['height']) && (int) $params['height'] > 0 ? (int) $params['height'] : 200;
-        $level = !empty($params['level']) && array_search($params['level'], array('L', 'M', 'Q', 'H')) !== false ? $params['level'] : 'M';
-        $urlencoded = urlencode('otpauth://totp/'.$name.'?secret='.$secret.'');
+        $width = !empty($params['width']) && (int)$params['width'] > 0 ? (int)$params['width'] : 200;
+        $height = !empty($params['height']) && (int)$params['height'] > 0 ? (int)$params['height'] : 200;
+        $level = !empty($params['level']) && array_search($params['level'],
+            array('L', 'M', 'Q', 'H')) !== false ? $params['level'] : 'M';
+        $urlencoded = urlencode('otpauth://totp/' . $name . '?secret=' . $secret . '');
         if (isset($title)) {
-            $urlencoded .= urlencode('&issuer='.urlencode($title));
+            $urlencoded .= urlencode('&issuer=' . urlencode($title));
         }
-        return 'https://chart.googleapis.com/chart?chs='.$width.'x'.$height.'&chld='.$level.'|0&cht=qr&chl='.$urlencoded.'';
+        return 'https://chart.googleapis.com/chart?chs=' . $width . 'x' . $height . '&chld=' . $level . '|0&cht=qr&chl=' . $urlencoded . '';
     }
+
     /**
      * Check if the code is correct. This will accept codes starting from $discrepancy*30sec ago to $discrepancy*30sec from now.
      *
-     * @param string   $secret
-     * @param string   $code
-     * @param int      $discrepancy      This is the allowed time drift in 30 second units (8 means 4 minutes before or after)
+     * @param string $secret
+     * @param string $code
+     * @param int $discrepancy This is the allowed time drift in 30 second units (8 means 4 minutes before or after)
      * @param int|null $currentTimeSlice time slice if we want use other that time()
      *
      * @return bool
@@ -123,6 +128,7 @@ class GoogleAuthenticatorService
         }
         return false;
     }
+
     /**
      * Set the code length, should be >=6.
      *
@@ -135,6 +141,7 @@ class GoogleAuthenticatorService
         $this->_codeLength = $length;
         return $this;
     }
+
     /**
      * Helper class to decode base32.
      *
@@ -178,6 +185,7 @@ class GoogleAuthenticatorService
         }
         return $binaryString;
     }
+
     /**
      * Get array with all 32 characters for decoding from/encoding to base32.
      *
@@ -186,13 +194,42 @@ class GoogleAuthenticatorService
     protected function _getBase32LookupTable()
     {
         return array(
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', //  7
-            'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', // 15
-            'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', // 23
-            'Y', 'Z', '2', '3', '4', '5', '6', '7', // 31
+            'A',
+            'B',
+            'C',
+            'D',
+            'E',
+            'F',
+            'G',
+            'H', //  7
+            'I',
+            'J',
+            'K',
+            'L',
+            'M',
+            'N',
+            'O',
+            'P', // 15
+            'Q',
+            'R',
+            'S',
+            'T',
+            'U',
+            'V',
+            'W',
+            'X', // 23
+            'Y',
+            'Z',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7', // 31
             '=',  // padding char
         );
     }
+
     /**
      * A timing safe equals comparison
      * more info here: http://blog.ircmaxell.com/2014/11/its-all-about-time.html.

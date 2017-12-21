@@ -24,7 +24,7 @@ class AdminProfileController extends Controller
         $em = $this->getDoctrine()->getManager();
 
 
-        if (isset($_POST['Userusername']) && $_POST['Userusername'] !== ''){
+        if (isset($_POST['Userusername']) && $_POST['Userusername'] !== '') {
             $user = $this->getUser();
 
             $user->setUsername($_POST['Userusername']);
@@ -43,11 +43,8 @@ class AdminProfileController extends Controller
         $data['error'] = '';
 
 
-
-
-
         // replace this example code with whatever you need
-        return $this->render('profiles/admin/information.profile.admin.index.twig' , $data);
+        return $this->render('profiles/admin/information.profile.admin.index.twig', $data);
     }
 
     /**
@@ -65,8 +62,7 @@ class AdminProfileController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        if (isset($_POST['currentPassword']) && $_POST['currentPassword'] !== '')
-        {
+        if (isset($_POST['currentPassword']) && $_POST['currentPassword'] !== '') {
             // Set out variables!
             $currentPassword = $_POST['currentPassword'];
             $newPassword = $_POST['newPassword'];
@@ -88,7 +84,7 @@ class AdminProfileController extends Controller
                     $data['error'] = "Provided Passwords do not match";
 
                 }
-            }else{
+            } else {
                 $data['error'] = "Current password is not correct";
             }
         }
@@ -100,7 +96,7 @@ class AdminProfileController extends Controller
 
 
         // render the needed view.
-        return $this->render('profiles/admin/password.profile.admin.index.twig' , $data);
+        return $this->render('profiles/admin/password.profile.admin.index.twig', $data);
     }
 
     /**
@@ -121,10 +117,9 @@ class AdminProfileController extends Controller
         $encryption_params = $this->container->getParameter('encryption');
 
 
-        if (isset($_POST['currentAPIKey']))
-        {
+        if (isset($_POST['currentAPIKey'])) {
             $newApiKey = $this->generatePassword(20);
-            $user->setApiKey($newApiKey , new EncryptionService($encryption_params));
+            $user->setApiKey($newApiKey, new EncryptionService($encryption_params));
             $data['success'] = 'API Key updated';
 
             $em->persist($user);
@@ -139,7 +134,7 @@ class AdminProfileController extends Controller
 
 
         // render the needed view.
-        return $this->render('profiles/admin/api.profile.admin.index.twig' , $data);
+        return $this->render('profiles/admin/api.profile.admin.index.twig', $data);
     }
 
     /**
@@ -165,7 +160,7 @@ class AdminProfileController extends Controller
 
 
         // render the needed view.
-        return $this->render('profiles/admin/tfa.profile.admin.index.twig' , $data);
+        return $this->render('profiles/admin/tfa.profile.admin.index.twig', $data);
     }
 
     /**
@@ -187,12 +182,11 @@ class AdminProfileController extends Controller
 
         // Create our TFA Secret & Barcode.
         $tfaSecret = $tfa->createSecret();
-        $tfaBarcode = $tfa->getQRCodeGoogleUrl("PoisonPanel TFA" ,$tfaSecret);
+        $tfaBarcode = $tfa->getQRCodeGoogleUrl("PoisonPanel TFA", $tfaSecret);
 
 
         // If TFA is active - deactivate
-        if ($user->getTfaStatus() == 1)
-        {
+        if ($user->getTfaStatus() == 1) {
             $user->setTfaStatus(0);
             $em->persist($user);
             $em->flush();
@@ -200,23 +194,20 @@ class AdminProfileController extends Controller
         }
 
         // Check if we have been posted a verification
-        if (isset($_POST['tfa-code']) && $_POST['tfa-code'] !== '')
-        {
-            $verified = $tfa->verifyCode($_POST['tfa_secret'] , $_POST['tfa-code']);
-            if ($verified)
-            {
+        if (isset($_POST['tfa-code']) && $_POST['tfa-code'] !== '') {
+            $verified = $tfa->verifyCode($_POST['tfa_secret'], $_POST['tfa-code']);
+            if ($verified) {
                 $user->setTfaSecret($_POST['tfa_secret']);
                 $user->setTfaStatus(1);
                 $em->persist($user);
                 $em->flush();
 
                 return new RedirectResponse('/admin/account/tfa');
-            }else{
+            } else {
                 $tfaSecret = $_POST['tfa_secret'];
             }
 
         }
-
 
 
         // Create our Data Array
@@ -227,7 +218,7 @@ class AdminProfileController extends Controller
         $data['tfa']['barcode'] = $tfaBarcode;
 
         // render the needed view.
-        return $this->render('profiles/admin/tfa.setup.profile.admin.index.twig' , $data);
+        return $this->render('profiles/admin/tfa.setup.profile.admin.index.twig', $data);
     }
 
 
@@ -243,7 +234,7 @@ class AdminProfileController extends Controller
         $user = $this->getUser();
         $currentPassword = $user->getPassword();
 
-        $verify = password_verify($password , $currentPassword);
+        $verify = password_verify($password, $currentPassword);
 
         return $verify;
 
@@ -252,8 +243,8 @@ class AdminProfileController extends Controller
     /**
      * Generates a random password
      *
-     * @param int    $length         Length of the password
-     * @param bool   $add_dashes     Add dashes to the password
+     * @param int $length Length of the password
+     * @param bool $add_dashes Add dashes to the password
      * @param string $available_sets Rules to use
      *
      * @return bool|string
@@ -261,37 +252,35 @@ class AdminProfileController extends Controller
     public function generatePassword($length = 9, $add_dashes = false, $available_sets = 'luds')
     {
         $sets = array();
-        if(strpos($available_sets, 'l') !== false) {
+        if (strpos($available_sets, 'l') !== false) {
             $sets[] = 'abcdefghjkmnpqrstuvwxyz';
         }
-        if(strpos($available_sets, 'u') !== false) {
+        if (strpos($available_sets, 'u') !== false) {
             $sets[] = 'ABCDEFGHJKMNPQRSTUVWXYZ';
         }
-        if(strpos($available_sets, 'd') !== false) {
+        if (strpos($available_sets, 'd') !== false) {
             $sets[] = '23456789';
         }
-        if(strpos($available_sets, 's') !== false) {
+        if (strpos($available_sets, 's') !== false) {
             $sets[] = '!@#$%&*?';
         }
         $all = '';
         $password = '';
-        foreach($sets as $set)
-        {
+        foreach ($sets as $set) {
             $password .= $set[array_rand(str_split($set))];
             $all .= $set;
         }
         $all = str_split($all);
-        for($i = 0; $i < $length - count($sets); $i++) {
+        for ($i = 0; $i < $length - count($sets); $i++) {
             $password .= $all[array_rand($all)];
         }
         $password = str_shuffle($password);
-        if(!$add_dashes) {
+        if (!$add_dashes) {
             return $password;
         }
         $dash_len = floor(sqrt($length));
         $dash_str = '';
-        while(strlen($password) > $dash_len)
-        {
+        while (strlen($password) > $dash_len) {
             $dash_str .= substr($password, 0, $dash_len) . '-';
             $password = substr($password, $dash_len);
         }
@@ -327,18 +316,17 @@ class AdminProfileController extends Controller
      *          Name of the Setting
      * @return Settings|mixed
      */
-    public function getSetting($settingName )
+    public function getSetting($settingName)
     {
         $settings = $this->getDoctrine()->getRepository('AppBundle:Settings');
         $query = $settings->createQueryBuilder('s');
         $result = $query->select('s.id')
             ->where('s.settingName = :setting')
-            ->setParameter('setting' , $settingName)
+            ->setParameter('setting', $settingName)
             ->getQuery()
             ->execute();
 
-        if (empty($result))
-        {
+        if (empty($result)) {
             $newSetting = new Settings();
             $newSetting->setSettingName($settingName);
             $newSetting->setSettingValue(0);

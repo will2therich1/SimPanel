@@ -5,6 +5,7 @@
  * Date: 12/12/17
  * Time: 11:35
  */
+
 namespace AppBundle\Service;
 
 use AppBundle\Entity\NetworkServer;
@@ -36,7 +37,7 @@ class NetworkServerService
      * @param NetworkServer $server
      *          A server Object
      */
-    public function __construct(EncryptionService $encryptionService , NetworkServer $server)
+    public function __construct(EncryptionService $encryptionService, NetworkServer $server)
     {
         $this->encryptionService = $encryptionService;
         $this->server = $server;
@@ -55,8 +56,7 @@ class NetworkServerService
         // Load our key file
         $keyFile = new RSA();
         $keyFile->loadKey($sshKey);
-        if ($sshKeyPassword !== '')
-        {
+        if ($sshKeyPassword !== '') {
             $keyFile->setPassword($sshKeyPassword);
         }
 
@@ -88,8 +88,7 @@ class NetworkServerService
         // Load our key file
         $keyFile = new RSA();
         $keyFile->loadKey($sshKey);
-        if ($sshKeyPassword !== '')
-        {
+        if ($sshKeyPassword !== '') {
             $keyFile->setPassword($sshKeyPassword);
         }
 
@@ -112,7 +111,7 @@ class NetworkServerService
      * @param $loginPassword
      * @return bool|SSH2
      */
-    public function userConnect($loginName , $loginPassword)
+    public function userConnect($loginName, $loginPassword)
     {
         $host = $this->server->getIp();
 

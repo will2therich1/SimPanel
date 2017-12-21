@@ -27,8 +27,7 @@ class AdminAdminController extends Controller
         $data['error'] = '';
 
 
-        if (isset($_POST['newUserUsername']))
-        {
+        if (isset($_POST['newUserUsername'])) {
             $firstName = $_POST['firstName'];
             $lastName = $_POST['lastName'];
             $username = $_POST['newUserUsername'];
@@ -38,20 +37,18 @@ class AdminAdminController extends Controller
             $passwordConfirmation = $_POST['newUserPassword-2'];
 
 
+            if ($password !== '') {
 
-
-            if ($password !== ''){
-
-                if ($password == $passwordConfirmation){
-                    $setPassword = password_hash($password , PASSWORD_DEFAULT);
-                }else{
+                if ($password == $passwordConfirmation) {
+                    $setPassword = password_hash($password, PASSWORD_DEFAULT);
+                } else {
                     $data['error'] = "Provided passwords do not match";
                 }
 
-            }else{
+            } else {
 
                 $password = $this->generatePassword();
-                $setPassword = password_hash($password , PASSWORD_DEFAULT);
+                $setPassword = password_hash($password, PASSWORD_DEFAULT);
 
             }
 
@@ -71,28 +68,25 @@ class AdminAdminController extends Controller
                     $em->flush();
                 } catch (\Exception $e) {
                     $data['error'] = "An unknown error occoured, please ensure the username and email are unique";
-                    return $this->render('admin/create.user.admin.html.twig' , $data);
+                    return $this->render('admin/create.user.admin.html.twig', $data);
 
                 }
 
                 $data['success'] = "Admin Created";
-                $this->userCreationEmail($email , $username , $password);
+                $this->userCreationEmail($email, $username, $password);
 
             }
 
 
-
-
-        }else{
+        } else {
 
         }
 
 
-
-
         // replace this example code with whatever you need
-        return $this->render('admin/create.admin.admin.html.twig' , $data);
+        return $this->render('admin/create.admin.admin.html.twig', $data);
     }
+
     /**
      * @Route("/admin/admins/{id}", name="ViewAdmin")
      */
@@ -139,7 +133,7 @@ class AdminAdminController extends Controller
             }
         }
         // replace this example code with whatever you need
-        return $this->render('admin/users/view.user.admin.html.twig' , $data);
+        return $this->render('admin/users/view.user.admin.html.twig', $data);
     }
 
     /**
@@ -225,18 +219,17 @@ class AdminAdminController extends Controller
      *          Name of the Setting
      * @return Settings|mixed
      */
-    public function getSetting($settingName )
+    public function getSetting($settingName)
     {
         $settings = $this->getDoctrine()->getRepository('AppBundle:Settings');
         $query = $settings->createQueryBuilder('s');
         $result = $query->select('s.id')
             ->where('s.settingName = :setting')
-            ->setParameter('setting' , $settingName)
+            ->setParameter('setting', $settingName)
             ->getQuery()
             ->execute();
 
-        if (empty($result))
-        {
+        if (empty($result)) {
             $newSetting = new Settings();
             $newSetting->setSettingName($settingName);
             $newSetting->setSettingValue(0);
@@ -261,8 +254,8 @@ class AdminAdminController extends Controller
     /**
      * Generates a random password
      *
-     * @param int    $length         Length of the password
-     * @param bool   $add_dashes     Add dashes to the password
+     * @param int $length Length of the password
+     * @param bool $add_dashes Add dashes to the password
      * @param string $available_sets Rules to use
      *
      * @return bool|string
@@ -270,37 +263,35 @@ class AdminAdminController extends Controller
     public function generatePassword($length = 9, $add_dashes = false, $available_sets = 'luds')
     {
         $sets = array();
-        if(strpos($available_sets, 'l') !== false) {
+        if (strpos($available_sets, 'l') !== false) {
             $sets[] = 'abcdefghjkmnpqrstuvwxyz';
         }
-        if(strpos($available_sets, 'u') !== false) {
+        if (strpos($available_sets, 'u') !== false) {
             $sets[] = 'ABCDEFGHJKMNPQRSTUVWXYZ';
         }
-        if(strpos($available_sets, 'd') !== false) {
+        if (strpos($available_sets, 'd') !== false) {
             $sets[] = '23456789';
         }
-        if(strpos($available_sets, 's') !== false) {
+        if (strpos($available_sets, 's') !== false) {
             $sets[] = '!@#$%&*?';
         }
         $all = '';
         $password = '';
-        foreach($sets as $set)
-        {
+        foreach ($sets as $set) {
             $password .= $set[array_rand(str_split($set))];
             $all .= $set;
         }
         $all = str_split($all);
-        for($i = 0; $i < $length - count($sets); $i++) {
+        for ($i = 0; $i < $length - count($sets); $i++) {
             $password .= $all[array_rand($all)];
         }
         $password = str_shuffle($password);
-        if(!$add_dashes) {
+        if (!$add_dashes) {
             return $password;
         }
         $dash_len = floor(sqrt($length));
         $dash_str = '';
-        while(strlen($password) > $dash_len)
-        {
+        while (strlen($password) > $dash_len) {
             $dash_str .= substr($password, 0, $dash_len) . '-';
             $password = substr($password, $dash_len);
         }
@@ -308,7 +299,7 @@ class AdminAdminController extends Controller
         return $dash_str;
     }
 
-    public function userCreationEmail(string $email , string $username , string $password)
+    public function userCreationEmail(string $email, string $username, string $password)
     {
         $message = \Swift_Message::newInstance()
             ->setSubject('Account Created at SimPanel')
@@ -317,12 +308,13 @@ class AdminAdminController extends Controller
             ->setBody(
                 $this->renderView(
                     'emails/user/user.creation.email.html.twig',
-                    array('username' => $username,
+                    array(
+                        'username' => $username,
                         'password' => $password,
-                        'loginurl' => 'https://poisonpanel.servers4all.co.uk')
+                        'loginurl' => 'https://poisonpanel.servers4all.co.uk'
+                    )
                 ), 'text/html'
-            )
-        ;
+            );
         $this->get('mailer')->send($message);
 
     }

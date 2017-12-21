@@ -5,6 +5,7 @@
  * Date: 12/12/17
  * Time: 11:35
  */
+
 namespace AppBundle\Service;
 
 use AppBundle\Entity\NetworkServer;
@@ -38,14 +39,13 @@ class ServerUserService
      * @param NetworkServer $server
      *          A server Object
      */
-    public function __construct(EncryptionService $encryptionService , NetworkServer $server)
+    public function __construct(EncryptionService $encryptionService, NetworkServer $server)
     {
         $this->encryptionService = $encryptionService;
         $this->server = $server;
-        $this->networkService = new NetworkServerService($this->encryptionService , $this->server);
+        $this->networkService = new NetworkServerService($this->encryptionService, $this->server);
 
     }
-
 
 
     public function connect()

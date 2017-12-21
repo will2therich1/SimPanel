@@ -21,39 +21,47 @@ class MaintenanceListener
 
     protected $em;
 
-    public function __construct(ObjectManager $entityManager )
+    public function __construct(ObjectManager $entityManager)
     {
         $this->em = $entityManager;
     }
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-    $maintenanceModeSetting = $this->getSetting("Maintenance");
-    $value = $maintenanceModeSetting->getSettingValue();
-    $adminArea = strpos($event->getRequest()->getRequestUri() , 'admin');
+        $maintenanceModeSetting = $this->getSetting("Maintenance");
+        $value = $maintenanceModeSetting->getSettingValue();
+        $adminArea = strpos($event->getRequest()->getRequestUri(), 'admin');
 
-    if ($event->getRequest()->getRequestUri() == '/Maintenance') {
-        if ($value == 0)
-        {
-        return new RedirectResponse('/login_check');
+        if ($event->getRequest()->getRequestUri() == '/Maintenance') {
+            if ($value == 0) {
+                return new RedirectResponse('/login_check');
+            }
         }
-    }
 
 
-    // Allow Access to certain areas!
-    if ($event->getRequest()->getRequestUri() == '/Maintenance') return;
-    if ($event->getRequest()->getRequestUri() == '/login') return;
-    if ($event->getRequest()->getRequestUri() == '/login_check') return;
-    if ($event->getRequest()->getRequestUri() == '/logout') return;
-    if ($adminArea == true) return;
-
-    // Check they are not already on the Maintenance mode page!
-    if ($event->getRequest()->getRequestUri() !== '/Maintenance') {
-        if ($value == 1) {
-            $event->setResponse(new RedirectResponse('/Maintenance'));
+        // Allow Access to certain areas!
+        if ($event->getRequest()->getRequestUri() == '/Maintenance') {
+            return;
         }
-    }
+        if ($event->getRequest()->getRequestUri() == '/login') {
+            return;
+        }
+        if ($event->getRequest()->getRequestUri() == '/login_check') {
+            return;
+        }
+        if ($event->getRequest()->getRequestUri() == '/logout') {
+            return;
+        }
+        if ($adminArea == true) {
+            return;
+        }
 
+        // Check they are not already on the Maintenance mode page!
+        if ($event->getRequest()->getRequestUri() !== '/Maintenance') {
+            if ($value == 1) {
+                $event->setResponse(new RedirectResponse('/Maintenance'));
+            }
+        }
 
 
     }
@@ -73,12 +81,11 @@ class MaintenanceListener
         $query = $settings->createQueryBuilder('s');
         $result = $query->select('s.id')
             ->where('s.settingName = :setting')
-            ->setParameter('setting' , $settingName)
+            ->setParameter('setting', $settingName)
             ->getQuery()
             ->execute();
 
-        if (empty($result))
-        {
+        if (empty($result)) {
             $newSetting = new Settings();
             $newSetting->setSettingName($settingName);
             $newSetting->setSettingValue(0);

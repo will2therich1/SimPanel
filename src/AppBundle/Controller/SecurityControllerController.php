@@ -26,18 +26,18 @@ class SecurityControllerController extends Controller
         $user = $this->getUser();
 
         // If logged in we will redirect to our check pages
-        if($user){
+        if ($user) {
             return new RedirectResponse('login_check');
         }
 
         // We will check to see if we have been passed any errors.
         if (isset($_GET['login'])) {
-            if ($_GET['login'] == 'failed'){
+            if ($_GET['login'] == 'failed') {
                 $error = "Login Failed, Please check your credentials & your TFA Code if applicable \n Your account may also be deactive!";
             }
         }
 
-        return $this->render('security/login.html.twig' , array(
+        return $this->render('security/login.html.twig', array(
             'error' => $error,
         ));
 
@@ -70,13 +70,13 @@ class SecurityControllerController extends Controller
         $roles = $this->getUser()->getRoles();
 
         // Check if they have the admin role
-        if (isset($roles['USER_ROLE_2'])){
+        if (isset($roles['USER_ROLE_2'])) {
             // Verify the admin role
             if ($roles['USER_ROLE_2'] === 'ROLE_ADMIN') {
                 // If they are an admin then we will take them to the admin area
                 return new RedirectResponse('/admin');
             }
-        }else{
+        } else {
             // Else if they are a user then we take them to the user area
             return new RedirectResponse('/user');
         }

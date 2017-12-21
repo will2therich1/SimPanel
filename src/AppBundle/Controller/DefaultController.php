@@ -19,7 +19,6 @@ class DefaultController extends Controller
     }
 
 
-
     /**
      * @Route("/user", name="user")
      */
@@ -27,7 +26,7 @@ class DefaultController extends Controller
     {
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
         ]);
     }
 
@@ -38,7 +37,7 @@ class DefaultController extends Controller
     {
         $url = $request->getHttpHost();
         $data['url'] = $url;
-        return $this->render('errorPages/maintenance.mode.html.twig' , $data);
+        return $this->render('errorPages/maintenance.mode.html.twig', $data);
     }
 
 }

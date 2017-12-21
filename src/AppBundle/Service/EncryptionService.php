@@ -30,14 +30,14 @@ class EncryptionService
 
     public function encrypt($data)
     {
-        $returnEncryption = openssl_encrypt($data, $this->enc_cypher, $this->enc_secret, $options=0, $this->enc_iv);
+        $returnEncryption = openssl_encrypt($data, $this->enc_cypher, $this->enc_secret, $options = 0, $this->enc_iv);
 
         return $returnEncryption;
     }
 
     public function decrypt($data)
     {
-        $returnEncryption = openssl_decrypt($data, $this->enc_cypher, $this->enc_secret, $options=0, $this->enc_iv);
+        $returnEncryption = openssl_decrypt($data, $this->enc_cypher, $this->enc_secret, $options = 0, $this->enc_iv);
 
         return $returnEncryption;
     }

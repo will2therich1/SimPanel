@@ -30,8 +30,7 @@ class NetworkServerController extends Controller
         $data['error'] = '';
 
 
-        if (isset($_POST['name']))
-        {
+        if (isset($_POST['name'])) {
             $serverName = $_POST['name'];
             $loginUser = $_POST['login_name'];
             $ftpPort = $_POST['ftp_port'];
@@ -57,23 +56,19 @@ class NetworkServerController extends Controller
                     $data['success'] = "Server Created we will test the connection automatically!";
                 } catch (\Exception $e) {
                     $data['error'] = "An unknown error occoured, please Check the provided information";
-                    return $this->render('admin/network/create.network.admin.html.twig' , $data);
+                    return $this->render('admin/network/create.network.admin.html.twig', $data);
 
                 }
             }
 
 
-
-
-        }else{
+        } else {
 
         }
 
 
-
-
         // replace this example code with whatever you need
-        return $this->render('admin/network/create.network.admin.html.twig' , $data);
+        return $this->render('admin/network/create.network.admin.html.twig', $data);
     }
 
     /**
@@ -93,24 +88,22 @@ class NetworkServerController extends Controller
         $data['success'] = '';
         $data['error'] = '';
 
-        $server =$this->getDoctrine()->getManager()->getRepository('AppBundle:NetworkServer')->find($request->attributes->get('id'));
+        $server = $this->getDoctrine()->getManager()->getRepository('AppBundle:NetworkServer')->find($request->attributes->get('id'));
         error_log($server->getId());
 
-        $networkManager = new NetworkServerService($this->getEncryptionService() , $server);
+        $networkManager = new NetworkServerService($this->getEncryptionService(), $server);
         $connectionStatus = $networkManager->connectionTest();
 
         error_log(print_r($connectionStatus));
-        if ($connectionStatus === true)
-        {
+        if ($connectionStatus === true) {
             $server->setConnectionStatus("Connected!");
             $em->persist($server);
             $em->flush();
-        }else{
+        } else {
             $server->setConnectionStatus("Connection Failed!");
             $em->persist($server);
             $em->flush();
         }
-
 
 
         // replace this example code with whatever you need
@@ -120,7 +113,8 @@ class NetworkServerController extends Controller
     /**
      * @return EncryptionService
      */
-    public function getEncryptionService(){
+    public function getEncryptionService()
+    {
         $encryption_params = $this->container->getParameter('encryption');
         return new EncryptionService($encryption_params);
     }
@@ -153,12 +147,11 @@ class NetworkServerController extends Controller
         $query = $settings->createQueryBuilder('s');
         $result = $query->select('s.id')
             ->where('s.settingName = :setting')
-            ->setParameter('setting' , $settingName)
+            ->setParameter('setting', $settingName)
             ->getQuery()
             ->execute();
 
-        if (empty($result))
-        {
+        if (empty($result)) {
             $newSetting = new Settings();
             $newSetting->setSettingName($settingName);
             $newSetting->setSettingValue(0);

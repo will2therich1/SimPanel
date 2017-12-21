@@ -11,7 +11,6 @@ class GeneralUserPanelSettingsController extends Controller
 {
 
 
-
     /**
      * @Route("/admin/settings/general/user/branding" , name="BrandingUserSettings")
      */
@@ -20,13 +19,12 @@ class GeneralUserPanelSettingsController extends Controller
         // Create our Data Array
         $data = [];
 
-        if ($request->getMethod() == 'POST')
-        {
-            $this->setSetting('panelName' , $_POST['PanelName']);
-            $this->setSetting('panelNamePart1' , $_POST['PanelNamePart1']);
-            $this->setSetting('panelNamePart2' , $_POST['PanelNamePart2']);
-            $this->setSetting('PanelNameShortPart1' , $_POST['PanelNameShortPart1']);
-            $this->setSetting('PanelNameShortPart2' , $_POST['PanelNameShortPart2']);
+        if ($request->getMethod() == 'POST') {
+            $this->setSetting('panelName', $_POST['PanelName']);
+            $this->setSetting('panelNamePart1', $_POST['PanelNamePart1']);
+            $this->setSetting('panelNamePart2', $_POST['PanelNamePart2']);
+            $this->setSetting('PanelNameShortPart1', $_POST['PanelNameShortPart1']);
+            $this->setSetting('PanelNameShortPart2', $_POST['PanelNameShortPart2']);
         }
 
         $data['currentUser'] = $this->getUser()->getUserInfo();
@@ -36,7 +34,7 @@ class GeneralUserPanelSettingsController extends Controller
         $data['success'] = '';
         $data['error'] = '';
 
-        return $this->render('settings/general/user/user.general.settings.tab.branding.html.twig' , $data);
+        return $this->render('settings/general/user/user.general.settings.tab.branding.html.twig', $data);
 
 
     }
@@ -51,12 +49,10 @@ class GeneralUserPanelSettingsController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        if (isset($_POST['action']) && $_POST['action'] !== '')
-        {
+        if (isset($_POST['action']) && $_POST['action'] !== '') {
             $action = $_POST['action'];
 
-            if($action === 'enableMaintenanceMode')
-            {
+            if ($action === 'enableMaintenanceMode') {
                 $maintenance = $this->getSetting('Maintenance');
                 $maintenance->setSettingValue('1');
                 $em->persist($maintenance);
@@ -64,8 +60,7 @@ class GeneralUserPanelSettingsController extends Controller
 
                 return true;
 
-            }elseif($action === 'disableMaintenanceMode')
-            {
+            } elseif ($action === 'disableMaintenanceMode') {
                 $maintenance = $this->getSetting('Maintenance');
                 $maintenance->setSettingValue('0');
                 $em->persist($maintenance);
@@ -87,7 +82,7 @@ class GeneralUserPanelSettingsController extends Controller
 
         // Deal with Ajax requests!
 
-        return $this->render('settings/general/user/user.general.settings.tab.general.html.twig' , $data);
+        return $this->render('settings/general/user/user.general.settings.tab.general.html.twig', $data);
 
 
     }
@@ -102,18 +97,17 @@ class GeneralUserPanelSettingsController extends Controller
      *          Name of the Setting
      * @return Settings|mixed
      */
-    public function getSetting($settingName )
+    public function getSetting($settingName)
     {
         $settings = $this->getDoctrine()->getRepository('AppBundle:Settings');
         $query = $settings->createQueryBuilder('s');
         $result = $query->select('s.id')
             ->where('s.settingName = :setting')
-            ->setParameter('setting' , $settingName)
+            ->setParameter('setting', $settingName)
             ->getQuery()
             ->execute();
 
-        if (empty($result))
-        {
+        if (empty($result)) {
             $newSetting = new Settings();
             $newSetting->setSettingName($settingName);
             $newSetting->setSettingValue(0);
@@ -134,7 +128,7 @@ class GeneralUserPanelSettingsController extends Controller
         return $returnObject;
     }
 
-    public function setSetting($settingName , $settingValue)
+    public function setSetting($settingName, $settingValue)
     {
         $setting = $this->getSetting($settingName);
 
