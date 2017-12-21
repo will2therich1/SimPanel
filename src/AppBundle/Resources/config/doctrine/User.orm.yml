@@ -43,4 +43,12 @@ AppBundle\Entity\User:
             type: string
             length: 255
             nullable: true
+        serverUser:
+            type: string
+            length: 255
+            nullable: true
+        serverPassword:
+            type: string
+            length: 255
+            nullable: true
     lifecycleCallbacks: {  }

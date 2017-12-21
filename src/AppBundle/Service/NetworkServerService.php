@@ -72,8 +72,59 @@ class NetworkServerService
 
     }
 
-    public function connect()
+    /**
+     * Returns a connection if details are valid
+     *
+     * @return bool|SSH2
+     */
+    public function masterConnect()
     {
+        // Set our variables
+        $host = $this->server->getIp();
+        $loginUser = $this->server->getLoginUser();
+        $sshKey = $this->server->getSshKey($this->encryptionService);
+        $sshKeyPassword = $this->server->getSshPassword($this->encryptionService);
+
+        // Load our key file
+        $keyFile = new RSA();
+        $keyFile->loadKey($sshKey);
+        if ($sshKeyPassword !== '')
+        {
+            $keyFile->setPassword($sshKeyPassword);
+        }
+
+        // Try our connection
+        try {
+            $connection = new SSH2($host);
+            $connection->login($loginUser, $keyFile);
+
+            return $connection;
+        } catch (Exception $e) {
+            return false;
+        }
+
+    }
+
+    /**
+     * Connects using a Users credentials to a server.
+     *
+     * @param $loginName
+     * @param $loginPassword
+     * @return bool|SSH2
+     */
+    public function userConnect($loginName , $loginPassword)
+    {
+        $host = $this->server->getIp();
+
+        // Try our connection
+        try {
+            $connection = new SSH2($host);
+            $connection->login($loginName, $loginPassword);
+
+            return $connection;
+        } catch (Exception $e) {
+            return false;
+        }
 
     }
 

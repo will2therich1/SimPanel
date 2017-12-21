@@ -387,4 +387,62 @@ class User implements UserInterface
         return $data;
     }
 
+    /**
+     * @var string
+     */
+    private $serverUser;
+
+    /**
+     * @var string
+     */
+    private $serverPassword;
+
+
+    /**
+     * Set serverUser
+     *
+     * @param string $serverUser
+     *
+     * @return User
+     */
+    public function setServerUser($serverUser)
+    {
+        $this->serverUser = $serverUser;
+
+        return $this;
+    }
+
+    /**
+     * Get serverUser
+     *
+     * @return string
+     */
+    public function getServerUser()
+    {
+        return $this->serverUser;
+    }
+
+    /**
+     * Set serverPassword
+     *
+     * @param string $serverPassword
+     *
+     * @return User
+     */
+    public function setServerPassword($serverPassword)
+    {
+        $this->serverPassword = $serverPassword;
+
+        return $this;
+    }
+
+    /**
+     * Get serverPassword
+     *
+     * @return string
+     */
+    public function getServerPassword()
+    {
+        return $this->serverPassword;
+    }
 }
