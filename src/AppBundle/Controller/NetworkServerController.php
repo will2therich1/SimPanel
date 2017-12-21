@@ -72,6 +72,40 @@ class NetworkServerController extends Controller
         return $this->render('admin/network/create.network.admin.html.twig', $data);
     }
 
+
+    /**
+     * @Route("/admin/network/{id}", name="ViewNetworkServer")
+     */
+    public function viewNetworkServerPage(Request $request)
+    {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        $server = $this->getDoctrine()->getManager()->getRepository('AppBundle:NetworkServer')->find($request->attributes->get('id'));
+        $serverArray = array($server);
+        // Create our Data Array
+        $data = [];
+        $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['branding'] = $this->getSiteInformation();
+        $data['active'] = 'Network';
+        $data['success'] = '';
+        $data['error'] = '';
+        $data['server'] = $serverArray[0];
+
+
+        if($request->getMethod() == "POST")
+        {
+            $server ->setName($request->get('name'));
+            $server ->setLoginUser($request->get('login_name'));
+            $server ->setPort($request->get('ftp_port'));
+            $server ->setIp($request->get('ip'));
+            $em->persist($server);
+            $em->flush();
+        }
+
+        // replace this example code with whatever you need
+        return $this->render('admin/network/view.network.admin.html.twig', $data);
+    }
+
     /**
      * @Route("/admin/network/{id}/connectiontest", name="NetworkServerConnectionTest")
      */
