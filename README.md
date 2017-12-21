@@ -1,4 +1,8 @@
-panel
+SimPanel
 =====
 
-A Symfony project created on December 8, 2017, 10:40 am.
+SimPanel - The Simple Gamepanel.
+
+SimPanel is designed to be a simple panel for GameServer Managers to install and use.
+
+It is built with PHP on Symfony 3.4
