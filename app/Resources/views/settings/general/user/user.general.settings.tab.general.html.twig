@@ -63,7 +63,6 @@
 {% block javascripts %}
 <script type="text/javascript">
     $('.maintModeOn').click(function () {
-      console.log("Request");
       $.ajax({
         type: 'POST',
         data: {"action" : "enableMaintenanceMode"},
@@ -77,7 +76,6 @@
     });
 
     $('.maintModeOff').click(function () {
-      console.log("Request");
       $.ajax({
         type: 'POST',
         data: {"action" : "disableMaintenanceMode"},
