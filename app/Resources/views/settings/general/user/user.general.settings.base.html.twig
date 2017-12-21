@@ -18,7 +18,7 @@
 
                     <div id="exTab3" class="container">
                         <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-link {% if tab == 'General'  %}active{% endif %}"><a  href="{{ path('AdminProfileInfo') }}">General Settings</a></li>
+                        <li class="nav-link {% if tab == 'General'  %}active{% endif %}"><a  href="{{ path('GeneralUserSettings') }}">General Settings</a></li>
                         <li class="nav-link {% if tab == 'Branding'  %}active{% endif %}"><a  href="{{ path('BrandingUserSettings') }}">Branding Settings</a></li>
                         <li class='nav-link {% if tab == 'Emails'  %}active{% endif %}'><a href = '{{ path('AdminProfilePassword') }}' > Email Settings</a >
                         <li class='nav-link {% if tab == 'API'  %}active{% endif %}' ><a href = '{{ path('AdminProfileAPI') }}' > User API Settings</a >

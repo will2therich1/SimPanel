@@ -1,0 +1,98 @@
+{% extends '/settings/general/user/user.general.settings.base.html.twig' %}
+
+
+{% block tabcontent %}
+
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <p>General settings</p>
+                <hr>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-md-6" >
+                <div class="form-group" >
+                <label >Maintenance Mode</label ><br>
+                    <button type="button" class="maintModeOn btn btn-info btn-circle btn-xl"><i class="fas fa-check"></i></button>
+                    <button type="button" class="maintModeOff btn btn-warning btn-circle btn-xl"><i class="fas fa-times"></i></button>
+                </div >
+        </div >
+
+        </div>
+
+
+        <div class="clearfix" ></div >
+
+    <style>
+        body{margin:40px;}
+
+
+        .btn-circle {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            padding: 6px 0;
+            font-size: 12px;
+            line-height: 1.428571429;
+            border-radius: 15px;
+        }
+        .btn-circle.btn-lg {
+            width: 50px;
+            height: 50px;
+            padding: 10px 16px;
+            font-size: 18px;
+            line-height: 1.33;
+            border-radius: 25px;
+        }
+        .btn-circle.btn-xl {
+            width: 70px;
+            height: 70px;
+            padding: 10px 16px;
+            font-size: 24px;
+            line-height: 1.33;
+            border-radius: 35px;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+    $('.maintModeOn').click(function () {
+      console.log("Request");
+      $.ajax({
+        type: 'POST',
+        data: {"action" : "enableMaintenanceMode"},
+        url: '{{ path('GeneralUserSettings') }}',
+        success: function (data) {
+          alert("Success");
+          location.reload();
+        }
+      });
+      alert("Maintenance Mode Enabled")
+    });
+
+    $('.maintModeOff').click(function () {
+      console.log("Request");
+      $.ajax({
+        type: 'POST',
+        data: {"action" : "disableMaintenanceMode"},
+        url: '{{ path('GeneralUserSettings') }}',
+        success: function (data) {
+          alert("Success");
+          location.reload();
+        }
+      });
+      alert("Maintenance Mode Disabled")
+
+    });
+
+
+</script>
+
+
+{% endblock %}

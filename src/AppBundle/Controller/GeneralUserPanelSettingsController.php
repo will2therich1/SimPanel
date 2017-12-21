@@ -10,17 +10,15 @@ use Symfony\Component\HttpFoundation\Request;
 class GeneralUserPanelSettingsController extends Controller
 {
 
+
+
     /**
-     * @Route("/settings/general/user" , name="BrandingUserSettings")
+     * @Route("/admin/settings/general/user/branding" , name="BrandingUserSettings")
      */
-    public function userGeneralSettings(Request $request)
+    public function userGeneralBrandingSettings(Request $request)
     {
         // Create our Data Array
         $data = [];
-
-
-        dump($this->getSiteInformation());
-        dump($this->getDoctrine()->getRepository('AppBundle:Settings')->findAll());
 
         if ($request->getMethod() == 'POST')
         {
@@ -38,11 +36,61 @@ class GeneralUserPanelSettingsController extends Controller
         $data['success'] = '';
         $data['error'] = '';
 
-        return $this->render('settings/general/user/user.general.settings.tab.1.html.twig' , $data);
+        return $this->render('settings/general/user/user.general.settings.tab.branding.html.twig' , $data);
 
 
     }
 
+    /**
+     * @Route("/admin/settings/general/user" , name="GeneralUserSettings")
+     */
+    public function userGeneralSettings()
+    {
+        // Create our Data Array
+        $data = [];
+
+        $em = $this->getDoctrine()->getManager();
+
+        if (isset($_POST['action']) && $_POST['action'] !== '')
+        {
+            $action = $_POST['action'];
+
+            if($action === 'enableMaintenanceMode')
+            {
+                $maintenance = $this->getSetting('Maintenance');
+                $maintenance->setSettingValue('1');
+                $em->persist($maintenance);
+                $em->flush();
+
+                return true;
+
+            }elseif($action === 'disableMaintenanceMode')
+            {
+                $maintenance = $this->getSetting('Maintenance');
+                $maintenance->setSettingValue('0');
+                $em->persist($maintenance);
+                $em->flush();
+
+                return true;
+
+            }
+
+        }
+
+
+        $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['active'] = 'GeneralSettings';
+        $data['tab'] = 'General';
+        $data['branding'] = $this->getSiteInformation();
+        $data['success'] = '';
+        $data['error'] = '';
+
+        // Deal with Ajax requests!
+
+        return $this->render('settings/general/user/user.general.settings.tab.general.html.twig' , $data);
+
+
+    }
 
 
     /**
