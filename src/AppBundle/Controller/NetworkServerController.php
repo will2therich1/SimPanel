@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Service\EncryptionService;
+use AppBundle\Service\ServerUserService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\NetworkServer;
@@ -170,6 +171,33 @@ class NetworkServerController extends Controller
         $returnObject = $this->getDoctrine()->getRepository('AppBundle:Settings')->find($id);
 
         return $returnObject;
+    }
+
+    /**
+     * @Route("/admin/create/user/server" )
+     */
+    public function createServerUser()
+    {
+        $encryption_params = $this->container->getParameter('encryption');
+        $server = $this->getDoctrine()->getManager()->getRepository('AppBundle:NetworkServer')->find(6);
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+
+        $serverManager = new ServerUserService(new EncryptionService($encryption_params) , $server , $user, $em);
+
+        $serverManager->connect();
+
+        // Create our Data Array
+        $data = [];
+        $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['branding'] = $this->getSiteInformation();
+        $data['active'] = 'Network';
+        $data['success'] = '';
+        $data['error'] = '';
+
+        return $this->render('admin/network/create.network.admin.html.twig', $data);
+
+
     }
 
 }
