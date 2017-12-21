@@ -39,6 +39,7 @@ class MaintenanceListener
         }
     }
 
+
     // Allow Access to certain areas!
     if ($event->getRequest()->getRequestUri() == '/Maintenance') return;
     if ($event->getRequest()->getRequestUri() == '/login') return;
