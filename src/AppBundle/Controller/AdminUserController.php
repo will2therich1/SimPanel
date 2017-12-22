@@ -26,6 +26,7 @@ class AdminUserController extends Controller
         // Create our Data Array
         $data = [];
         $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['branding'] = $this->getSiteInformation();
         $data['active'] = 'User';
         $data['success'] = '';
         $data['error'] = '';
