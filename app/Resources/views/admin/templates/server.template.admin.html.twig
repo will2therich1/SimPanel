@@ -14,7 +14,7 @@
             {% endif %}
             <div class="col-lg-12">
                 <div class="block">
-                    <div class="title"><strong class="d-block">Search Network Servers</strong><span class="d-block">Search for Network Servers</span></div>
+                    <div class="title"><strong class="d-block">Search Server Templates</strong><span class="d-block">Search for Server templates</span></div>
                     <div class="block-body">
                         <form class="form-horizontal" method='get' action=''>
                             <div class="form-group row">
@@ -46,22 +46,20 @@
             <thead>
                 <th>ID</th>
                 <th>Name</th>
-                <th>IP</th>
-                <th>Connection Status</th>
-                <th>Login user</th>
-                <th>Connection Test</th>
+                <th>Steam Game ID</th>
+                <th>Build Status</th>
+                <th>Size</th>
                 <th>Edit</th>
             </thead>
             <tbody>
-            {% for server in servers %}
+            {% for template in templates %}
             <tr>
-                    <th scope="row">{{ server.id|e }}</th>
-                    <th>{{ server.name|e }}</th>
-                    <th>{{ server.ip|e }}</th>
-                    <th>{{ server.connectionStatus|e }}</th>
-                    <th>{{ server.loginUser|e }}</th>
-                    <th><a href='./network/{{ server.id|e }}/connectiontest'>Test</a></th>
-                    <th><a href='./network/{{ server.id|e }}'>Edit</a></th>
+                    <th scope="row">{{ template.id|e }}</th>
+                    <th>{{ template.templateName|e }}</th>
+                    <th>{{ template.steamName|e }}</th>
+                    <th>{{ template.status|e }} {% if template.status == "Steam Installing" %} Steam Install Percent - %{{ template.steamPercentage }} {% endif %}</th>
+                    <th>{{ template.size|e }}</th>
+                    <th><a href='./template/{{ template.id|e }}'>Edit</a></th>
                 </tr>
             {% endfor %}
             </tbody>
@@ -73,11 +71,11 @@
     </div>
     <hr>
 
-    <div class='button-bar'>
-        <a href="{{ path('NetworkServerList') }}" class='button prev'>First Page</a>&nbsp;&nbsp;&nbsp;&nbsp
-        <a href='{{ pages.lastlink }}' class='button prev'>Previous</a>
-        <a href='{{ pages.nextlink }}' class='button next'>Next</a>
-    </div>
+    {#<div class='button-bar'>#}
+        {#<a href="{{ path('ServerTemplateList') }}" class='button prev'>First Page</a>&nbsp;&nbsp;&nbsp;&nbsp#}
+        {#<a href='{{ pages.lastlink }}' class='button prev'>Previous</a>#}
+        {#<a href='{{ pages.nextlink }}' class='button next'>Next</a>#}
+    {#</div>#}
             {% endblock %}
         {% block javascripts %}
 

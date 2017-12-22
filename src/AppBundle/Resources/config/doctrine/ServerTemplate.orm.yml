@@ -1,7 +1,7 @@
-AppBundle\Entity\User:
+AppBundle\Entity\ServerTemplate:
     type: entity
     table: null
-    repositoryClass: AppBundle\Repository\UserRepository
+    repositoryClass: AppBundle\Repository\ServerTemplateRepository
     id:
         id:
             type: integer
@@ -9,46 +9,36 @@ AppBundle\Entity\User:
             generator:
                 strategy: AUTO
     fields:
-        firstName:
+        networkId:
+            type: integer
+        configId:
+            type: integer
+        steamPercentage:
             type: string
             length: 255
-        lastName:
+            column: steam_percentage
+        steam_name:
             type: string
             length: 255
-        username:
+        template_name:
             type: string
             length: 255
-            unique: true
-        email:
+        dateCreated:
             type: string
             length: 255
-            unique: true
-        password:
-            type: string
-            length: 255
+            column: date_created
         status:
             type: string
             length: 255
-        admin:
-            type: integer
+        size:
+            type: string
             length: 255
-        apiKey:
+        description:
             type: string
             length: 255
             nullable: true
-        tfaStatus:
-            type: integer
-            length: 255
-        tfaSecret:
+        location:
             type: string
             length: 255
-            nullable: true
-        serverUser:
-            type: string
-            length: 255
-            nullable: true
-        serverPassword:
-            type: string
-            length: 255
-            nullable: true
+
     lifecycleCallbacks: {  }

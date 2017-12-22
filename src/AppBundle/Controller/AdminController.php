@@ -269,6 +269,86 @@ class AdminController extends Controller
         return $this->render('admin/network/network.admin.html.twig', $data);
     }
 
+    /**
+     * @Route("/admin/servers/templates", name="ServerTemplateList")
+     */
+    public function adminServerTemplatesListPage()
+    {
+        $data = [];
+        $data['branding'] = $this->getSiteInformation();
+        $data['success'] = '';
+        $data['error'] = '';
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        $queryBuilder = $em->createQueryBuilder();
+
+
+        $get = $_GET;
+        // Set the offset for queries
+        if (isset($get['offset']) && $get['offset'] !== '') {
+            $offset = $get['offset'];
+        } else {
+            $offset = 0;
+        }
+
+        // Set the limit for queries
+        if (isset($get['limit']) && $get['limit'] !== '') {
+            $limit = $get['limit'];
+        } else {
+            $limit = 10;
+        }
+
+
+        // Create the queries!
+        if (isset($get['name']) && $get['name'] !== '') {
+
+
+            $queryBuilder->select('st')
+                ->from('AppBundle:ServerTemplate', 'st')
+                ->where('st.template_name LIKE :name')
+                ->setMaxResults($limit)
+                ->setFirstResult($offset)
+                ->setParameter('name', '%'.$get['name'].'%');
+
+
+            $result = $queryBuilder->getQuery()->execute();
+
+
+        } elseif (isset($get['id']) && $get['id'] !== '') {
+
+            $queryBuilder->select('st')
+                ->from('AppBundle:ServerTemplate', 'st')
+                ->where('st.id = :id')
+                ->setMaxResults($limit)
+                ->setFirstResult($offset)
+                ->setParameter('id', $get['id']);
+
+            $result = $queryBuilder->getQuery()->execute();
+
+        }
+
+
+        if (!isset($result)) {
+            $queryBuilder->select('st')
+                ->from('AppBundle:ServerTemplate', 'st')
+                ->setMaxResults($limit)
+                ->setFirstResult($offset);
+
+            $result = $queryBuilder->getQuery()->execute();
+        }
+
+
+        // Create our Data Array
+        $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['pages'] = $this->createPagination('/admin/network', $offset, $limit);
+        $data['templates'] = $result;
+        $data['active'] = "Templates";
+
+
+        // replace this example code with whatever you need
+        return $this->render('admin/templates/server.template.admin.html.twig', $data);
+    }
+
 
     /**
      * @param $url
