@@ -29,6 +29,14 @@ class NetworkServerService
 
 
     /**
+     * Location where the daemon stores its scripts
+     *
+     * @var string
+     */
+    protected $scriptLocation = "/usr/local/sp/bin/";
+
+
+    /**
      * NetworkServerService constructor.
      *
      * @param EncryptionService $encryptionService
@@ -127,5 +135,29 @@ class NetworkServerService
 
     }
 
+
+    /**
+     * Runs a command on the server
+     *
+     * @param $cmd
+     * @return bool
+     */
+    public function runCMD($cmd)
+    {
+
+        $connection = $this->masterConnect();
+
+        $command = $this->scriptLocation . $cmd;
+        try{
+            $connection->exec($command);
+            error_log($command);
+            return true;
+        }catch (Exception $e)
+        {
+            return false;
+        }
+
+
+    }
 
 }

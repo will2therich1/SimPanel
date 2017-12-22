@@ -9,6 +9,7 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = [
+            new Cron\CronBundle\CronCronBundle(),
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),

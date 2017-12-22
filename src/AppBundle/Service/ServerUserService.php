@@ -108,37 +108,14 @@ class ServerUserService
         $this->em->persist($this->user);
         $this->em->flush();
 
-        $this->runCMD($cmd);
-
+        $this->networkService->runCMD($cmd);
 
         return true;
 
 
     }
 
-    /**
-     * Runs a command on the server
-     *
-     * @param $cmd
-     * @return bool
-     */
-    public function runCMD($cmd)
-    {
 
-        $connection = $this->networkService->masterConnect();
-
-        $command = $this->scriptLocation . $cmd;
-        try{
-            $connection->exec($command);
-            error_log($command);
-            return true;
-        }catch (Exception $e)
-        {
-            return false;
-        }
-
-
-    }
 
 
 

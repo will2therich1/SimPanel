@@ -82,6 +82,7 @@ class NetworkServerController extends Controller
         $em = $this->getDoctrine()->getManager();
         $server = $this->getDoctrine()->getManager()->getRepository('AppBundle:NetworkServer')->find($request->attributes->get('id'));
         $serverArray = array($server);
+
         // Create our Data Array
         $data = [];
         $data['currentUser'] = $this->getUser()->getUserInfo();
@@ -233,5 +234,7 @@ class NetworkServerController extends Controller
 
 
     }
+
+
 
 }
