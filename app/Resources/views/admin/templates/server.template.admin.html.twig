@@ -57,7 +57,7 @@
                     <th scope="row">{{ template.id|e }}</th>
                     <th>{{ template.templateName|e }}</th>
                     <th>{{ template.steamName|e }}</th>
-                    <th>{{ template.status|e }} {% if template.status == "Steam Installing" %} Steam Install Percent - %{{ template.steamPercentage }} {% endif %}</th>
+                    <th>{{ template.status|e }} {% if template.status == "Steam Installing" %} , Steam Install Percent - {{ template.steamPercentage }}% {% endif %}</th>
                     <th>{{ template.size|e }}</th>
                     <th><a href='./template/{{ template.id|e }}'>Edit</a></th>
                 </tr>
@@ -71,11 +71,11 @@
     </div>
     <hr>
 
-    {#<div class='button-bar'>#}
-        {#<a href="{{ path('ServerTemplateList') }}" class='button prev'>First Page</a>&nbsp;&nbsp;&nbsp;&nbsp#}
-        {#<a href='{{ pages.lastlink }}' class='button prev'>Previous</a>#}
-        {#<a href='{{ pages.nextlink }}' class='button next'>Next</a>#}
-    {#</div>#}
+    <div class='button-bar'>
+        <a href="{{ path('ServerTemplateList') }}" class='button prev'>First Page</a>&nbsp;&nbsp;&nbsp;&nbsp
+        <a href='{{ pages.lastlink }}' class='button prev'>Previous</a>
+        <a href='{{ pages.nextlink }}' class='button next'>Next</a>
+    </div>
             {% endblock %}
         {% block javascripts %}
 

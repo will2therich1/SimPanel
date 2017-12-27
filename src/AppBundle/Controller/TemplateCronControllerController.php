@@ -42,7 +42,22 @@ class TemplateCronControllerController extends Controller
             
         }elseif ($do == "tpl_status")
         {
-            $status = $request->get('started');
+            $status = $request->get('status');
+
+            if ($status == null)
+            {
+                $status = $request->get('update');
+
+            }
+
+
+            if($status == 'complete')
+            {
+                $size = $request->get('size');
+                $template->setSize($size);
+                $status = "Completed";
+            }
+
             $template->setStatus($status);
         }
         

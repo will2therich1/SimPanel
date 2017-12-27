@@ -127,7 +127,7 @@ class NetworkServerController extends Controller
         $server = $this->getDoctrine()->getManager()->getRepository('AppBundle:NetworkServer')->find($request->attributes->get('id'));
         error_log($server->getId());
 
-        $networkManager = new NetworkServerService($this->getEncryptionService(), $server);
+        $networkManager = new NetworkServerService($this->getEncryptionService(), $server, $em);
         $connectionStatus = $networkManager->connectionTest();
 
         error_log(print_r($connectionStatus));

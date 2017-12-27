@@ -340,7 +340,7 @@ class AdminController extends Controller
 
         // Create our Data Array
         $data['currentUser'] = $this->getUser()->getUserInfo();
-        $data['pages'] = $this->createPagination('/admin/network', $offset, $limit);
+        $data['pages'] = $this->createPagination('/admin/servers/templates', $offset, $limit);
         $data['templates'] = $result;
         $data['active'] = "Templates";
 

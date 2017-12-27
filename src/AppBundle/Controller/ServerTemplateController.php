@@ -14,7 +14,7 @@ class ServerTemplateController extends Controller
 {
 
     /**
-     * @Route("/admin/servers/template/create", name="CreateServerTemplate")
+     * @Route("/admin/servers/templates/create", name="CreateServerTemplate")
      */
     public function createServerTemplatesPage(Request $request)
     {
