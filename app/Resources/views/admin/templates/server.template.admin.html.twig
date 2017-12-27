@@ -59,7 +59,7 @@
                     <th>{{ template.steamName|e }}</th>
                     <th>{{ template.status|e }} {% if template.status == "Steam Installing" %} , Steam Install Percent - {{ template.steamPercentage }}% {% endif %}</th>
                     <th>{{ template.size|e }}</th>
-                    <th><a href='./template/{{ template.id|e }}'>Edit</a></th>
+                    <th><a href='./templates/{{ template.id|e }}'>Edit</a></th>
                 </tr>
             {% endfor %}
             </tbody>
