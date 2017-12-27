@@ -54,7 +54,6 @@ class ServerTemplateController extends Controller
 
                 $networkService->createTemplate($template->getId() , $template->getSteamName() , $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId()));
 
-                dump($template);
 
 
             }catch (\Exception $e)
@@ -95,8 +94,6 @@ class ServerTemplateController extends Controller
         {
             if (null !== $request->get('deleteServer'))
             {
-                // TODO: Implement deleteing server templates.
-                dump($request->get('deleteServer'));
 
                 $networkService = new NetworkServerService($this->getEncryptionService() , $networkServer , $em);
                 $networkService->deleteTemplate($template);
@@ -106,7 +103,6 @@ class ServerTemplateController extends Controller
 
             }elseif( null !== $request->get('name'))
             {
-                dump("Test");
                 $template->setTemplateName($request->get('name'));
                 $template->setDescription($request->get('template_description'));
                 $data['success'] = "Server Template Updated";
@@ -117,7 +113,6 @@ class ServerTemplateController extends Controller
         $em->persist($template);
         $em->flush();
 
-        dump($data);
 
 
 
