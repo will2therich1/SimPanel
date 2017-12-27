@@ -3,10 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Service\EncryptionService;
-use Grpc\Server;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\ServerTemplate;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\NetworkServerService;
 
@@ -66,6 +66,63 @@ class ServerTemplateController extends Controller
 
         // replace this example code with whatever you need
         return $this->render('admin/templates/create.server.template.admin.html.twig', $data);
+    }
+
+    /**
+     * @Route("/admin/servers/templates/{id}", name="ViewServerTemplate")
+     */
+    public function viewServerTemplatesPage(Request $request)
+    {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+
+        $id = $request->get('id');
+
+        $template = $em->getRepository('AppBundle:ServerTemplate')->find($id);
+        $networkServer = $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId());
+
+        // Create our Data Array
+        $data = [];
+        $data['serverTemplate']['data'] = $template;
+        $data['serverTemplate']['server'] = $networkServer;
+        $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['branding'] = $this->getSiteInformation();
+        $data['active'] = 'Templates';
+        $data['success'] = '';
+        $data['error'] = '';
+
+        if ($request->getMethod() == 'POST')
+        {
+            if (null !== $request->get('deleteServer'))
+            {
+                // TODO: Implement deleteing server templates.
+                dump($request->get('deleteServer'));
+
+                $networkService = new NetworkServerService($this->getEncryptionService() , $networkServer , $em);
+                $networkService->deleteTemplate($template);
+
+                return new RedirectResponse('/admin/servers/templates');
+
+
+            }elseif( null !== $request->get('name'))
+            {
+                dump("Test");
+                $template->setTemplateName($request->get('name'));
+                $template->setDescription($request->get('template_description'));
+                $data['success'] = "Server Template Updated";
+            }
+
+        }
+
+        $em->persist($template);
+        $em->flush();
+
+        dump($data);
+
+
+
+        // replace this example code with whatever you need
+        return $this->render('admin/templates/view.server.template.admin.html.twig', $data);
     }
 
     /**

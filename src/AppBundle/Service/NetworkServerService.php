@@ -9,6 +9,7 @@
 namespace AppBundle\Service;
 
 use AppBundle\Entity\NetworkServer;
+use AppBundle\Entity\ServerTemplate;
 use Doctrine\Common\Persistence\ObjectManager;
 use phpseclib\Crypt\RSA;
 use phpseclib\Net\SSH2;
@@ -179,14 +180,25 @@ class NetworkServerService
 
     }
 
+    /**
+     * Deletes a Game server Template on the remote server
+     */
+    public function deleteTemplate(ServerTemplate $template)
+    {
+        $cmd = "DeleteTemplate -i ". $template->getId();
+        $this->runCMD($cmd);
+
+        $this->em->remove($template);
+        $this->em->flush();
+
+    }
+
     function steamInstall($callbackUrl , $steam_name , $tpl_id , $networkServer )
     {
         $cfg_steam_auth = "";
         $steam_user = "servers4all";
         $steam_pass = "Servers4all16!";
-
-        $encryptionService = $this->encryptionService;
-        $networkServer = $this->em->getRepository('AppBundle:NetworkServer')->find($networkServer);
+        
 
         $cmd  = "SteamCMDInstall -g '$steam_name' -i $tpl_id -l '$steam_user' -p '$steam_pass' -c '$cfg_steam_auth' -u '$callbackUrl' >> /dev/null 2>&1 &";
 

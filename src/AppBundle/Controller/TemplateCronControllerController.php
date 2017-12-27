@@ -54,6 +54,7 @@ class TemplateCronControllerController extends Controller
             if($status == 'complete')
             {
                 $size = $request->get('size');
+                $location = "/usr/local/sp/templates/".$request->get('id');
                 $template->setSize($size);
                 $status = "Completed";
             }
