@@ -14,8 +14,15 @@ class AdminController extends Controller
     /**
      * @Route("/admin", name="adminHomepage")
      */
-    public function adminIndexAction()
+    public function adminIndexAction(Request $request)
     {
+        if($request->getHttpHost() == "localhost:8000")
+        {
+            $status = "Development";
+        }else{
+            $status = "Production";
+        }
+
 
         // Prepare data for page
         $data = [];
@@ -25,6 +32,7 @@ class AdminController extends Controller
         $data['block']['user'] = $this->getUserCount();
         $data['block']['admin'] = $this->getAdminCount();
         $data['block']['network'] = $this->getNetworkServerCount();
+        $data['block']['status'] = $status;
 
         // replace this example code with whatever you need
         return $this->render('admin/admin.index.html.twig', $data);

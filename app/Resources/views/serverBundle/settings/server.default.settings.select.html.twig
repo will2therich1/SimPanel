@@ -1,0 +1,31 @@
+{% extends '/serverBundle/settings/server.default.settings.base.html.twig' %}
+
+{% block tabcontent %}
+
+
+    <form action = '' method = 'POST' >
+
+        <div class="row">
+            <div class="col-md-12" >
+                <div class="form-group">
+                    <label style="color:white;"> Select Server Template to edit</label>
+                    <br>
+                    <select name="ServerToEdit" id="STE" style="width: 100%;" class="custom-select">
+                        {% for template in templates %}
+                        <option value="{{ template.id }}" >{{ template.templateName }} - {{ template.id }}</option>
+                        {% endfor %}
+                    </select>
+                </div >
+            </div >
+
+        </div>
+
+
+
+
+
+        <button type = "submit" class="btn btn-info btn-fill pull-right" > Edit Server </button >
+        <div class="clearfix" ></div >
+    </form >
+
+{% endblock %}
