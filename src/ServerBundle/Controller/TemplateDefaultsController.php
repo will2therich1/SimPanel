@@ -77,6 +77,8 @@ class TemplateDefaultsController extends Controller
             $cfg->setStartupCommand("example");
             $cfg->setTemplateId($serverId);
             $cfg->setUpdateCommand("example");
+            $cfg->setDefaultRam("1024");
+            $cfg->setDefaultPlayerSlots("10");
 
             // Persist and flush the objects
             $em->persist($cfg);
