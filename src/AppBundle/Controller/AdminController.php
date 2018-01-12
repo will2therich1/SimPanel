@@ -213,6 +213,7 @@ class AdminController extends Controller
 
 
         $get = $_GET;
+
         // Set the offset for queries
         if (isset($get['offset']) && $get['offset'] !== '') {
             $offset = $get['offset'];

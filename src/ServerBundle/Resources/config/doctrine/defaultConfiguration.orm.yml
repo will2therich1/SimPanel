@@ -21,9 +21,13 @@ ServerBundle\Entity\defaultConfiguration:
             type: string
             length: 255
         startupCommand:
+            type: text
+        updateCommand:
+            type: text
+        defaultRam:
             type: string
             length: 255
-        updateCommand:
+        defaultPlayerSlots:
             type: string
             length: 255
     lifecycleCallbacks: {  }

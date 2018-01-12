@@ -46,19 +46,23 @@ class TemplateDefaultsController extends Controller
     /**
      * @Route("/settings/server/templates/defaults/g/{id}/general", name="ServerTemplateDefaultsID")
      */
-    public function templateEditor(Request $request)
+    public function templateEditorGeneral(Request $request)
     {
         // Get the entity manager!!
         $em = $this->getDoctrine()->getManager();
 
+        // Build out data array
         $data = [];
         $data['branding'] = $this->getSiteInformation();
         $data['success'] = '';
         $data['error'] = '';
         $data['tab'] = 'General';
+
+        // Get our server ID from the uri
         $serverId = $request->get('id');
         $data['serverId'] = $serverId;
 
+        // Get our server template Item
         $server = $em->getRepository('AppBundle:ServerTemplate')->find($serverId);
 
 
@@ -114,6 +118,114 @@ class TemplateDefaultsController extends Controller
         $data['active'] = "ServerDefaults";
 
         return $this->render('/serverBundle/settings/server.default.settings.general.html.twig', $data);
+    }
+
+    /**
+     * @Route("/settings/server/templates/defaults/g/{id}/advanced", name="ServerTemplateDefaultsIDAdvanced")
+     */
+    public function templateEditorAdvanced(Request $request)
+    {
+        // Get the entity manager!!
+        $em = $this->getDoctrine()->getManager();
+
+        // Build out data array
+        $data = [];
+        $data['branding'] = $this->getSiteInformation();
+        $data['success'] = '';
+        $data['error'] = '';
+        $data['tab'] = 'Advanced';
+
+        // Get our server ID from the uri
+        $serverId = $request->get('id');
+        $data['serverId'] = $serverId;
+
+        // Get our server template Item
+        $server = $em->getRepository('AppBundle:ServerTemplate')->find($serverId);
+
+
+        // See if we already have a set of defaults.
+        $cfgId = $server->getConfigId();
+        $data['cfg'] = $em->getRepository('ServerBundle:defaultConfiguration')->find($cfgId);
+
+
+        $post = $request->getMethod();
+
+        // If we have a post request then we will update the config
+        if ($post == "POST")
+        {
+            $cfg = $em->getRepository('ServerBundle:defaultConfiguration')->find($cfgId);
+
+            $cfg->setDefaultRam($request->get('defaultRam'));
+            $cfg->setDefaultPlayerSlots($request->get('defaultPlayerSlots'));
+            $cfg->setUpdateCommand($request->get('updateCommand'));
+            $cfg->setQueryEngine($request->get('queryEngine'));
+
+            $em->persist($cfg);
+            $em->flush();
+
+        }
+
+
+
+        // Create our Data Array
+        $data['template'] = $server;
+        $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['active'] = "ServerDefaults";
+
+        return $this->render('/serverBundle/settings/server.default.settings.advanced.html.twig', $data);
+    }
+
+    /**
+     * @Route("/settings/server/templates/defaults/g/{id}/startup", name="ServerTemplateDefaultsIDStartup")
+     */
+    public function templateEditorStartup(Request $request)
+    {
+        // Get the entity manager!!
+        $em = $this->getDoctrine()->getManager();
+
+        // Build out data array
+        $data = [];
+        $data['branding'] = $this->getSiteInformation();
+        $data['success'] = '';
+        $data['error'] = '';
+        $data['tab'] = 'Startup';
+
+        // Get our server ID from the uri
+        $serverId = $request->get('id');
+        $data['serverId'] = $serverId;
+
+        // Get our server template Item
+        $server = $em->getRepository('AppBundle:ServerTemplate')->find($serverId);
+
+
+        // See if we already have a set of defaults.
+        $cfgId = $server->getConfigId();
+        $data['cfg'] = $em->getRepository('ServerBundle:defaultConfiguration')->find($cfgId);
+
+
+        $post = $request->getMethod();
+
+        // If we have a post request then we will update the config
+        if ($post == "POST")
+        {
+            $cfg = $em->getRepository('ServerBundle:defaultConfiguration')->find($cfgId);
+
+            $cfg->setStartupCommand($request->get('startupCommand'));
+
+
+            $em->persist($cfg);
+            $em->flush();
+
+        }
+
+
+
+        // Create our Data Array
+        $data['template'] = $server;
+        $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['active'] = "ServerDefaults";
+
+        return $this->render('/serverBundle/settings/server.default.settings.startup.html.twig', $data);
     }
 
     /**

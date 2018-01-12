@@ -30,7 +30,7 @@
             <div class="col-sm-9">
                 <select required style="width:100%" name="networkSelect" class="custom-select" data-live-search="true">
                     {% for networkServer in networkServers%}
-                        <option value="{{ networkServer.id }}">{{ networkServer.name }} ({{ networkServer.ip }})</option>
+                        <option value="{{ networkServer.id }}">{{ networkServer.name }} ({{ networkServer.ip }}) -- {{ networkServer.connectionStatus }}</option>
                     {% endfor %}
                 </select>
 
