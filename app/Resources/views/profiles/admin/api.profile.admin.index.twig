@@ -87,7 +87,7 @@
           url: '/api/keys/delete/' + splitArray[1],
           success: function (data) {
             alert("Success");
-            location.reload();
+            window.location = window.location.href;
           }
         });
       });
