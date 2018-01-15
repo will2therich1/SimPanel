@@ -9,6 +9,7 @@ namespace AppBundle\Security;
 
 use AppBundle\Service\EncryptionService;
 use AppBundle\Service\GoogleAuthenticatorService;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class LoginAuthenticator extends AbstractGuardAuthenticator
 {
+    private $userId;
+
     /**
      * Called on every request. Return whatever credentials you want to
      * be passed to getUser(). Returning null will cause this authenticator
@@ -32,6 +35,8 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         if (isset($_POST['username'])) {
             error_log("Username: " . $_POST['username']);
             $username = $_POST['username'];
+
+
 
             return array(
                 'username' => $username
@@ -69,6 +74,9 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
     {
 
         $password = $user->getPassword();
+
+        $this->userId = $user->getId();
+
         $postedPassword = $_POST['password'];
         if ($user->getStatus() == 1) {
             if (password_verify($postedPassword, $password)) {
@@ -136,4 +144,18 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         return false;
     }
 
+    // Sitting here for now, may be used later
+//    protected function getAPIKeys(ObjectManager $manager)
+//    {
+//        $queryBuilder = $manager->createQueryBuilder();
+//
+//        $queryBuilder->select('a')
+//            ->from('ApiBundle:ApiKeys', 'a')
+//            ->where('a.ownerId LIKE :id')
+//            ->setParameter('id' , $this->userId);
+//
+//        $result = $queryBuilder->getQuery()->execute();
+//
+//        dump($result);
+//    }
 }
