@@ -124,7 +124,6 @@ class AdminProfileController extends Controller
             ->where('a.ownerId LIKE :id')
             ->setParameter('id', $user->getId());
 
-        $apiKeys = $queryBuilder->getQuery()->execute();
 
         $newApiKeyName = $request->get('newApiKeyName');
 
@@ -144,6 +143,7 @@ class AdminProfileController extends Controller
             $data['success'] = "A new api key has been generated it is below. Note this can only be seen once! {$generatedApiKey}";
         }
 
+        $apiKeys = $queryBuilder->getQuery()->execute();
 
         // Create our Data Array
         $data['currentUser'] = $this->getUser()->getUserInfo();
