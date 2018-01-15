@@ -36,13 +36,7 @@ security:
 #                authenticators:
 #                    - AppBundle\Security\LoginAuthenticator
 
-            # activate different ways to authenticate
 
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
     access_control:
         - { path: ^/admin, role: ROLE_ADMIN }
         - { path: ^/user, role: ROLE_USER }
