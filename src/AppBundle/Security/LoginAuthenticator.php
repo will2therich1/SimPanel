@@ -114,9 +114,6 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        $data = array(
-            'error' => strtr($exception->getMessageKey(), $exception->getMessageData())
-        );
 
         return new RedirectResponse('login?&login=failed' , '302') ;
     }

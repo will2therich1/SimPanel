@@ -1,0 +1,21 @@
+ApiBundle\Entity\ApiKeys:
+    type: entity
+    table: null
+    repositoryClass: ApiBundle\Repository\ApiKeysRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        apiKey:
+            type: string
+            length: 255
+        name:
+            type: string
+            length: 255
+        ownerId:
+            type: integer
+            length: 255
+    lifecycleCallbacks: {  }

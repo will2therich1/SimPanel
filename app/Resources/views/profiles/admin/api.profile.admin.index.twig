@@ -4,19 +4,97 @@
 {% block tabcontent %}
 
 
-    <form action = '' method = 'POST' >
 
         <div class="row">
             <div class="col-md-12" >
                 <div class="form-group">
-                    <label> API Key </label>
-                    <input type="text" value="{{ currentUser.apiKey }}" readonly class="form-control"  name='currentAPIKey'>
+                    <label> API Keys </label>
                 </div >
             </div >
 
         </div>
-        <button type = "submit" class="btn btn-info btn-fill pull-right" > Update API Key </button >
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Api Key Name</th>
+                        <th>Last Used</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for apiKey in apiKeys %}
+                    <tr>
+                        <th scope="row">{{ apiKey.id }}</th>
+                        <td>{{ apiKey.name }}</td>
+                        <td>Never</td>
+                        <td><button id="deleteApiKey-{{ apiKey.id }}" type="button" class="btn btn-danger">Delete</button></td>
+                    </tr>
+                        {% endfor  %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <button class="btn btn-info btn-fill pull-right" data-toggle="modal" data-target="#apiKeyModal"> Create new API Key </button >
         <div class="clearfix" ></div >
-    </form >
+
+    <!-- Modal -->
+    <div class="modal fade" id="apiKeyModal" tabindex="-1" role="dialog" aria-labelledby="apiKeyModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="apiKeyModalLabel">Create new Api Key</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="newApiKeyName"> Name For Api Key</label>
+                                    <input required class="form-control" id="newApiKeyName" name="newApiKeyName" type="text">
+                                </div>
+                            </div>
+
+
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+      $('button[id ^= \'deleteApiKey\']').click(function () {
+        var id = $(this).attr('id');
+        var splitArray = id.split('-');
+
+
+        $.ajax({
+          type: 'POST',
+          url: '/api/keys/delete/' + splitArray[1],
+          success: function (data) {
+            alert("Success");
+            location.reload();
+          }
+        });
+      });
+
+
+
+    </script>
+
 
 {% endblock %}

@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Service\EncryptionService;
 use AppBundle\Service\GoogleAuthenticatorService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use ApiBundle\Entity\ApiKeys;
 
 class AdminProfileController extends Controller
 {
@@ -102,7 +104,7 @@ class AdminProfileController extends Controller
     /**
      * @Route("/admin/account/api", name="AdminProfileAPI")
      */
-    public function adminAPIProfilePage()
+    public function adminAPIProfilePage(Request $request)
     {
         $data = [];
         $data['error'] = '';
@@ -114,24 +116,40 @@ class AdminProfileController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $encryption_params = $this->container->getParameter('encryption');
+        // Get out api Keys from the database
+        $queryBuilder = $em->createQueryBuilder();
 
+        $queryBuilder->select('a')
+            ->from('ApiBundle:ApiKeys', 'a')
+            ->where('a.ownerId LIKE :id')
+            ->setParameter('id', $user->getId());
 
-        if (isset($_POST['currentAPIKey'])) {
-            $newApiKey = $this->generatePassword(20);
-            $user->setApiKey($newApiKey, new EncryptionService($encryption_params));
-            $data['success'] = 'API Key updated';
+        $apiKeys = $queryBuilder->getQuery()->execute();
 
-            $em->persist($user);
+        $newApiKeyName = $request->get('newApiKeyName');
+
+        if (isset($newApiKeyName) && $newApiKeyName !== '')
+        {
+            $apiKey = new ApiKeys();
+            $generatedApiKey = $this->generatePassword('20');
+
+            $apiKey->setName($newApiKeyName);
+            $apiKey->setOwnerId($this->getUser()->getId());
+            $apiKey->setApiKey(password_hash($generatedApiKey , PASSWORD_DEFAULT));
+
+            $em->persist($apiKey);
             $em->flush();
+
+
+            $data['success'] = "A new api key has been generated it is below. Note this can only be seen once! {$generatedApiKey}";
         }
+
 
         // Create our Data Array
         $data['currentUser'] = $this->getUser()->getUserInfo();
         $data['active'] = 'Dash';
         $data['tab'] = 'API';
-        $data['currentUser']['apiKey'] = $user->getApiKey(new EncryptionService($encryption_params));
-
+        $data['apiKeys'] = $apiKeys;
 
         // render the needed view.
         return $this->render('profiles/admin/api.profile.admin.index.twig', $data);

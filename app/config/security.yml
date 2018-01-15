@@ -27,10 +27,14 @@ security:
             guard:
                 authenticators:
                     - AppBundle\Security\LoginAuthenticator
-            form_login:
-                login_path: login
-                check_path: login
-                default_target_path: adminHomepage
+        api:
+            pattern: ^/api/v1/
+            anonymous: ~
+            provider: user_db_provider
+            security: false
+#            guard:
+#                authenticators:
+#                    - AppBundle\Security\LoginAuthenticator
 
             # activate different ways to authenticate
 
