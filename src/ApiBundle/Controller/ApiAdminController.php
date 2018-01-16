@@ -30,11 +30,12 @@ class ApiAdminController extends Controller
      */
     public function adminApiList(Request $request)
     {
-        $sentApiKey = $request->headers->get('Authorization');
-        if ($sentApiKey == null)
+        if ($request->headers->get('Authorization') == null)
         {
             $headers = apache_request_headers();
             $sentApiKey = $headers['Authorization'];
+        }else {
+            $sentApiKey = $request->headers->get('Authorization');
         }
 
         $auth = $this->authorise($sentApiKey);
@@ -106,11 +107,12 @@ class ApiAdminController extends Controller
      */
     public function adminApiSpecific(Request $request)
     {
-        $sentApiKey = $request->headers->get('Authorization');
-        if ($sentApiKey == null)
+        if ($request->headers->get('Authorization') == null)
         {
             $headers = apache_request_headers();
             $sentApiKey = $headers['Authorization'];
+        }else {
+            $sentApiKey = $request->headers->get('Authorization');
         }
 
         $auth = $this->authorise($sentApiKey);

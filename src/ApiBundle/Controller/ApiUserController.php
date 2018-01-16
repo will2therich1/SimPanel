@@ -29,11 +29,12 @@ class ApiUserController extends Controller
      */
     public function userApiList(Request $request)
     {
-        $sentApiKey = $request->headers->get('Authorization');
-        if ($sentApiKey == null)
+        if ($request->headers->get('Authorization') == null)
         {
             $headers = apache_request_headers();
             $sentApiKey = $headers['Authorization'];
+        }else {
+            $sentApiKey = $request->headers->get('Authorization');
         }
 
         $auth = $this->authorise($sentApiKey);
@@ -97,11 +98,12 @@ class ApiUserController extends Controller
      */
     public function userApiSpecific(Request $request)
     {
-        $sentApiKey = $request->headers->get('Authorization');
-        if ($sentApiKey == null)
+        if ($request->headers->get('Authorization') == null)
         {
             $headers = apache_request_headers();
             $sentApiKey = $headers['Authorization'];
+        }else {
+            $sentApiKey = $request->headers->get('Authorization');
         }
 
         $auth = $this->authorise($sentApiKey);

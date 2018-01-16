@@ -4,7 +4,6 @@
     <list default="true" id="ab0bad1d-7c43-40d9-9997-927c9a0987ed" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/ApiAdminController.php" afterPath="$PROJECT_DIR$/src/ApiBundle/Controller/ApiAdminController.php" />
       <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/ApiUserController.php" afterPath="$PROJECT_DIR$/src/ApiBundle/Controller/ApiUserController.php" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/ApiBundle/Controller/DefaultController.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,12 +17,10 @@
       <file leaf-file-name="ApiUserController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ApiBundle/Controller/ApiUserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="619">
-              <caret line="157" column="0" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+            <state relative-caret-position="2020">
+              <caret line="101" column="9" lean-forward="true" selection-start-line="101" selection-start-column="9" selection-end-line="101" selection-end-column="9" />
               <folding>
                 <element signature="e#40#69#0#PHP" expanded="true" />
-                <element signature="e#642#2730#0#PHP" expanded="false" />
-                <element signature="e#2791#4850#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -32,15 +29,13 @@
       <file leaf-file-name="ApiAdminController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ApiBundle/Controller/ApiAdminController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="30" column="50" lean-forward="false" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
+            <state relative-caret-position="373">
+              <caret line="38" column="9" lean-forward="false" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
               <folding>
                 <element signature="e#40#69#0#PHP" expanded="true" />
-                <element signature="e#645#2866#0#PHP" expanded="false" />
-                <element signature="e#2928#4989#0#PHP" expanded="false" />
-                <element signature="e#4995#5511#0#PHP" expanded="false" />
-                <element signature="e#5608#6039#0#PHP" expanded="false" />
-                <element signature="e#6094#6281#0#PHP" expanded="false" />
+                <element signature="e#5091#5607#0#PHP" expanded="false" />
+                <element signature="e#5704#6135#0#PHP" expanded="false" />
+                <element signature="e#6190#6377#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -219,12 +214,12 @@
       <option name="presentableId" value="Default" />
       <updated>1512737313937</updated>
       <workItem from="1512737314999" duration="6298000" />
-      <workItem from="1516096070997" duration="10688000" />
+      <workItem from="1516096070997" duration="11081000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16986000" />
+    <option name="totallyTimeSpent" value="17379000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1920" height="1080" extended-state="6" />
@@ -527,27 +522,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ApiBundle/Controller/ApiAdminController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="30" column="50" lean-forward="false" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
+        <state relative-caret-position="373">
+          <caret line="38" column="9" lean-forward="false" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
           <folding>
             <element signature="e#40#69#0#PHP" expanded="true" />
-            <element signature="e#645#2866#0#PHP" expanded="false" />
-            <element signature="e#2928#4989#0#PHP" expanded="false" />
-            <element signature="e#4995#5511#0#PHP" expanded="false" />
-            <element signature="e#5608#6039#0#PHP" expanded="false" />
-            <element signature="e#6094#6281#0#PHP" expanded="false" />
+            <element signature="e#5091#5607#0#PHP" expanded="false" />
+            <element signature="e#5704#6135#0#PHP" expanded="false" />
+            <element signature="e#6190#6377#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ApiBundle/Controller/ApiUserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="619">
-          <caret line="157" column="0" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+        <state relative-caret-position="2020">
+          <caret line="101" column="9" lean-forward="true" selection-start-line="101" selection-start-column="9" selection-end-line="101" selection-end-column="9" />
           <folding>
             <element signature="e#40#69#0#PHP" expanded="true" />
-            <element signature="e#642#2730#0#PHP" expanded="false" />
-            <element signature="e#2791#4850#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
