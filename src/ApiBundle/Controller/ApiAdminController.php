@@ -166,7 +166,6 @@ class ApiAdminController extends Controller
 
     private function authorise($sendApiKey)
     {
-        $sendApiKey = $request->headers->get('Authorization');
         $this->authoriseApiKey($sendApiKey);
 
         if ($this->keyId == null)
