@@ -29,8 +29,14 @@ class ApiUserController extends Controller
      */
     public function userApiList(Request $request)
     {
-        $auth = $this->authorise($request);
+        $sentApiKey = $request->headers->get('Authorization');
+        if ($sentApiKey == null)
+        {
+            $headers = apache_request_headers();
+            $sentApiKey = $headers['Authorization'];
+        }
 
+        $auth = $this->authorise($sentApiKey);
         if (!$auth) {
             $data = array(
                 // you might translate this message
@@ -91,8 +97,14 @@ class ApiUserController extends Controller
      */
     public function userApiSpecific(Request $request)
     {
-        $auth = $this->authorise($request);
+        $sentApiKey = $request->headers->get('Authorization');
+        if ($sentApiKey == null)
+        {
+            $headers = apache_request_headers();
+            $sentApiKey = $headers['Authorization'];
+        }
 
+        $auth = $this->authorise($sentApiKey);
         if (!$auth) {
             $data = array(
                 // you might translate this message
@@ -141,9 +153,8 @@ class ApiUserController extends Controller
 
     }
 
-    private function authorise(Request $request)
+    private function authorise($sendApiKey)
     {
-        $sendApiKey = $request->headers->get('Authorization');
         $this->authoriseApiKey($sendApiKey);
 
         if ($this->keyId == null) {
@@ -181,7 +192,7 @@ class ApiUserController extends Controller
             $verify = password_verify($apiKey, $key->getApiKey());
 
 
-            if ($verify == true) {
+            if ($verify === true) {
 
                 $this->keyId = $key->getId();
                 break;

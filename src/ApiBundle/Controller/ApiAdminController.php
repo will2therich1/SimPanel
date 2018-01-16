@@ -30,8 +30,14 @@ class ApiAdminController extends Controller
      */
     public function adminApiList(Request $request)
     {
-        $auth = $this->authorise($request);
+        $sentApiKey = $request->headers->get('Authorization');
+        if ($sentApiKey == null)
+        {
+            $headers = apache_request_headers();
+            $sentApiKey = $headers['Authorization'];
+        }
 
+        $auth = $this->authorise($sentApiKey);
         if (!$auth)
         {
             $data = array(
@@ -100,8 +106,14 @@ class ApiAdminController extends Controller
      */
     public function adminApiSpecific(Request $request)
     {
-        $auth = $this->authorise($request);
+        $sentApiKey = $request->headers->get('Authorization');
+        if ($sentApiKey == null)
+        {
+            $headers = apache_request_headers();
+            $sentApiKey = $headers['Authorization'];
+        }
 
+        $auth = $this->authorise($sentApiKey);
         if (!$auth) {
             $data = array(
                 // you might translate this message
@@ -150,7 +162,7 @@ class ApiAdminController extends Controller
 
     }
 
-    private function authorise(Request $request)
+    private function authorise($sendApiKey)
     {
         $sendApiKey = $request->headers->get('Authorization');
         $this->authoriseApiKey($sendApiKey);

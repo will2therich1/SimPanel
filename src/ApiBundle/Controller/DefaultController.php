@@ -38,13 +38,29 @@ class DefaultController extends Controller
      */
     public function authorisationTest(Request $request)
     {
-        $auth = $this->authorise($request);
+
+        $sentApiKey = $request->headers->get('Authorization');
+        if ($sentApiKey == null)
+        {
+            $headers = apache_request_headers();
+            $sentApiKey = $headers['Authorization'];
+        }
+
+        $auth = $this->authorise($sentApiKey);
+
+
+
 
         if (!$auth)
         {
             $data = array(
                 // you might translate this message
                 'message' => "Unable to validate with the API Key provided",
+                'Key ID' => $this->keyId,
+                'Authorisation Status' => $auth,
+                'API Key received' => $sentApiKey,
+                'Symfony All Headers recieved' => $request->headers->all(),
+                'Apache All Headers recieved' => apache_request_headers(),
             );
 
             return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
@@ -53,15 +69,19 @@ class DefaultController extends Controller
                 // you might translate this message
                 'message' => "You have been validated",
                 'username' => $this->user->getUsername(),
+                'Key ID' => $this->keyId,
+                'Authorisation Status' => $auth,
+                'API Key received' => $sentApiKey,
+                'Symfony All Headers recieved' => $request->headers->all(),
+                'Apache All Headers recieved' => apache_request_headers(),
             );
             return new JsonResponse($data, 200);
 
         }
     }
 
-    private function authorise(Request $request)
+    private function authorise($sendApiKey)
     {
-        $sendApiKey = $request->headers->get('Authorization');
         $this->authoriseApiKey($sendApiKey);
 
         if ($this->keyId == null)
@@ -95,6 +115,8 @@ class DefaultController extends Controller
 
         $keys = $em->getRepository('ApiBundle:ApiKeys')->findAll();
 
+        print_r($keys);
+
         foreach ($keys as $key)
         {
 
@@ -106,6 +128,7 @@ class DefaultController extends Controller
             {
 
                 $this->keyId = $key->getId();
+
                 break;
 
             }
