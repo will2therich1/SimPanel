@@ -1,12 +1,13 @@
 {
-    "name": "will/panel",
+    "name": "servers4all/simpanel",
     "license": "proprietary",
     "type": "project",
     "autoload": {
         "psr-4": {
             "AppBundle\\": "src/AppBundle",
             "ServerBundle\\": "src/ServerBundle",
-            "ApiBundle\\": "src/ApiBundle"
+            "ApiBundle\\": "src/ApiBundle",
+            "UserBundle\\": "src/UserBundle"
         },
         "classmap": [
             "app/AppKernel.php",

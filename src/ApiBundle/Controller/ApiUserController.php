@@ -125,11 +125,11 @@ class ApiUserController extends Controller
 
         if ($user == null) {
             $data = array(
-                // you might translate this message
                 'message' => "No user found with the id of {$request->get('id')}",
             );
 
             return new JsonResponse($data, Response::HTTP_NOT_FOUND);
+
         } else {
             if ($user->getAdmin() == 1) {
                 $data = array(

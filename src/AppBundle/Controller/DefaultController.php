@@ -20,17 +20,6 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/user", name="user")
-     */
-    public function userIndexAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
-        ]);
-    }
-
-    /**
      * @Route("/Maintenance" , name="Maintenance")
      */
     public function maintenanceModePage(Request $request)
