@@ -32,6 +32,22 @@
 
     </head>
     <body>
+
+    {#<div class="uk-offcanvas-content" >#}
+
+
+        <div id="TACToggl" uk-offcanvas>
+            <div class="uk-offcanvas-bar">
+                <h1>Terms and conditions</h1>
+                <p>To Be defined by hosting company. contact them for details</p>
+
+
+                <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+            </div>
+        </div>
+
+    {#</div>#}
     {% block navbar %}{% endblock %}
 
 
@@ -39,7 +55,7 @@
     <footer>
         <div class="uk-card  uk-card-default ">
             <div class="uk-card-body" style="text-align: center">
-            <span>2017 &copy; SimPanel. Developed by Will Rich &nbsp- Version: 0.10</span>
+            <span>2017 &copy; SimPanel. Developed by Will Rich &nbsp- Version: 0.10 &nbsp; <a href="#TACToggl" uk-toggle>Terms And Conditions</a></span>
             </div>
         </div>
     </footer>
