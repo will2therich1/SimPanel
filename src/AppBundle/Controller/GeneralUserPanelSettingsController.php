@@ -25,6 +25,7 @@ class GeneralUserPanelSettingsController extends Controller
             $this->setSetting('panelNamePart2', $_POST['PanelNamePart2']);
             $this->setSetting('PanelNameShortPart1', $_POST['PanelNameShortPart1']);
             $this->setSetting('PanelNameShortPart2', $_POST['PanelNameShortPart2']);
+            $this->setSetting('TermsAndConditions', $_POST['TermsAndConditions']);
         }
 
         $data['currentUser'] = $this->getUser()->getUserInfo();
@@ -150,6 +151,7 @@ class GeneralUserPanelSettingsController extends Controller
         $returnArray['PanelNamePart2'] = $this->getSetting('PanelNamePart2')->getSettingValue();
         $returnArray['PanelNameShortPart1'] = $this->getSetting('PanelNameShortPart1')->getSettingValue();
         $returnArray['PanelNameShortPart2'] = $this->getSetting('PanelNameShortPart2')->getSettingValue();
+        $returnArray['termsandconditions'] = $this->getSetting('TermsAndConditions')->getSettingValue();
 
         return $returnArray;
     }
