@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Settings;
+use AppBundle\Service\SettingService;
 
 class AdminController extends Controller
 {
@@ -16,6 +17,11 @@ class AdminController extends Controller
      */
     public function adminIndexAction(Request $request)
     {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
         if($request->getHttpHost() == "localhost:8000")
         {
             $status = "Development";
@@ -27,7 +33,7 @@ class AdminController extends Controller
         // Prepare data for page
         $data = [];
         $data['currentUser'] = $this->getUser()->getUserInfo();
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
         $data['active'] = "Dash";
         $data['block']['user'] = $this->getUserCount();
         $data['block']['admin'] = $this->getAdminCount();
@@ -46,6 +52,9 @@ class AdminController extends Controller
     {
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
         $queryBuilder = $em->createQueryBuilder();
 
         $get = $_GET;
@@ -108,7 +117,7 @@ class AdminController extends Controller
         // Create our Data Array
         $data = [];
         $data['currentUser'] = $this->getUser()->getUserInfo();
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
         $data['users'] = $result;
         $data['pages'] = $this->createPagination('/admin/users', $offset, $limit);
         $data['active'] = "User";
@@ -126,6 +135,9 @@ class AdminController extends Controller
     {
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
         $queryBuilder = $em->createQueryBuilder();
 
         $get = $_GET;
@@ -188,7 +200,7 @@ class AdminController extends Controller
         // Create our Data Array
         $data = [];
         $data['currentUser'] = $this->getUser()->getUserInfo();
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
         $data['users'] = $result;
         $data['pages'] = $this->createPagination('/admin/admins', $offset, $limit);
         $data['active'] = "Admin";
@@ -203,12 +215,16 @@ class AdminController extends Controller
      */
     public function adminNetworkServerListPage()
     {
-        $data = [];
-        $data['branding'] = $this->getSiteInformation();
-        $data['success'] = '';
-        $data['error'] = '';
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
+        $data = [];
+        $data['branding'] = $settingService->getSiteInformation();
+        $data['success'] = '';
+        $data['error'] = '';
+
         $queryBuilder = $em->createQueryBuilder();
 
 
@@ -283,12 +299,16 @@ class AdminController extends Controller
      */
     public function adminServerTemplatesListPage()
     {
-        $data = [];
-        $data['branding'] = $this->getSiteInformation();
-        $data['success'] = '';
-        $data['error'] = '';
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
+        $data = [];
+        $data['branding'] = $settingService->getSiteInformation();
+        $data['success'] = '';
+        $data['error'] = '';
+
         $queryBuilder = $em->createQueryBuilder();
 
 
@@ -468,111 +488,7 @@ class AdminController extends Controller
         return $networkCountQueryCount;
     }
 
-    /**
-     * Generates a random password
-     *
-     * @param int $length Length of the password
-     * @param bool $add_dashes Add dashes to the password
-     * @param string $available_sets Rules to use
-     *
-     * @return bool|string
-     */
-    public function generatePassword($length = 9, $add_dashes = false, $available_sets = 'luds')
-    {
-        $sets = array();
-        if (strpos($available_sets, 'l') !== false) {
-            $sets[] = 'abcdefghjkmnpqrstuvwxyz';
-        }
-        if (strpos($available_sets, 'u') !== false) {
-            $sets[] = 'ABCDEFGHJKMNPQRSTUVWXYZ';
-        }
-        if (strpos($available_sets, 'd') !== false) {
-            $sets[] = '23456789';
-        }
-        if (strpos($available_sets, 's') !== false) {
-            $sets[] = '!@#$%&*?';
-        }
-        $all = '';
-        $password = '';
-        foreach ($sets as $set) {
-            $password .= $set[array_rand(str_split($set))];
-            $all .= $set;
-        }
-        $all = str_split($all);
-        for ($i = 0; $i < $length - count($sets); $i++) {
-            $password .= $all[array_rand($all)];
-        }
-        $password = str_shuffle($password);
-        if (!$add_dashes) {
-            return $password;
-        }
-        $dash_len = floor(sqrt($length));
-        $dash_str = '';
-        while (strlen($password) > $dash_len) {
-            $dash_str .= substr($password, 0, $dash_len) . '-';
-            $password = substr($password, $dash_len);
-        }
-        $dash_str .= $password;
-        return $dash_str;
-    }
 
-    /**
-     * Gets the site information and returns this
-     *
-     * @return array
-     */
-    public function getSiteInformation()
-    {
-
-        $returnArray = [];
-        $returnArray['panelName'] = $this->getSetting('PanelName')->getSettingValue();
-        $returnArray['panelNamePart1'] = $this->getSetting('PanelNamePart1')->getSettingValue();
-        $returnArray['PanelNamePart2'] = $this->getSetting('PanelNamePart2')->getSettingValue();
-        $returnArray['PanelNameShortPart1'] = $this->getSetting('PanelNameShortPart1')->getSettingValue();
-        $returnArray['PanelNameShortPart2'] = $this->getSetting('PanelNameShortPart2')->getSettingValue();
-
-        return $returnArray;
-    }
-
-    /**
-     * Returns the Setting Object!
-     *
-     * If the setting dosen't exist then it will be created.
-     *
-     * @param $settingName
-     *          Name of the Setting
-     * @return Settings|mixed
-     */
-    public function getSetting($settingName)
-    {
-        $settings = $this->getDoctrine()->getRepository('AppBundle:Settings');
-        $query = $settings->createQueryBuilder('s');
-        $result = $query->select('s.id')
-            ->where('s.settingName = :setting')
-            ->setParameter('setting', $settingName)
-            ->getQuery()
-            ->execute();
-
-        if (empty($result)) {
-            $newSetting = new Settings();
-            $newSetting->setSettingName($settingName);
-            $newSetting->setSettingValue(0);
-            $newSetting->setSettingUpdatedTime(new \DateTime());
-
-            $this->getDoctrine()->getManager()->persist($newSetting);
-            $this->getDoctrine()->getManager()->flush();
-
-            return $newSetting;
-        }
-
-        $result = $result[0];
-        $id = $result['id'];
-
-
-        $returnObject = $this->getDoctrine()->getRepository('AppBundle:Settings')->find($id);
-
-        return $returnObject;
-    }
 
 
 }

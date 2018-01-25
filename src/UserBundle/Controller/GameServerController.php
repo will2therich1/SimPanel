@@ -22,7 +22,7 @@ class GameServerController extends Controller
 
         $data = [];
         $data['user'] = $user->getUserInfo();
-        $data['active'] = "GameServer";
+        $data['active'] = "gameServer";
         $data['site'] = $this->getSiteInformation();
         // replace this example code with whatever you need
         return $this->render('userBundle/gameServers/user.servers.html.twig' , $data);

@@ -8,18 +8,23 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\ServerTemplate;
 use ServerBundle\Entity\defaultConfiguration;
+use AppBundle\Service\SettingService;
 
 class TemplateDefaultsController extends Controller
 {
 
     /**
-     * @Route("/settings/server/templates/defaults/g", name="ServerTemplateDefaults")
+     * @Route("/admin/settings/server/templates/defaults/g", name="ServerTemplateDefaults")
      */
     public function indexAction(Request $request)
     {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
 
         $data = [];
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
         $data['success'] = '';
         $data['error'] = '';
         $data['serverId'] = '';
@@ -27,11 +32,10 @@ class TemplateDefaultsController extends Controller
         $serverId = $request->get('ServerToEdit');
 
         if ($serverId !== null && $serverId != "") {
-            return new RedirectResponse("/settings/server/templates/defaults/g/$serverId/general");
+            return new RedirectResponse("/admin/settings/server/templates/defaults/g/$serverId/general");
         }
 
 
-        $em = $this->getDoctrine()->getManager();
         $templates = $em->getRepository("AppBundle:ServerTemplate")->findAll();
 
 
@@ -44,16 +48,18 @@ class TemplateDefaultsController extends Controller
     }
 
     /**
-     * @Route("/settings/server/templates/defaults/g/{id}/general", name="ServerTemplateDefaultsID")
+     * @Route("/admin/settings/server/templates/defaults/g/{id}/general", name="ServerTemplateDefaultsID")
      */
     public function templateEditorGeneral(Request $request)
     {
-        // Get the entity manager!!
+        // Get Doctrine
         $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
 
         // Build out data array
         $data = [];
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
         $data['success'] = '';
         $data['error'] = '';
         $data['tab'] = 'General';
@@ -123,16 +129,18 @@ class TemplateDefaultsController extends Controller
     }
 
     /**
-     * @Route("/settings/server/templates/defaults/g/{id}/advanced", name="ServerTemplateDefaultsIDAdvanced")
+     * @Route("/admin/settings/server/templates/defaults/g/{id}/advanced", name="ServerTemplateDefaultsIDAdvanced")
      */
     public function templateEditorAdvanced(Request $request)
     {
-        // Get the entity manager!!
+        // Get Doctrine
         $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
 
         // Build out data array
         $data = [];
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
         $data['success'] = '';
         $data['error'] = '';
         $data['tab'] = 'Advanced';
@@ -178,16 +186,18 @@ class TemplateDefaultsController extends Controller
     }
 
     /**
-     * @Route("/settings/server/templates/defaults/g/{id}/startup", name="ServerTemplateDefaultsIDStartup")
+     * @Route("/admin/settings/server/templates/defaults/g/{id}/startup", name="ServerTemplateDefaultsIDStartup")
      */
     public function templateEditorStartup(Request $request)
     {
-        // Get the entity manager!!
+        // Get Doctrine
         $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
 
         // Build out data array
         $data = [];
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
         $data['success'] = '';
         $data['error'] = '';
         $data['tab'] = 'Startup';
@@ -230,62 +240,6 @@ class TemplateDefaultsController extends Controller
         return $this->render('/serverBundle/settings/server.default.settings.startup.html.twig', $data);
     }
 
-    /**
-     * Gets the site information and returns this
-     *
-     * @return array
-     */
-    public function getSiteInformation()
-    {
 
-        $returnArray = [];
-        $returnArray['panelName'] = $this->getSetting('PanelName')->getSettingValue();
-        $returnArray['panelNamePart1'] = $this->getSetting('PanelNamePart1')->getSettingValue();
-        $returnArray['PanelNamePart2'] = $this->getSetting('PanelNamePart2')->getSettingValue();
-        $returnArray['PanelNameShortPart1'] = $this->getSetting('PanelNameShortPart1')->getSettingValue();
-        $returnArray['PanelNameShortPart2'] = $this->getSetting('PanelNameShortPart2')->getSettingValue();
-
-        return $returnArray;
-    }
-
-    /**
-     * Returns the Setting Object!
-     *
-     * If the setting dosen't exist then it will be created.
-     *
-     * @param $settingName
-     *          Name of the Setting
-     * @return Settings|mixed
-     */
-    public function getSetting($settingName)
-    {
-        $settings = $this->getDoctrine()->getRepository('AppBundle:Settings');
-        $query = $settings->createQueryBuilder('s');
-        $result = $query->select('s.id')
-            ->where('s.settingName = :setting')
-            ->setParameter('setting', $settingName)
-            ->getQuery()
-            ->execute();
-
-        if (empty($result)) {
-            $newSetting = new Settings();
-            $newSetting->setSettingName($settingName);
-            $newSetting->setSettingValue(0);
-            $newSetting->setSettingUpdatedTime(new \DateTime());
-
-            $this->getDoctrine()->getManager()->persist($newSetting);
-            $this->getDoctrine()->getManager()->flush();
-
-            return $newSetting;
-        }
-
-        $result = $result[0];
-        $id = $result['id'];
-
-
-        $returnObject = $this->getDoctrine()->getRepository('AppBundle:Settings')->find($id);
-
-        return $returnObject;
-    }
 
 }

@@ -10,6 +10,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\NetworkServer;
 use AppBundle\Entity\ServerTemplate;
+use AppBundle\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
 use phpseclib\Crypt\RSA;
 use phpseclib\Net\SSH2;
@@ -201,6 +202,20 @@ class NetworkServerService
         
 
         $cmd  = "SteamCMDInstall -g '$steam_name' -i $tpl_id -l '$steam_user' -p '$steam_pass' -c '$cfg_steam_auth' -u '$callbackUrl' >> /dev/null 2>&1 &";
+
+        $this->runCMD($cmd);
+    }
+
+    public function serverCreation(User $user , NetworkServer $networkserver , ServerTemplate $template , $callbackURL)
+    {
+
+        $userRemoteName = $user->getServerUser();
+        $ip = $networkserver->getIp();
+        $port = '8392';
+        $templateId = $template->getId();
+
+
+        $cmd = "CreateServer -u $userRemoteName -i $ip -p $port -x $templateId -c $callbackURL ";
 
         $this->runCMD($cmd);
     }

@@ -9,6 +9,7 @@ use AppBundle\Service\GoogleAuthenticatorService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use ApiBundle\Entity\ApiKeys;
+use AppBundle\Service\SettingService;
 
 class AdminProfileController extends Controller
 {
@@ -19,13 +20,17 @@ class AdminProfileController extends Controller
      */
     public function adminInfoProfilePage()
     {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
         $data = [];
         $data['success'] = '';
-        $data['branding'] = $this->getSiteInformation();
-
-        $em = $this->getDoctrine()->getManager();
+        $data['branding'] = $settingService->getSiteInformation();
 
 
+        // If user data has been posted
         if (isset($_POST['Userusername']) && $_POST['Userusername'] !== '') {
             $user = $this->getUser();
 
@@ -54,15 +59,19 @@ class AdminProfileController extends Controller
      */
     public function adminPasswordProfilePage()
     {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
         $data = [];
         $data['error'] = '';
         $data['success'] = '';
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
 
 
         // Get Doctrine
         $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
 
         if (isset($_POST['currentPassword']) && $_POST['currentPassword'] !== '') {
             // Set out variables!
@@ -106,15 +115,19 @@ class AdminProfileController extends Controller
      */
     public function adminAPIProfilePage(Request $request)
     {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
         $data = [];
         $data['error'] = '';
         $data['success'] = '';
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
 
 
-        // Get Doctrine
+        // Get User
         $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
 
         // Get out api Keys from the database
         $queryBuilder = $em->createQueryBuilder();
@@ -160,13 +173,18 @@ class AdminProfileController extends Controller
      */
     public function adminTFAProfilePage()
     {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
         $data = [];
         $data['error'] = '';
         $data['success'] = '';
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
 
 
-        // Get Doctrine
+        // Get User
         $user = $this->getUser();
 
 
@@ -186,13 +204,17 @@ class AdminProfileController extends Controller
      */
     public function adminTFASetupPage()
     {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
         $data = [];
         $data['error'] = '';
         $data['success'] = '';
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
 
-        // Get Doctrine
-        $em = $this->getDoctrine()->getManager();
+        // Get User
         $user = $this->getUser();
 
         // Get Google Authenticator
@@ -307,61 +329,4 @@ class AdminProfileController extends Controller
     }
 
 
-    /**
-     * Gets the site information and returns this
-     *
-     * @return array
-     */
-    public function getSiteInformation()
-    {
-
-        $returnArray = [];
-        $returnArray['panelName'] = $this->getSetting('PanelName')->getSettingValue();
-        $returnArray['panelNamePart1'] = $this->getSetting('PanelNamePart1')->getSettingValue();
-        $returnArray['PanelNamePart2'] = $this->getSetting('PanelNamePart2')->getSettingValue();
-        $returnArray['PanelNameShortPart1'] = $this->getSetting('PanelNameShortPart1')->getSettingValue();
-        $returnArray['PanelNameShortPart2'] = $this->getSetting('PanelNameShortPart2')->getSettingValue();
-
-        return $returnArray;
-    }
-
-    /**
-     * Returns the Setting Object!
-     *
-     * If the setting dosen't exist then it will be created.
-     *
-     * @param $settingName
-     *          Name of the Setting
-     * @return Settings|mixed
-     */
-    public function getSetting($settingName)
-    {
-        $settings = $this->getDoctrine()->getRepository('AppBundle:Settings');
-        $query = $settings->createQueryBuilder('s');
-        $result = $query->select('s.id')
-            ->where('s.settingName = :setting')
-            ->setParameter('setting', $settingName)
-            ->getQuery()
-            ->execute();
-
-        if (empty($result)) {
-            $newSetting = new Settings();
-            $newSetting->setSettingName($settingName);
-            $newSetting->setSettingValue(0);
-            $newSetting->setSettingUpdatedTime(new \DateTime());
-
-            $this->getDoctrine()->getManager()->persist($newSetting);
-            $this->getDoctrine()->getManager()->flush();
-
-            return $newSetting;
-        }
-
-        $result = $result[0];
-        $id = $result['id'];
-
-
-        $returnObject = $this->getDoctrine()->getRepository('AppBundle:Settings')->find($id);
-
-        return $returnObject;
-    }
 }

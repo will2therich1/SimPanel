@@ -10,6 +10,7 @@ use AppBundle\Service\NetworkServerService;
 use AppBundle\Service\ServerUserService;
 use AppBundle\Service\EncryptionService;
 use AppBundle\Entity\User;
+use AppBundle\Service\SettingService;
 
 class TemplateCronControllerController extends Controller
 {
@@ -22,15 +23,15 @@ class TemplateCronControllerController extends Controller
      */
     function templateCallbackURL(Request $request)
     {
-        error_log($request->getContent());
-
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
         $message = "Cron test";
         $response = new Response();
         $response->setContent($message);
 
 
         // get our template
-        $template = $this->getDoctrine()->getManager()->getRepository('AppBundle:ServerTemplate')->find($request->get('id'));
+        $template = $em->getRepository('AppBundle:ServerTemplate')->find($request->get('id'));
 
         $do = $request->get('do');
 
@@ -62,9 +63,34 @@ class TemplateCronControllerController extends Controller
             $template->setStatus($status);
         }
         
-        $em = $this->getDoctrine()->getManager();
         $em->persist($template);
         $em->flush();
+
+        return $response;
+
+
+    }
+
+
+    /**
+     * @Route("/cron/serverCallback/{id}", name="cronServerMaster")
+     */
+    function serverCreateCallback(Request $request)
+    {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        $message = "Cron test";
+        $response = new Response();
+        $response->setContent($message);
+
+
+        // get our template
+        $template = $em->getRepository('ServerBundle:GameServer')->find($request->get('id'));
+
+        error_log($request->getBaseUrl());
+        error_log($request->getBasePath());
+
+
 
         return $response;
 
