@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use AppBundle\Service\SettingService;
 
 class AdminAdminController extends Controller
 {
@@ -16,12 +17,15 @@ class AdminAdminController extends Controller
     {
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
 
 
         // Create our Data Array
         $data = [];
         $data['currentUser'] = $this->getUser()->getUserInfo();
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
         $data['active'] = 'Admin';
         $data['success'] = '';
         $data['error'] = '';
@@ -92,17 +96,22 @@ class AdminAdminController extends Controller
      */
     public function adminViewAdminPage(Request $request)
     {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
         // Set our data stuff
         $data = [];
         $data['currentUser'] = $this->getUser()->getUserInfo();
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
         $data['active'] = "Admin";
         $data['success'] = '';
         $data['error'] = '';
 
 
-        // Get Doctrine
-        $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->find($request->attributes->get('id'));
+        // Get User
+        $user = $em->getRepository('AppBundle:User')->find($request->attributes->get('id'));
         $userArray = array($user);
 
         $data['user'] = $userArray['0'];
@@ -121,7 +130,6 @@ class AdminAdminController extends Controller
                 $user->setLastName($lastName);
                 $user->setEmail($email);
                 $user->setUsername($username);
-                $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
                 $data['success'] = "Admin Updated";
@@ -141,19 +149,23 @@ class AdminAdminController extends Controller
      */
     public function adminAdminDeactivatePage(Request $request)
     {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
         // Set our data stuff
         $data = [];
         $data['currentUser'] = $this->getUser()->getUserInfo();
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
         $data['active'] = "Admin";
         $data['success'] = '';
         $data['error'] = '';
 
 
-        // Get Doctrine
-        $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->find($request->attributes->get('id'));
+        // Get User
+        $user = $em->getRepository('AppBundle:User')->find($request->attributes->get('id'));
         $user->setStatus(0);
-        $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
 
@@ -167,19 +179,23 @@ class AdminAdminController extends Controller
      */
     public function adminAdminActivatePage(Request $request)
     {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
         // Set our data stuff
         $data = [];
         $data['currentUser'] = $this->getUser()->getUserInfo();
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
         $data['active'] = "Admin";
         $data['success'] = '';
         $data['error'] = '';
 
 
-        // Get Doctrine
-        $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->find($request->attributes->get('id'));
+        // Get User
+        $user = $em->getRepository('AppBundle:User')->find($request->attributes->get('id'));
         $user->setStatus(1);
-        $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
 
@@ -190,66 +206,7 @@ class AdminAdminController extends Controller
         // replace this example code with whatever you need
         return new RedirectResponse('/admin/admins');
     }
-
-    /**
-     * Gets the site information and returns this
-     *
-     * @return array
-     */
-    public function getSiteInformation()
-    {
-
-        $returnArray = [];
-        $returnArray['panelName'] = $this->getSetting('PanelName')->getSettingValue();
-        $returnArray['panelNamePart1'] = $this->getSetting('PanelNamePart1')->getSettingValue();
-        $returnArray['PanelNamePart2'] = $this->getSetting('PanelNamePart2')->getSettingValue();
-        $returnArray['PanelNameShortPart1'] = $this->getSetting('PanelNameShortPart1')->getSettingValue();
-        $returnArray['PanelNameShortPart2'] = $this->getSetting('PanelNameShortPart2')->getSettingValue();
-
-        return $returnArray;
-    }
-
-
-    /**
-     * Returns the Setting Object!
-     *
-     * If the setting dosen't exist then it will be created.
-     *
-     * @param $settingName
-     *          Name of the Setting
-     * @return Settings|mixed
-     */
-    public function getSetting($settingName)
-    {
-        $settings = $this->getDoctrine()->getRepository('AppBundle:Settings');
-        $query = $settings->createQueryBuilder('s');
-        $result = $query->select('s.id')
-            ->where('s.settingName = :setting')
-            ->setParameter('setting', $settingName)
-            ->getQuery()
-            ->execute();
-
-        if (empty($result)) {
-            $newSetting = new Settings();
-            $newSetting->setSettingName($settingName);
-            $newSetting->setSettingValue(0);
-            $newSetting->setSettingUpdatedTime(new \DateTime());
-
-            $this->getDoctrine()->getManager()->persist($newSetting);
-            $this->getDoctrine()->getManager()->flush();
-
-            return $newSetting;
-        }
-
-        $result = $result[0];
-        $id = $result['id'];
-
-
-        $returnObject = $this->getDoctrine()->getRepository('AppBundle:Settings')->find($id);
-
-        return $returnObject;
-    }
-
+    
 
     /**
      * Generates a random password

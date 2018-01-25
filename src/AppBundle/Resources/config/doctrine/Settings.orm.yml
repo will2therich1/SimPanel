@@ -13,7 +13,7 @@ AppBundle\Entity\Settings:
             type: string
             length: 255
         settingValue:
-            type: string
+            type: text
             length: 255
         settingUpdatedTime:
             type: datetime

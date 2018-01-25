@@ -67,7 +67,7 @@ class ServerUserService
         $this->user = $user;
         $this->em = $entityManager;
 
-        $this->networkService = new NetworkServerService($this->encryptionService, $this->server);
+        $this->networkService = new NetworkServerService($this->encryptionService, $this->server , $entityManager);
 
     }
 

@@ -9,6 +9,7 @@ use AppBundle\Entity\ServerTemplate;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\NetworkServerService;
+use AppBundle\Service\SettingService;
 
 class ServerTemplateController extends Controller
 {
@@ -20,13 +21,14 @@ class ServerTemplateController extends Controller
     {
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
-
+        // Get our setting service
+        $settingService = new SettingService($em);
 
         // Create our Data Array
         $data = [];
         $data['currentUser'] = $this->getUser()->getUserInfo();
-        $data['branding'] = $this->getSiteInformation();
-        $data['networkServers'] = $this->getDoctrine()->getRepository('AppBundle:NetworkServer')->findAll();
+        $data['branding'] = $settingService->getSiteInformation();
+        $data['networkServers'] = $em->getRepository('AppBundle:NetworkServer')->findAll();
         $data['active'] = 'Templates';
         $data['success'] = '';
         $data['error'] = '';
@@ -74,6 +76,8 @@ class ServerTemplateController extends Controller
     {
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
 
         $id = $request->get('id');
 
@@ -85,7 +89,7 @@ class ServerTemplateController extends Controller
         $data['serverTemplate']['data'] = $template;
         $data['serverTemplate']['server'] = $networkServer;
         $data['currentUser'] = $this->getUser()->getUserInfo();
-        $data['branding'] = $this->getSiteInformation();
+        $data['branding'] = $settingService->getSiteInformation();
         $data['active'] = 'Templates';
         $data['success'] = '';
         $data['error'] = '';
@@ -120,63 +124,6 @@ class ServerTemplateController extends Controller
         return $this->render('admin/templates/view.server.template.admin.html.twig', $data);
     }
 
-    /**
-     * Gets the site information and returns this
-     *
-     * @return array
-     */
-    public function getSiteInformation()
-    {
-
-        $returnArray = [];
-        $returnArray['panelName'] = $this->getSetting('PanelName')->getSettingValue();
-        $returnArray['panelNamePart1'] = $this->getSetting('PanelNamePart1')->getSettingValue();
-        $returnArray['PanelNamePart2'] = $this->getSetting('PanelNamePart2')->getSettingValue();
-        $returnArray['PanelNameShortPart1'] = $this->getSetting('PanelNameShortPart1')->getSettingValue();
-        $returnArray['PanelNameShortPart2'] = $this->getSetting('PanelNameShortPart2')->getSettingValue();
-
-        return $returnArray;
-    }
-
-    /**
-     * Returns the Setting Object!
-     *
-     * If the setting dosen't exist then it will be created.
-     *
-     * @param $settingName
-     *          Name of the Setting
-     * @return Settings|mixed
-     */
-    public function getSetting($settingName)
-    {
-        $settings = $this->getDoctrine()->getRepository('AppBundle:Settings');
-        $query = $settings->createQueryBuilder('s');
-        $result = $query->select('s.id')
-            ->where('s.settingName = :setting')
-            ->setParameter('setting', $settingName)
-            ->getQuery()
-            ->execute();
-
-        if (empty($result)) {
-            $newSetting = new Settings();
-            $newSetting->setSettingName($settingName);
-            $newSetting->setSettingValue(0);
-            $newSetting->setSettingUpdatedTime(new \DateTime());
-
-            $this->getDoctrine()->getManager()->persist($newSetting);
-            $this->getDoctrine()->getManager()->flush();
-
-            return $newSetting;
-        }
-
-        $result = $result[0];
-        $id = $result['id'];
-
-
-        $returnObject = $this->getDoctrine()->getRepository('AppBundle:Settings')->find($id);
-
-        return $returnObject;
-    }
 
     /**
      * Brings you back the Encryption Service

@@ -8,12 +8,10 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\ServerTemplate;
 
-
-class GameServerController extends Controller
+class AccountController extends Controller
 {
-
     /**
-     * @Route("/user/servers/g/", name="userGameServers")
+     * @Route("/user/settings", name="userSettingsMain")
      */
     public function userIndexAction(Request $request)
     {
@@ -21,12 +19,13 @@ class GameServerController extends Controller
         $user = $this->getUser();
 
         $data = [];
+        $data['active'] = "Dash";
         $data['user'] = $user->getUserInfo();
-        $data['active'] = "gameServer";
         $data['site'] = $this->getSiteInformation();
         // replace this example code with whatever you need
-        return $this->render('userBundle/gameServers/user.servers.html.twig' , $data);
+        return $this->render('userBundle/accountSettings/user.settings.main.html.twig' , $data);
     }
+
 
     /**
      * Returns the Setting Object!
@@ -90,4 +89,5 @@ class GameServerController extends Controller
 
         return $returnArray;
     }
+
 }

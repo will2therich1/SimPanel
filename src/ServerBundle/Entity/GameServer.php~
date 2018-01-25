@@ -1,0 +1,258 @@
+<?php
+
+namespace ServerBundle\Entity;
+
+/**
+ * GameServer
+ */
+class GameServer
+{
+    /**
+     * @var int
+     */
+    private $id;
+
+    /**
+     * @var int
+     */
+    private $templateId;
+
+    /**
+     * @var string
+     */
+    private $serverName;
+
+    /**
+     * @var string
+     */
+    private $gameName;
+
+    /**
+     * @var int
+     */
+    private $ownerId;
+
+    /**
+     * @var string
+     */
+    private $startupCommand;
+
+    /**
+     * @var string
+     */
+    private $updateCommand;
+
+    /**
+     * @var string
+     */
+    private $playerSlots;
+
+    /**
+     * @var string
+     */
+    private $ram;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set templateId
+     *
+     * @param integer $templateId
+     *
+     * @return GameServer
+     */
+    public function setTemplateId($templateId)
+    {
+        $this->templateId = $templateId;
+
+        return $this;
+    }
+
+    /**
+     * Get templateId
+     *
+     * @return int
+     */
+    public function getTemplateId()
+    {
+        return $this->templateId;
+    }
+
+    /**
+     * Set serverName
+     *
+     * @param string $serverName
+     *
+     * @return GameServer
+     */
+    public function setServerName($serverName)
+    {
+        $this->serverName = $serverName;
+
+        return $this;
+    }
+
+    /**
+     * Get serverName
+     *
+     * @return string
+     */
+    public function getServerName()
+    {
+        return $this->serverName;
+    }
+
+    /**
+     * Set gameName
+     *
+     * @param string $gameName
+     *
+     * @return GameServer
+     */
+    public function setGameName($gameName)
+    {
+        $this->gameName = $gameName;
+
+        return $this;
+    }
+
+    /**
+     * Get gameName
+     *
+     * @return string
+     */
+    public function getGameName()
+    {
+        return $this->gameName;
+    }
+
+    /**
+     * Set ownerId
+     *
+     * @param integer $ownerId
+     *
+     * @return GameServer
+     */
+    public function setOwnerId($ownerId)
+    {
+        $this->ownerId = $ownerId;
+
+        return $this;
+    }
+
+    /**
+     * Get ownerId
+     *
+     * @return int
+     */
+    public function getOwnerId()
+    {
+        return $this->ownerId;
+    }
+
+    /**
+     * Set startupCommand
+     *
+     * @param string $startupCommand
+     *
+     * @return GameServer
+     */
+    public function setStartupCommand($startupCommand)
+    {
+        $this->startupCommand = $startupCommand;
+
+        return $this;
+    }
+
+    /**
+     * Get startupCommand
+     *
+     * @return string
+     */
+    public function getStartupCommand()
+    {
+        return $this->startupCommand;
+    }
+
+    /**
+     * Set updateCommand
+     *
+     * @param string $updateCommand
+     *
+     * @return GameServer
+     */
+    public function setUpdateCommand($updateCommand)
+    {
+        $this->updateCommand = $updateCommand;
+
+        return $this;
+    }
+
+    /**
+     * Get updateCommand
+     *
+     * @return string
+     */
+    public function getUpdateCommand()
+    {
+        return $this->updateCommand;
+    }
+
+    /**
+     * Set playerSlots
+     *
+     * @param string $playerSlots
+     *
+     * @return GameServer
+     */
+    public function setPlayerSlots($playerSlots)
+    {
+        $this->playerSlots = $playerSlots;
+
+        return $this;
+    }
+
+    /**
+     * Get playerSlots
+     *
+     * @return string
+     */
+    public function getPlayerSlots()
+    {
+        return $this->playerSlots;
+    }
+
+    /**
+     * Set ram
+     *
+     * @param string $ram
+     *
+     * @return GameServer
+     */
+    public function setRam($ram)
+    {
+        $this->ram = $ram;
+
+        return $this;
+    }
+
+    /**
+     * Get ram
+     *
+     * @return string
+     */
+    public function getRam()
+    {
+        return $this->ram;
+    }
+}
+
