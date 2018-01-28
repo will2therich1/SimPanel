@@ -99,9 +99,8 @@ class SettingService
         $setting = $this->getSetting($settingName);
 
         $setting->setSettingValue($settingValue);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($setting);
-        $em->flush();
+        $this->em->persist($setting);
+        $this->em->flush();
 
         return;
 
