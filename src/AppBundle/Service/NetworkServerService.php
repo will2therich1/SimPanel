@@ -206,12 +206,13 @@ class NetworkServerService
         $this->runCMD($cmd);
     }
 
-    public function serverCreation(User $user , NetworkServer $networkserver , ServerTemplate $template , $callbackURL)
+    public function serverCreation(User $user , NetworkServer $networkserver , ServerTemplate $template , $callbackURL , $port)
     {
 
         $userRemoteName = $user->getServerUser();
         $ip = $networkserver->getIp();
-        $port = '8392';
+
+
         $templateId = $template->getId();
 
 
@@ -219,5 +220,6 @@ class NetworkServerService
 
         $this->runCMD($cmd);
     }
+
 
 }

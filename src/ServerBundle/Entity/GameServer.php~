@@ -3,7 +3,7 @@
 namespace ServerBundle\Entity;
 
 /**
- * GameServer
+ * gameServer
  */
 class GameServer
 {
@@ -254,5 +254,62 @@ class GameServer
     {
         return $this->ram;
     }
-}
+    /**
+     * @var string
+     */
+    private $queryEngine;
 
+
+    /**
+     * Set queryEngine
+     *
+     * @param string $queryEngine
+     *
+     * @return GameServer
+     */
+    public function setQueryEngine($queryEngine)
+    {
+        $this->queryEngine = $queryEngine;
+
+        return $this;
+    }
+
+    /**
+     * Get queryEngine
+     *
+     * @return string
+     */
+    public function getQueryEngine()
+    {
+        return $this->queryEngine;
+    }
+    /**
+     * @var integer
+     */
+    private $port;
+
+
+    /**
+     * Set port
+     *
+     * @param integer $port
+     *
+     * @return GameServer
+     */
+    public function setPort($port)
+    {
+        $this->port = $port;
+
+        return $this;
+    }
+
+    /**
+     * Get port
+     *
+     * @return integer
+     */
+    public function getPort()
+    {
+        return $this->port;
+    }
+}

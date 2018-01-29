@@ -97,23 +97,22 @@ class AdminGameServerController extends Controller
     {
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
-        // Get Settings Service
-        $settingsService = new SettingService($em);
 
-        $data = [];
-        $data['branding'] = $settingsService->getSiteInformation();
-        $data['success'] = '';
-        $data['error'] = '';
-        $data['serverId'] = '';
-        $data['tab'] = '';
-
+        // Get the params from the url.
         $configId = $request->get('defaultId');
         $ownerId = $request->get('ownerId');
 
+        // Get our objects from the database
         $config = $em->getRepository('ServerBundle:defaultConfiguration')->find($configId);
         $user = $em->getRepository('AppBundle:User')->find($ownerId);
         $template = $em->getRepository('AppBundle:ServerTemplate')->find($config->getTemplateId());
+        $networkServer = $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId());
 
+        // Get the server IP and generate a port.
+        $serverIp = $networkServer->getIp();
+        $port =  $this->findOpenPort($serverIp);
+
+        // Create the server database Object
         $server = new GameServer();
         $server->setGameName($config->getGameName());
         $server->setServerName($this->serverNameReplacement($config->getDefaultServerName() , $user , $template));
@@ -124,31 +123,35 @@ class AdminGameServerController extends Controller
         $server->setUpdateCommand($config->getUpdateCommand());
         $server->setTemplateId($config->getTemplateId());
         $server->setQueryEngine('Not Implemented');
+        $server->setIp($serverIp);
+        $server->setPort($port);
 
+        // Persist the server and flush to update the DB.
         $em->persist($server);
         $em->flush();
 
-        // Lets work on the actual server now!
-        $server = $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId());
 
+        // Lets work on the actual server now!
         $enc_service = $this->getEncryptionService();
 
-        $networkServerService = new NetworkServerService($enc_service ,$server , $em);
+        // Create the needed services
+        $networkServerService = new NetworkServerService($enc_service ,$networkServer , $em);
+        $serverUserService = new ServerUserService($enc_service , $networkServer , $user , $em);
 
-
-        $serverUserService = new ServerUserService($enc_service , $server , $user , $em);
-
+        // See if the current user already has a server account.
         if ($user->getServerUser() === 0)
         {
             $serverUserService->createUser($user->getUsername());
         }
 
-        $serverId = $server->getId();
+        // Get the server Id
+        $serverId = $networkServer->getId();
         $callbackUrl = $request->getHttpHost() . "/cron/serverCallback/$serverId";
 
-        error_log($callbackUrl);
-        $networkServerService->serverCreation($user , $server , $template , $callbackUrl);
+        // Actually create the server.
+        $networkServerService->serverCreation($user , $networkServer , $template , $callbackUrl ,);
 
+        // Throw them back to the create a server page.
         return new RedirectResponse("/admin/servers/g/create");
     }
 
@@ -188,6 +191,26 @@ class AdminGameServerController extends Controller
     {
         $encryption_params = $this->container->getParameter('encryption');
         return new EncryptionService($encryption_params);
+    }
+
+    /**
+     * Generates a random port.
+     *
+     * Not perfect but should be able to cover 90% of use cases.
+     *
+     * @param $ip
+     * @return int
+     */
+    public function findOpenPort($ip)
+    {
+        $port = rand('49152' , '655325');
+
+        if(!fsockopen($ip,$port))
+        {
+            $port = rand('49152' , '655325');
+        }
+
+        return $port;
     }
 
 
