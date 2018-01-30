@@ -172,10 +172,9 @@ class NetworkServerService
     /**
      * Creates a Game server Template on the remote server
      */
-    public function createTemplate($template_id , $steam_name , NetworkServer $networkServer)
+    public function createTemplate($template_id , $steam_name , NetworkServer $networkServer , $callbackUrl)
     {
         $serverId = $networkServer->getId();
-        $callbackUrl = "localhost:8000/cron/templateCallback/".$template_id;
         $this->steamInstall($callbackUrl , $steam_name , $template_id , $serverId);
 
 
