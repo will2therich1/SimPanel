@@ -150,7 +150,7 @@ class AdminGameServerController extends Controller
     }
 
     /**
-     * @Route("/admin/servers/g/create/template/{templateId}/{ownerId}", name="CreateGameServerDefaults")
+     * @Route("/admin/servers/g/create/template/{templateId}/{ownerId}", name="CreateGameServerTemplate")
      */
     public function serverCreateTemplates(Request $request)
     {
