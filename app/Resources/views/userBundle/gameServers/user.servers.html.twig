@@ -54,18 +54,23 @@
                 </tr>
                 </thead>
                 <tbody>
+                {% for server in servers  %}
+
                 <tr>
-                    <td>1</td>
-                    <td>Server 1</td>
-                    <td><div class="online"></div> Online</td>
-                    <td><button class="uk-button uk-button-default" type="button">More Info</button></td>
+                        <td>{{ server.id }}</td>
+                        <td>{{ server.serverName }}</td>
+                    {% if server.status == "Online" %}
+                        <td><div class="online"></div> Online</td>
+                    {% elseif server.status == "Offline" %}
+                        <td><div class="offline"></div> Offline</td>
+                    {% else %}
+                        <td><div></div> {{ server.status }}</td>
+                    {% endif %}
+                        <td><button class="uk-button uk-button-default" type="button">More Info</button></td>
+
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Server 2</td>
-                    <td><div class="online"></div> Online</td>
-                    <td><button class="uk-button uk-button-default" type="button">More Info</button></td>
-                </tr>
+                {% endfor %}
+
                 </tbody>
             </table>
 

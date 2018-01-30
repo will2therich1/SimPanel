@@ -50,14 +50,12 @@
             <div class="uk-card-header" >
                 <h3 style="color:black;">My Servers</h3>
             </div>
-            <h3 ><a href="" style="color:black !important;"><div class="online"></div> &nbsp;Server Name Here </a></h3>
+        {% for server in servers  %}
+
+            <h3 ><a href="" style="color:black !important;"><div class="{% if server.status == "Online" %} online {% elseif server.status == "Offline" %} offline {% endif %}"></div>&nbsp; {{ server.serverName }} </a></h3>
             <hr>
-            <h3 ><a href="" style="color:black !important;"><div class="online"></div>&nbsp; Server Name Here 2 </a></h3>
-            <hr>
-            <h3 ><a href="" style="color:black !important;"><div class="offline"></div>&nbsp; Server Name Here 3 </a></h3>
-            <hr>
-            <h3 ><a href="" style="color:black !important;"><div class="online"></div>&nbsp; Server Name Here 4</a></h3>
-            <hr>
+
+            {% endfor %}
         </div>
 
         <div class="uk-card uk-card-body uk-card-default uk-card-small" style="margin: 15px;width:  46%;">
