@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab0bad1d-7c43-40d9-9997-927c9a0987ed" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/game.server.create.step.2.html.twig" />
-      <change beforePath="$PROJECT_DIR$/.idea/panel.iml" afterPath="$PROJECT_DIR$/.idea/panel.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/userBundle/base.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/dashboardpage.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/userBundle/dashboardpage.html.twig" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Service/SettingService.php" afterPath="$PROJECT_DIR$/src/AppBundle/Service/SettingService.php" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Controller/AdminGameServerController.php" afterPath="$PROJECT_DIR$/src/ServerBundle/Controller/AdminGameServerController.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/SecurityControllerController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/SecurityControllerController.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,12 +43,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SettingService.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SettingService.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/SettingService.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
               <caret line="34" column="27" lean-forward="false" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SecurityControllerController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/SecurityControllerController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-140">
+              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding>
+                <element signature="e#40#97#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,7 +79,6 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/config/doctrine/User.orm.yml" />
         <option value="$PROJECT_DIR$/src/AppBundle/Entity/User.php" />
         <option value="$PROJECT_DIR$/app/config/security.yml" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/SecurityControllerController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php" />
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
@@ -109,6 +113,7 @@
         <option value="$PROJECT_DIR$/app/Resources/views/userBundle/dashboardpage.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/userBundle/base.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Service/SettingService.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/SecurityControllerController.php" />
       </list>
     </option>
   </component>
@@ -183,6 +188,13 @@
               <item name="pp-symfony-rewrite" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="pp-symfony-rewrite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pp-symfony-rewrite" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="pp-symfony-rewrite" type="b2602c69:ProjectViewProjectNode" />
@@ -302,12 +314,12 @@
       <workItem from="1516699998683" duration="9310000" />
       <workItem from="1516783848614" duration="1011000" />
       <workItem from="1517303875123" duration="6580000" />
-      <workItem from="1517313177847" duration="209000" />
+      <workItem from="1517313177847" duration="864000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43862000" />
+    <option name="totallyTimeSpent" value="44517000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
@@ -348,13 +360,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="89" column="102" lean-forward="false" selection-start-line="89" selection-start-column="102" selection-end-line="89" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -661,7 +666,7 @@
         <state relative-caret-position="340">
           <caret line="15" column="128" lean-forward="false" selection-start-line="15" selection-start-column="128" selection-end-line="15" selection-end-column="128" />
           <folding>
-            <marker date="1517303991625" expanded="true" signature="367:401" ph="{% if active == 'GameServer'  ...%}" />
+            <marker date="1517313913644" expanded="true" signature="367:401" ph="{% if active == 'GameServer'  ...%}" />
           </folding>
         </state>
       </provider>
@@ -703,7 +708,7 @@
         <state relative-caret-position="-380">
           <caret line="154" column="59" lean-forward="false" selection-start-line="154" selection-start-column="59" selection-end-line="154" selection-end-column="59" />
           <folding>
-            <element signature="e#43#69#0#PHP" expanded="true" />
+            <element signature="e#43#69#0#PHP" expanded="false" />
             <element signature="e#712#2655#0#PHP" expanded="false" />
             <element signature="e#2782#5429#0#PHP" expanded="false" />
             <element signature="e#5557#8946#0#PHP" expanded="false" />
@@ -730,6 +735,16 @@
         <state relative-caret-position="240">
           <caret line="34" column="27" lean-forward="false" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/SecurityControllerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-140">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="e#40#97#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -37,9 +37,14 @@ class SecurityControllerController extends Controller
             }
         }
 
-        return $this->render('security/login.html.twig', array(
-            'error' => $error,
-        ));
+        $data = [];
+
+        $em = $this->getDoctrine()->getManager();
+        $settingService = new SettingService($em);
+
+        $data['branding'] = $settingService->getSiteInformation();
+
+        return $this->render('security/login.html.twig', ;
 
     }
 
