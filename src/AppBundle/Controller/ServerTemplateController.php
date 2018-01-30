@@ -54,7 +54,11 @@ class ServerTemplateController extends Controller
 
                 $networkService = new NetworkServerService($this->getEncryptionService() , $em->getRepository('AppBundle:NetworkServer')->find($request->get('networkSelect')) , $em);
 
-                $networkService->createTemplate($template->getId() , $template->getSteamName() , $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId()));
+                $httpHost = $request->getHttpHost();
+                $templateId = $template->getId();
+                $callbackUrl = "$httpHost/cron/templateCallback/$templateId";
+
+                $networkService->createTemplate($template->getId() , $template->getSteamName() , $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId()) , $callbackUrl);
 
 
 
