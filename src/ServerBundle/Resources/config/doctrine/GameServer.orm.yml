@@ -37,4 +37,7 @@ ServerBundle\Entity\GameServer:
         ip:
             type: string
             length: 255
+        status:
+            type: string
+            length: 255
     lifecycleCallbacks: {  }

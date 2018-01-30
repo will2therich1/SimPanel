@@ -20,7 +20,7 @@ class AdminGameServerController extends Controller
     /**
      * @Route("/admin/servers/g/create", name="CreateGameServer")
      */
-    public function indexAction(Request $request)
+    public function createGameServer(Request $request)
     {
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
@@ -53,28 +53,21 @@ class AdminGameServerController extends Controller
 
             if ($action == 'defaultSettings')
             {
-                dump($action);
 
                 $configId = $request->get('serverDefault');
                 $user = $request->get('user');
-                dump($configId);
-                dump($user);
 
                 return new RedirectResponse("/admin/servers/g/create/defaults/$configId/$user");
 
             }else if ($action == 'templateCreation')
             {
-                dump($action);
 
                 $templateId = $request->get('template');
                 $user = $request->get('user');
 
-                dump($templateId);
-                dump($user);
-
             }else
             {
-                dump($action);
+
             }
 
         }
@@ -125,6 +118,7 @@ class AdminGameServerController extends Controller
         $server->setQueryEngine('Not Implemented');
         $server->setIp($serverIp);
         $server->setPort($port);
+        $server->setStatus("New");
 
         // Persist the server and flush to update the DB.
         $em->persist($server);
@@ -149,7 +143,7 @@ class AdminGameServerController extends Controller
         $callbackUrl = $request->getHttpHost() . "/cron/serverCallback/$serverId";
 
         // Actually create the server.
-        $networkServerService->serverCreation($user , $networkServer , $template , $callbackUrl ,);
+        $networkServerService->serverCreation($user , $networkServer , $template , $callbackUrl , $port);
 
         // Throw them back to the create a server page.
         return new RedirectResponse("/admin/servers/g/create");
@@ -205,15 +199,162 @@ class AdminGameServerController extends Controller
     {
         $port = rand('49152' , '655325');
 
-        if(!fsockopen($ip,$port))
-        {
-            $port = rand('49152' , '655325');
-        }
-
         return $port;
     }
 
+    /**
+     * @Route("/admin/servers/g", name="GameServerList")
+     */
+    public function gameServerListPage()
+    {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
+        $data = [];
+        $data['branding'] = $settingService->getSiteInformation();
+        $data['success'] = '';
+        $data['error'] = '';
+
+        $queryBuilder = $em->createQueryBuilder();
 
 
+        $get = $_GET;
+
+        // Set the offset for queries
+        if (isset($get['offset']) && $get['offset'] !== '') {
+            $offset = $get['offset'];
+        } else {
+            $offset = 0;
+        }
+
+        // Set the limit for queries
+        if (isset($get['limit']) && $get['limit'] !== '') {
+            $limit = $get['limit'];
+        } else {
+            $limit = 10;
+        }
+
+
+        // Create the queries!
+        if (isset($get['name']) && $get['name'] !== '') {
+
+            $queryBuilder->select('u')
+                ->from('ServerBundle:GameServer', 'gs')
+                ->where('gs.server_name = :name')
+                ->setMaxResults($limit)
+                ->setFirstResult($offset)
+                ->setParameter('name', $get['name']);
+
+
+            $result = $queryBuilder->getQuery()->execute();
+
+
+        } elseif (isset($get['id']) && $get['id'] !== '') {
+
+            $queryBuilder->select('gs')
+                ->from('ServerBundle:GameServer', 'gs')
+                ->where('gs.id = :id')
+                ->setMaxResults($limit)
+                ->setFirstResult($offset)
+                ->setParameter('id', $get['id']);
+
+            $result = $queryBuilder->getQuery()->execute();
+
+        }
+
+
+        if (!isset($result)) {
+            $queryBuilder->select('gs')
+                ->from('ServerBundle:GameServer', 'gs')
+                ->setMaxResults($limit)
+                ->setFirstResult($offset);
+
+            $result = $queryBuilder->getQuery()->execute();
+        }
+
+        $returnServerData = [];
+        $i = 0;
+
+        // Attach the owner details to each server.
+        foreach ($result as $server)
+        {
+
+            $serverOwner = $em->getRepository('AppBundle:User')->find($server->getOwnerId());
+
+            $serverData = $this->seraliseServerData($server , $serverOwner);
+            $returnServerData['gameServer'][$i] = $serverData;
+            $i++;
+        }
+
+        // Create our Data Array
+        $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['pages'] = $this->createPagination('/admin/servers/g', $offset, $limit);
+        $data['server'] = $returnServerData;
+
+        // Fix an error if the [server] array is empty (e.g there are no gameservers).
+        if ($returnServerData == null)
+        {
+            $data['server']['gameServer'] = [];
+        }
+
+        $data['active'] = "GameServers";
+
+
+        // replace this example code with whatever you need
+        return $this->render('/serverBundle/gameServer/view.game.servers.admin.html.twig', $data);
+    }
+
+    /**
+     * @param $url
+     *       The url for the pagination to link to.
+     * @param $offset
+     *       The current Offset
+     * @param $limit
+     *       The current Limit
+     *
+     * @return array
+     *        Returns array containing the two necessary links
+     */
+    public function createPagination($url, $offset, $limit)
+    {
+        // Setting the limit
+        $nextLimit = $limit + 10;
+
+        if ($limit == 10) {
+            $lastLimit = 10;
+        } else {
+            $lastLimit = $limit - 10;
+        }
+
+        // Setting the offset
+        $nextOffset = $offset + 10;
+
+        if ($offset == 0) {
+
+            $lastOffset = 0;
+        } else {
+
+            $lastOffset = $offset - 10;
+        }
+
+        // Create the links
+        $nextPageLink = "$url?limit=$nextLimit &offset=$nextOffset";
+        $lastPageLink = "$url?limit=$lastLimit&offset=$lastOffset";
+
+        $data['nextlink'] = $nextPageLink;
+        $data['lastlink'] = $lastPageLink;
+
+        return $data;
+    }
+
+    public function seraliseServerData(GameServer $server , User $user)
+    {
+        $data = $server->getServerInfomation();
+        $data['owner'] = $user->getUserInfo();
+
+        return $data;
+    }
 
 }

@@ -312,4 +312,54 @@ class GameServer
     {
         return $this->port;
     }
+    /**
+     * @var string
+     */
+    private $ip;
+
+
+    /**
+     * Set ip
+     *
+     * @param string $ip
+     *
+     * @return GameServer
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    /**
+     * Get ip
+     *
+     * @return string
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    public function getServerInfomation()
+    {
+        $returnData = [];
+
+        $returnData['ip'] = $this->getIp();
+        $returnData['port'] = $this->getPort();
+        $returnData['fullIp'] = $this->getIp() .":". $this->getPort();
+
+        $returnData['serverName'] = $this->getServerName();
+        $returnData['ownerId'] = $this->getOwnerId();
+        $returnData['playerSlots'] = $this->getPlayerSlots();
+        $returnData['ram'] = $this->getRam();
+        $returnData['startCMD'] = $this->getStartupCommand();
+        $returnData['updateCMD'] = $this->getUpdateCommand();
+        $returnData['templateId'] = $this->getTemplateId();
+        $returnData['queryEngine'] = $this->getQueryEngine();
+
+        return $returnData;
+
+    }
 }
