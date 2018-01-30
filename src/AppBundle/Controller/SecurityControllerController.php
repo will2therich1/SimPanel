@@ -44,7 +44,7 @@ class SecurityControllerController extends Controller
 
         $data['branding'] = $settingService->getSiteInformation();
 
-        return $this->render('security/login.html.twig', ;
+        return $this->render('security/login.html.twig', $data);
 
     }
 
