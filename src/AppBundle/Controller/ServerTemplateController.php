@@ -56,7 +56,7 @@ class ServerTemplateController extends Controller
 
                 $httpHost = $request->getHttpHost();
                 $templateId = $template->getId();
-                $callbackUrl = "$httpHost/cron/templateCallback/$templateId";
+                $callbackUrl = "https://$httpHost/cron/templateCallback/$templateId";
 
                 $networkService->createTemplate($template->getId() , $template->getSteamName() , $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId()) , $callbackUrl);
 
