@@ -20,10 +20,22 @@ class DefaultController extends Controller
         $settingService = new SettingService($em);
 
         $user = $this->getUser();
+        $userId = $user->getId();
+
+        $queryBuilder = $em->createQueryBuilder();
+
+        $queryBuilder->select('gs')
+            ->from('ServerBundle:GameServer', 'gs')
+            ->where('gs.ownerId LIKE :id')
+            ->setMaxResults(10)
+            ->setParameter('id', $userId);
+
+        $result = $queryBuilder->getQuery()->execute();
 
         $data = [];
         $data['active'] = "Dash";
         $data['user'] = $user->getUserInfo();
+        $data['servers'] = $result;
         $data['site'] = $settingService->getSiteInformation();
 
         // replace this example code with whatever you need

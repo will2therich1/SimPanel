@@ -19,15 +19,27 @@ class GameServerController extends Controller
     {
 
         $user = $this->getUser();
+        $userId = $user->getId();
+
 
         $em = $this->getDoctrine()->getManager();
         $settingService = new SettingService($em);
 
+        $queryBuilder = $em->createQueryBuilder();
+
+        $queryBuilder->select('gs')
+            ->from('ServerBundle:GameServer', 'gs')
+            ->where('gs.ownerId LIKE :id')
+            ->setParameter('id', $userId);
+
+        $result = $queryBuilder->getQuery()->execute();
 
         $data = [];
         $data['user'] = $user->getUserInfo();
         $data['active'] = "gameServer";
+        $data['servers'] = $result;
         $data['site'] = $settingService->getSiteInformation();
+        dump($data);
         // replace this example code with whatever you need
         return $this->render('userBundle/gameServers/user.servers.html.twig' , $data);
     }
