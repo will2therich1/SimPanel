@@ -65,8 +65,8 @@ class AdminGameServerController extends Controller
                 $templateId = $request->get('template');
                 $user = $request->get('user');
 
-            }else
-            {
+                return new RedirectResponse("/admin/servers/g/create/template/$templateId/$user");
+
 
             }
 
@@ -148,6 +148,93 @@ class AdminGameServerController extends Controller
         // Throw them back to the create a server page.
         return new RedirectResponse("/admin/servers/g/create");
     }
+
+    /**
+     * @Route("/admin/servers/g/create/template/{templateId}/{ownerId}", name="CreateGameServerDefaults")
+     */
+    public function serverCreateTemplates(Request $request)
+    {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get Settings Service
+        $settingsService = new SettingService($em);
+
+        // Get the params from the url.
+        $templateId = $request->get('templateId');
+        $ownerId = $request->get('ownerId');
+
+        // Get our objects from the database
+        $user = $em->getRepository('AppBundle:User')->find($ownerId);
+        $template = $em->getRepository('AppBundle:ServerTemplate')->find($templateId);
+        $networkServer = $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId());
+
+        // Get the server IP and generate a port.
+        $serverIp = $networkServer->getIp();
+        $port =  $this->findOpenPort($serverIp);
+
+        if ($request->getMethod() == "POST") {
+
+            // Create the server database Object
+            $server = new GameServer();
+            $server->setGameName($request->get('nameOfGame'));
+            $server->setServerName($this->serverNameReplacement($request->get('serverName') , $user , $template));
+            $server->setOwnerId($ownerId);
+            $server->setPlayerSlots($request->get('playerSlots'));
+            $server->setRam($request->get('ram'));
+            $server->setStartupCommand($request->get('startCommand'));
+            $server->setUpdateCommand($request->get('serverName'));
+            $server->setTemplateId($templateId);
+            $server->setQueryEngine('Not Implemented');
+            $server->setIp($serverIp);
+            $server->setPort($port);
+            $server->setStatus("New");
+            //Persist the server and flush to update the DB.
+            $em->persist($server);
+            $em->flush();
+
+
+            // Lets work on the actual server now!
+            $enc_service = $this->getEncryptionService();
+
+            // Create the needed services
+            $networkServerService = new NetworkServerService($enc_service ,$networkServer , $em);
+            $serverUserService = new ServerUserService($enc_service , $networkServer , $user , $em);
+
+            // See if the current user already has a server account.
+            if ($user->getServerUser() === 0 || $user->getServerUser() == null)
+            {
+                $serverUserService->createUser($user->getUsername());
+            }
+
+            // Get the server Id
+            $serverId = $networkServer->getId();
+            $callbackUrl = $request->getHttpHost() . "/cron/serverCallback/$serverId";
+
+            // Actually create the server.
+            $networkServerService->serverCreation($user , $networkServer , $template , $callbackUrl , $port);
+
+            // Throw them back to the create a server page.
+            return new RedirectResponse("/admin/servers/g/create");
+
+        }
+
+        $data = [];
+        $data['branding'] = $settingsService->getSiteInformation();
+        $data['success'] = '';
+        $data['error'] = '';
+        $data['serverId'] = '';
+        $data['tab'] = '';
+        // Create our Data Array
+        $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['active'] = "GameServers";
+        $data['template'] = $template;
+        $data['server'] = $networkServer;
+
+        dump($data);
+
+        return $this->render('/serverBundle/gameServer/game.server.create.step.2.html.twig', $data);
+    }
+
 
 
     /**
