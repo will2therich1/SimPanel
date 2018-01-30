@@ -222,8 +222,9 @@ class AdminProfileController extends Controller
 
         // Create our TFA Secret & Barcode.
         $tfaSecret = $tfa->createSecret();
-        $tfaBarcode = $tfa->getQRCodeGoogleUrl("PoisonPanel TFA", $tfaSecret);
-
+        $serviceSetting = $settingService->getSetting('PanelName');
+        $serviceName = $serviceSetting->getSettingValue();
+        $tfaBarcode = $tfa->getQRCodeGoogleUrl($serviceName." TFA", $tfaSecret);
 
         // If TFA is active - deactivate
         if ($user->getTfaStatus() == 1) {

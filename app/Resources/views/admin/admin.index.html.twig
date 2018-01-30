@@ -26,7 +26,7 @@
         <div class="title">
             <div class="icon"><i class="icon-user"></i></div><strong>Panel Admins</strong>
         </div>
-        <div class="number dashtext-2">{{ block.admin|e }}</div>
+            <div class="number dashtext-2"><a style="color: inherit" href="{{ path('AdminList') }}">{{ block.admin|e }}</a></div>
     </div>
     </div>
     </div>
@@ -36,7 +36,7 @@
     <div class="title">
         <div class="icon"><i class="icon-paper-and-pencil"></i></div><strong>Network Servers</strong>
     </div>
-    <div class="number dashtext-3">{{ block.network|e }}</div>
+        <div class="number dashtext-3"><a style="color: inherit" href="{{ path('NetworkServerList') }}">{{ block.network|e }}</a></div>
     </div>
     </div>
     </div>

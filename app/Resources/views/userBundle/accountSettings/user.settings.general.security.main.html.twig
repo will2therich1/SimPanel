@@ -1,0 +1,112 @@
+{% extends 'userBundle/accountSettings/user.settings.base.html.twig' %}
+
+
+{% block stylesheets %}
+    <style>
+        .offline {
+            background: #f00;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .online {
+            background: lawngreen;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+    </style>
+
+
+{% endblock %}
+
+
+
+{% block tabBody %}
+
+                    <div class="uk-card-header">
+                        <h3>My Account Security</h3>
+                    </div>
+                    <div class="uk-card-content" style="color: white">
+                        <br>
+                        {% if error is defined %}
+                                <div class="uk-alert uk-alert-danger" data-uk-alert>
+                                    {{ error }}
+                                    <a href="#" class="uk-alert-close uk-close"></a>
+                                    <p></p>
+                                </div>
+                            {%  endif %}
+
+                        {% if success is defined %}
+                            <div class="uk-alert uk-alert-success" data-uk-alert>
+                                {{ success }}
+                                <a href="#" class="uk-alert-close uk-close"></a>
+                                <p></p>
+                            </div>
+                        {%  endif %}
+                        {% if error is defined %}
+                                <div class="uk-alert uk-alert-danger" data-uk-alert>
+                                    {{ error }}
+                                    <a href="#" class="uk-alert-close uk-close"></a>
+                                    <p></p>
+                                </div>
+                            {%  endif %}
+
+                        {% if success is defined %}
+                            <div class="uk-alert uk-alert-success" data-uk-alert>
+                                {{ success }}
+                                <a href="#" class="uk-alert-close uk-close"></a>
+                                <p></p>
+                            </div>
+                        {%  endif %}
+                        <form class="uk-form-stacked" method="post">
+                            <div uk-grid>
+                            <div class="uk-width-1-1">
+                                <h3 for="firstName">Change Password: </h3>
+                                <form action="" method="post">
+                                <div>
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-1">
+                                            <label for="currentPassword">Current Password</label>
+                                            <input type="password" class="uk-input" name="currentPassword">
+                                            <input type="text" class="uk-input" name="do" value="passwordUpdate" style="display: none;">
+                                        </div>
+                                        <div class="uk-width-1-2">
+                                            <label for="newPassword">New Password</label>
+                                            <input type="password" class="uk-input" name="newPassword">
+                                        </div>
+                                        <div class="uk-width-1-2">
+                                            <label for="newPasswordConfirm">Confirm New Password</label>
+                                            <input type="password" class="uk-input" name="newPasswordConfirm">
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="uk-text-right">
+                                    <button class="uk-button uk-button-primary" type="submit">Update</button>
+                                </p>
+                            </div>
+
+                        </form>
+
+                        <br>
+                        <h3 for="firstName">Two Factor Authentication </h3>
+                        <div class="uk-width-1-1">
+                                <label for="lastName">TFA Status</label>
+                                <input type="text" class="uk-input" readonly id="emailAddr" name="emailAddr" style="padding-top: 5px;" value="{% if tfaStatus == 1 %} Active {% endif %}{% if tfaStatus == 0 %} Deactive {% endif %}">
+
+                            </div>
+                                <div class="uk-width-1-1">
+                                    <a href="{{ path('userTfaSetup') }}"><button class="uk-button uk-button-primary" id="tfaSetup" type="button">Enable/Disable TFA</button></a>
+                                </div>
+                        </form>
+
+                    </div>
+                </div>
+
+
+    </div>
+{% endblock %}
+
