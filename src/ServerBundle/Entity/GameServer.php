@@ -283,4 +283,122 @@ class GameServer
     {
         return $this->queryEngine;
     }
+    /**
+     * @var integer
+     */
+    private $port;
+
+
+    /**
+     * Set port
+     *
+     * @param integer $port
+     *
+     * @return GameServer
+     */
+    public function setPort($port)
+    {
+        $this->port = $port;
+
+        return $this;
+    }
+
+    /**
+     * Get port
+     *
+     * @return integer
+     */
+    public function getPort()
+    {
+        return $this->port;
+    }
+    /**
+     * @var string
+     */
+    private $ip;
+
+
+    /**
+     * Set ip
+     *
+     * @param string $ip
+     *
+     * @return GameServer
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    /**
+     * Get ip
+     *
+     * @return string
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     *
+     * returns all the server information in one function.
+     *
+     * @return array
+     */
+    public function getServerInfomation()
+    {
+        $returnData = [];
+
+        // Ip Related things
+        $returnData['ip'] = $this->getIp();
+        $returnData['port'] = $this->getPort();
+        $returnData['fullIp'] = $this->getIp() .":". $this->getPort();
+
+        // All other server related things.
+        $returnData['id'] = $this->getId();
+        $returnData['serverName'] = $this->getServerName();
+        $returnData['ownerId'] = $this->getOwnerId();
+        $returnData['playerSlots'] = $this->getPlayerSlots();
+        $returnData['ram'] = $this->getRam();
+        $returnData['startCMD'] = $this->getStartupCommand();
+        $returnData['updateCMD'] = $this->getUpdateCommand();
+        $returnData['templateId'] = $this->getTemplateId();
+        $returnData['queryEngine'] = $this->getQueryEngine();
+        $returnData['staus'] = $this->getStatus();
+
+        return $returnData;
+
+    }
+    /**
+     * @var string
+     */
+    private $status;
+
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     *
+     * @return GameServer
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
 }

@@ -32,4 +32,12 @@ ServerBundle\Entity\GameServer:
         queryEngine:
             type: string
             length: 255
+        port:
+            type: integer
+        ip:
+            type: string
+            length: 255
+        status:
+            type: string
+            length: 255
     lifecycleCallbacks: {  }

@@ -22,6 +22,8 @@ class SettingService
      */
     private $em;
 
+    private $version = '0.24';
+
     public function __construct(ObjectManager $em)
     {
         $this->em = $em;
@@ -29,7 +31,8 @@ class SettingService
     }
 
     /**
-     * Gets the site information and returns this
+     * Gets the site information and returns this.
+     * CALLED ON EVERY PAGE
      *
      * @return array
      */
@@ -43,6 +46,7 @@ class SettingService
         $returnArray['PanelNameShortPart1'] = $this->getSetting('PanelNameShortPart1')->getSettingValue();
         $returnArray['PanelNameShortPart2'] = $this->getSetting('PanelNameShortPart2')->getSettingValue();
         $returnArray['termsandconditions'] = $this->getSetting('TermsAndConditions')->getSettingValue();
+        $returnArray['version'] = $this->version;
 
         return $returnArray;
     }
