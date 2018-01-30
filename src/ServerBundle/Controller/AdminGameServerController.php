@@ -230,7 +230,6 @@ class AdminGameServerController extends Controller
         $data['template'] = $template;
         $data['server'] = $networkServer;
 
-        dump($data);
 
         return $this->render('/serverBundle/gameServer/game.server.create.step.2.html.twig', $data);
     }

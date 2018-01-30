@@ -1,0 +1,66 @@
+{% extends 'userBundle/base.full.html.twig' %}
+{% block body %}
+
+    <div class="uk-card uk-card-body uk-card-default uk-card-" style="margin:40px">
+
+        <div class="uk-card-content">
+            <div class="uk-card-header">
+                <h3>My Account</h3>
+                <hr>
+            </div>
+            <div class="uk-child-width-1-2@m" uk-grid style="margin-left:  34px;">
+
+                <ul uk-tab>
+                    <li>
+                        <!-- This is the menu item toggling the dropdown -->
+                        <a href="">General Settings</a>
+
+                        <!-- This is the dropdown -->
+                        <div uk-dropdown="mode: hover">
+                            <ul class="uk-nav uk-dropdown-nav" id="myInfomation"><a href="{{ path('userSettingsMain') }}">My Information</a></ul>
+                            <ul class="uk-nav uk-dropdown-nav" id="Security"><a href="">Security</a></ul>
+                        </div>
+
+                    </li>
+                    <li class="uk-disabled"><a href="{{ path('userSettingsGeneralSecurity') }}">Email Preferences</a></li>
+                    <li class="uk-disabled"><a href="#">Sub Accounts</a></li>
+                    <li class="uk-disabled"><a href="#">API</a></li>
+                </ul>
+
+                <div class="uk-card uk-card-body uk-card-primary uk-card-" style="margin:40px ;width: 100%;">
+                    {% block tabBody %} {% endblock %}
+                </div>
+
+
+            </div>
+            <div class="uk-card-footer">
+                <hr>
+                No service issues. Everything running.
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+
+$('#Security').on('click' , function() {
+  window.location.href = '{{ path('userSettingsGeneralSecurity') }}';
+})
+
+$('#tfaSetup').on('click' , function() {
+  window.location.href = '{{ path('userTfaSetup') }}';
+})
+
+$('#myInfomation').on('click' , function() {
+  window.location.href = '{{ path('userSettingsMain') }}';
+})
+
+
+{% block scripts %}
+{% endblock %}
+
+</script>
+{% endblock %}

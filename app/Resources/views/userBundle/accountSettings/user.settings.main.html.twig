@@ -1,85 +1,59 @@
-{% extends 'userBundle/base.full.html.twig' %}
-
-
-{% block stylesheets %}
-    <style>
-        .offline {
-            background: #f00;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-        .online {
-            background: lawngreen;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-    </style>
-
-
-{% endblock %}
+{% extends 'userBundle/accountSettings/user.settings.base.html.twig' %}
 
 
 
-{% block body %}
+{% block tabBody %}
 
-    <div class="uk-card uk-card-body uk-card-default uk-card-" style="margin:40px">
-
-        <div class="uk-card-content">
-            <div class="uk-card-header">
-                <h3>My Account</h3>
-                <hr>
-            </div>
-            <div class="uk-child-width-1-2@m" uk-grid style="margin-left:  34px;">
-
-                <ul uk-tab>
-                    <li>
-                        <!-- This is the menu item toggling the dropdown -->
-                        <a href="">General Settings</a>
-
-                        <!-- This is the dropdown -->
-                        <div uk-dropdown="mode: click">
-                            <ul class="uk-nav uk-dropdown-nav"><a href="#">My Information</a></ul>
-                            <ul class="uk-nav uk-dropdown-nav"><a href="#">Security</a></ul>
-                            <ul class="uk-nav uk-dropdown-nav"><a href="#">Change my password</a></ul>
-                        </div>
-
-                    </li>
-                    <li><a href="#">Email Preferences</a></li>
-                    <li class="uk-disabled"><a href="#">Sub Accounts</a></li>
-                    <li class="uk-disabled"><a href="#">API</a></li>
-                </ul>
-
-                <div class="uk-card uk-card-body uk-card-primary uk-card-" style="margin:40px ;width: 100%;">
                     <div class="uk-card-header">
                         <h3>My Information</h3>
                     </div>
                     <div class="uk-card-content" style="color: white">
                         <br>
+                        {% if error is defined %}
+                            <div class="uk-alert uk-alert-danger" data-uk-alert>
+                                {{ error }}
+                                <a href="#" class="uk-alert-close uk-close"></a>
+                                <p></p>
+                            </div>
+                        {%  endif %}
+
+                        {% if success is defined %}
+                            <div class="uk-alert uk-alert-success" data-uk-alert>
+                                {{ success }}
+                                <a href="#" class="uk-alert-close uk-close"></a>
+                                <p></p>
+                            </div>
+                        {%  endif %}
 
                         <form class="uk-form-stacked" method="post">
                             <div uk-grid>
                             <div class="uk-width-1-2">
+                                <label for="firstName">User ID</label>
+                                <input type="text" class="uk-input" readonly value="{{ user.id }}" id="userId" name="userId">
+                            </div>
+                            <br>
+                            <div class="uk-width-1-2">
+                                <label for="lastName">Username</label>
+                                <input type="text" class="uk-input" id="username" readonly value="{{ user.username }}" name="__username__">
+                            </div>
+
+                            <div class="uk-width-1-2">
                                 <label for="firstName">First Name</label>
-                                <input type="text" class="uk-input" id="firstName" name="firstname">
+                                <input type="text" class="uk-input" id="firstName" required name="firstname" value="{{ user.firstName }}">
                             </div>
                             <br>
                             <div class="uk-width-1-2">
                                 <label for="lastName">Last Name</label>
-                                <input type="text" class="uk-input" id="lastName" name="lastname">
+                                <input type="text" class="uk-input" id="lastName" required name="lastname" value="{{ user.lastName }}">
                             </div>
 
                             <div class="uk-width-1-1">
                                 <label for="lastName">My Email</label>
-                                <input type="text" class="uk-input" id="emailAddr" name="emailAddr" style="padding-top: 5px;">
+                                <input type="text" class="uk-input" id="emailAddr" required name="emailAddr" style="padding-top: 5px;" value="{{ user.email }}">
                             </div>
                                 <div class="uk-width-1-1">
 
-                                <button class="uk-button uk-button-default uk-margin-small-right" type="submit">Open</button>
+                                <button class="uk-button uk-button-default uk-margin-small-right" type="submit">Update</button>
                                 </div>
                         </form>
 
@@ -87,13 +61,6 @@
                 </div>
 
 
-            </div>
-            <div class="uk-card-footer">
-                <hr>
-                No service issues. Everything running.
-            </div>
-
-        </div>
 
     </div>
 {% endblock %}
