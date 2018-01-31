@@ -401,4 +401,62 @@ class GameServer
     {
         return $this->status;
     }
+    /**
+     * @var string
+     */
+    private $location;
+
+    /**
+     * @var string
+     */
+    private $pid;
+
+
+    /**
+     * Set location
+     *
+     * @param string $location
+     *
+     * @return GameServer
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * Set pid
+     *
+     * @param string $pid
+     *
+     * @return GameServer
+     */
+    public function setPid($pid)
+    {
+        $this->pid = $pid;
+
+        return $this;
+    }
+
+    /**
+     * Get pid
+     *
+     * @return string
+     */
+    public function getPid()
+    {
+        return $this->pid;
+    }
 }

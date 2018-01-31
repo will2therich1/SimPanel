@@ -14,6 +14,7 @@ use AppBundle\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
 use phpseclib\Crypt\RSA;
 use phpseclib\Net\SSH2;
+use ServerBundle\Entity\GameServer;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 
@@ -219,6 +220,28 @@ class NetworkServerService
 
         $this->runCMD($cmd);
     }
+
+    public function restartServer($startCmd , GameServer $gameServer, User $user , ObjectManager $em)
+    {
+        $serverIp = $gameServer->getIp();
+        $serverId = $gameServer->getId();
+        $serverPort = $gameServer->getPort();
+        $serverLocation = $gameServer->getLocation();
+
+        $serverUsername = $user->getUsername();
+        $pidFile = $serverUsername."_".$serverId;
+
+
+        $ssh_cmd = "Restart -u $serverUsername -i $serverIp -p $serverPort $pidFile $serverLocation -o '$startCmd'";
+        $this->runCMD($ssh_cmd);
+
+        $gameServer->setPid($pidFile);
+        $gameServer->setStatus("Starting");
+        
+        $em->persist($gameServer);
+        $em->flush();
+    }
+
 
 
 }

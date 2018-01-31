@@ -125,6 +125,13 @@ class AdminGameServerController extends Controller
         $em->flush();
 
 
+        $username = $user->getUsername();
+
+        // Update the server location
+        $server->setLocation("/usr/local/sp/users/$username/$serverIp.$port");
+        $em->persist($server);
+        $em->flush();
+
         // Lets work on the actual server now!
         $enc_service = $this->getEncryptionService();
 
@@ -188,7 +195,14 @@ class AdminGameServerController extends Controller
             $server->setIp($serverIp);
             $server->setPort($port);
             $server->setStatus("New");
+            $server->setLocation("/unknown");
             //Persist the server and flush to update the DB.
+            $em->persist($server);
+            $em->flush();
+
+            $username = $user->getUsername();
+
+            $server->setLocation("/usr/local/sp/users/$username/$serverIp.$port");
             $em->persist($server);
             $em->flush();
 
