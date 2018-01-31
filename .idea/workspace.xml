@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab0bad1d-7c43-40d9-9997-927c9a0987ed" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/panel.iml" afterPath="$PROJECT_DIR$/.idea/panel.iml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/view.game.server.admin.html.twig" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/view.game.servers.admin.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/view.game.servers.admin.html.twig" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Service/NetworkServerService.php" afterPath="$PROJECT_DIR$/src/AppBundle/Service/NetworkServerService.php" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Service/SettingService.php" afterPath="$PROJECT_DIR$/src/AppBundle/Service/SettingService.php" />
       <change beforePath="$PROJECT_DIR$/src/ServerBundle/Controller/AdminGameServerController.php" afterPath="$PROJECT_DIR$/src/ServerBundle/Controller/AdminGameServerController.php" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Entity/GameServer.php" afterPath="$PROJECT_DIR$/src/ServerBundle/Entity/GameServer.php" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Resources/config/doctrine/GameServer.orm.yml" afterPath="$PROJECT_DIR$/src/ServerBundle/Resources/config/doctrine/GameServer.orm.yml" />
       <change beforePath="$PROJECT_DIR$/src/UserBundle/Controller/GameServerController.php" afterPath="$PROJECT_DIR$/src/UserBundle/Controller/GameServerController.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,94 +20,81 @@
   <component name="ComposerSettings">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="AdminGameServerController.php" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/src/ServerBundle/Controller/AdminGameServerController.php">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="82">
+                    <caret line="544" column="45" lean-forward="false" selection-start-line="544" selection-start-column="45" selection-end-line="544" selection-end-column="45" />
+                    <folding>
+                      <element signature="e#712#2655#0#PHP" expanded="false" />
+                      <element signature="e#2578#2640#0#PHP" expanded="true" />
+                      <element signature="e#2782#5643#0#PHP" expanded="false" />
+                      <element signature="e#5771#9377#0#PHP" expanded="false" />
+                      <element signature="e#9801#9826#1#PHP" expanded="true" />
+                      <element signature="e#10594#10610#1#PHP" expanded="true" />
+                      <element signature="e#10753#10812#0#PHP" expanded="true" />
+                      <element signature="e#12130#12240#0#PHP" expanded="false" />
+                      <element signature="e#12319#15289#0#PHP" expanded="false" />
+                      <element signature="e#15579#16302#0#PHP" expanded="false" />
+                      <element signature="e#16308#16505#0#PHP" expanded="false" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="NetworkServerService.php" pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/NetworkServerService.php">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="528">
+                    <caret line="247" column="0" lean-forward="false" selection-start-line="247" selection-start-column="0" selection-end-line="247" selection-end-column="0" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="GameServerController.php" pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/src/UserBundle/Controller/GameServerController.php">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="688">
+                    <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+                    <folding>
+                      <element signature="e#625#1495#0#PHP" expanded="false" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SettingService.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SettingService.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/SettingService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="280">
               <caret line="24" column="28" lean-forward="false" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AccountController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/UserBundle/Controller/AccountController.php">
+      <file leaf-file-name="view.game.server.admin.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/view.game.server.admin.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="166" column="0" lean-forward="false" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
+            <state relative-caret-position="335">
+              <caret line="181" column="32" lean-forward="false" selection-start-line="181" selection-start-column="32" selection-end-line="181" selection-end-column="32" />
               <folding>
-                <element signature="e#508#1395#0#PHP" expanded="false" />
-                <element signature="e#1502#3250#0#PHP" expanded="false" />
-                <element signature="e#3353#5323#0#PHP" expanded="false" />
+                <element signature="e#1649#1655#0#HTML" expanded="true" />
+                <element signature="e#1698#1704#0#HTML" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameServerController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/UserBundle/Controller/GameServerController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="740">
-              <caret line="82" column="99" lean-forward="false" selection-start-line="82" selection-start-column="99" selection-end-line="82" selection-end-column="99" />
-              <folding>
-                <element signature="e#41#76#0#PHP" expanded="true" />
-                <element signature="e#1843#1868#1#PHP" expanded="true" />
-                <element signature="e#1965#1991#1#PHP" expanded="true" />
-                <element signature="e#2104#2129#1#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NetworkServerService.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/NetworkServerService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="698">
-              <caret line="239" column="8" lean-forward="true" selection-start-line="239" selection-start-column="8" selection-end-line="239" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdminGameServerController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ServerBundle/Controller/AdminGameServerController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="129" column="37" lean-forward="false" selection-start-line="129" selection-start-column="37" selection-end-line="129" selection-end-column="37" />
-              <folding>
-                <element signature="e#712#2655#0#PHP" expanded="false" />
-                <element signature="e#1392#1418#1#PHP" expanded="true" />
-                <element signature="e#1471#1506#1#PHP" expanded="true" />
-                <element signature="e#1556#1572#1#PHP" expanded="true" />
-                <element signature="e#2578#2640#0#PHP" expanded="true" />
-                <element signature="e#3134#3169#1#PHP" expanded="true" />
-                <element signature="e#3224#3240#1#PHP" expanded="true" />
-                <element signature="e#3298#3324#1#PHP" expanded="true" />
-                <element signature="e#3403#3428#1#PHP" expanded="true" />
-                <element signature="e#6209#6225#1#PHP" expanded="true" />
-                <element signature="e#6283#6309#1#PHP" expanded="true" />
-                <element signature="e#6375#6400#1#PHP" expanded="true" />
-                <element signature="e#9300#9362#0#PHP" expanded="true" />
-                <element signature="e#9770#10217#0#PHP" expanded="false" />
-                <element signature="e#10682#10792#0#PHP" expanded="false" />
-                <element signature="e#10871#13841#0#PHP" expanded="false" />
-                <element signature="e#12991#13007#1#PHP" expanded="true" />
-                <element signature="e#13766#13826#0#PHP" expanded="true" />
-                <element signature="e#14131#14854#0#PHP" expanded="false" />
-                <element signature="e#14860#15057#0#PHP" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameServer.orm.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ServerBundle/Resources/config/doctrine/GameServer.orm.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="758">
-              <caret line="48" column="26" lean-forward="false" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -122,12 +109,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.settings.main.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.main.html.twig">
+      <file leaf-file-name="view.game.servers.admin.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/view.game.servers.admin.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="36" column="73" lean-forward="false" selection-start-line="36" selection-start-column="73" selection-end-line="36" selection-end-column="73" />
-              <folding />
+            <state relative-caret-position="200">
+              <caret line="11" column="24" lean-forward="false" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+              <folding>
+                <element signature="e#12#32#0#Twig" expanded="true" />
+                <element signature="e#3053#3059#0#HTML" expanded="true" />
+                <element signature="e#3059#3065#0#HTML" expanded="true" />
+                <element signature="e#3065#3071#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -171,7 +163,6 @@
         <option value="$PROJECT_DIR$/src/ServerBundle/Entity/GameServer.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/admin/templates/view.server.template.admin.html.twig" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/view.game.servers.admin.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/userBundle/base.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/ServerTemplateController.php" />
@@ -188,11 +179,14 @@
         <option value="$PROJECT_DIR$/app/Resources/views/userBundle/gameServers/user.servers.html.twig" />
         <option value="$PROJECT_DIR$/src/UserBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/userBundle/dashboardpage.html.twig" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Service/SettingService.php" />
-        <option value="$PROJECT_DIR$/src/ServerBundle/Controller/AdminGameServerController.php" />
         <option value="$PROJECT_DIR$/src/ServerBundle/Resources/config/doctrine/GameServer.orm.yml" />
+        <option value="$PROJECT_DIR$/install.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/view.game.servers.admin.html.twig" />
         <option value="$PROJECT_DIR$/src/UserBundle/Controller/GameServerController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Service/NetworkServerService.php" />
+        <option value="$PROJECT_DIR$/src/ServerBundle/Controller/AdminGameServerController.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/view.game.server.admin.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Service/SettingService.php" />
       </list>
     </option>
   </component>
@@ -261,8 +255,7 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="108" />
-    <option name="y" value="1080" />
+    <option name="x" value="1920" />
     <option name="width" value="1920" />
     <option name="height" value="1080" />
   </component>
@@ -314,6 +307,67 @@
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="pp-symfony-rewrite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pp-symfony-rewrite" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="users" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="pp-symfony-rewrite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pp-symfony-rewrite" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="serverBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="pp-symfony-rewrite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pp-symfony-rewrite" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="serverBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="gameServer" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="pp-symfony-rewrite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pp-symfony-rewrite" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="settings" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="pp-symfony-rewrite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pp-symfony-rewrite" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="settings" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="general" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="pp-symfony-rewrite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pp-symfony-rewrite" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="settings" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="general" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="user" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="pp-symfony-rewrite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pp-symfony-rewrite" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="userBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -334,20 +388,14 @@
               <item name="pp-symfony-rewrite" type="b2602c69:ProjectViewProjectNode" />
               <item name="pp-symfony-rewrite" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="pp-symfony-rewrite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pp-symfony-rewrite" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Service" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ServerBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="pp-symfony-rewrite" type="b2602c69:ProjectViewProjectNode" />
               <item name="pp-symfony-rewrite" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="ServerBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="pp-symfony-rewrite" type="b2602c69:ProjectViewProjectNode" />
@@ -415,19 +463,19 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="PHP" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="SearchEverywhereHistoryKey" value="Gam&#9;FILE&#9;file:///home/will/Documents/Projects/SymfonyGamePanel/panel/pp-symfony-rewrite/src/ServerBundle/Controller/AdminGameServerController.php&#10;getEncr&#9;null&#9;null&#10;userSettingsGe&#9;null&#9;null&#10;adminPro&#9;FILE&#9;file:///home/will/Documents/Projects/SymfonyGamePanel/panel/pp-symfony-rewrite/src/AppBundle/Controller/AdminProfileController.php&#10;admin&#9;FILE&#9;file:///home/will/Documents/Projects/SymfonyGamePanel/panel/pp-symfony-rewrite/src/AppBundle/Controller/AdminProfileController.php&#10;profileCon&#9;null&#9;null&#10;uk-rab&#9;null&#9;null&#10;uk-tab&#9;null&#9;null&#10;Server&#9;FILE&#9;file:///home/will/Documents/Projects/SymfonyGamePanel/panel/pp-symfony-rewrite/src/ServerBundle/Controller/AdminGameServerController.php&#10;Template&#9;FILE&#9;file:///home/will/Documents/Projects/SymfonyGamePanel/panel/pp-symfony-rewrite/src/AppBundle/Controller/ServerTemplateController.php&#10;view.server.tem&#9;FILE&#9;file:///home/will/Documents/Projects/SymfonyGamePanel/panel/pp-symfony-rewrite/app/Resources/views/admin/templates/view.server.template.admin.html.twig&#10;viewServerTe&#9;null&#9;null&#10;AdminGame&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="settings&#9;FILE&#9;file:///home/will/Documents/Projects/SymfonyGamePanel/panel/pp-symfony-rewrite/src/AppBundle/Service/SettingService.php&#10;settingsSe&#9;FILE&#9;file:///home/will/Documents/Projects/SymfonyGamePanel/panel/pp-symfony-rewrite/app/Resources/views/userBundle/accountSettings/user.settings.general.security.tfa.setup.main.html.twig&#10;serverPo&#9;null&#9;null&#10;Gam&#9;FILE&#9;file:///home/will/Documents/Projects/SymfonyGamePanel/panel/pp-symfony-rewrite/src/ServerBundle/Controller/AdminGameServerController.php&#10;getEncr&#9;null&#9;null&#10;userSettingsGe&#9;null&#9;null&#10;adminPro&#9;FILE&#9;file:///home/will/Documents/Projects/SymfonyGamePanel/panel/pp-symfony-rewrite/src/AppBundle/Controller/AdminProfileController.php&#10;admin&#9;FILE&#9;file:///home/will/Documents/Projects/SymfonyGamePanel/panel/pp-symfony-rewrite/src/AppBundle/Controller/AdminProfileController.php&#10;profileCon&#9;null&#9;null&#10;uk-rab&#9;null&#9;null&#10;uk-tab&#9;null&#9;null&#10;Server&#9;FILE&#9;file:///home/will/Documents/Projects/SymfonyGamePanel/panel/pp-symfony-rewrite/src/ServerBundle/Controller/AdminGameServerController.php&#10;Template&#9;FILE&#9;file:///home/will/Documents/Projects/SymfonyGamePanel/panel/pp-symfony-rewrite/src/AppBundle/Controller/ServerTemplateController.php&#10;view.server.tem&#9;FILE&#9;file:///home/will/Documents/Projects/SymfonyGamePanel/panel/pp-symfony-rewrite/app/Resources/views/admin/templates/view.server.template.admin.html.twig&#10;viewServerTe&#9;null&#9;null&#10;AdminGame&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/Resources/views/userBundle" />
-      <recent name="$PROJECT_DIR$/app/Resources/views/admin" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings" />
       <recent name="$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer" />
+      <recent name="$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings" />
       <recent name="$PROJECT_DIR$/app/Resources/views/userBundle/gameServers" />
       <recent name="$PROJECT_DIR$/app/Resources/views/userBundle/GameServers" />
       <recent name="$PROJECT_DIR$/app/Resources/views/userBundle" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Resources/views/userBundle" />
+      <recent name="$PROJECT_DIR$/app/Resources/views/admin" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -469,22 +517,23 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60749000" />
+    <option name="totallyTimeSpent" value="66376000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="108" y="1080" width="1920" height="1080" extended-state="6" />
+    <frame x="1920" y="0" width="1920" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27724358" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32943678" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943678" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17429194" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27724358" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -517,46 +566,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/css/font.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="19" column="4" lean-forward="false" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserBundle/UserBundle.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerBundle/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerBundle/Controller/TemplateDefaultsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="8" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/User.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
@@ -614,14 +628,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/view.game.servers.admin.html.twig" />
     <entry file="file://$PROJECT_DIR$/app/Resources/views/serverBundle/settings/server.default.settings.advanced.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
@@ -661,13 +667,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-142">
           <caret line="37" column="29" lean-forward="false" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/game.server.create.step.2.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="105" column="33" lean-forward="false" selection-start-line="105" selection-start-column="33" selection-end-line="105" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -727,13 +726,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/settings/general/user/user.general.settings.tab.general.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/profiles/admin/tfa.setup.profile.admin.index.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -762,13 +754,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="24" column="42" lean-forward="false" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.general.security.main.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="265">
@@ -776,38 +761,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.main.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="36" column="73" lean-forward="false" selection-start-line="36" selection-start-column="73" selection-end-line="36" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.general.security.tfa.setup.main.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AdminAdminController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserBundle/Controller/AccountController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="166" column="0" lean-forward="false" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
-          <folding>
-            <element signature="e#508#1395#0#PHP" expanded="false" />
-            <element signature="e#1502#3250#0#PHP" expanded="false" />
-            <element signature="e#3353#5323#0#PHP" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -847,14 +805,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/SettingService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="24" column="28" lean-forward="false" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ServerBundle/Resources/config/doctrine/GameServer.orm.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="758">
@@ -863,52 +813,170 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServerBundle/Controller/AdminGameServerController.php">
+    <entry file="file://$PROJECT_DIR$/web/js/charts-home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="129" column="37" lean-forward="false" selection-start-line="129" selection-start-column="37" selection-end-line="129" selection-end-column="37" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#712#2655#0#PHP" expanded="false" />
-            <element signature="e#1392#1418#1#PHP" expanded="true" />
-            <element signature="e#1471#1506#1#PHP" expanded="true" />
-            <element signature="e#1556#1572#1#PHP" expanded="true" />
-            <element signature="e#2578#2640#0#PHP" expanded="true" />
-            <element signature="e#3134#3169#1#PHP" expanded="true" />
-            <element signature="e#3224#3240#1#PHP" expanded="true" />
-            <element signature="e#3298#3324#1#PHP" expanded="true" />
-            <element signature="e#3403#3428#1#PHP" expanded="true" />
-            <element signature="e#6209#6225#1#PHP" expanded="true" />
-            <element signature="e#6283#6309#1#PHP" expanded="true" />
-            <element signature="e#6375#6400#1#PHP" expanded="true" />
-            <element signature="e#9300#9362#0#PHP" expanded="true" />
-            <element signature="e#9770#10217#0#PHP" expanded="false" />
-            <element signature="e#10682#10792#0#PHP" expanded="false" />
-            <element signature="e#10871#13841#0#PHP" expanded="false" />
-            <element signature="e#12991#13007#1#PHP" expanded="true" />
-            <element signature="e#13766#13826#0#PHP" expanded="true" />
-            <element signature="e#14131#14854#0#PHP" expanded="false" />
-            <element signature="e#14860#15057#0#PHP" expanded="false" />
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/install.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/admin/users/view.user.admin.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="72" column="22" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="72" selection-end-column="22" />
+          <folding>
+            <element signature="e#12#32#0#Twig" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/game.server.create.step.2.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="107" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UserBundle/Controller/AccountController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="166" column="0" lean-forward="false" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
+          <folding>
+            <element signature="e#508#1395#0#PHP" expanded="false" />
+            <element signature="e#1502#3250#0#PHP" expanded="false" />
+            <element signature="e#3353#5323#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.main.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-145">
+          <caret line="36" column="73" lean-forward="false" selection-start-line="36" selection-start-column="73" selection-end-line="36" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-385">
+          <caret line="24" column="42" lean-forward="false" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/settings/general/user/user.general.settings.tab.general.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="81" column="9" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/settings/general/user/user.general.settings.tab.branding.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-925">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#12#71#0#Twig" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/UserBundle/Controller/GameServerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="740">
-          <caret line="82" column="99" lean-forward="false" selection-start-line="82" selection-start-column="99" selection-end-line="82" selection-end-column="99" />
+        <state relative-caret-position="688">
+          <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding>
-            <element signature="e#41#76#0#PHP" expanded="true" />
-            <element signature="e#1843#1868#1#PHP" expanded="true" />
-            <element signature="e#1965#1991#1#PHP" expanded="true" />
-            <element signature="e#2104#2129#1#PHP" expanded="true" />
+            <element signature="e#625#1495#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/view.game.server.admin.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="181" column="32" lean-forward="false" selection-start-line="181" selection-start-column="32" selection-end-line="181" selection-end-column="32" />
+          <folding>
+            <element signature="e#1649#1655#0#HTML" expanded="true" />
+            <element signature="e#1698#1704#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/NetworkServerService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="698">
-          <caret line="239" column="8" lean-forward="true" selection-start-line="239" selection-start-column="8" selection-end-line="239" selection-end-column="8" />
+        <state relative-caret-position="528">
+          <caret line="247" column="0" lean-forward="false" selection-start-line="247" selection-start-column="0" selection-end-line="247" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServerBundle/Controller/AdminGameServerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="544" column="45" lean-forward="false" selection-start-line="544" selection-start-column="45" selection-end-line="544" selection-end-column="45" />
+          <folding>
+            <element signature="e#712#2655#0#PHP" expanded="false" />
+            <element signature="e#2578#2640#0#PHP" expanded="true" />
+            <element signature="e#2782#5643#0#PHP" expanded="false" />
+            <element signature="e#5771#9377#0#PHP" expanded="false" />
+            <element signature="e#9801#9826#1#PHP" expanded="true" />
+            <element signature="e#10594#10610#1#PHP" expanded="true" />
+            <element signature="e#10753#10812#0#PHP" expanded="true" />
+            <element signature="e#12130#12240#0#PHP" expanded="false" />
+            <element signature="e#12319#15289#0#PHP" expanded="false" />
+            <element signature="e#15579#16302#0#PHP" expanded="false" />
+            <element signature="e#16308#16505#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/view.game.servers.admin.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="11" column="24" lean-forward="false" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+          <folding>
+            <element signature="e#12#32#0#Twig" expanded="true" />
+            <element signature="e#3053#3059#0#HTML" expanded="true" />
+            <element signature="e#3059#3065#0#HTML" expanded="true" />
+            <element signature="e#3065#3071#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.general.security.tfa.setup.main.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Service/SettingService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="24" column="28" lean-forward="false" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
           <folding />
         </state>
       </provider>

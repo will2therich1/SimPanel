@@ -242,6 +242,25 @@ class NetworkServerService
         $em->flush();
     }
 
+    public function stopServer(GameServer $gameServer, User $user , ObjectManager $em)
+    {
+        $serverIp = $gameServer->getIp();
+        $serverPort = $gameServer->getPort();
+        $serverLocation = $gameServer->getLocation();
+        $serverPid = $gameServer->getPid();
+        $serverUsername = $user->getUsername();
+
+
+        $ssh_cmd = "Stop -u $serverUsername -i $serverIp -p $serverPort  $serverLocation $serverPid ";
+        $this->runCMD($ssh_cmd);
+
+        $gameServer->setPid(null);
+        $gameServer->setStatus("Stopped");
+
+        $em->persist($gameServer);
+        $em->flush();
+    }
+
 
 
 }
