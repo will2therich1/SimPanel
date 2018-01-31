@@ -40,4 +40,11 @@ ServerBundle\Entity\GameServer:
         status:
             type: string
             length: 255
+        location:
+            type: string
+            length: 255
+        pid:
+            type: string
+            length: 255
+            nullable: true
     lifecycleCallbacks: {  }

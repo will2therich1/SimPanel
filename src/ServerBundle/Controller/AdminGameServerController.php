@@ -125,6 +125,13 @@ class AdminGameServerController extends Controller
         $em->flush();
 
 
+        $username = $user->getUsername();
+
+        // Update the server location
+        $server->setLocation("/usr/local/sp/users/$username/$serverIp.$port");
+        $em->persist($server);
+        $em->flush();
+
         // Lets work on the actual server now!
         $enc_service = $this->getEncryptionService();
 
@@ -188,7 +195,14 @@ class AdminGameServerController extends Controller
             $server->setIp($serverIp);
             $server->setPort($port);
             $server->setStatus("New");
+            $server->setLocation("/unknown");
             //Persist the server and flush to update the DB.
+            $em->persist($server);
+            $em->flush();
+
+            $username = $user->getUsername();
+
+            $server->setLocation("/usr/local/sp/users/$username/$serverIp.$port");
             $em->persist($server);
             $em->flush();
 
@@ -234,7 +248,50 @@ class AdminGameServerController extends Controller
         return $this->render('/serverBundle/gameServer/game.server.create.step.2.html.twig', $data);
     }
 
+    /**
+     * @Route("/admin/servers/g/{id}", name="adminViewUserGameServer")
+     */
+    public function viewUserGameServer(Request $request)
+    {
+        $data = [];
 
+        $serverId = $request->get('id');
+
+        $user = $this->getUser();
+        $userId = $user->getId();
+
+
+        $em = $this->getDoctrine()->getManager();
+        $settingService = new SettingService($em);
+
+        $server = $em->getRepository('ServerBundle:GameServer')->find($serverId);
+
+        if ($request->getMethod() == "POST")
+        {
+            $server->setServerName($request->get('serverName'));
+            $server->setGameName($request->get('gameName'));
+            $server->setPort($request->get('serverPort'));
+            $server->setStartupCommand($request->get('startCommand'));
+            $server->setUpdateCommand($request->get('updateCommand'));
+
+            $em->persist($server);
+            $em->flush();
+
+            $data['success'] = "Server Updated";
+        }
+
+
+
+        $data['currentUser'] = $user->getUserInfo();
+        $data['active'] = "GameServers";
+        $data['server'] = $server;
+        $data['branding'] = $settingService->getSiteInformation();
+        $data['owner'] = $em->getRepository('AppBundle:User')->find($server->getOwnerId());
+        // replace this example code with whatever you need
+        dump($data);
+
+        return $this->render('/serverBundle/gameServer/view.game.server.admin.html.twig', $data);
+    }
 
     /**
      * In the server name there are these possible replacements:
@@ -441,6 +498,107 @@ class AdminGameServerController extends Controller
         $data['owner'] = $user->getUserInfo();
 
         return $data;
+    }
+
+    /**
+     * @Route("/admin/servers/g/{id}/power" , name="serverPowerControl")
+     */
+    public function serverPowerControl(Request $request)
+    {
+        // Get the user
+        $user = $this->getUser();
+        // Get doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get the server
+        $server = $em->getRepository('ServerBundle:GameServer')->find($request->get('id'));
+        // Get the template
+        $template = $em->getRepository('AppBundle:ServerTemplate')->find($server->getTemplateId());
+        // Get the network server
+        $networkServer = $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId());
+        // Get the encryption service
+        $encryptionService  = $this->getEncryptionService();
+        // Get the setting Service
+        $settingService = new SettingService($em);
+
+
+        if ($request->getMethod() == "POST")
+        {
+            $action = $request->get('do');
+
+            if ($action == "start")
+            {
+                // Get the start command.
+                $startCommandRaw = $server->getStartupCommand();
+                $processedStartCommand = $this->formatStartCMD($startCommandRaw , $server , $template);
+
+                // Now we need the server service
+                $networkServerService = new NetworkServerService($encryptionService , $networkServer , $em);
+
+                // Start/Restart the server.
+                $networkServerService->restartServer($processedStartCommand ,$server , $user , $em);
+
+
+
+            }elseif ($action == "stop")
+            {
+
+                // we need the server service
+                $networkServerService = new NetworkServerService($encryptionService , $networkServer , $em);
+
+                // Stop the server.
+                $networkServerService->stopServer($server , $user , $em);
+
+
+            }elseif ($action == "restart")
+            {
+
+            }else
+            {
+                return new RedirectResponse('/user');
+            }
+
+        }
+
+        $data['currentUser'] = $user->getUserInfo();
+        $data['active'] = "GameServers";
+        $data['server'] = $server;
+        $data['owner'] = $user;
+        $data['branding'] = $settingService->getSiteInformation();
+
+        $serverId = $server->getId();
+        return new RedirectResponse("/admin/servers/g/$serverId");
+
+
+    }
+
+
+    /**
+     * In the server Startup/Update command:
+     *
+     * {steam.name} - The steam name of the game being updated eg (340)
+     * {server.ip} - The Servers Ip
+     * {server.port} - The Servers Port
+     *
+     * This function will turn these into what they should be
+     *
+     *
+     * @param $startCMD
+     * @param GameServer $server
+     * @param ServerTemplate $template
+     *
+     * @return string
+     */
+    public function formatStartCMD($startCMD , $server , $template)
+    {
+        $string_steam_name_replace = str_replace('{steam.name}' , $template->getSteamName() , $startCMD);
+
+        $string_server_ip_replace = str_replace('{server.ip}' , $server->getIp() , $string_steam_name_replace);
+
+        $string_template_port_replace = str_replace('{server.port}' , $server->getPort() , $string_server_ip_replace);
+
+        return $string_template_port_replace;
+
+
     }
 
 }
