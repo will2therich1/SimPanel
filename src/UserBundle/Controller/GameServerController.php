@@ -70,7 +70,7 @@ class GameServerController extends Controller
         $data['server'] = $server;
         $data['site'] = $settingService->getSiteInformation();
         // replace this example code with whatever you need
-        return $this->render('userBundle/gameServers/user.servers.html.twig' , $data);
+        return $this->render('userBundle/gameServers/user.view.game.server.html.twig' , $data);
     }
 
 
