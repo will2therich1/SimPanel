@@ -506,8 +506,6 @@ class AdminGameServerController extends Controller
      */
     public function serverMainControl(Request $request)
     {
-        // Get the user
-        $user = $this->getUser();
         // Get doctrine
         $em = $this->getDoctrine()->getManager();
         // Get the server
@@ -520,7 +518,8 @@ class AdminGameServerController extends Controller
         $encryptionService  = $this->getEncryptionService();
         // Get the setting Service
         $settingService = new SettingService($em);
-
+        // Get the user
+        $user = $em->getRepository('AppBundle:User')->find($server->getOwnerId());
 
         if ($request->getMethod() == "POST")
         {
@@ -530,7 +529,7 @@ class AdminGameServerController extends Controller
             {
                 // Get the start command.
                 $startCommandRaw = $server->getStartupCommand();
-                $processedStartCommand = $this->formatStartCMD($startCommandRaw , $server , $template);
+                $processedStartCommand = $server->formatStartCMD($startCommandRaw , $server , $template);
 
                 // Now we need the server service
                 $networkServerService = new NetworkServerService($encryptionService , $networkServer , $em);
@@ -595,33 +594,6 @@ class AdminGameServerController extends Controller
     }
 
 
-    /**
-     * In the server Startup/Update command:
-     *
-     * {steam.name} - The steam name of the game being updated eg (340)
-     * {server.ip} - The Servers Ip
-     * {server.port} - The Servers Port
-     *
-     * This function will turn these into what they should be
-     *
-     *
-     * @param $startCMD
-     * @param GameServer $server
-     * @param ServerTemplate $template
-     *
-     * @return string
-     */
-    public function formatStartCMD($startCMD , $server , $template)
-    {
-        $string_steam_name_replace = str_replace('{steam.name}' , $template->getSteamName() , $startCMD);
 
-        $string_server_ip_replace = str_replace('{server.ip}' , $server->getIp() , $string_steam_name_replace);
-
-        $string_template_port_replace = str_replace('{server.port}' , $server->getPort() , $string_server_ip_replace);
-
-        return $string_template_port_replace;
-
-
-    }
 
 }

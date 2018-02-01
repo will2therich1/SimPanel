@@ -255,7 +255,7 @@ class NetworkServerService
         $this->runCMD($ssh_cmd);
 
         $gameServer->setPid(null);
-        $gameServer->setStatus("Stopped");
+        $gameServer->setStatus("Offline");
 
         $em->persist($gameServer);
         $em->flush();
@@ -275,6 +275,7 @@ class NetworkServerService
     public function reinstallServer(GameServer $gameServer , ServerTemplate $template , $callbackUrl , User $user)
     {
         $this->deleteServer($user , $gameServer);
+        sleep(5);
         $this->serverCreation($user , $this->server , $template , $callbackUrl , $gameServer->getPort());
 
         $gameServer->setStatus("Reinstalling");

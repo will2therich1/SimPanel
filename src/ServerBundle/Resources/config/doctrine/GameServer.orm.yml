@@ -47,4 +47,8 @@ ServerBundle\Entity\GameServer:
             type: string
             length: 255
             nullable: true
+        startupExtra:
+            type: string
+            length: 255
+            nullable: true
     lifecycleCallbacks: {  }
