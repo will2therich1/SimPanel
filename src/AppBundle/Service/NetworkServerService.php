@@ -261,6 +261,29 @@ class NetworkServerService
         $em->flush();
     }
 
+    public function deleteServer(User $user , GameServer $gameServer)
+    {
+        $serverIp = $gameServer->getIp();
+        $serverPort = $gameServer->getPort();
+        $serverUser = $user->getServerUser();
+
+        $ssh_cmd  = "DeleteServer -u $serverUser -i $serverIp -p $serverPort";
+        $this->runCMD($ssh_cmd);
+
+    }
+
+    public function reinstallServer(GameServer $gameServer , ServerTemplate $template , $callbackUrl , User $user)
+    {
+        $this->deleteServer($user , $gameServer);
+        $this->serverCreation($user , $this->server , $template , $callbackUrl , $gameServer->getPort());
+
+        $gameServer->setStatus("Reinstalling");
+        $this->em->persist($gameServer);
+        $this->em->flush();
+
+
+    }
+
 
 
 }

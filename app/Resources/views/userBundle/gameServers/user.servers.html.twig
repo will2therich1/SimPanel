@@ -66,7 +66,7 @@
                     {% else %}
                         <td><div></div> {{ server.status }}</td>
                     {% endif %}
-                        <td><button class="uk-button uk-button-default" type="button">More Info</button></td>
+                    <td><a href="/user/servers/g/{{ server.id }}"><button class="uk-button uk-button-default" type="button">More Info</button></a></td>
 
                 </tr>
                 {% endfor %}

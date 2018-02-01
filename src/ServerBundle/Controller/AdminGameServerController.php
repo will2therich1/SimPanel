@@ -118,6 +118,7 @@ class AdminGameServerController extends Controller
         $server->setQueryEngine('Not Implemented');
         $server->setIp($serverIp);
         $server->setPort($port);
+        $server->setLocation('/');
         $server->setStatus("New");
 
         // Persist the server and flush to update the DB.
@@ -501,9 +502,9 @@ class AdminGameServerController extends Controller
     }
 
     /**
-     * @Route("/admin/servers/g/{id}/power" , name="serverPowerControl")
+     * @Route("/admin/servers/g/{id}/manage" , name="serverMainControl")
      */
-    public function serverPowerControl(Request $request)
+    public function serverMainControl(Request $request)
     {
         // Get the user
         $user = $this->getUser();
@@ -551,6 +552,28 @@ class AdminGameServerController extends Controller
 
             }elseif ($action == "restart")
             {
+
+            }elseif ($action == "reinstall"){
+
+                // Make the network server service
+                $networkServerService = new NetworkServerService($encryptionService , $networkServer , $em);
+
+                // Get the server Id
+                $serverId = $server->getId();
+                // Make the callback URL
+                $callbackUrl = $request->getHttpHost() . "/cron/serverCallback/$serverId";
+                // Reinstall the server
+                $networkServerService->reinstallServer($server , $template , $callbackUrl , $user );
+
+            }elseif ($action == "delete"){
+
+                // Delete the server.
+                $networkServerService = new NetworkServerService($encryptionService , $networkServer , $em);
+                $networkServerService->deleteServer($user , $server);
+
+                // Remove from the DB
+                $em->remove($server);
+                $em->flush();
 
             }else
             {

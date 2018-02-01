@@ -23,7 +23,8 @@
                             <div class="col-sm-9">
                                 <button  value="Restart/Start Server" id="restartStartServer" class="btn btn-primary" type="button">Restart/Start Server</button>
                                 <button  value="Restart/Start Server"  class="btn btn-primary" id="stopServer" type="button">Stop Server</button>
-                                <button  value="Restart/Start Server"  class="btn btn-primary" type="button">Reinstall Server</button>
+                                <button  value="Restart/Start Server"  class="btn btn-primary" id="reinstallServer" type="button">Reinstall Server</button>
+                                                                <button  value="Restart/Start Server"  class="btn btn-primary" id="deleteServer" type="button">Delete Server</button>
 
                             </div>
                         </div>
@@ -165,7 +166,7 @@
       $.ajax({
         type: 'POST',
         data: {"do" : "start"},
-        url: "/admin/servers/g/{{ server.id }}/power",
+        url: "/admin/servers/g/{{ server.id }}/manage",
         success: function (data) {
           alert("Attemping Server Start");
           location.reload();
@@ -177,12 +178,35 @@
       $.ajax({
         type: 'POST',
         data: {"do" : "stop"},
-        url: "/admin/servers/g/{{ server.id }}/power",
+        url: "/admin/servers/g/{{ server.id }}/manage",
         success: function (data) {
           alert("Stopping Server");
           location.reload();
         }
       });
+    });
+     $('#reinstallServer').click(function () {
+      $.ajax({
+        type: 'POST',
+        data: {"do" : "reinstall"},
+        url: "/admin/servers/g/{{ server.id }}/manage",
+        success: function (data) {
+          alert("Deinstalling Server");
+          location.reload();
+        }
+      });
+    });
+    $('#deleteServer').click(function () {
+      $.ajax({
+        type: 'POST',
+        data: {"do" : "delete"},
+        url: "/admin/servers/g/{{ server.id }}/manage",
+        success: function (data) {
+          alert("Server Deleted");
+        }
+      });
+        location.href = '{{ path('adminHomepage') }}';
+
     });
 </script>
     {% endblock %}
