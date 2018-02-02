@@ -401,4 +401,92 @@ class GameServer
     {
         return $this->status;
     }
+    /**
+     * @var string
+     */
+    private $location;
+
+    /**
+     * @var string
+     */
+    private $pid;
+
+
+    /**
+     * Set location
+     *
+     * @param string $location
+     *
+     * @return GameServer
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * Set pid
+     *
+     * @param string $pid
+     *
+     * @return GameServer
+     */
+    public function setPid($pid)
+    {
+        $this->pid = $pid;
+
+        return $this;
+    }
+
+    /**
+     * Get pid
+     *
+     * @return string
+     */
+    public function getPid()
+    {
+        return $this->pid;
+    }
+
+    /**
+     * In the server Startup/Update command:
+     *
+     * {steam.name} - The steam name of the game being updated eg (340)
+     * {server.ip} - The Servers Ip
+     * {server.port} - The Servers Port
+     *
+     * This function will turn these into what they should be
+     *
+     *
+     * @param $startCMD
+     * @param $server
+     * @param $template
+     *
+     * @return string
+     */
+    public function formatStartCMD($startCMD , $server , $template)
+    {
+        $string_steam_name_replace = str_replace('{steam.name}' , $template->getSteamName() , $startCMD);
+
+        $string_server_ip_replace = str_replace('{server.ip}' , $server->getIp() , $string_steam_name_replace);
+
+        $string_template_port_replace = str_replace('{server.port}' , $server->getPort() , $string_server_ip_replace);
+
+        return $string_template_port_replace;
+
+
+    }
+
 }

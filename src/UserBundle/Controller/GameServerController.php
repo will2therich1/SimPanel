@@ -12,6 +12,7 @@ use AppBundle\Service\SettingService;
 use AppBundle\Service\EncryptionService;
 use AppBundle\Service\NetworkServerService;
 use AppBundle\Service\ServerUserService;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class GameServerController extends Controller
 {
@@ -64,12 +65,23 @@ class GameServerController extends Controller
 
         $server = $em->getRepository('ServerBundle:GameServer')->find($serverId);
 
+        if ($request->getMethod() == "POST")
+        {
+            $server->setStartupExtra($request->get('startupParams'));
+            $em->persist($server);
+            $em->flush();
+
+        }
+
+
         $data = [];
         $data['user'] = $user->getUserInfo();
         $data['active'] = "gameServer";
         $data['server'] = $server;
         $data['site'] = $settingService->getSiteInformation();
         // replace this example code with whatever you need
+
+
         return $this->render('userBundle/gameServers/user.view.game.server.html.twig' , $data);
     }
 
@@ -86,6 +98,103 @@ class GameServerController extends Controller
         $encryption_params = $this->container->getParameter('encryption');
         return new EncryptionService($encryption_params);
     }
+
+    /**
+     * @Route("/user/servers/g/{id}/manage" , name="userServerMainControl")
+     */
+    public function serverMainControl(Request $request)
+    {
+        // Get the user
+        $user = $this->getUser();
+        // Get doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get the server
+        $server = $em->getRepository('ServerBundle:GameServer')->find($request->get('id'));
+        // Get the template
+        $template = $em->getRepository('AppBundle:ServerTemplate')->find($server->getTemplateId());
+        // Get the network server
+        $networkServer = $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId());
+        // Get the encryption service
+        $encryptionService  = $this->getEncryptionService();
+        // Get the setting Service
+        $settingService = new SettingService($em);
+
+        $userId = $user->getId();
+        $ownerId = $server->getOwnerId();
+
+        if ($userId === $ownerId ) {
+
+
+            if ($request->getMethod() == "POST") {
+                $action = $request->get('do');
+
+                if ($action == "start") {
+                    // Get the start command.
+                    $startCommandRaw = $server->getStartupCommand();
+                    $processedStartCommand = $server->formatStartCMD($startCommandRaw, $server, $template);
+
+                    // Now we need the server service
+                    $networkServerService = new NetworkServerService($encryptionService, $networkServer, $em);
+
+                    // Start/Restart the server.
+                    $networkServerService->restartServer($processedStartCommand, $server, $user, $em);
+
+
+                } elseif ($action == "stop") {
+
+                    // we need the server service
+                    $networkServerService = new NetworkServerService($encryptionService, $networkServer, $em);
+
+                    // Stop the server.
+                    $networkServerService->stopServer($server, $user, $em);
+
+
+                } elseif ($action == "restart") {
+
+                } elseif ($action == "reinstall") {
+
+                    // Make the network server service
+                    $networkServerService = new NetworkServerService($encryptionService, $networkServer, $em);
+
+                    // Get the server Id
+                    $serverId = $server->getId();
+                    // Make the callback URL
+                    $callbackUrl = $request->getHttpHost() . "/cron/serverCallback/$serverId";
+                    // Reinstall the server
+                    $networkServerService->reinstallServer($server, $template, $callbackUrl, $user);
+
+                } elseif ($action == "delete") {
+
+                    // Delete the server.
+                    $networkServerService = new NetworkServerService($encryptionService, $networkServer, $em);
+                    $networkServerService->deleteServer($user, $server);
+
+                    // Remove from the DB
+                    $em->remove($server);
+                    $em->flush();
+
+                } else {
+                    return new RedirectResponse('/user');
+                }
+
+            }
+        } else {
+            throw new UnauthorizedHttpException('Not Allowed');
+        }
+
+        $data['currentUser'] = $user->getUserInfo();
+        $data['active'] = "GameServers";
+        $data['server'] = $server;
+        $data['owner'] = $user;
+        $data['branding'] = $settingService->getSiteInformation();
+
+
+        $serverId = $server->getId();
+        return new RedirectResponse("/admin/servers/g/$serverId");
+
+
+    }
+
 
 
 

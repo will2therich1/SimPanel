@@ -459,4 +459,66 @@ class GameServer
     {
         return $this->pid;
     }
+
+    /**
+     * In the server Startup/Update command:
+     *
+     * {steam.name} - The steam name of the game being updated eg (340)
+     * {server.ip} - The Servers Ip
+     * {server.port} - The Servers Port
+     *
+     * This function will turn these into what they should be
+     *
+     *
+     * @param $startCMD
+     * @param $server
+     * @param $template
+     *
+     * @return string
+     */
+    public function formatStartCMD($startCMD , $server , $template)
+    {
+        $string_steam_name_replace = str_replace('{steam.name}' , $template->getSteamName() , $startCMD);
+
+        $string_server_ip_replace = str_replace('{server.ip}' , $server->getIp() , $string_steam_name_replace);
+
+        $string_template_port_replace = str_replace('{server.port}' , $server->getPort() , $string_server_ip_replace);
+
+        // Now we add the extra startup params addable by a user,
+        $startupCommand = $string_template_port_replace . $this->getStartupExtra();
+
+        return $startupCommand;
+
+
+    }
+
+    /**
+     * @var string
+     */
+    private $startupExtra;
+
+
+    /**
+     * Set startupExtra
+     *
+     * @param string $startupExtra
+     *
+     * @return GameServer
+     */
+    public function setStartupExtra($startupExtra)
+    {
+        $this->startupExtra = $startupExtra;
+
+        return $this;
+    }
+
+    /**
+     * Get startupExtra
+     *
+     * @return string
+     */
+    public function getStartupExtra()
+    {
+        return $this->startupExtra;
+    }
 }

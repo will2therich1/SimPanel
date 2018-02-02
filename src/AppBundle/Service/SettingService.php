@@ -22,12 +22,11 @@ class SettingService
      */
     private $em;
 
-    private $version = '0.29';
+    public $version = '0.30';
 
     public function __construct(ObjectManager $em)
     {
         $this->em = $em;
-
     }
 
     /**

@@ -52,7 +52,7 @@
             </div>
         {% for server in servers  %}
 
-            <h3 ><a href="" style="color:black !important;"><div class="{% if server.status == "Online" %} online {% elseif server.status == "Offline" %} offline {% endif %}"></div>&nbsp; {{ server.serverName }} </a></h3>
+            <h3 ><a href="/user/servers/g/{{ server.id }}" style="color:black !important;"><div class="{% if server.status == "Online" %} online {% elseif server.status == "Offline" %} offline {% endif %}"></div>&nbsp; {{ server.serverName }} </a></h3>
             <hr>
 
             {% endfor %}
