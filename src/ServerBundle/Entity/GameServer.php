@@ -367,7 +367,7 @@ class GameServer
         $returnData['updateCMD'] = $this->getUpdateCommand();
         $returnData['templateId'] = $this->getTemplateId();
         $returnData['queryEngine'] = $this->getQueryEngine();
-        $returnData['staus'] = $this->getStatus();
+        $returnData['status'] = $this->getStatus();
 
         return $returnData;
 

@@ -109,4 +109,33 @@ class ApiKeys
     {
         return $this->name;
     }
+    /**
+     * @var string
+     */
+    private $lastUsed;
+
+
+    /**
+     * Set lastUsed
+     *
+     * @param string $lastUsed
+     *
+     * @return ApiKeys
+     */
+    public function setLastUsed($lastUsed)
+    {
+        $this->lastUsed = $lastUsed;
+
+        return $this;
+    }
+
+    /**
+     * Get lastUsed
+     *
+     * @return string
+     */
+    public function getLastUsed()
+    {
+        return $this->lastUsed;
+    }
 }

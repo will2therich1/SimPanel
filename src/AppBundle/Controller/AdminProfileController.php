@@ -164,6 +164,8 @@ class AdminProfileController extends Controller
         $data['tab'] = 'API';
         $data['apiKeys'] = $apiKeys;
 
+        dump($data);
+
         // render the needed view.
         return $this->render('profiles/admin/api.profile.admin.index.twig', $data);
     }
