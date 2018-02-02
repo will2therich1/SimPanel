@@ -13,6 +13,7 @@ use AppBundle\Service\EncryptionService;
 use AppBundle\Service\NetworkServerService;
 use AppBundle\Service\ServerUserService;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use UserBundle\Service\PermissionsService;
 
 class GameServerController extends Controller
 {
@@ -25,9 +26,21 @@ class GameServerController extends Controller
 
         $user = $this->getUser();
         $userId = $user->getId();
-
-
         $em = $this->getDoctrine()->getManager();
+
+
+        if($user->getSubUser() === 1)
+        {
+            $permissionsService = new PermissionsService($user, $em);
+
+            $permission = $permissionsService->checkPermission("USER_VIEW_SERVER");
+            $owner = $permissionsService->getSubUserOwner();
+
+            if ($permission) {
+                $userId = $owner->getId();
+            }
+        }
+
         $settingService = new SettingService($em);
 
         $queryBuilder = $em->createQueryBuilder();
@@ -53,6 +66,9 @@ class GameServerController extends Controller
      */
     public function viewUserGameServer(Request $request)
     {
+        $data = [];
+
+
 
         $serverId = $request->get('id');
 
@@ -63,21 +79,50 @@ class GameServerController extends Controller
         $em = $this->getDoctrine()->getManager();
         $settingService = new SettingService($em);
 
+        $em = $this->getDoctrine()->getManager();
+
+
+        if($user->getSubUser() === 1)
+        {
+            $permissionsService = new PermissionsService($user, $em);
+
+            $permission = $permissionsService->checkPermission("USER_VIEW_SERVER");
+
+            $editable = $permissionsService->checkPermission("USER_EDIT_SERVER");
+
+            $canManage = $permissionsService->checkPermission("USER_MANAGE_SERVER");
+
+            if ($permission) {
+
+            }else{
+                return new RedirectResponse('/user');
+            }
+        }
+
+
         $server = $em->getRepository('ServerBundle:GameServer')->find($serverId);
 
         if ($request->getMethod() == "POST")
         {
-            $server->setStartupExtra($request->get('startupParams'));
+            if ($user->getSubUser() == 1 && $editable){
+                $server->setStartupExtra($request->get('startupParams'));
+            }elseif($user->getSubUser() == 1 && !$editable){
+                $data['error'] = "You do not have permission to edit this server";
+            }else{
+                $server->setStartupExtra($request->get('startupParams'));
+            }
+
             $em->persist($server);
             $em->flush();
 
         }
 
 
-        $data = [];
         $data['user'] = $user->getUserInfo();
         $data['active'] = "gameServer";
         $data['server'] = $server;
+        $data['subUser'] = $user->getSubUser();
+        $data['manage'] = $canManage;
         $data['site'] = $settingService->getSiteInformation();
         // replace this example code with whatever you need
 
