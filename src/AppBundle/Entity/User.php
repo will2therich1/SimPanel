@@ -382,7 +382,7 @@ class User implements UserInterface
         $data['email'] = $email;
         $data['firstName'] = $firstName;
         $data['lastName'] = $lastName;
-
+        $data['subUser'] = $this->getSubUser();
 
         return $data;
     }

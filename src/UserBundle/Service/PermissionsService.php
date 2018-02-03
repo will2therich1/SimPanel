@@ -48,20 +48,6 @@ class PermissionsService
 
     }
 
-    public function setPermissions()
-    {
-        $permissions = array();
-        $permissions['USER_VIEW_SERVER'] = 1;
-        $permissions['USER_EDIT_SERVER'] = 1;
-        $permissions['USER_MANAGE_SERVER'] = 1;
-
-
-        $this->user->setSubUserPermissions($permissions);
-        $this->em->persist($this->user);
-        $this->em->flush();
-
-    }
-
     public function getSubUserOwner()
     {
 

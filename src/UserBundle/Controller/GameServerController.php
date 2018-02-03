@@ -2,16 +2,13 @@
 
 namespace UserBundle\Controller;
 
-use ServerBundle\Entity\GameServer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Entity\ServerTemplate;
 use AppBundle\Service\SettingService;
 use AppBundle\Service\EncryptionService;
 use AppBundle\Service\NetworkServerService;
-use AppBundle\Service\ServerUserService;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use UserBundle\Service\PermissionsService;
 
@@ -97,10 +94,24 @@ class GameServerController extends Controller
             }else{
                 return new RedirectResponse('/user');
             }
+        } else
+        {
+            // If not a sub user set these variables.
+            $canManage = null;
+            $editable = null;
         }
 
 
         $server = $em->getRepository('ServerBundle:GameServer')->find($serverId);
+
+        if ($userId !== $server->getOwnerId() && $user->getSubUser() == 0)
+        {
+            return new RedirectResponse('/user');
+        } elseif ($user->getSubUser() == 1 && $user->getSubUserFor() !== $server->getOwnerId())
+        {
+            return new RedirectResponse('/user');
+
+        }
 
         if ($request->getMethod() == "POST")
         {
