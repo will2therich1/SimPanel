@@ -38,6 +38,10 @@ services:
         arguments: ['%encryption%']
         public: true
 
+    SettingsService:
+        class: AppBundle\Service\SettingService
+        public: true
+
     MaintenanceListener:
         class: AppBundle\Service\MaintenanceListener
         tags:

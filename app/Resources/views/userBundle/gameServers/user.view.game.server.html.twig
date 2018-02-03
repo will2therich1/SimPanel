@@ -39,14 +39,32 @@
             <hr>
         </div>
 
+        {%  if error is defined %}
+            <div uk-alert class="uk-alert-error">
+                {{ error }}
+            </div>
+
+
+        {% endif %}
         <form action="" method="post">
         <div uk-grid>
             <div class="uk-width-1-1">
+                {% if subUser == 1 %}
+                    {% if manage == 1 %}
+                        <label for="">Actions: &nbsp;</label>
+                        <button id="restartStartServer" type="button" class="uk-button uk-button-primary">Start/Restart Server</button>
+                        <button id="stopServer" type="button" class="uk-button uk-button-primary">Stop Server</button>
+                        <button id="reinstallServer" type="button" class="uk-button uk-button-primary">Reinstall Server</button>
+                    {% else %}
+
+                    {% endif %}
+
+                {% else %}
                 <label for="">Actions: &nbsp;</label>
                 <button id="restartStartServer" type="button" class="uk-button uk-button-primary">Start/Restart Server</button>
                 <button id="stopServer" type="button" class="uk-button uk-button-primary">Stop Server</button>
                 <button id="reinstallServer" type="button" class="uk-button uk-button-primary">Reinstall Server</button>
-
+                {% endif %}
             </div>
             <div class="uk-width-1-1">
                 <label for="">Information: &nbsp;</label>

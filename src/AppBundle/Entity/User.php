@@ -382,7 +382,7 @@ class User implements UserInterface
         $data['email'] = $email;
         $data['firstName'] = $firstName;
         $data['lastName'] = $lastName;
-
+        $data['subUser'] = $this->getSubUser();
 
         return $data;
     }
@@ -493,5 +493,92 @@ class User implements UserInterface
         }
         $dash_str .= $password;
         return $dash_str;
+    }
+    /**
+     * @var integer
+     */
+    private $subUser;
+
+    /**
+     * @var string
+     */
+    private $subUserPermissions;
+
+
+    /**
+     * Set subUser
+     *
+     * @param integer $subUser
+     *
+     * @return User
+     */
+    public function setSubUser($subUser)
+    {
+        $this->subUser = $subUser;
+
+        return $this;
+    }
+
+    /**
+     * Get subUser
+     *
+     * @return integer
+     */
+    public function getSubUser()
+    {
+        return $this->subUser;
+    }
+
+    /**
+     * Set subUserPermissions
+     *
+     * @param string $subUserPermissions
+     *
+     * @return User
+     */
+    public function setSubUserPermissions($subUserPermissions)
+    {
+        $this->subUserPermissions = $subUserPermissions;
+
+        return $this;
+    }
+
+    /**
+     * Get subUserPermissions
+     *
+     * @return string
+     */
+    public function getSubUserPermissions()
+    {
+        return $this->subUserPermissions;
+    }
+    /**
+     * @var integer
+     */
+    private $subUserFor;
+
+
+    /**
+     * Set subUserFor
+     *
+     * @param integer $subUserFor
+     *
+     * @return User
+     */
+    public function setSubUserFor($subUserFor)
+    {
+        $this->subUserFor = $subUserFor;
+
+        return $this;
+    }
+
+    /**
+     * Get subUserFor
+     *
+     * @return integer
+     */
+    public function getSubUserFor()
+    {
+        return $this->subUserFor;
     }
 }

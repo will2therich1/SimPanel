@@ -22,7 +22,7 @@ class SettingService
      */
     private $em;
 
-    public $version = '0.30';
+    public $version = '0.33';
 
     public function __construct(ObjectManager $em)
     {

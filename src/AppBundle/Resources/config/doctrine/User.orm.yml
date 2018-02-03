@@ -51,4 +51,14 @@ AppBundle\Entity\User:
             type: string
             length: 255
             nullable: true
+        subUser:
+            type: integer
+            nullable: true
+        subUserPermissions:
+            type: array
+            nullable: true
+        subUserFor:
+            type: integer
+            nullable: true
+
     lifecycleCallbacks: {  }

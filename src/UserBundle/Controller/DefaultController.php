@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\ServerTemplate;
 use AppBundle\Service\SettingService;
+use UserBundle\Service\PermissionsService;
 
 class DefaultController extends Controller
 {
@@ -21,6 +22,20 @@ class DefaultController extends Controller
 
         $user = $this->getUser();
         $userId = $user->getId();
+
+
+        if($user->getSubUser() === 1)
+        {
+            $permissionsService = new PermissionsService($user, $em);
+
+            $permission = $permissionsService->checkPermission("USER_VIEW_SERVER");
+            $owner = $permissionsService->getSubUserOwner();
+
+            if ($permission) {
+                $userId = $owner->getId();
+            }
+        }
+
 
         $queryBuilder = $em->createQueryBuilder();
 
