@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class ApiAdminController extends Controller
+class ApiNetworkServerController extends Controller
 {
     /**
      * The API Key object
@@ -26,11 +26,12 @@ class ApiAdminController extends Controller
 
 
     /**
-     * @Rest\Get("/api/v1/admins")
+     * @Rest\Get("/api/v1/network/servers")
      */
-    public function adminApiList(Request $request)
+    public function networkServerListApi(Request $request)
     {
         $data = [];
+
 
         if ($request->headers->get('Authorization') == null)
         {
@@ -72,39 +73,39 @@ class ApiAdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         $queryBuilder = $em->createQueryBuilder();
 
-        $queryBuilder->select('u')
-            ->from('AppBundle:User', 'u')
-            ->Where('u.admin = 1')
+        $queryBuilder->select('ns')
+            ->from('AppBundle:NetworkServer', 'ns')
             ->setMaxResults($limit)
             ->setFirstResult($offset);
 
         $result = $queryBuilder->getQuery()->execute();
 
 
-        foreach ($result as $user )
+        foreach ($result as $server)
         {
-            $data["user_".$user->getId()]['id'] = $user->getId();
-            $data["user_".$user->getId()]['first_name'] = $user->getFirstName();
-            $data["user_".$user->getId()]['last_name'] = $user->getLastName();
-            $data["user_".$user->getId()]['username'] = $user->getUsername();
-            $data["user_".$user->getId()]['email'] = $user->getEmail();
-            $data["user_".$user->getId()]['status'] = $user->getStatus();
-            $data["user_".$user->getId()]['roles'] = $user->getRoles();
-            $data["user_".$user->getId()]['tfa_status'] = $user->getTfaStatus();
+
+            $data["server_".$server->getId()]['id'] = $server->getId();
+            $data["server_".$server->getId()]['serverName'] = $server->getName();
+            $data["server_".$server->getId()]['serverIp'] = $server->getIp();
+            $data["server_".$server->getId()]['serverFtpPort'] = $server->getPort();
+            $data["server_".$server->getId()]['loginUser'] = $server->getLoginUser();
+            $data["server_".$server->getId()]['connectionStatus'] = $server->getConnectionStatus();
 
 
         }
+
 
         return new JsonResponse($data, 200);
 
     }
 
     /**
-     * @Rest\Get("/api/v1/admins/{id}")
+     * @Rest\Get("/api/v1/network/servers/{id}")
      */
-    public function adminApiSpecific(Request $request)
+    public function networkServerApiSpecific(Request $request)
     {
         $data = [];
+
 
         if ($request->headers->get('Authorization') == null)
         {
@@ -128,35 +129,24 @@ class ApiAdminController extends Controller
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
 
-        $user = $em->getRepository('AppBundle:User')->find($request->get('id'));
+        $server = $em->getRepository('AppBundle:NetworkServer')->find($request->get('id'));
 
 
-        if ($user == null) {
+        if ($server == null) {
             $data = array(
                 // you might translate this message
-                'message' => "No admin found with the id of {$request->get('id')}",
+                'message' => "No network server found with the id of {$request->get('id')}",
             );
 
             return new JsonResponse($data, Response::HTTP_NOT_FOUND);
-        } else {
-            if ($user->getAdmin() == 0) {
-                $data = array(
-                    // you might translate this message
-                    'message' => "No admin found with the id of {$request->get('id')}, There is a user with this id",
-                );
-
-                return new JsonResponse($data, Response::HTTP_NOT_FOUND);
-            }
         }
 
-        $data["user_" . $user->getId()]['id'] = $user->getId();
-        $data["user_" . $user->getId()]['first_name'] = $user->getFirstName();
-        $data["user_" . $user->getId()]['last_name'] = $user->getLastName();
-        $data["user_" . $user->getId()]['username'] = $user->getUsername();
-        $data["user_" . $user->getId()]['email'] = $user->getEmail();
-        $data["user_" . $user->getId()]['status'] = $user->getStatus();
-        $data["user_" . $user->getId()]['roles'] = $user->getRoles();
-        $data["user_" . $user->getId()]['tfa_status'] = $user->getTfaStatus();
+        $data["server_".$server->getId()]['id'] = $server->getId();
+        $data["server_".$server->getId()]['serverName'] = $server->getName();
+        $data["server_".$server->getId()]['serverIp'] = $server->getIp();
+        $data["server_".$server->getId()]['serverFtpPort'] = $server->getPort();
+        $data["server_".$server->getId()]['loginUser'] = $server->getLoginUser();
+        $data["server_".$server->getId()]['connectionStatus'] = $server->getConnectionStatus();
 
 
         return new JsonResponse($data, 200);
@@ -192,6 +182,7 @@ class ApiAdminController extends Controller
         }
 
     }
+
     /**
      * Authorises the API key sent on request
      *

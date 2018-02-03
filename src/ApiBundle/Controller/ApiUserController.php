@@ -29,6 +29,8 @@ class ApiUserController extends Controller
      */
     public function userApiList(Request $request)
     {
+        $data = [];
+
         if ($request->headers->get('Authorization') == null)
         {
             $headers = apache_request_headers();
@@ -98,6 +100,8 @@ class ApiUserController extends Controller
      */
     public function userApiSpecific(Request $request)
     {
+        $data = [];
+
         if ($request->headers->get('Authorization') == null)
         {
             $headers = apache_request_headers();
@@ -159,7 +163,8 @@ class ApiUserController extends Controller
     {
         $this->authoriseApiKey($sendApiKey);
 
-        if ($this->keyId == null) {
+        if ($this->keyId == null)
+        {
             return false;
 
         }
@@ -170,8 +175,15 @@ class ApiUserController extends Controller
         $user = $em->getRepository('AppBundle:User')->find($apiKey->getOwnerId());
 
         $this->user = $user;
+        $date = date('Y-m-d H:i:s');
 
-        if ($user !== null) {
+        $apiKey->setLastUsed($date);
+
+        $em->persist($user);
+        $em->flush();
+
+        if ($user !== null)
+        {
             return true;
         }
 

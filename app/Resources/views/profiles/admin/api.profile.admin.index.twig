@@ -29,7 +29,7 @@
                     <tr>
                         <th scope="row">{{ apiKey.id }}</th>
                         <td>{{ apiKey.name }}</td>
-                        <td>Never</td>
+                        <td>{{ apiKey.lastUsed }}</td>
                         <td><button id="deleteApiKey-{{ apiKey.id }}" type="button" class="btn btn-danger">Delete</button></td>
                     </tr>
                         {% endfor  %}
