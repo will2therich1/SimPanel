@@ -1,0 +1,121 @@
+{% extends 'userBundle/base.full.html.twig' %}
+
+
+{% block stylesheets %}
+<style>
+    .offline
+    {
+        background: #f00;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+
+    }
+    .online
+    {
+        background: lawngreen;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+
+    }
+
+</style>
+
+
+{% endblock %}
+
+
+
+{% block body %}
+
+<div class="uk-card uk-card-body uk-card-primary uk-card-" style="margin:40px">
+
+    <div class="uk-card-content">
+        <div class="uk-card-header">
+            <h3>Create a Sub User</h3>
+            <hr>
+        </div>
+        {%  if error is defined %}
+            <div uk-alert class="uk-alert-error">
+                {{ error }}
+            </div>
+        {% endif %}
+        {%  if success is defined %}
+            <div uk-alert class="uk-alert-success">
+                {{ success }}
+            </div>
+        {% endif %}
+        <form action="" method="post">
+            <div uk-grid>
+                <div class="uk-width-1-1">
+
+                </div>
+                <div class="uk-width-1-1">
+                    <label for="">Creating a sub user. &nbsp;</label>
+
+                </div>
+
+                <div class="uk-width-1-2">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="uk-input"  value="" id="firstName" name="userFirstName">
+                </div>
+
+
+                <div class="uk-width-1-2">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="uk-input" id="lastName"  value="" name="userLastName">
+                </div>
+
+                <div class="uk-width-1-2">
+                    <label for="userEmail">Email</label>
+                    <input type="text" class="uk-input" id="userEmail"  value="" name="userEmail">
+                </div>
+
+                <div class="uk-width-1-2">
+                    <label for="userUsername">Username</label>
+                    <input type="text" class="uk-input" id="userUsername"  value="" name="userUsername">
+                </div>
+                <div class="uk-width-1-2">
+                    <label for="userPassword">Password <i>If not provided random password will be generated</i></label>
+                    <input type="text" class="uk-input" id="userPassword"  value="" name="userPassword">
+                </div>
+
+                <div class="uk-width-1-2">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="text" class="uk-input" id="confirmPassword" value="" name="userPasswordConfirm">
+                </div>
+                <hr style="width: 100%">
+                <div class="uk-width-1-1">
+                    <h4>Users Roles</h4>
+                    <br>
+                    <label for="userCanViewRole"> User can view servers</label>
+                    <input type="checkbox" class="uk-checkbox" id="userCanViewRole" name="userCanViewRole">
+                    <br>
+                    <label for="userCanViewRole"> User can edit servers</label>
+                    <input type="checkbox" class="uk-checkbox" id="userCanEditRole" name="userCanEditRole">
+                    <br>
+                    <label for="userCanViewRole"> User can manage my servers</label>
+                    <input type="checkbox" class="uk-checkbox" id="userCanManageRole" name="userCanManageRole">
+                </div>
+                <div class="uk-width-1-1">
+
+                    <button class="uk-button uk-button-default uk-margin-small-right" type="submit">Create</button>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="uk-card-footer">
+            <hr>
+            No service issues. Everything running.
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

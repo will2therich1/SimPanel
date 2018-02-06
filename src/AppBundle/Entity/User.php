@@ -532,7 +532,7 @@ class User implements UserInterface
     /**
      * Set subUserPermissions
      *
-     * @param string $subUserPermissions
+     * @param array $subUserPermissions
      *
      * @return User
      */
