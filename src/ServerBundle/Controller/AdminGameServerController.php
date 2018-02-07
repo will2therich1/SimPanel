@@ -14,6 +14,7 @@ use ServerBundle\Entity\GameServer;
 use AppBundle\Service\NetworkServerService;
 use AppBundle\Service\EncryptionService;
 use AppBundle\Service\ServerUserService;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 
 class AdminGameServerController extends Controller
 {
@@ -42,7 +43,14 @@ class AdminGameServerController extends Controller
 
         $templates = $em->getRepository("AppBundle:ServerTemplate")->findAll();
         $defaults = $em->getRepository("ServerBundle:defaultConfiguration")->findAll();
-        $users = $em->getRepository("AppBundle:User")->findAll();
+
+        $queryBuilder = $em->createQueryBuilder();
+
+        $queryBuilder->select('u')
+            ->from('AppBundle:User', 'u')
+            ->where('u.subUser != 1');
+
+        $users = $queryBuilder->getQuery()->execute();
 
         $requestType = $request->getMethod();
 
@@ -100,6 +108,11 @@ class AdminGameServerController extends Controller
         $user = $em->getRepository('AppBundle:User')->find($ownerId);
         $template = $em->getRepository('AppBundle:ServerTemplate')->find($config->getTemplateId());
         $networkServer = $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId());
+
+        if ($user->getSubUser() == 1)
+        {
+            throw new MethodNotAllowedException("" , "Sub Users cannot be given a server");
+        }
 
         // Get the server IP and generate a port.
         $serverIp = $networkServer->getIp();
@@ -180,7 +193,13 @@ class AdminGameServerController extends Controller
         $serverIp = $networkServer->getIp();
         $port =  $this->findOpenPort($serverIp);
 
+        if ($user->getSubUser() == 1)
+        {
+            throw new MethodNotAllowedException("" , "Sub Users cannot be given a server");
+        }
+
         if ($request->getMethod() == "POST") {
+
 
             // Create the server database Object
             $server = new GameServer();
