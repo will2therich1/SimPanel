@@ -312,4 +312,21 @@ class ServerTemplate
     {
         return $this->template_name;
     }
+
+    public function getTemplateDetails()
+    {
+        $data = [];
+
+        $data['id'] = $this->getId();
+        $data['name'] = $this->getTemplateName();
+        $data['steamGameId'] = $this->getSteamName();
+        $data['templateStatus'] = $this->getStatus();
+        $data['templateSize'] = $this->getSize();
+        $data['description'] = $this->getDescription();
+        $data['networkId'] = $this->getNetworkId();
+        $data['defaultConfigId'] = $this->getConfigId();
+
+        return $data;
+    }
+
 }

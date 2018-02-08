@@ -293,6 +293,8 @@ class AdminGameServerController extends Controller
             $server->setPort($request->get('serverPort'));
             $server->setStartupCommand($request->get('startCommand'));
             $server->setUpdateCommand($request->get('updateCommand'));
+            $server->setPlayerSlots($request->get('serverPlayerSlots'));
+            $server->setRam($request->get('serverRam'));
 
             $em->persist($server);
             $em->flush();

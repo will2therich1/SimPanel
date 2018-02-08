@@ -70,8 +70,24 @@
                             </div>
                             <label class="col-sm-1 form-control-label">Server Port</label>
                             <div class="col-sm-4">
-                                <input id="inputHorizontalSuccess" value="{{ server.port }}" type="text"
+                                <input id="inputHorizontalSuccess" readonly value="{{ server.port }}" type="text"
                                        name='serverPort' placeholder="" required
+                                       class="form-control form-control-success">
+                                <small class="form-text"></small>
+                            </div>
+                        </div>
+                                                <div class="form-group row">
+                            <label class="col-sm-3 form-control-label">Player Slots</label>
+                            <div class="col-sm-4">
+                                <input id="inputHorizontalSuccess" value="{{ server.playerSlots }}" type="text"
+                                       name='serverPlayerSlots'  placeholder="" required
+                                       class="form-control form-control-success">
+                                <small class="form-text"></small>
+                            </div>
+                            <label class="col-sm-1 form-control-label">Server Ram</label>
+                            <div class="col-sm-4">
+                                <input id="inputHorizontalSuccess"  value="{{ server.ram }}" type="text"
+                                       name='serverRam' placeholder="" required
                                        class="form-control form-control-success">
                                 <small class="form-text"></small>
                             </div>

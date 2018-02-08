@@ -10,6 +10,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Entity\User;
 
 class ApiUserController extends Controller
 {
@@ -159,6 +160,78 @@ class ApiUserController extends Controller
 
     }
 
+    /**
+     * @Rest\Post("/api/v1/users/create")
+     */
+    public function userAPICreate(Request $request)
+    {
+        $data = [];
+
+        if ($request->headers->get('Authorization') == null)
+        {
+            $headers = apache_request_headers();
+            $sentApiKey = $headers['Authorization'];
+        }else {
+            $sentApiKey = $request->headers->get('Authorization');
+        }
+
+        $auth = $this->authorise($sentApiKey);
+        if (!$auth) {
+            $data = array(
+                // you might translate this message
+                'message' => "Unable to validate with the API Key provided",
+            );
+
+            return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
+        }
+
+        // Get em
+        $em = $this->getDoctrine()->getManager();
+
+        $user = new User();
+        $user->setFirstName($request->get('firstName'));
+        $user->setLastName($request->get('lastName'));
+        $user->setUsername($request->get('name'));
+        $user->setEmail(filter_var($request->get('email') , FILTER_VALIDATE_EMAIL));
+        $user->setTfaStatus(0);
+        $user->setStatus($request->get('status'));
+        $user->setAdmin(0);
+
+        $password = $user->generatePassword();
+        $hashed_password = password_hash($password , PASSWORD_DEFAULT);
+
+        $user->setPassword($hashed_password);
+
+        $em->persist($user);
+
+        try{
+            $em->flush();
+            $message = "User Created";
+            $status = 201;
+            $this->userCreationEmail($user->getEmail() , $user->getUsername() , $password );
+
+        }catch(\Exception $e)
+        {
+            $message = "error occoured with message " . $e->getMessage();
+            $status = 500;
+
+            $data = array(
+                // you might translate this message
+                'message' => $message,
+            );
+
+            return new JsonResponse($data, $status);
+        }
+
+        $data = array(
+            // you might translate this message
+            'message' => $message,
+        );
+
+        return new JsonResponse($data, $status);
+
+    }
+
     private function authorise($sendApiKey)
     {
         $this->authoriseApiKey($sendApiKey);
@@ -230,5 +303,26 @@ class ApiUserController extends Controller
         return $key;
 
     }
+
+    public function userCreationEmail($email,  $username, $password)
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Account Created at SimPanel')
+            ->setFrom('no-reply@servers4all.co.uk')
+            ->setTo($email)
+            ->setBody(
+                $this->renderView(
+                    'emails/user/user.creation.email.html.twig',
+                    array(
+                        'username' => $username,
+                        'password' => $password,
+                        'loginurl' => 'https://poisonpanel.servers4all.co.uk'
+                    )
+                ), 'text/html'
+            );
+        $this->get('mailer')->send($message);
+
+    }
+
 
 }
