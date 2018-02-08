@@ -192,7 +192,7 @@ class ApiAdminController extends Controller
     }
 
     /**
-     * @Rest\Post("/api/v1/admins/{id}")
+     * @Rest\Put("/api/v1/admins/{id}")
      */
     public function postAdminUpdate(Request $request)
     {

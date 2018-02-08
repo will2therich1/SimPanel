@@ -172,7 +172,7 @@ class ApiTemplateController extends Controller
     }
 
     /**
-     * @Rest\Post("/api/v1/templates/{id}")
+     * @Rest\Put("/api/v1/templates/{id}")
      */
     public function postTemplateUpdate(Request $request)
     {

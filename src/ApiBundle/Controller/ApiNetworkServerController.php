@@ -156,7 +156,7 @@ class ApiNetworkServerController extends Controller
     }
 
     /**
-     * @Rest\Post("/api/v1/network/servers/{id}")
+     * @Rest\Put("/api/v1/network/servers/{id}")
      */
     public function postServerUpdate(Request $request)
     {

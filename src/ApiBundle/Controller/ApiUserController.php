@@ -161,6 +161,109 @@ class ApiUserController extends Controller
     }
 
     /**
+     * @Rest\Put("/api/v1/users/{id}")
+     */
+    public function postUserUpdate(Request $request)
+    {
+        $data = [];
+
+        // AUTHORISATION START
+        if ($request->headers->get('Authorization') == null)
+        {
+            $headers = apache_request_headers();
+            if (isset($headers['Authorization']))
+            {
+                $sentApiKey = $headers['Authorization'];
+            }
+
+
+        } else {
+            $sentApiKey = $request->headers->get('Authorization');
+        }
+
+        if(!isset($sentApiKey))
+        {
+            throw new AccessDeniedException("No Api Key Provided");
+        }
+
+
+        $auth = $this->authorise($sentApiKey);
+        if (!$auth) {
+            $data = array(
+                // you might translate this message
+                'message' => "Unable to validate with the API Key provided",
+            );
+
+            return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
+        }
+
+        // AUTHORISATION END
+
+
+        $auth = $this->authorise($sentApiKey);
+        if (!$auth) {
+            $data = array(
+                // you might translate this message
+                'message' => "Unable to validate with the API Key provided",
+            );
+
+            return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
+        }
+
+
+
+
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('AppBundle:User')->find($request->get('id'));
+
+
+
+        if ($user == null) {
+            $data = array(
+                // you might translate this message
+                'message' => "No user found with the id of {$request->get('id')}",
+            );
+
+            return new JsonResponse($data, Response::HTTP_NOT_FOUND);
+        } else {
+            if ($user->getAdmin() == 1) {
+                $data = array(
+                    // you might translate this message
+                    'message' => "No user found with the id of {$request->get('id')}, There is a admin with this id",
+                );
+
+                return new JsonResponse($data, Response::HTTP_NOT_FOUND);
+            }
+        }
+
+        $user->setFirstName($request->get('first_name'));
+        $user->setLastName($request->get('last_name'));
+        $user->setEmail(filter_var($request->get('email') , FILTER_VALIDATE_EMAIL));
+        $user->setUsername($request->get('username'));
+        $user->setStatus($request->get('status'));
+
+        $em->persist($user);
+
+        try{
+            $em->flush();
+            $message = "User Updated";
+            $status = 202;
+        }catch(\Exception $e)
+        {
+            $message = "error occoured with message " . $e->getMessage();
+            $status = 500;
+        }
+
+        $data['message'] = $message;
+
+
+        return new JsonResponse($data , $status );
+
+    }
+
+    /**
      * @Rest\Post("/api/v1/users/create")
      */
     public function userAPICreate(Request $request)

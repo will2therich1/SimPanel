@@ -172,7 +172,7 @@ class ApiGameServerController extends Controller
     }
 
     /**
-     * @Rest\Post("/api/v1/game/servers/{id}")
+     * @Rest\Put("/api/v1/game/servers/{id}")
      */
     public function postGameServerUpdate(Request $request)
     {
