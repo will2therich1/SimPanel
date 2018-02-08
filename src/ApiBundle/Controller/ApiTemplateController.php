@@ -3,6 +3,7 @@
 namespace ApiBundle\Controller;
 
 use ApiBundle\Entity\ApiKeys;
+use AppBundle\Entity\ServerTemplate;
 use FOS\RestBundle\View\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -11,8 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\User;
+use AppBundle\Service\NetworkServerService;
+use AppBundle\Service\ServerUserService;
+use AppBundle\Service\EncryptionService;
 
-class ApiAdminController extends Controller
+class ApiTemplateController extends Controller
 {
     /**
      * The API Key object
@@ -27,9 +31,9 @@ class ApiAdminController extends Controller
 
 
     /**
-     * @Rest\Get("/api/v1/admins")
+     * @Rest\Get("/api/v1/templates")
      */
-    public function adminApiList(Request $request)
+    public function templateApiList(Request $request)
     {
         $data = [];
 
@@ -87,24 +91,16 @@ class ApiAdminController extends Controller
         $queryBuilder = $em->createQueryBuilder();
 
         $queryBuilder->select('u')
-            ->from('AppBundle:User', 'u')
-            ->Where('u.admin = 1')
+            ->from('AppBundle:ServerTemplate', 'u')
             ->setMaxResults($limit)
             ->setFirstResult($offset);
 
         $result = $queryBuilder->getQuery()->execute();
 
 
-        foreach ($result as $user )
+        foreach ($result as $template )
         {
-            $data["user_".$user->getId()]['id'] = $user->getId();
-            $data["user_".$user->getId()]['first_name'] = $user->getFirstName();
-            $data["user_".$user->getId()]['last_name'] = $user->getLastName();
-            $data["user_".$user->getId()]['username'] = $user->getUsername();
-            $data["user_".$user->getId()]['email'] = $user->getEmail();
-            $data["user_".$user->getId()]['status'] = $user->getStatus();
-            $data["user_".$user->getId()]['roles'] = $user->getRoles();
-            $data["user_".$user->getId()]['tfa_status'] = $user->getTfaStatus();
+            $data["template_".$template->getId()] = $template->getTemplateDetails();
 
 
         }
@@ -114,9 +110,9 @@ class ApiAdminController extends Controller
     }
 
     /**
-     * @Rest\Get("/api/v1/admins/{id}")
+     * @Rest\Get("/api/v1/templates/{id}")
      */
-    public function adminApiSpecific(Request $request)
+    public function templateApiSpecific(Request $request)
     {
         $data = [];
 
@@ -156,35 +152,19 @@ class ApiAdminController extends Controller
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
 
-        $user = $em->getRepository('AppBundle:User')->find($request->get('id'));
+        $template = $em->getRepository('AppBundle:ServerTemplate')->find($request->get('id'));
 
 
-        if ($user == null) {
+        if ($template == null) {
             $data = array(
                 // you might translate this message
-                'message' => "No admin found with the id of {$request->get('id')}",
+                'message' => "No template found with the id of {$request->get('id')}",
             );
 
             return new JsonResponse($data, Response::HTTP_NOT_FOUND);
-        } else {
-            if ($user->getAdmin() == 0) {
-                $data = array(
-                    // you might translate this message
-                    'message' => "No admin found with the id of {$request->get('id')}, There is a user with this id",
-                );
-
-                return new JsonResponse($data, Response::HTTP_NOT_FOUND);
-            }
         }
 
-        $data["user_" . $user->getId()]['id'] = $user->getId();
-        $data["user_" . $user->getId()]['first_name'] = $user->getFirstName();
-        $data["user_" . $user->getId()]['last_name'] = $user->getLastName();
-        $data["user_" . $user->getId()]['username'] = $user->getUsername();
-        $data["user_" . $user->getId()]['email'] = $user->getEmail();
-        $data["user_" . $user->getId()]['status'] = $user->getStatus();
-        $data["user_" . $user->getId()]['roles'] = $user->getRoles();
-        $data["user_" . $user->getId()]['tfa_status'] = $user->getTfaStatus();
+        $data[] = $template->getTemplateDetails();
 
 
         return new JsonResponse($data, 200);
@@ -192,9 +172,9 @@ class ApiAdminController extends Controller
     }
 
     /**
-     * @Rest\Post("/api/v1/admins/{id}")
+     * @Rest\Post("/api/v1/templates/{id}")
      */
-    public function postAdminUpdate(Request $request)
+    public function postTemplateUpdate(Request $request)
     {
         $data = [];
 
@@ -247,39 +227,27 @@ class ApiAdminController extends Controller
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
 
-        $user = $em->getRepository('AppBundle:User')->find($request->get('id'));
+        $template = $em->getRepository('AppBundle:ServerTemplate')->find($request->get('id'));
 
 
 
-        if ($user == null) {
+        if ($template == null) {
             $data = array(
                 // you might translate this message
-                'message' => "No admin found with the id of {$request->get('id')}",
+                'message' => "No template found with the id of {$request->get('id')}",
             );
 
             return new JsonResponse($data, Response::HTTP_NOT_FOUND);
-        } else {
-            if ($user->getAdmin() == 0) {
-                $data = array(
-                    // you might translate this message
-                    'message' => "No admin found with the id of {$request->get('id')}, There is a user with this id",
-                );
-
-                return new JsonResponse($data, Response::HTTP_NOT_FOUND);
-            }
         }
 
-        $user->setFirstName($request->get('first_name'));
-        $user->setLastName($request->get('last_name'));
-        $user->setEmail(filter_var($request->get('email') , FILTER_VALIDATE_EMAIL));
-        $user->setUsername($request->get('username'));
-        $user->setStatus($request->get('status'));
+        $template->setTemplateName($request->get('name'));
+        $template->setDescription($request->get('description'));
 
-        $em->persist($user);
+        $em->persist($template);
 
         try{
             $em->flush();
-            $message = "User Updated";
+            $message = "Template Updated";
             $status = 202;
         }catch(\Exception $e)
         {
@@ -295,9 +263,9 @@ class ApiAdminController extends Controller
     }
 
     /**
-     * @Rest\Post("/api/v1/admins/create/")
+     * @Rest\Post("/api/v1/templates/create/")
      */
-    public function adminAPICreate(Request $request)
+    public function templateAPICreate(Request $request)
     {
         $data = [];
 
@@ -322,38 +290,39 @@ class ApiAdminController extends Controller
         // Get em
         $em = $this->getDoctrine()->getManager();
 
-        $user = new User();
-        $user->setFirstName($request->get('firstName'));
-        $user->setLastName($request->get('lastName'));
-        $user->setUsername($request->get('name'));
-        $user->setEmail(filter_var($request->get('email') , FILTER_VALIDATE_EMAIL));
-        $user->setTfaStatus(0);
-        $user->setStatus($request->get('status'));
-        $user->setAdmin(1);
+        $template = new ServerTemplate();
+        $template->setConfigId(0);
+        $template->setDateCreated(time());
+        $template->setLocation('/usr/local/sp/templates');
+        $template->setNetworkId($request->get('networkId'));
+        $template->setSize('Unknown');
+        $template->setStatus('New');
+        $template->setSteamName($request->get('steamCmdId'));
+        $template->setSteamPercentage(0);
+        $template->setTemplateName($request->get('name'));
+        $template->setDescription($request->get('templateDescription'));
 
-        $password = $user->generatePassword();
-        $hashed_password = password_hash($password , PASSWORD_DEFAULT);
+        $em->persist($template);
 
-        $user->setPassword($hashed_password);
-
-        $em->persist($user);
-
-        try{
+        try {
             $em->flush();
-            $message = "Admin Created";
+            $message= "Template has been created sending to server";
             $status = 201;
-            $this->userCreationEmail($user->getEmail() , $user->getUsername() , $password);
-        }catch(\Exception $e)
+
+            $networkService = new NetworkServerService($this->getEncryptionService() , $em->getRepository('AppBundle:NetworkServer')->find($request->get('networkId')) , $em);
+
+            $httpHost = $request->getHttpHost();
+            $templateId = $template->getId();
+            $callbackUrl = "https://$httpHost/cron/templateCallback/$templateId";
+
+            $networkService->createTemplate($template->getId() , $template->getSteamName() , $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId()) , $callbackUrl);
+
+
+
+        }catch (\Exception $e)
         {
-            $message = "error occoured with message " . $e->getMessage();
+            $message = "Failed with the following message:" . $e->getMessage();
             $status = 500;
-
-            $data = array(
-                // you might translate this message
-                'message' => $message,
-            );
-
-            return new JsonResponse($data, $status);
         }
 
         $data = array(
@@ -438,25 +407,15 @@ class ApiAdminController extends Controller
 
     }
 
-    public function userCreationEmail($email, $username, $password)
+    /**
+     * Makes a instance of the Encryption Service
+     *
+     * @return EncryptionService
+     */
+    public function getEncryptionService()
     {
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Account Created at SimPanel')
-            ->setFrom('no-reply@servers4all.co.uk')
-            ->setTo($email)
-            ->setBody(
-                $this->renderView(
-                    'emails/user/user.creation.email.html.twig',
-                    array(
-                        'username' => $username,
-                        'password' => $password,
-                        'loginurl' => 'https://poisonpanel.servers4all.co.uk'
-                    )
-                ), 'text/html'
-            );
-        $this->get('mailer')->send($message);
-
+        $encryption_params = $this->container->getParameter('encryption');
+        return new EncryptionService($encryption_params);
     }
-
 
 }
