@@ -32,7 +32,7 @@ class GeneralUserPanelSettingsController extends Controller
             $settingService->setSetting('TermsAndConditions', $_POST['TermsAndConditions']);
         }
 
-        $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['currentUser'] = $settingService->getUser()->getUserInfo();
         $data['active'] = 'GeneralSettings';
         $data['tab'] = 'Branding';
         $data['branding'] = $settingService->getSiteInformation();
@@ -62,7 +62,7 @@ class GeneralUserPanelSettingsController extends Controller
             $action = $_POST['action'];
 
             if ($action === 'enableMaintenanceMode') {
-                $maintenance = $this->getSetting('Maintenance');
+                $maintenance = $settingService->getSetting('Maintenance');
                 $maintenance->setSettingValue('1');
                 $em->persist($maintenance);
                 $em->flush();
@@ -70,7 +70,7 @@ class GeneralUserPanelSettingsController extends Controller
                 return true;
 
             } elseif ($action === 'disableMaintenanceMode') {
-                $maintenance = $this->getSetting('Maintenance');
+                $maintenance = $settingService->getSetting('Maintenance');
                 $maintenance->setSettingValue('0');
                 $em->persist($maintenance);
                 $em->flush();
