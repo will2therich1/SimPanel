@@ -579,4 +579,114 @@ class ApiGameServerController extends Controller
         $encryption_params = $this->container->getParameter('encryption');
         return new EncryptionService($encryption_params);
     }
+
+    /**
+     * @Rest\Post("/api/v1/game/servers/{id}/manage" , name="serverApiMainControl")
+     */
+    public function serverApiMainControl(Request $request)
+    {
+        // Get doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get the server
+        $server = $em->getRepository('ServerBundle:GameServer')->find($request->get('id'));
+        // Get the template
+        $template = $em->getRepository('AppBundle:ServerTemplate')->find($server->getTemplateId());
+        // Get the network server
+        $networkServer = $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId());
+        // Get the encryption service
+        $encryptionService  = $this->getEncryptionService();
+
+        // Get the user
+        $user = $em->getRepository('AppBundle:User')->find($server->getOwnerId());
+
+        if ($request->getMethod() == "POST")
+        {
+            $action = $request->get('action');
+
+            if ($action == "start" || $action == "restart")
+            {
+                // Get the start command.
+                $startCommandRaw = $server->getStartupCommand();
+                $processedStartCommand = $server->formatStartCMD($startCommandRaw , $server , $template);
+
+                // Now we need the server service
+                $networkServerService = new NetworkServerService($encryptionService , $networkServer , $em);
+
+                // Start/Restart the server.
+                $networkServerService->restartServer($processedStartCommand ,$server , $user , $em);
+
+                $data = array(
+                    // you might translate this message
+                    'message' => "Server Started/Restarted",
+                );
+
+                return new JsonResponse($data, Response::HTTP_OK);
+
+
+            }elseif ($action == "stop")
+            {
+
+                // we need the server service
+                $networkServerService = new NetworkServerService($encryptionService , $networkServer , $em);
+
+                // Stop the server.
+                $networkServerService->stopServer($server , $user , $em);
+
+                $data = array(
+                    // you might translate this message
+                    'message' => "Server Stopped",
+                );
+
+                return new JsonResponse($data, Response::HTTP_OK);
+
+            }elseif ($action == "reinstall"){
+
+                // Make the network server service
+                $networkServerService = new NetworkServerService($encryptionService , $networkServer , $em);
+
+                // Get the server Id
+                $serverId = $server->getId();
+                // Make the callback URL
+                $callbackUrl = $request->getHttpHost() . "/cron/serverCallback/$serverId";
+                // Reinstall the server
+                $networkServerService->reinstallServer($server , $template , $callbackUrl , $user );
+
+                $data = array(
+                    // you might translate this message
+                    'message' => "Server Reinstalling",
+                );
+
+                return new JsonResponse($data, Response::HTTP_OK);
+
+            }elseif ($action == "delete"){
+
+                // Delete the server.
+                $networkServerService = new NetworkServerService($encryptionService , $networkServer , $em);
+                $networkServerService->deleteServer($user , $server);
+
+                // Remove from the DB
+                $em->remove($server);
+                $em->flush();
+
+                $data = array(
+                    // you might translate this message
+                    'message' => "Server Deleted",
+                );
+
+                return new JsonResponse($data, Response::HTTP_OK);
+
+            }else
+            {
+                $data = array(
+                    // you might translate this message
+                    'message' => "Missing 'action' in the post data ",
+                );
+
+                return new JsonResponse($data, Response::HTTP_BAD_REQUEST);
+            }
+
+        }
+
+
+    }
 }
