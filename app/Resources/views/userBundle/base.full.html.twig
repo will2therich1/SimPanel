@@ -1,0 +1,29 @@
+{% extends 'userBundle/base.html.twig' %}
+
+{% block navbar %}
+    <nav class="uk-navbar-container uk-margin uk-navbar-sticky" uk-navbar style="margin-top: 0 !important   ;">
+        <div class="uk-navbar-center">
+
+            <div class="uk-navbar-center-left"><div>
+                    <ul class="uk-navbar-nav">
+                        <li class="{% if active == 'gameServer'  %}uk-active{% endif %}"><a  href="{{ path('userGameServers') }}">Game Servers</a></li>
+                        <li class="{% if active == 'VoiceServer'  %}uk-active{% endif %}"><a href="{{ path('userVoiceServers') }}">Voice Servers</a></li>
+                    </ul>
+                </div></div>
+            <a class="uk-navbar-item uk-logo" href="{{ path('userIndex') }}">Dashboard</a>
+            <div class="uk-navbar-center-right"><div>
+                    <ul class="uk-navbar-nav">
+                        <li class="{% if active == 'AccountSettings'  %}uk-active{% endif %}"><a href="{{ path('userSettingsMain') }}">Account Settings</a></li>
+                        {% if user.subUser != 1 %}
+                            <li class="{% if active == 'SubUsers'  %}uk-active{% endif %}"><a href="{{ path('SubUserList') }}">Sub Users</a></li>
+
+                        {% endif %}
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </div></div>
+
+        </div>
+    </nav>
+{% endblock %}
+
+{##}

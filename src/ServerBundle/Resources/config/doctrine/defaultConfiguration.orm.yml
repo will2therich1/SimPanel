@@ -1,0 +1,33 @@
+ServerBundle\Entity\defaultConfiguration:
+    type: entity
+    table: null
+    repositoryClass: ServerBundle\Repository\defaultConfigurationRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        templateId:
+            type: integer
+        defaultServerName:
+            type: string
+            length: 255
+        gameName:
+            type: string
+            length: 255
+        queryEngine:
+            type: string
+            length: 255
+        startupCommand:
+            type: text
+        updateCommand:
+            type: text
+        defaultRam:
+            type: string
+            length: 255
+        defaultPlayerSlots:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

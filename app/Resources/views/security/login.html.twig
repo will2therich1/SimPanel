@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<title> Login - PoisonPanel</title>
+<div class="login-page">
+    <div class="container d-flex align-items-center">
+    <div class="form-holder has-shadow">
+    <div class="row" style="height: 63%;">
+    <!-- Logo & Information Panel-->
+    <div class="col-lg-6">
+        <div class="info d-flex align-items-center">
+        <div class="content">
+            <div class="logo">
+                <h1>{{ branding.panelName }}</h1>
+            </div>
+            <p>Please Log In<br>
+                <!-- Please do not remove this unless you support us at https://servers4all.co.uk. It is part of the license conditions. Thank you for understanding :)-->
+                <small>Developed By Servers4All</small>
+            </p>
+        </div>
+    </div>
+</div>
+<!-- Form Panel    -->
+<div class="col-lg-6 bg-white">
+<div class="form d-flex align-items-center">
+<div class="content">
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    <form id="login-form" action="{{ path("login") }}" method="post">
+        <div class="form-group">
+            <input autocomplete="off" id="username" type="text" name="username" value="{{ form.username is defined ? form.username : '' }}" required="" class="input-material">
+            <label for="login-username" class="label-material">User Name</label>
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" id="password" type="password" name="password"  required class="input-material">
+            <label  for="login-password" class="label-material">Password</label>
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" id="tfa-code" type="text" name="tfa-code"  class="input-material">
+            <label for="tfa-code" class="label-material">TFA Code(If Required)</label>
+        </div>
+
+
+        <input id="login" type='submit' name="_submit" class="btn btn-primary" value='Login'> </input>
+    </form><a href="#" class="forgot-pass">Forgot Password?</a><br>
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="copyrights text-center">
+<!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+</div>
+</div>
+<!-- Javascript files-->
+{% endblock %}

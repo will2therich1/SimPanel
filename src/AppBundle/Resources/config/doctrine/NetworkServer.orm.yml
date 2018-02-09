@@ -1,0 +1,35 @@
+AppBundle\Entity\NetworkServer:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\NetworkServerRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: true
+        ip:
+            type: string
+            length: 255
+            unique: true
+        port:
+            type: string
+            length: 255
+        loginUser:
+            type: string
+            length: 255
+        sshKey:
+            type: text
+        sshPassword:
+            type: string
+            length: 255
+            nullable: true
+        connectionStatus:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

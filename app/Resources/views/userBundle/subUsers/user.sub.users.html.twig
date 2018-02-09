@@ -1,0 +1,83 @@
+{% extends 'userBundle/base.full.html.twig' %}
+
+
+{% block stylesheets %}
+<style>
+    .offline
+    {
+        background: #f00;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+
+    }
+    .online
+    {
+        background: lawngreen;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+
+    }
+
+</style>
+
+
+{% endblock %}
+
+
+
+{% block body %}
+
+<div class="uk-card uk-card-body uk-card-primary uk-card-" style="margin:40px">
+
+    <div class="uk-card-content">
+        <div class="uk-card-header">
+            <h3>Subusers</h3>
+            <hr>
+        </div>
+        <div class="uk-child-width-1-4@m" uk-grid style="margin-left:  31px;">
+            <td><a href="{{ path('createSubUser') }}"><button class="uk-button uk-button-primary" type="button">Create new SubUser</button></a></td>
+
+        </div>
+
+        <div class="uk-child-width-1-2@m" uk-grid style="margin-left:  34px;">
+
+
+            <table class="uk-table uk-table-justify uk-table-divider" style="width: 100%;">
+                <thead>
+                <tr>
+                    <th class="uk-width-small">#</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>More Info</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in subUsers %}
+
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username}}</td>
+                    <td>{{ user.email}}</td>
+                    <td><a href="/user/subusers/{{ user.id }}"><button class="uk-button uk-button-default" type="button">More Info</button></a></td>
+
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+
+        </div>
+        <div class="uk-card-footer">
+            <hr>
+            No service issues. Everything running.
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

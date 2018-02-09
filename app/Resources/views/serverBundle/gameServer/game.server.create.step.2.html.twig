@@ -1,0 +1,122 @@
+{% extends 'admin.base.html.twig' %}
+
+
+{% block body %}
+    <div class="container-fluid">
+    {% if success %}
+        <div class="alert alert-success">{{ success }}</div>
+    {% endif %}
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    <div class="row">
+    <hr>
+    <div class="col-lg-12">
+    <div class="block">
+        <div class="title"><strong class="d-block">Creating a server using template: {{ template.id }}</strong><span
+                    class="d-block">Add a game server</span></div>
+        <div class="block-body">
+            <form class="form-horizontal" method='post' action=''>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Server IP <i>(This is determined by the template)</i></label>
+                    <div class="col-sm-9">
+                        <input id="inputHorizontalSuccess" type="text" name='serverIp' readonly value="{{ server.ip }}" placeholder="" required
+                               class="form-control form-control-success">
+                        <small class="form-text"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Server Name</label>
+                    <div class="col-sm-9">
+                        <input id="inputHorizontalSuccess" type="text" name='serverName' placeholder="" required
+                               class="form-control form-control-success">
+                        <small>Possible Replacements:
+                            <ul>
+                                <li>
+                                    {user.name} - The user who owns the servers name
+                                </li>
+                                <li>
+                                    {user.id} - The id of the user who owns the server
+                                </li>
+                                <li>
+                                    {template.name} - The name of the server template
+                                </li>
+                            </ul>
+                        </small>                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Game Name</label>
+                    <div class="col-sm-9">
+                        <input id="inputHorizontalSuccess" type="text" name='nameOfGame' placeholder="" required
+                               class="form-control form-control-success">
+                        <small class="form-text"></small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Player Slots</label>
+                    <div class="col-sm-9">
+                        <input id="inputHorizontalWarning" type="text" name='playerSlots' placeholder=""
+                               required class="form-control form-control-warning">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Ram</label>
+                    <div class="col-sm-9">
+                        <input id="inputHorizontalWarning" type="text" name='ram'  required
+                               class="form-control form-control-warning">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Start Command </label>
+                    <div class="col-sm-9">
+                        <textarea required class="form-control" name="startCommand" id="" cols="30" rows="10"></textarea>
+                        <small>Possible Replacements:
+                            <ul>
+                                <li>
+                                    {steam.name} - The steam name of the game being updated eg (340)
+                                </li>
+                                <li>
+                                    {server.ip} - The Servers Ip
+                                <li>
+                                    {server.port} - The Servers Port
+                                </li>
+
+                            </ul>
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">Update Command </label>
+                    <div class="col-sm-9">
+                        <textarea required class="form-control" name="startCommand" id="" cols="30" rows="10"></textarea>
+                        <small>Possible Replacements:
+                            <ul>
+                                <li>
+                                    {steam.name} - The steam name of the game being updated eg (340)
+                                </li>
+                                <li>
+                                    {server.ip} - The Servers Ip
+                                <li>
+                                    {server.port} - The Servers Port
+                                </li>
+
+                            </ul>
+                        </small>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-9 offset-sm-3">
+                        <input type="submit" value="Create" class="btn btn-primary">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+{% endblock %}

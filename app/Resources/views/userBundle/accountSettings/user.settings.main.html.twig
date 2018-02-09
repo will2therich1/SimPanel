@@ -1,0 +1,66 @@
+{% extends 'userBundle/accountSettings/user.settings.base.html.twig' %}
+
+
+
+{% block tabBody %}
+
+                    <div class="uk-card-header">
+                        <h3>My Information</h3>
+                    </div>
+                    <div class="uk-card-content" style="color: white">
+                        <br>
+                        {% if error is defined %}
+                            <div class="uk-alert uk-alert-danger" data-uk-alert>
+                                {{ error }}
+                                <a href="#" class="uk-alert-close uk-close"></a>
+                                <p></p>
+                            </div>
+                        {%  endif %}
+
+                        {% if success is defined %}
+                            <div class="uk-alert uk-alert-success" data-uk-alert>
+                                {{ success }}
+                                <a href="#" class="uk-alert-close uk-close"></a>
+                                <p></p>
+                            </div>
+                        {%  endif %}
+
+                        <form class="uk-form-stacked" method="post">
+                            <div uk-grid>
+                            <div class="uk-width-1-2">
+                                <label for="firstName">User ID</label>
+                                <input type="text" class="uk-input" readonly value="{{ user.id }}" id="userId" name="userId">
+                            </div>
+                            <br>
+                            <div class="uk-width-1-2">
+                                <label for="lastName">Username</label>
+                                <input type="text" class="uk-input" id="username" readonly value="{{ user.username }}" name="__username__">
+                            </div>
+
+                            <div class="uk-width-1-2">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="uk-input" id="firstName" required name="firstname" value="{{ user.firstName }}">
+                            </div>
+                            <br>
+                            <div class="uk-width-1-2">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="uk-input" id="lastName" required name="lastname" value="{{ user.lastName }}">
+                            </div>
+
+                            <div class="uk-width-1-1">
+                                <label for="lastName">My Email</label>
+                                <input type="text" class="uk-input" id="emailAddr" required name="emailAddr" style="padding-top: 5px;" value="{{ user.email }}">
+                            </div>
+                                <div class="uk-width-1-1">
+
+                                <button class="uk-button uk-button-default uk-margin-small-right" type="submit">Update</button>
+                                </div>
+                        </form>
+
+                    </div>
+                </div>
+
+
+
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+AppBundle\Entity\Settings:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\SettingsRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        settingName:
+            type: string
+            length: 255
+        settingValue:
+            type: text
+            length: 255
+        settingUpdatedTime:
+            type: datetime
+            length: 255
+    lifecycleCallbacks: {  }

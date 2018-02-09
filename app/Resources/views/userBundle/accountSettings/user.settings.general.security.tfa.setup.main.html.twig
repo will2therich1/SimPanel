@@ -1,0 +1,86 @@
+{% extends 'userBundle/accountSettings/user.settings.base.html.twig' %}
+
+
+{% block stylesheets %}
+    <style>
+        .offline {
+            background: #f00;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .online {
+            background: lawngreen;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+    </style>
+
+
+{% endblock %}
+
+
+
+{% block tabBody %}
+
+                    <div class="uk-card-header">
+                        <h3>Two Factor Authenticaion Setup</h3>
+                    </div>
+                    <div class="uk-card-content" style="color: white">
+                        <br>
+                        {% if error is defined %}
+                                <div class="uk-alert uk-alert-danger" data-uk-alert>
+                                    {{ error }}
+                                    <a href="#" class="uk-alert-close uk-close"></a>
+                                    <p></p>
+                                </div>
+                            {%  endif %}
+
+                        {% if success is defined %}
+                            <div class="uk-alert uk-alert-success" data-uk-alert>
+                                {{ success }}
+                                <a href="#" class="uk-alert-close uk-close"></a>
+                                <p></p>
+                            </div>
+                        {%  endif %}
+
+                        <form class="uk-form-stacked" method="post">
+                            <div uk-grid>
+                            <div class="uk-width-1-1">
+                                <form action="" method="post">
+                                <div>
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-1">
+                                            <label for="currentPassword">TFA Secret</label>
+                                            <input type="text" class="uk-input" name="tfaSecret" value="{{ tfa.secret }}">
+                                        </div>
+                                        <div class="uk-width-1-1">
+                                            <br>
+                                            <label for="newPassword">TFA Barcode: </label>
+                                            <img src="{{ tfa.barcode }}" alt="{{ tfa.secret }}">
+                                            <br>
+                                        </div>
+                                        <div class="uk-width-1-1"><br>
+                                            <label for="newPasswordConfirm">TFA Code</label>
+                                            <input type="password" class="uk-input" name="tfaCode">
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="uk-text-right">
+                                    <button class="uk-button uk-button-primary" style="float: left;" type="submit">Activate</button>
+                                </p>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+                </div>
+
+
+    </div>
+{% endblock %}

@@ -1,0 +1,153 @@
+{% extends 'userBundle/base.full.html.twig' %}
+
+
+{% block stylesheets %}
+<style>
+    .offline
+    {
+        background: #f00;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+
+    }
+    .online
+    {
+        background: lawngreen;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+
+    }
+
+</style>
+
+
+{% endblock %}
+
+
+
+{% block body %}
+
+<div class="uk-card uk-card-body uk-card-primary uk-card-" style="margin:40px">
+
+    <div class="uk-card-content">
+        <div class="uk-card-header">
+            <h3>Viewing Game Server: {{ server.id }} - {{ server.serverName }}</h3>
+            <hr>
+        </div>
+
+        {%  if error is defined %}
+            <div uk-alert class="uk-alert-error">
+                {{ error }}
+            </div>
+
+
+        {% endif %}
+        <form action="" method="post">
+        <div uk-grid>
+            <div class="uk-width-1-1">
+                {% if subUser == 1 %}
+                    {% if manage == 1 %}
+                        <label for="">Actions: &nbsp;</label>
+                        <button id="restartStartServer" type="button" class="uk-button uk-button-primary">Start/Restart Server</button>
+                        <button id="stopServer" type="button" class="uk-button uk-button-primary">Stop Server</button>
+                        <button id="reinstallServer" type="button" class="uk-button uk-button-primary">Reinstall Server</button>
+                    {% else %}
+
+                    {% endif %}
+
+                {% else %}
+                <label for="">Actions: &nbsp;</label>
+                <button id="restartStartServer" type="button" class="uk-button uk-button-primary">Start/Restart Server</button>
+                <button id="stopServer" type="button" class="uk-button uk-button-primary">Stop Server</button>
+                <button id="reinstallServer" type="button" class="uk-button uk-button-primary">Reinstall Server</button>
+                {% endif %}
+            </div>
+            <div class="uk-width-1-1">
+                <label for="">Information: &nbsp;</label>
+                <p> Server Status: {{ server.status }} &nbsp; Players Online 0/{{ server.playerSlots }} &nbsp; Server Usage:  TBI</p>
+
+            </div>
+            <div class="uk-width-1-2">
+                <label for="firstName">Server Name</label>
+                <input type="text" class="uk-input" readonly value="{{ server.serverName }}" id="userId" name="userId">
+            </div>
+            <div class="uk-width-1-2">
+                <label for="lastName">Server Game Name</label>
+                <input type="text" class="uk-input" id="username" readonly value="{{ server.gameName }}" name="__username__">
+            </div>
+
+            <div class="uk-width-1-2">
+                <label for="firstName">Startup Command</label>
+                <textarea name="startupCommand" readonly class="uk-textarea" id="" cols="30" rows="10">{{ server.startupCommand }}</textarea>
+            </div>
+            <div class="uk-width-1-2">
+                <label for="firstName">Update Command</label>
+                <textarea name="updateCommand" class="uk-textarea" id="" cols="30" rows="10">{{ server.updateCommand }}</textarea>
+            </div>
+            <div class="uk-width-1-1">
+                <label for="lastName">Additional Startup Params <i>Will be added to the end of the startup command on startup</i></label>
+                <input type="text" class="uk-input" id="emailAddr" required name="startupParams" style="padding-top: 5px;" value="{{ server.startupExtra }}">
+            </div>
+
+            <div class="uk-width-1-1">
+
+                <button class="uk-button uk-button-default uk-margin-small-right" type="submit">Update</button>
+            </div>
+
+        </div>
+
+        </div>
+        <div class="uk-card-footer">
+            <hr>
+            No service issues. Everything running.
+        </div>
+    </form>
+    </div>
+
+</div>
+{% endblock %}
+
+    {% block javascripts %}
+
+        <script >
+          $('#restartStartServer').click(function () {
+            $.ajax({
+              type: 'POST',
+              data: {"do" : "start"},
+              url: "/user/servers/g/{{ server.id }}/manage",
+              success: function (data) {
+                alert("Attemping Server Start");
+                location.reload();
+              }
+            });
+          });
+
+          $('#stopServer').click(function () {
+            $.ajax({
+              type: 'POST',
+              data: {"do" : "stop"},
+              url: "/user/servers/g/{{ server.id }}/manage",
+              success: function (data) {
+                alert("Stopping Server");
+                location.reload();
+              }
+            });
+          });
+          $('#reinstallServer').click(function () {
+            $.ajax({
+              type: 'POST',
+              data: {"do" : "reinstall"},
+              url: "/user/servers/g/{{ server.id }}/manage",
+              success: function (data) {
+                alert("Reinstalling Server");
+                location.reload();
+              }
+            });
+          });
+
+        </script>
+    {% endblock %}
