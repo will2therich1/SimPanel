@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/panel.iml" filepath="$PROJECT_DIR$/.idea/panel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/simpanel-symf4.iml" filepath="$PROJECT_DIR$/.idea/simpanel-symf4.iml" />
     </modules>
   </component>
 </project>
