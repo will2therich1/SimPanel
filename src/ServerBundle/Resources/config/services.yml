@@ -1,4 +1,0 @@
-services:
-#    server.example:
-#        class: ServerBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
