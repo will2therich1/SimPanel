@@ -61,7 +61,7 @@
                                                 <div class="uk-width-1-1">
                                                     <p>You have linked your WHMCS account</p>
                                                     <label for="currentPassword">WHMCS Linked Email</label>
-                                                    <input type="text" class="uk-input" name="whmcsEmail" value="{{ whmcsUser.email }}">
+                                                    <input type="text" class="uk-input" readonly name="whmcsEmail" value="{{ whmcsUser.email }}">
                                                     <input type="text" class="uk-input" name="do" value="deactivateWHMCS" style="display: none;">
                                                 </div>
                                                 <div class="uk-width-1-1">
@@ -83,13 +83,13 @@
                                             <div class="uk-width-1-1">
                                                 <p>You have NOT linked your WHMCS account <i>WE DO NOT STORE YOUR WHMCS PASSWORD</i></p>
                                                 <label for="currentPassword">WHMCS Email</label>
-                                                <input type="text" class="uk-input" name="whmcsEmail" value="{{ whmcsUser.email }}">
+                                                <input type="text" class="uk-input" autocomplete="off" name="whmcsEmail" value="{{ whmcsUser.email }}">
                                                 <input type="text" class="uk-input" name="do" value="activateWHMCS" style="display: none;">
                                             </div>
                                             <div class="uk-width-1-1">
 
                                                 <label for="currentPassword">WHMCS Password</label>
-                                                <input type="password" class="uk-input" name="whmcsPassword" value="">
+                                                <input type="password" autocomplete="off" class="uk-input" name="whmcsPassword" value="">
                                             </div>
                                         </div>
                                     </div>
