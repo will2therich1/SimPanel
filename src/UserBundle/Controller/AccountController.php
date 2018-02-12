@@ -162,5 +162,44 @@ class AccountController extends Controller
     }
 
 
+    /**
+     * @Route("/user/settings/whmcs", name="userWhmcsSetup")
+     */
+    public function userSettingsWhmcs(Request $request)
+    {       // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
+        // Get User
+        $user = $this->getUser();
+
+        $whmcsSettings = $this->getParameter('whmcs');
+
+        $userWhmcs = [];
+        $userWhmcsEnabled = $user->getWhmcsStatus();
+        $userWhmcsEmail = $user->getWhmcsEmail();
+
+        $userWhmcs['enabled'] = $userWhmcsEnabled;
+        $userWhmcs['email'] = $userWhmcsEmail;
+
+        
+
+        $data = [];
+        $data['whmcsSettings'] = $whmcsSettings;
+        $data['whmcsUser'] = $userWhmcs;
+        $data['active'] = "AccountSettings";
+        $data['user'] = $user->getUserInfo();
+        $data['site'] = $settingService->getSiteInformation();
+
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+
+        // replace this example code with whatever you need
+        return $this->render('userBundle/accountSettings/user.settings.general.security.whmcs.main.html.twig' , $data);
+    }
+
+
 
 }
