@@ -60,5 +60,12 @@ AppBundle\Entity\User:
         subUserFor:
             type: integer
             nullable: true
+        whmcsStatus:
+            type: integer
+            nullable: true
+        whmcsEmail:
+            type: string
+            length: 255
+            nullable: true
 
     lifecycleCallbacks: {  }

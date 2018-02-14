@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\ServerTemplate;
 use AppBundle\Service\SettingService;
+use GuzzleHttp\Client;
 
 class AccountController extends Controller
 {
@@ -159,6 +160,128 @@ class AccountController extends Controller
 
         // replace this example code with whatever you need
         return $this->render('userBundle/accountSettings/user.settings.general.security.tfa.setup.main.html.twig' , $data);
+    }
+
+
+    /**
+     * @Route("/user/settings/whmcs", name="userWhmcsSetup")
+     */
+    public function userSettingsWhmcs(Request $request)
+    {
+
+        $data = [];
+
+
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
+        // Get User
+        $user = $this->getUser();
+
+        $whmcsSettings = $this->getParameter('whmcs');
+
+        $userWhmcs = [];
+        $userWhmcsEnabled = $user->getWhmcsStatus();
+        $userWhmcsEmail = $user->getWhmcsEmail();
+
+        $userWhmcs['enabled'] = $userWhmcsEnabled;
+        $userWhmcs['email'] = $userWhmcsEmail;
+
+        if($request->getMethod() === "POST") {
+
+
+
+            if ($request->get('do') === "activateWHMCS")
+            {
+
+                $client = new Client();
+
+                $whmcsUrl = $whmcsSettings['whmcs_url'];
+                $whmcsApiUrl = $whmcsUrl . '/includes/api.php';
+
+
+                $postfields = array(
+                    'identifier' => $whmcsSettings['whmcs_identifier'],
+                    'secret' => $whmcsSettings['whmcs_secret'],
+                    'action' => 'GetClients',
+                    'search' => $request->get('whmcsEmail'),
+                    'responsetype' => 'json',
+                );
+
+
+                try {
+                    $apiRequest = $client->post($whmcsApiUrl, ['form_params' => $postfields]);
+
+                    $apiResult = $apiRequest->getBody()->getContents();
+
+                    $apiResultArray = json_decode($apiResult);
+
+                    // Get through the maze of objects and variables
+                    $apiResultArray = get_object_vars($apiResultArray);
+                    $apiResultClients = get_object_vars($apiResultArray['clients']);
+                    $apiResultClient = $apiResultClients['client'];
+                    $apiClient = get_object_vars($apiResultClient[0]);
+
+
+                    if ($apiClient['email'] === $request->get('whmcsEmail'))
+                    {
+                        $loginValidateRequest = array(
+                            'identifier' => $whmcsSettings['whmcs_identifier'],
+                            'secret' => $whmcsSettings['whmcs_secret'],
+                            'action' => 'ValidateLogin',
+                            'email' => $request->get('whmcsEmail'),
+                            'password2' => $request->get('whmcsPassword'),
+                            'responsetype' => 'json',
+                        );
+
+                        $apiLoginValidation = $client->post($whmcsApiUrl, ['form_params' => $loginValidateRequest]);
+                        $apiLoginValidationResult = $apiLoginValidation->getBody()->getContents();
+                        $apiLoginValidationResultArray = get_object_vars(\GuzzleHttp\json_decode($apiLoginValidationResult));
+
+
+                        if ($apiLoginValidationResultArray['result'] === "success")
+                        {
+                            $user->setWhmcsStatus(1);
+                            $user->setWhmcsEmail($request->get('whmcsEmail'));
+                            $em->persist($user);
+                            $em->flush();
+
+                            $data['success'] = "API Account now linked!";
+
+                        }else{
+                            $data['error'] = "Logging into WHMCS Failed with the following message: " . $apiLoginValidationResultArray['message'];
+                        }
+
+                    }
+
+
+                }catch (\Exception $e){
+                    $data['error'] = "An error occoured with the following message" . $e->getMessage();
+                }
+
+
+            }elseif($request->get('do') === "deactivateWHMCS")
+            {
+                $user->setWhmcsStatus(0);
+                $user->setWhmcsEmail("");
+                $em->persist($user);
+                $em->flush();
+            }
+
+        }
+
+        
+
+        $data['whmcsSettings'] = $whmcsSettings;
+        $data['whmcsUser'] = $userWhmcs;
+        $data['active'] = "AccountSettings";
+        $data['user'] = $user->getUserInfo();
+        $data['site'] = $settingService->getSiteInformation();
+
+        // replace this example code with whatever you need
+        return $this->render('userBundle/accountSettings/user.settings.general.security.whmcs.main.html.twig' , $data);
     }
 
 

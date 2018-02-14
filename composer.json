@@ -7,6 +7,7 @@
             "AppBundle\\": "src/AppBundle",
             "ServerBundle\\": "src/ServerBundle",
             "ApiBundle\\": "src/ApiBundle",
+            "WhmcsBundle\\": "src/WhmcsBundle",
             "UserBundle\\": "src/UserBundle"
         },
         "classmap": [
@@ -29,6 +30,7 @@
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "friendsofsymfony/rest-bundle": "^2.3",
+        "guzzlehttp/guzzle": "^6.3",
         "incenteev/composer-parameter-handler": "^2.0",
         "jms/serializer-bundle": "^2.3",
         "nelmio/cors-bundle": "^1.5",

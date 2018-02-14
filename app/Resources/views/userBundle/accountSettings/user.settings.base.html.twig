@@ -23,7 +23,7 @@
 
                     </li>
                     <li class="uk-disabled"><a href="{{ path('userSettingsGeneralSecurity') }}">Email Preferences</a></li>
-                    <li class="uk-disabled"><a href="#">Sub Accounts</a></li>
+                    <li class="" id="whmcsInt"><a >WHMCS Integration</a></li>
                     <li class="uk-disabled"><a href="#">API</a></li>
                 </ul>
 
@@ -58,6 +58,9 @@ $('#myInfomation').on('click' , function() {
   window.location.href = '{{ path('userSettingsMain') }}';
 })
 
+$('#whmcsInt').on('click' , function() {
+    window.location.href = '{{ path('userWhmcsSetup') }}';
+})
 
 {% block scripts %}
 {% endblock %}

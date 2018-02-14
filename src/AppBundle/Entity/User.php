@@ -581,4 +581,62 @@ class User implements UserInterface
     {
         return $this->subUserFor;
     }
+    /**
+     * @var integer
+     */
+    private $whmcsStatus;
+
+    /**
+     * @var string
+     */
+    private $whmcsEmail;
+
+
+    /**
+     * Set whmcsStatus
+     *
+     * @param integer $whmcsStatus
+     *
+     * @return User
+     */
+    public function setWhmcsStatus($whmcsStatus)
+    {
+        $this->whmcsStatus = $whmcsStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get whmcsStatus
+     *
+     * @return integer
+     */
+    public function getWhmcsStatus()
+    {
+        return $this->whmcsStatus;
+    }
+
+    /**
+     * Set whmcsEmail
+     *
+     * @param string $whmcsEmail
+     *
+     * @return User
+     */
+    public function setWhmcsEmail($whmcsEmail)
+    {
+        $this->whmcsEmail = $whmcsEmail;
+
+        return $this;
+    }
+
+    /**
+     * Get whmcsEmail
+     *
+     * @return string
+     */
+    public function getWhmcsEmail()
+    {
+        return $this->whmcsEmail;
+    }
 }

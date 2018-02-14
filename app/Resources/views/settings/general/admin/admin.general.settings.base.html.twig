@@ -4,10 +4,10 @@
 <div class="container-fluid">
     {%  if error is defined %}
         {%  if error != '' %}
-            <div class="alert alert-danger">
-                {{ error }}
-            </div>
-        {% endif %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+            {% endif %}
 
 
     {% endif %}
@@ -22,7 +22,9 @@
         {% endif %}
 
     {% endif %}
+
     <div class="row">
+
         <div class="col-lg-12">
             <div class="block">
                 <div class="title"><strong class="d-block"></strong><span class="d-block"></span></div>
@@ -30,8 +32,8 @@
 
                     <div id="exTab3" class="container">
                         <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-link {% if tab == 'General'  %}active{% endif %}"><a  href="{{ path('GeneralUserSettings') }}">General Settings</a></li>
-                        <li class="nav-link {% if tab == 'Branding'  %}active{% endif %}"><a  href="{{ path('BrandingUserSettings') }}">Branding Settings</a></li>
+                        <li class="nav-link {% if tab == 'General'  %}active{% endif %}"><a  href="{{ path('GeneralAdminSettings') }}">General Settings</a></li>
+                        <li class="nav-link {% if tab == 'WHMCS'  %}active{% endif %}"><a  href="{{ path('GeneralAdminSettingsWhmcs') }}">WHMCS Integration</a></li>
                         <li class='nav-link {% if tab == 'Emails'  %}active{% endif %}'><a href = '{{ path('AdminProfilePassword') }}' > Email Settings</a >
                         <li class='nav-link {% if tab == 'API'  %}active{% endif %}' ><a href = '{{ path('AdminProfileAPI') }}' > User API Settings</a >
 

@@ -23,4 +23,10 @@ parameters:
         enc_secret: 123yiwqjhee72xasdasdh8023qx07bh
         enc_iv: u27eydhgstuyahst
         enc_cypher: aes-256-ctr
+    # Options for WHMCS Integration
+    whmcs:
+        whmcs_status: 0
+        whmcs_identifier: null
+        whmcs_secret: null
+        whmcs_url: null
 
