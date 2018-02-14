@@ -144,18 +144,4 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
         return false;
     }
 
-    // Sitting here for now, may be used later
-//    protected function getAPIKeys(ObjectManager $manager)
-//    {
-//        $queryBuilder = $manager->createQueryBuilder();
-//
-//        $queryBuilder->select('a')
-//            ->from('ApiBundle:ApiKeys', 'a')
-//            ->where('a.ownerId LIKE :id')
-//            ->setParameter('id' , $this->userId);
-//
-//        $result = $queryBuilder->getQuery()->execute();
-//
-//        dump($result);
-//    }
 }
