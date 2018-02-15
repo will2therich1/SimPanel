@@ -42,6 +42,7 @@ class AccountController extends Controller
         $data['active'] = "AccountSettings";
         $data['user'] = $user->getUserInfo();
         $data['site'] = $settingService->getSiteInformation();
+        $data['tab'] = "General";
 
         // replace this example code with whatever you need
         return $this->render('userBundle/accountSettings/user.settings.main.html.twig' , $data);
@@ -95,6 +96,7 @@ class AccountController extends Controller
         }
         $data['active'] = "AccountSettings";
         $data['tfaStatus'] = $user->getTfaStatus();
+        $data['tab'] = "General";
 
         // replace this example code with whatever you need
         return $this->render('userBundle/accountSettings/user.settings.general.security.main.html.twig' , $data);
@@ -156,6 +158,7 @@ class AccountController extends Controller
         $data['site'] = $settingService->getSiteInformation();
         $data['tfa']['secret'] = $tfaSecret;
         $data['tfa']['barcode'] = $tfaBarcode;
+        $data['tab'] = "General";
 
 
         // replace this example code with whatever you need
@@ -279,6 +282,7 @@ class AccountController extends Controller
         $data['active'] = "AccountSettings";
         $data['user'] = $user->getUserInfo();
         $data['site'] = $settingService->getSiteInformation();
+        $data['tab'] = "whmcs";
 
         // replace this example code with whatever you need
         return $this->render('userBundle/accountSettings/user.settings.general.security.whmcs.main.html.twig' , $data);

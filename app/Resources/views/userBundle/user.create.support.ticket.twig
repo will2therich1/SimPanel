@@ -1,0 +1,124 @@
+{% extends 'userBundle/base.full.html.twig' %}
+
+
+{% block stylesheets %}
+<style>
+    .offline
+    {
+        background: #f00;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+
+    }
+    .online
+    {
+        background: lawngreen;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+
+    }
+
+</style>
+
+
+{% endblock %}
+
+
+
+{% block body %}
+
+<div class="uk-card uk-card-body uk-card-primary uk-card-" style="margin:40px">
+
+    <div class="uk-card-content">
+        <div class="uk-card-header">
+            <h3>Create a support ticket</h3>
+            <hr>
+        </div>
+        {%  if error is defined %}
+            <div uk-alert class="uk-alert-error">
+                {{ error }}
+            </div>
+        {% endif %}
+        {%  if success is defined %}
+            <div uk-alert class="uk-alert-success">
+                {{ success }}
+            </div>
+        {% endif %}
+        <form action="" method="post">
+            <div uk-grid>
+                <div class="uk-width-1-1">
+
+                </div>
+                {% if whmcsActive == 1 %}
+
+                <div class="uk-width-1-1">
+                    <label for="">Creating a support ticket. &nbsp;</label>
+
+                </div>
+
+                <div class="uk-width-1-1">
+                    <label for="ticketSubject">Ticket Subject</label>
+                    <input type="text" class="uk-input"  value="" id="ticketSubject" name="ticketSubject">
+                </div>
+
+
+                <div class="uk-width-1-2">
+                    <label for="priority">Ticket Priority</label>
+                    <select name="priority" class="uk-select" id="priority">
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+
+                <div class="uk-width-1-2">
+                    <label for="department">Ticket Department</label>
+                    <select name="department" class="uk-select" id="department">
+                        {% for department in departments %}
+                        <option value="{{ department.id }}">{{ department.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="uk-width-1-1">
+                    <label for="ticketDescription">Ticket Description </label>
+                    <textarea name="ticketDescription" id="" class="uk-textarea" cols="30" rows="10"></textarea>
+                </div>
+
+
+                <div class="uk-width-1-1">
+
+                    <button class="uk-button uk-button-default uk-margin-small-right" type="submit">Create</button>
+                </form>
+                {% else %}
+
+                    <div class="uk-width-1-1">
+                        <label for="">You have not linked your WHMCS account this can be done on your account settings &nbsp;</label>
+
+                    </div>
+        {% endif %}
+
+
+    </div>
+        </div>
+
+
+        </div>
+        <div class="uk-card-footer">
+            <hr>
+            No service issues. Everything running.
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+
+</script>
+{% endblock %}

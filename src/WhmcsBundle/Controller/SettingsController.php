@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\SettingService;
 use AppBundle\Service\EncryptionService;
 use GuzzleHttp\Client;
+use WhmcsBundle\Service\WhmcsService;
 
 class SettingsController extends Controller
 {
@@ -96,6 +97,55 @@ class SettingsController extends Controller
 
 
     }
+    /**
+     * @Route("/user/support" , name="userSupportTicket")
+     */
+    public function userCreateSupportTicket(Request $request)
+    {
+        // Get our setting service
+        $em = $this->getDoctrine()->getManager();
+        $settingService = new SettingService($em);
+        $message = null;
 
+        // Create our Data Array
+        $data = [];
+
+        $parameters = $this->getParameter('whmcs');
+
+        $whmcsService = new WhmcsService($this->getUser() , $parameters);
+        $departments = $whmcsService->getWhmcsDepartments();
+
+        if ($request->getMethod() === "POST")
+        {
+            $client = $whmcsService->getWhmcsUser();
+
+            $ticketData = [];
+            $ticketData['departmentId'] = $request->get('department');
+            $ticketData['subject'] = $request->get('ticketSubject');
+            $ticketData['message'] = $request->get('ticketDescription');
+            $ticketData['priority'] = $request->get('priority');
+            $ticketData['clientId'] = $client['id'];
+            $ticketData['name'] = $client['firstname'] . " " . $client['lastname'];
+            $ticketData['email'] = $client['email'];
+
+            $message = $whmcsService->createWhmcsTicket($ticketData);
+            $data['success'] = $message;
+
+        }
+        $user = $this->getUser();
+
+
+        $data['whmcsParameters'] = $parameters;
+        $data['user'] = $this->getUser()->getUserInfo();
+        $data['whmcsActive'] = $user->getWhmcsStatus();
+        $data['active'] = 'Support';
+        $data['tab'] = 'WHMCS';
+        $data['departments'] = $departments;
+        $data['site'] = $settingService->getSiteInformation();
+
+        return $this->render('userBundle/user.create.support.ticket.twig', $data);
+
+
+    }
 
 }
