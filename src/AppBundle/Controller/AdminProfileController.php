@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Service\EncryptionService;
 use AppBundle\Service\GoogleAuthenticatorService;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use ApiBundle\Entity\ApiKeys;
@@ -142,18 +143,42 @@ class AdminProfileController extends Controller
 
         if (isset($newApiKeyName) && $newApiKeyName !== '')
         {
-            $apiKey = new ApiKeys();
-            $generatedApiKey = $this->generatePassword('20');
+            $apiKeyLimit = $settingService->getSetting('apiKeyLimit')->getSettingValue();
 
-            $apiKey->setName($newApiKeyName);
-            $apiKey->setOwnerId($this->getUser()->getId());
-            $apiKey->setApiKey(password_hash($generatedApiKey , PASSWORD_DEFAULT));
+            $queryBuilder2 = $em->createQueryBuilder();
 
-            $em->persist($apiKey);
-            $em->flush();
+            $apiKeyQuerys = $queryBuilder2->select('count(a)')
+                                            ->from('ApiBundle:ApiKeys', 'a')
+                                            ->Where('a.ownerId = :id')
+                                            ->setParameter('id', $user->getId());
 
+            $numberOfApiKeys = $apiKeyQuerys->getQuery()->getSingleScalarResult();
 
-            $data['success'] = "A new api key has been generated it is below. Note this can only be seen once! {$generatedApiKey}";
+            if ($numberOfApiKeys < $apiKeyLimit) {
+
+                $apiKey = new ApiKeys();
+                $generatedApiKey = $this->generatePassword('20');
+
+                $apiKey->setName($newApiKeyName);
+                $apiKey->setOwnerId($this->getUser()->getId());
+                $apiKey->setApiKey(password_hash($generatedApiKey, PASSWORD_DEFAULT));
+                $apiKey->setLastUsed('Never');
+
+                echo $apiKeyLimit;
+                echo $numberOfApiKeys;
+
+                $em->persist($apiKey);
+                try {
+                    $em->flush();
+
+                    $data['success'] = "A new api key has been generated it is below. Note this can only be seen once! {$generatedApiKey}";
+                } catch (Exception $e){
+                    $data['error'] = "Creation failed with message: " . $e->getMessage();
+                }
+            }else{
+                $data['error'] = "You have hit the maximum number of api keys";
+            }
+
         }
 
         $apiKeys = $queryBuilder->getQuery()->execute();
@@ -164,7 +189,6 @@ class AdminProfileController extends Controller
         $data['tab'] = 'API';
         $data['apiKeys'] = $apiKeys;
 
-        dump($data);
 
         // render the needed view.
         return $this->render('profiles/admin/api.profile.admin.index.twig', $data);
