@@ -8,13 +8,14 @@ use AppBundle\Entity\Settings;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\SettingService;
 
+
 class GeneralAdminPanelSettingsController extends Controller
 {
 
     /**
      * @Route("/admin/settings/general/admin" , name="GeneralAdminSettings")
      */
-    public function adminGeneralSettings()
+    public function adminGeneralSettings(Request $request)
     {
         // Get our setting service
         $em = $this->getDoctrine()->getManager();
@@ -26,13 +27,22 @@ class GeneralAdminPanelSettingsController extends Controller
 
 
 
+        if ($request->getMethod() == "POST")
+        {
+            try {
+                $settingService->setSetting('apiKeyLimit', $request->get('apiKeyLimit'));
+                $data['success'] = "Settings Updated";
+            } catch (\Exception $e){
+                $data['error'] = "Updated failed with message: " . $e->getMessage();
+            }
+        }
+
+        $data['settings']['apiKeyLimit'] = $settingService->getSetting('apiKeyLimit')->getSettingValue();
 
         $data['currentUser'] = $this->getUser()->getUserInfo();
         $data['active'] = 'GeneralSettings';
         $data['tab'] = 'General';
         $data['branding'] = $settingService->getSiteInformation();
-        $data['success'] = '';
-        $data['error'] = '';
 
         // Deal with Ajax requests!
 

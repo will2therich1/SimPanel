@@ -11,7 +11,7 @@
             <div class="uk-child-width-1-2@m" uk-grid style="margin-left:  34px;">
 
                 <ul uk-tab>
-                    <li>
+                    <li id="general" {% if tab == "general" %} class="uk-active" {% endif %}>
                         <!-- This is the menu item toggling the dropdown -->
                         <a href="">General Settings</a>
 
@@ -23,7 +23,7 @@
 
                     </li>
                     <li class="uk-disabled"><a href="{{ path('userSettingsGeneralSecurity') }}">Email Preferences</a></li>
-                    <li class="" id="whmcsInt"><a >WHMCS Integration</a></li>
+                    <li {% if tab == "whmcs" %} class="uk-active" {% endif %}  id="whmcsInt"><a >WHMCS Integration</a></li>
                     <li class="uk-disabled"><a href="#">API</a></li>
                 </ul>
 
@@ -60,6 +60,9 @@ $('#myInfomation').on('click' , function() {
 
 $('#whmcsInt').on('click' , function() {
     window.location.href = '{{ path('userWhmcsSetup') }}';
+})
+$('#general').on('click' , function() {
+  window.location.href = '{{ path('userSettingsMain') }}';
 })
 
 {% block scripts %}
