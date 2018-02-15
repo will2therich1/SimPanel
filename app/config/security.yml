@@ -23,6 +23,7 @@ security:
 
         main:
             anonymous: ~
+            logout_on_user_change: true
             provider: user_db_provider
             guard:
                 authenticators:
@@ -32,9 +33,7 @@ security:
             anonymous: ~
             provider: user_db_provider
             security: false
-#            guard:
-#                authenticators:
-#                    - AppBundle\Security\LoginAuthenticator
+
 
 
     access_control:

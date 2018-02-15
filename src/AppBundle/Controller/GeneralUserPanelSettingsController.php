@@ -8,6 +8,7 @@ use AppBundle\Entity\Settings;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Service\SettingService;
 
+
 class GeneralUserPanelSettingsController extends Controller
 {
 
@@ -47,7 +48,7 @@ class GeneralUserPanelSettingsController extends Controller
     /**
      * @Route("/admin/settings/general/user" , name="GeneralUserSettings")
      */
-    public function userGeneralSettings()
+    public function userGeneralSettings(Request $request)
     {
         // Get our setting service
         $em = $this->getDoctrine()->getManager();
@@ -58,8 +59,9 @@ class GeneralUserPanelSettingsController extends Controller
         $data = [];
 
 
-        if (isset($_POST['action']) && $_POST['action'] !== '') {
-            $action = $_POST['action'];
+
+        if ($request->get('action')) {
+            $action = $request->get('action');
 
             if ($action === 'enableMaintenanceMode') {
                 $maintenance = $settingService->getSetting('Maintenance');

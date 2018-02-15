@@ -193,10 +193,20 @@ class NetworkServerService
         $this->em->flush();
 
     }
+    /**
+     * Deletes a Game server Template on the remote server will NOT update the database.
+     */
+    public function deleteTemplateNoDb(ServerTemplate $template)
+    {
+        $cmd = "DeleteTemplate -i ". $template->getId();
+        $this->runCMD($cmd);
+
+    }
 
     function steamInstall($callbackUrl , $steam_name , $tpl_id , $networkServer )
     {
         $cfg_steam_auth = "";
+        // TODO: ADD THESE DETAILS TO THE PARAMETERS
         $steam_user = "servers4all";
         $steam_pass = "Servers4all16!";
         

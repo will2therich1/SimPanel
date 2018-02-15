@@ -33,8 +33,7 @@ class ServerTemplateController extends Controller
         $data['success'] = '';
         $data['error'] = '';
 
-        if (null !== $request->get('name') && $request->get('name') !== '')
-        {
+        if (null !== $request->get('name') && $request->get('name') !== '') {
             $template = new ServerTemplate();
             $template->setConfigId(0);
             $template->setDateCreated(time());
@@ -52,18 +51,18 @@ class ServerTemplateController extends Controller
                 $em->flush();
                 $data['success'] = "Template has been created sending to server";
 
-                $networkService = new NetworkServerService($this->getEncryptionService() , $em->getRepository('AppBundle:NetworkServer')->find($request->get('networkSelect')) , $em);
+                $networkService = new NetworkServerService($this->getEncryptionService(),
+                    $em->getRepository('AppBundle:NetworkServer')->find($request->get('networkSelect')), $em);
 
                 $httpHost = $request->getHttpHost();
                 $templateId = $template->getId();
                 $callbackUrl = "https://$httpHost/cron/templateCallback/$templateId";
 
-                $networkService->createTemplate($template->getId() , $template->getSteamName() , $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId()) , $callbackUrl);
+                $networkService->createTemplate($template->getId(), $template->getSteamName(),
+                    $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId()), $callbackUrl);
 
 
-
-            }catch (\Exception $e)
-            {
+            } catch (\Exception $e) {
                 $data['error'] = "Failed with the following message:" . $e->getMessage();
             }
         }
@@ -73,6 +72,58 @@ class ServerTemplateController extends Controller
         return $this->render('admin/templates/create.server.template.admin.html.twig', $data);
     }
 
+    /**
+     * @Route("/admin/servers/templates/retry/{id}", name="RetryServerTemplate")
+     */
+    public function retryServerTemplatesPage(Request $request)
+    {
+        // Get Doctrine
+        $em = $this->getDoctrine()->getManager();
+        // Get our setting service
+        $settingService = new SettingService($em);
+
+        // Create our Data Array
+        $data = [];
+        $data['currentUser'] = $this->getUser()->getUserInfo();
+        $data['branding'] = $settingService->getSiteInformation();
+        $data['networkServers'] = $em->getRepository('AppBundle:NetworkServer')->findAll();
+        $data['active'] = 'Templates';
+        $data['success'] = '';
+        $data['error'] = '';
+
+        // Get our template
+        $template = $em->getRepository('AppBundle:ServerTemplate')->find($request->get('id'));
+
+        try {
+
+            // Get the network service.
+            $networkService = new NetworkServerService($this->getEncryptionService(),
+            $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId()), $em);
+
+            $httpHost = $request->getHttpHost();
+            $templateId = $template->getId();
+            $callbackUrl = "https://$httpHost/cron/templateCallback/$templateId";
+
+            $networkService->deleteTemplateNoDb($template);
+
+            // Wait for the template to be deleted
+            sleep(5);
+
+            $networkService->createTemplate($template->getId(), $template->getSteamName(),
+            $em->getRepository('AppBundle:NetworkServer')->find($template->getNetworkId()), $callbackUrl);
+
+            $template->setStatus('Retrying');
+            $em->persist($template);
+            $em->flush();
+
+
+        } catch (\Exception $e) {
+            $data['error'] = "Failed with the following message:" . $e->getMessage();
+        }
+
+        // replace this example code with whatever you need
+        return new RedirectResponse('/admin/servers/templates');
+    }
     /**
      * @Route("/admin/servers/templates/{id}", name="ViewServerTemplate")
      */

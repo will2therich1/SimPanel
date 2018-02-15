@@ -57,7 +57,14 @@
                     <th scope="row">{{ template.id|e }}</th>
                     <th>{{ template.templateName|e }}</th>
                     <th>{{ template.steamName|e }}</th>
-                    <th>{{ template.status|e }} {% if template.status == "Steam Installing" %} , Steam Install Percent - {{ template.steamPercentage }}% {% endif %}</th>
+                    <th>
+                    {% if template.status == "failed" %}
+                    <a href="{{ path('RetryServerTemplate' , {'id': template.id}) }}">{{ template.status|e }}</a>
+                    {% else %}
+                    {{ template.status|e }}
+                    {% endif %}
+
+                    {% if template.status == "Steam Installing" %} , Steam Install Percent - {{ template.steamPercentage }}% {% endif %}</th>
                     <th>{{ template.size|e }}</th>
                     <th><a href='./templates/{{ template.id|e }}'>Edit</a></th>
                 </tr>
