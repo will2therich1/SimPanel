@@ -47,7 +47,7 @@ class WhmcsService
             'identifier' => $this->whmcsSettings['whmcs_identifier'],
             'secret' => $this->whmcsSettings['whmcs_secret'],
             'action' => 'GetClients',
-            'search' => $user->getEmail(),
+            'search' => $this->user->getWhmcsEmail(),
             'responsetype' => 'json',
         );
 
@@ -67,8 +67,92 @@ class WhmcsService
 
             return $apiClient;
         }catch (\Exception $e){
-            return false;
+            return ['message' => "An error occoured With message" . $e->getMessage()];
         }
 
+    }
+
+    public function getWhmcsDepartments()
+    {
+        $client = new Client();
+
+        $whmcsUrl = $this->whmcsSettings['whmcs_url'];
+        $whmcsApiUrl = $whmcsUrl . '/includes/api.php';
+
+
+        $postfields = array(
+            'identifier' => $this->whmcsSettings['whmcs_identifier'],
+            'secret' => $this->whmcsSettings['whmcs_secret'],
+            'action' => 'GetSupportDepartments',
+            'responsetype' => 'json',
+        );
+
+
+        try {
+            $apiRequest = $client->post($whmcsApiUrl, ['form_params' => $postfields]);
+
+            $apiResult = $apiRequest->getBody()->getContents();
+
+            $apiResultArray = json_decode($apiResult);
+
+            // Get through the maze of objects and variables
+            $apiResultArray = get_object_vars($apiResultArray);
+
+            $apiResultDepartmentArrays = get_object_vars($apiResultArray['departments']);
+
+            return $apiResultDepartmentArrays['department'];
+        }catch (\Exception $e){
+            return false;
         }
+    }
+
+    public function createWhmcsTicket($data)
+    {
+
+        $message = null;
+
+        $client = new Client();
+
+        $whmcsUrl = $this->whmcsSettings['whmcs_url'];
+        $whmcsApiUrl = $whmcsUrl . '/includes/api.php';
+
+        $postfields = array(
+            'identifier' => $this->whmcsSettings['whmcs_identifier'],
+            'secret' => $this->whmcsSettings['whmcs_secret'],
+            'action' => 'OpenTicket',
+            'deptid' => $data['departmentId'],
+            'subject' => $data['subject'],
+            'priority' => $data['priority'],
+            'message' => $data['message'],
+            'clientid' => $data['clientId'],
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'admin' => false,
+            'responsetype' => 'json',
+
+        );
+
+
+
+        try {
+            $apiRequest = $client->post($whmcsApiUrl, ['form_params' => $postfields]);
+
+            $apiResult = $apiRequest->getBody()->getContents();
+
+            $apiResultArray = json_decode($apiResult);
+
+            if ($apiResultArray->result == "success")
+            {
+                $message = "Ticket Created";
+            }
+
+
+        }catch (\Exception $e){
+            $message = "An error occoured with the following message" . $e->getMessage();
+        }
+
+        return $message;
+    }
+
+
 }

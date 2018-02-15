@@ -17,6 +17,7 @@
                         <li class="{% if active == 'AccountSettings'  %}uk-active{% endif %}"><a href="{{ path('userSettingsMain') }}">Account Settings</a></li>
                         {% if user.subUser != 1 %}
                             <li class="{% if active == 'SubUsers'  %}uk-active{% endif %}"><a href="{{ path('SubUserList') }}">Sub Users</a></li>
+                            <li class="{% if active == 'Support'  %}uk-active{% endif %}"><a href="{{ path('userSupportTicket') }}">Support</a></li>
 
                         {% endif %}
                         <li><a href="/logout">Logout</a></li>
