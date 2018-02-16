@@ -303,7 +303,7 @@ class AdminGameServerController extends Controller
             } catch (\Exception $e){
                 $serverQuery = "Failed with message" . $e->getMessage();
             }
-            
+
         }
 
         if ($request->getMethod() == "POST")
