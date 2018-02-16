@@ -11,6 +11,7 @@ use AppBundle\Service\EncryptionService;
 use AppBundle\Service\NetworkServerService;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use UserBundle\Service\PermissionsService;
+use ServerBundle\Service\GameServerService;
 
 class GameServerController extends Controller
 {
@@ -113,6 +114,26 @@ class GameServerController extends Controller
 
         }
 
+        if ($server->getStatus() === "Starting" || $server->getStatus() === "Online")
+        {
+            $gameServerService =  new GameServerService();
+
+            try {
+                $serverQuery = $gameServerService->queryServer($server->getIp(), $server->getPort(), $server->getQueryEngine());
+
+                if ($serverQuery[$server->getIp().":".$server->getPort()]['gq_online'] == 1){
+                    $server->setStatus("Online");
+                    $em->persist($server);
+                    $em->flush();
+                }
+            } catch (\Exception $e){
+                $serverQuery = "Failed with message" . $e->getMessage();
+            }
+
+        }
+
+
+
         if ($request->getMethod() == "POST")
         {
             if ($user->getSubUser() == 1 && $editable){
@@ -135,8 +156,6 @@ class GameServerController extends Controller
         $data['subUser'] = $user->getSubUser();
         $data['manage'] = $canManage;
         $data['site'] = $settingService->getSiteInformation();
-        // replace this example code with whatever you need
-
 
         return $this->render('userBundle/gameServers/user.view.game.server.html.twig' , $data);
     }
