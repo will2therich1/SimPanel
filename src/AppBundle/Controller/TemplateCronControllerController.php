@@ -25,7 +25,7 @@ class TemplateCronControllerController extends Controller
     {
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
-        $message = "Cron test";
+        $message = "Template Cron Updating";
         $response = new Response();
         $response->setContent($message);
 
@@ -79,17 +79,22 @@ class TemplateCronControllerController extends Controller
     {
         // Get Doctrine
         $em = $this->getDoctrine()->getManager();
-        $message = "Cron test";
+        $message = "Server Cron Updating";
         $response = new Response();
         $response->setContent($message);
 
 
         // get our template
-        $template = $em->getRepository('ServerBundle:GameServer')->find($request->get('id'));
+        $server = $em->getRepository('ServerBundle:GameServer')->find($request->get('id'));
 
-        error_log($request->getBaseUrl());
-        error_log($request->getBasePath());
+        $do = $request->get('do');
 
+        if($do === "createsrv_status")
+        {
+            $server->setStatus($request->get('status'));
+            $em->persist($server);
+            $em->flush();
+        }
 
 
         return $response;

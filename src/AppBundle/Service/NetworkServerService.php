@@ -74,7 +74,9 @@ class NetworkServerService
         // Load our key file
         $keyFile = new RSA();
         $keyFile->loadKey($sshKey);
+
         if ($sshKeyPassword !== '') {
+            error_log("Setting Password");
             $keyFile->setPassword($sshKeyPassword);
         }
 
@@ -82,6 +84,8 @@ class NetworkServerService
         try {
             $connection = new SSH2($host);
             $connectionTest = $connection->login($loginUser, $keyFile);
+
+
 
             return $connectionTest;
         } catch (Exception $e) {
@@ -206,6 +210,7 @@ class NetworkServerService
     function steamInstall($callbackUrl , $steam_name , $tpl_id , $networkServer )
     {
         $cfg_steam_auth = "";
+
         // TODO: ADD THESE DETAILS TO THE PARAMETERS
         $steam_user = "servers4all";
         $steam_pass = "Servers4all16!";
@@ -236,13 +241,15 @@ class NetworkServerService
         $serverIp = $gameServer->getIp();
         $serverId = $gameServer->getId();
         $serverPort = $gameServer->getPort();
-        $serverLocation = $gameServer->getLocation();
+
+        $template = $em->getRepository('AppBundle:ServerTemplate')->find($gameServer->getTemplateId());
+        $workDir = $template->getSteamName();
 
         $serverUsername = $user->getUsername();
         $pidFile = $serverUsername."_".$serverId;
 
 
-        $ssh_cmd = "Restart -u $serverUsername -i $serverIp -p $serverPort $pidFile $serverLocation -o '$startCmd'";
+        $ssh_cmd = "Restart -u $serverUsername -i $serverIp -p $serverPort -P $pidFile -w $workDir -o '$startCmd'";
         $this->runCMD($ssh_cmd);
 
         $gameServer->setPid($pidFile);
