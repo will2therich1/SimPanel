@@ -138,6 +138,7 @@ class SettingsController extends Controller
         $data['whmcsParameters'] = $parameters;
         $data['user'] = $this->getUser()->getUserInfo();
         $data['whmcsActive'] = $user->getWhmcsStatus();
+        $data['globalWhmcs'] = $parameters['whmcs_status'];
         $data['active'] = 'Support';
         $data['tab'] = 'WHMCS';
         $data['departments'] = $departments;

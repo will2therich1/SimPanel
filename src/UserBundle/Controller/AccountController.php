@@ -96,8 +96,7 @@ class AccountController extends Controller
         }
         $data['active'] = "AccountSettings";
         $data['tfaStatus'] = $user->getTfaStatus();
-        $data['tab'] = "General";
-
+        $data['tab'] = '';
         // replace this example code with whatever you need
         return $this->render('userBundle/accountSettings/user.settings.general.security.main.html.twig' , $data);
     }

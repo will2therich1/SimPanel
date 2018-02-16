@@ -22,7 +22,7 @@
                         </div>
 
                     </li>
-                    <li class="uk-disabled"><a href="{{ path('userSettingsGeneralSecurity') }}">Email Preferences</a></li>
+                    <li class="uk-disabled"><a href="">Email Preferences</a></li>
                     <li {% if tab == "whmcs" %} class="uk-active" {% endif %}  id="whmcsInt"><a >WHMCS Integration</a></li>
                     <li class="uk-disabled"><a href="#">API</a></li>
                 </ul>
@@ -43,7 +43,7 @@
     </div>
 {% endblock %}
 
-{% block javascripts %}
+{% block javascripts2 %}
 <script>
 
 $('#Security').on('click' , function() {
@@ -61,9 +61,7 @@ $('#myInfomation').on('click' , function() {
 $('#whmcsInt').on('click' , function() {
     window.location.href = '{{ path('userWhmcsSetup') }}';
 })
-$('#general').on('click' , function() {
-  window.location.href = '{{ path('userSettingsMain') }}';
-})
+
 
 {% block scripts %}
 {% endblock %}
