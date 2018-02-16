@@ -3,6 +3,7 @@
 namespace ServerBundle\Controller;
 
 use AppBundle\Entity\User;
+use ServerBundle\Service\GameServerService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -209,7 +210,7 @@ class AdminGameServerController extends Controller
             $server->setPlayerSlots($request->get('playerSlots'));
             $server->setRam($request->get('ram'));
             $server->setStartupCommand($request->get('startCommand'));
-            $server->setUpdateCommand($request->get('serverName'));
+            $server->setUpdateCommand($request->get('updateCommand'));
             $server->setTemplateId($templateId);
             $server->setQueryEngine('Not Implemented');
             $server->setIp($serverIp);
@@ -285,6 +286,26 @@ class AdminGameServerController extends Controller
         $settingService = new SettingService($em);
 
         $server = $em->getRepository('ServerBundle:GameServer')->find($serverId);
+
+
+        if ($server->getStatus() === "Starting" || $server->getStatus() === "Online")
+        {
+            $gameServerService =  new GameServerService();
+
+            try {
+                $serverQuery = $gameServerService->queryServer($server->getIp(), $server->getPort(), $server->getQueryEngine());
+
+                if ($serverQuery[$server->getIp().":".$server->getPort()]['gq_online'] == 1){
+                    $server->setStatus("Online");
+                    $em->persist($server);
+                    $em->flush();
+                }
+            } catch (\Exception $e){
+                $serverQuery = "Failed with message" . $e->getMessage();
+            }
+
+        }
+        
 
         if ($request->getMethod() == "POST")
         {

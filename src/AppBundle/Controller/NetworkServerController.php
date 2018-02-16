@@ -132,7 +132,6 @@ class NetworkServerController extends Controller
         $data['error'] = '';
 
         $server = $em->getRepository('AppBundle:NetworkServer')->find($request->attributes->get('id'));
-        error_log($server->getId());
 
         $networkManager = new NetworkServerService($this->getEncryptionService(), $server, $em);
         $connectionStatus = $networkManager->connectionTest();
@@ -147,6 +146,7 @@ class NetworkServerController extends Controller
             $em->persist($server);
             $em->flush();
         }
+
 
 
         // replace this example code with whatever you need
