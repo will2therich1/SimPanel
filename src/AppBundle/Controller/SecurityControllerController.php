@@ -27,7 +27,12 @@ class SecurityControllerController extends Controller
 
         // If logged in we will redirect to our check pages
         if ($user) {
-            return new RedirectResponse('login_check');
+            if ($request->get('dest') !== '') {
+                return new RedirectResponse('login_check');
+            }else{
+                return new RedirectResponse('login_check?dest=' . $request->get('dest'));
+
+            }
         }
 
         // We will check to see if we have been passed any errors.
@@ -81,11 +86,19 @@ class SecurityControllerController extends Controller
             // Verify the admin role
             if ($roles['USER_ROLE_2'] === 'ROLE_ADMIN') {
                 // If they are an admin then we will take them to the admin area
-                return new RedirectResponse('/admin');
+                if ($request->get('dest') !== '') {
+                    return new RedirectResponse('/admin');
+                }else{
+                    return new RedirectResponse($request->get('dest'));
+                }
             }
         } else {
             // Else if they are a user then we take them to the user area
-            return new RedirectResponse('/user');
+            if ($request->get('dest') !== '') {
+                return new RedirectResponse('/user');
+            }else{
+                return new RedirectResponse($request->get('dest'));
+            }
         }
 
         // Incase nothing matches than to the login page with you!

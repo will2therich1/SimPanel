@@ -12,6 +12,7 @@ use AppBundle\Service\NetworkServerService;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use UserBundle\Service\PermissionsService;
 use ServerBundle\Service\GameServerService;
+use UserBundle\Service\ActionsService;
 
 class GameServerController extends Controller
 {
@@ -67,17 +68,18 @@ class GameServerController extends Controller
         $data = [];
 
 
-
         $serverId = $request->get('id');
 
         $user = $this->getUser();
         $userId = $user->getId();
+        $userName = $user->getUsername();
 
 
         $em = $this->getDoctrine()->getManager();
         $settingService = new SettingService($em);
 
         $em = $this->getDoctrine()->getManager();
+        $actionService = new ActionsService($em);
 
 
         if($user->getSubUser() === 1)
@@ -121,6 +123,8 @@ class GameServerController extends Controller
             try {
                 $serverQuery = $gameServerService->queryServer($server->getIp(), $server->getPort(), $server->getQueryEngine());
 
+                $data['information']['players'] = $serverQuery[$server->getIp().":".$server->getPort()]['gq_numplayers'];
+
                 if ($serverQuery[$server->getIp().":".$server->getPort()]['gq_online'] == 1){
                     $server->setStatus("Online");
                     $em->persist($server);
@@ -138,14 +142,33 @@ class GameServerController extends Controller
         {
             if ($user->getSubUser() == 1 && $editable){
                 $server->setStartupExtra($request->get('startupParams'));
+                $owner = $em->getRepository('AppBundle:User')->find($user->getSubUserFor());
+                $ownerName = $owner->getUsername();
+                $ownerId = $owner->getId();
+
+
+                $action = $actionService->createANewAction("Server Updated wth Id $serverId" , $userName , $ownerName , $ownerId);
+
+                if ($action === false)
+                {
+                    $data['error'] = "An error occoured when making an action";
+                }
+
             }elseif($user->getSubUser() == 1 && !$editable){
                 $data['error'] = "You do not have permission to edit this server";
             }else{
                 $server->setStartupExtra($request->get('startupParams'));
+                $action = $actionService->createANewAction("Server Updated wth Id $serverId" , $userName , $userName , $userId);
+
+                if ($action === false)
+                {
+                    $data['error'] = "An error occoured when making an action";
+                }
             }
 
             $em->persist($server);
             $em->flush();
+
 
         }
 
@@ -195,10 +218,37 @@ class GameServerController extends Controller
         $settingService = new SettingService($em);
 
         $userId = $user->getId();
-        $ownerId = $server->getOwnerId();
+        $serverOwnerId = $server->getOwnerId();
 
-        if ($userId === $ownerId ) {
 
+        // Get server owner.
+        if ($user->getSubUser() == 1) {
+            $owner = $em->getRepository('AppBundle:User')->find($user->getSubUserFor());
+
+        }else{
+            $owner = $user;
+        }
+
+        $ownerName = $owner->getUsername();
+        $ownerId = $owner->getId();
+        $userName = $user->getUsername();
+        $serverId = $server->getId();
+
+        // Sub User Permissions
+        if ($user->getSubUser() == 1)
+        {
+            $permissionsService = new PermissionsService($this->getUser() , $em);
+            $canManage = $permissionsService->checkPermission("USER_MANAGE_SERVER");
+
+            if (!$canManage){
+                $this->render('userBundle/user.403.html.twig');
+            }
+        }
+
+
+        if ($userId === $serverOwnerId || $user->getSubUserFor() === $serverOwnerId) {
+
+            $actionService = new ActionsService($em);
 
             if ($request->getMethod() == "POST") {
                 $action = $request->get('do');
@@ -213,6 +263,7 @@ class GameServerController extends Controller
 
                     // Start/Restart the server.
                     $networkServerService->restartServer($processedStartCommand, $server, $user, $em);
+                    $action = $actionService->createANewAction("Server Started with Id $serverId" , $userName , $ownerName , $ownerId);
 
 
                 } elseif ($action == "stop") {
@@ -223,6 +274,7 @@ class GameServerController extends Controller
                     // Stop the server.
                     $networkServerService->stopServer($server, $user, $em);
 
+                    $action = $actionService->createANewAction("Server Stopped with Id $serverId" , $userName , $ownerName , $ownerId);
 
                 } elseif ($action == "restart") {
 
@@ -237,6 +289,9 @@ class GameServerController extends Controller
                     $callbackUrl = $request->getHttpHost() . "/cron/serverCallback/$serverId";
                     // Reinstall the server
                     $networkServerService->reinstallServer($server, $template, $callbackUrl, $user);
+
+                    $action = $actionService->createANewAction("Server Reinstalled with Id $serverId" , $userName , $ownerName , $ownerId);
+
 
                 } elseif ($action == "delete") {
 
