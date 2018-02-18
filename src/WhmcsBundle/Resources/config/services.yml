@@ -1,5 +1,4 @@
 services:
-    WhmcsService:
-        class: WhmcsBundle\Service\WhmcsService
-        arguments: ['%database_user%', '%whmcs%']
-        public: true
+#    whmcs.example:
+#        class: WhmcsBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

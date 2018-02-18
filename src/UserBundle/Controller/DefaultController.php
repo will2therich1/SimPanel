@@ -57,25 +57,6 @@ class DefaultController extends Controller
         return $this->render('userBundle/dashboardpage.html.twig' , $data);
     }
 
-    /**
-     * @Route("/user/403" , name="User403")
-     *
-     */
-    public function permissionDenied()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $settingService = new SettingService($em);
-
-        $user = $this->getUser();
-
-        $data = [];
-        $data['active'] = "Dash";
-        $data['user'] = $user->getUserInfo();
-        $data['site'] = $settingService->getSiteInformation();
-        return $this->render('userBundle/user.403.html.twig' , $data);
-
-    }
-
 
 
 

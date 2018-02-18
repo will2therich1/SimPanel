@@ -68,7 +68,7 @@
             </div>
             <div class="uk-width-1-1">
                 <label for="">Information: &nbsp;</label>
-                <p> Server Status: {{ server.status }} &nbsp; Players Online {% if information is defined %} {{ information.players }} {% else %}0 {% endif %}/{{ server.playerSlots }} &nbsp; Server Usage:  TBI</p>
+                <p> Server Status: {{ server.status }} &nbsp; Players Online 0/{{ server.playerSlots }} &nbsp; Server Usage:  TBI</p>
 
             </div>
             <div class="uk-width-1-2">
@@ -121,10 +121,9 @@
               url: "/user/servers/g/{{ server.id }}/manage",
               success: function (data) {
                 alert("Attemping Server Start");
+                location.reload();
               }
             });
-              location.reload();
-
           });
 
           $('#stopServer').click(function () {
@@ -134,10 +133,9 @@
               url: "/user/servers/g/{{ server.id }}/manage",
               success: function (data) {
                 alert("Stopping Server");
+                location.reload();
               }
             });
-              location.reload();
-
           });
           $('#reinstallServer').click(function () {
             $.ajax({
@@ -146,10 +144,9 @@
               url: "/user/servers/g/{{ server.id }}/manage",
               success: function (data) {
                 alert("Reinstalling Server");
+                location.reload();
               }
             });
-              location.reload();
-
           });
 
         </script>

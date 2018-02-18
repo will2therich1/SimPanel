@@ -136,9 +136,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
             'message' => 'Authentication Required'
         );
 
-        $path = $request->getRequestUri();
-
-        return new RedirectResponse('/login?dest='.$path );
+        return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
     }
 
     public function supportsRememberMe()
