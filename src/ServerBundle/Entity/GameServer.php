@@ -484,8 +484,10 @@ class GameServer
 
         $string_template_port_replace = str_replace('{server.port}' , $server->getPort() , $string_server_ip_replace);
 
+        $string_player_slots_replace = str_replace('{player.slots}' , $server->getPlayerSlots() , $string_template_port_replace);
+
         // Now we add the extra startup params addable by a user,
-        $startupCommand = $string_template_port_replace . $this->getStartupExtra();
+        $startupCommand = $string_player_slots_replace . $this->getStartupExtra();
 
         return $startupCommand;
 

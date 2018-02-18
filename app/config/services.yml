@@ -42,6 +42,7 @@ services:
         class: AppBundle\Service\SettingService
         public: true
 
+
     MaintenanceListener:
         class: AppBundle\Service\MaintenanceListener
         tags:
