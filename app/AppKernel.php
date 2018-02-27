@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new UserBundle\UserBundle(),
             new WhmcsBundle\WhmcsBundle(),
+            new FtpBundle\FtpBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -8,7 +8,8 @@
             "ServerBundle\\": "src/ServerBundle",
             "ApiBundle\\": "src/ApiBundle",
             "WhmcsBundle\\": "src/WhmcsBundle",
-            "UserBundle\\": "src/UserBundle"
+            "UserBundle\\": "src/UserBundle",
+            "FtpBundle\\": "src/FtpBundle"
         },
         "classmap": [
             "app/AppKernel.php",

@@ -1,3 +1,8 @@
+ftp:
+    resource: "@FtpBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 whmcs:
     resource: "@WhmcsBundle/Controller/"
     type:     annotation
