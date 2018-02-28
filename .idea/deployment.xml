@@ -5,7 +5,7 @@
       <paths name="Hetzner">
         <serverdata>
           <mappings>
-            <mapping deploy="/var/www/html/symfony/sites/dev/simpanel" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/var/www/html/symfony/sites/dev/SimPanel" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

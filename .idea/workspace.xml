@@ -2,276 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51fe4d6a-1e51-4b2f-a047-65d330f85ad9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.htaccess" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AppCache.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AppKernel.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/TwigBundle/views/Exception/error.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/FtpBundle/GameServers/view.game.server.files.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/admin.base.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/admin/admin.index.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/admin/admins.admin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/admin/create.admin.admin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/admin/network/create.network.admin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/admin/network/network.admin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/admin/network/view.network.admin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/admin/templates/create.server.template.admin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/admin/templates/server.template.admin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/admin/templates/view.server.template.admin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/admin/users/create.user.admin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/admin/users/users.admin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/admin/users/view.user.admin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/default/index.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/emails/user/user.creation.email.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/errorPages/maintenance.mode.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/profiles/admin/api.profile.admin.index.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/profiles/admin/information.profile.admin.index.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/profiles/admin/password.profile.admin.index.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/profiles/admin/profile.admin.base.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/profiles/admin/tfa.profile.admin.index.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/profiles/admin/tfa.setup.profile.admin.index.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/security/login.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/game.server.create.step.1.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/game.server.create.step.2.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/view.game.server.admin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/serverBundle/gameServer/view.game.servers.admin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/serverBundle/settings/server.default.settings.advanced.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/serverBundle/settings/server.default.settings.base.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/serverBundle/settings/server.default.settings.general.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/serverBundle/settings/server.default.settings.select.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/serverBundle/settings/server.default.settings.startup.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/settings/general/admin/admin.general.settings.base.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/settings/general/admin/admin.general.settings.tab.general.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/settings/general/admin/admin.general.settings.tab.whmcs.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/settings/general/user/user.general.settings.base.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/settings/general/user/user.general.settings.tab.branding.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/settings/general/user/user.general.settings.tab.general.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.base.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.general.security.main.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.general.security.tfa.setup.main.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.general.security.whmcs.main.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.main.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/base.full.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/base.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/dashboardpage.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/gameServers/user.servers.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/gameServers/user.view.game.server.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/gameServers/user.voice.servers.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/subUsers/create.user.sub.users.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/subUsers/user.sub.users.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/subUsers/view.user.sub.users.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/user.403.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/user.actions.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/userBundle/user.create.support.ticket.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config_dev.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config_prod.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config_test.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/parameters.yml.dist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/routing.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/routing_dev.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/security.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/services.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/console" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/symfony_requirements" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/install.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpunit.xml.dist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.htaccess" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/ApiBundle.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/ApiAdminController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/ApiGameServerController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/ApiKeyController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/ApiNetworkServerController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/ApiTemplateController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/ApiUserController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/DefaultController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Entity/ApiKeys.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Repository/ApiKeysRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Resources/config/doctrine/ApiKeys.orm.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Resources/config/services.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Resources/views/Default/index.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Tests/Controller/ApiAdminControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Tests/Controller/ApiGameServerControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Tests/Controller/ApiKeyControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Tests/Controller/ApiNetworkServerControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Tests/Controller/ApiTemplateControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Tests/Controller/ApiUserControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/AppBundle.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/AdminAdminController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/AdminController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/AdminProfileController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/AdminUserController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/GeneralAdminPanelSettingsController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/GeneralUserPanelSettingsController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/NetworkServerController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/SecurityControllerController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/ServerTemplateController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/TemplateCronControllerController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/NetworkServer.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/ServerTemplate.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Settings.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/User.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/NetworkServerRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/ServerTemplateRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/SettingsRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/UserRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/doctrine/NetworkServer.orm.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/doctrine/ServerTemplate.orm.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/doctrine/Settings.orm.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/doctrine/User.orm.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Security/LoginAuthenticator.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Service/EncryptionService.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Service/GoogleAuthenticatorService.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Service/MaintenanceListener.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Service/NetworkServerService.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Service/ServerUserService.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Service/SettingService.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Tests/Controller/AdminAdminControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Tests/Controller/AdminControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Tests/Controller/AdminProfileControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Tests/Controller/AdminUserControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Tests/Controller/GeneralAdminPanelSettingsControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Tests/Controller/GeneralUserPanelSettingsControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Tests/Controller/NetworkServerControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Tests/Controller/SecurityControllerControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Tests/Controller/ServerTemplateControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Tests/Controller/TemplateCronControllerControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FtpBundle/Controller/DefaultController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FtpBundle/Controller/GameServerFtpController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FtpBundle/FtpBundle.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FtpBundle/Resources/config/services.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FtpBundle/Resources/views/Default/index.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FtpBundle/Tests/Controller/GameServerFtpControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Controller/AdminGameServerController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Controller/DefaultController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Controller/TemplateDefaultsController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Entity/GameServer.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Entity/defaultConfiguration.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Repository/GameServerRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Repository/defaultConfigurationRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Resources/config/doctrine/GameServer.orm.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Resources/config/doctrine/defaultConfiguration.orm.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Resources/config/services.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Resources/views/Default/index.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/ServerBundle.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Service/GameServerService.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Tests/Controller/AdminGameServerControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServerBundle/Tests/Controller/TemplateDefaultsControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Controller/AccountController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Controller/ActionsController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Controller/DefaultController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Controller/GameServerController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Controller/SubUserController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Controller/VoiceServerController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Entity/Action.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Repository/ActionRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Resources/config/doctrine/Action.orm.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Resources/config/services.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Resources/views/Default/index.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Service/ActionsService.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Service/PermissionsService.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Tests/Controller/AccountControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Tests/Controller/GameServerControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Tests/Controller/SubUserControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/Tests/Controller/VoiceServerControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserBundle/UserBundle.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WhmcsBundle/Controller/DefaultController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WhmcsBundle/Controller/SettingsController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WhmcsBundle/Resources/config/services.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WhmcsBundle/Resources/views/Default/index.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WhmcsBundle/Service/WhmcsService.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WhmcsBundle/Tests/Controller/SettingsControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WhmcsBundle/WhmcsBundle.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error404.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/ApiBundle/Controller/DefaultControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/AppBundle/Controller/DefaultControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/FtpBundle/Controller/DefaultControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/ServerBundle/Controller/DefaultControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/UserBundle/Controller/DefaultControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/WhmcsBundle/Controller/DefaultControllerTest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/var/SymfonyRequirements.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/var/logs/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/var/sessions/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/.app_dev.php.swp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/.htaccess" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/app.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/app_dev.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/apple-touch-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/config.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/button-pagination.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/custom.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/font.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/style.blue.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/style.default.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/style.green.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/style.pink.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/style.red.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/style.sea.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/style.violet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/uikit-rtl.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/uikit-rtl.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/uikit.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/css/uikit.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/fonts/dark-dashboard.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/fonts/dark-dashboard.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/fonts/dark-dashboard.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/fonts/dark-dashboard.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/icons-reference/fonts/dark-dashboard.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/icons-reference/fonts/dark-dashboard.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/icons-reference/fonts/dark-dashboard.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/icons-reference/fonts/dark-dashboard.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/icons-reference/icons-reference.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/icons-reference/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/img/bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/img/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/img/template-mac.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/js/charts-custom.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/js/charts-home.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/js/front.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/js/uikit-icons.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/js/uikit-icons.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/js/uikit.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/js/uikit.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/bootstrap/css/bootstrap-grid.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/bootstrap/css/bootstrap-grid.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/bootstrap/css/bootstrap-reboot.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/bootstrap/css/bootstrap-reboot.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/bootstrap/css/bootstrap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/bootstrap/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/bootstrap/js/bootstrap.bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/bootstrap/js/bootstrap.bundle.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/bootstrap/js/bootstrap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/bootstrap/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/chart.js/Chart.bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/chart.js/Chart.bundle.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/chart.js/Chart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/chart.js/Chart.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/font-awesome/HELP-US-OUT.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/font-awesome/css/font-awesome.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/font-awesome/css/font-awesome.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/font-awesome/fonts/FontAwesome.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/font-awesome/fonts/fontawesome-webfont.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/font-awesome/fonts/fontawesome-webfont.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/font-awesome/fonts/fontawesome-webfont.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/font-awesome/fonts/fontawesome-webfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/font-awesome/fonts/fontawesome-webfont.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/jquery-easing/jquery.easing.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/jquery.cookie/MIT-LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/jquery.cookie/component.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/jquery.cookie/cookie.jquery.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/jquery.cookie/jquery.cookie.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/jquery/core.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/jquery/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/jquery/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/jquery/jquery.slim.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/vendor/jquery/jquery.slim.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimPanel/app/Resources/views/FtpBundle/GameServers/view.game.server.files.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/SimPanel/app/Resources/views/FtpBundle/GameServers/view.game.server.files.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -297,22 +29,62 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FTP/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="view.game.server.files.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SimPanel/app/Resources/views/FtpBundle/GameServers/view.game.server.files.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="160">
-              <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+              <caret line="8" column="64" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="64" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SimPanel/app/Resources/views/base.html.twig">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="parameters.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SimPanel/app/config/parameters.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="460">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="phpunit.xml.dist" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SimPanel/phpunit.xml.dist">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="install.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SimPanel/install.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name=".web-server-pid" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SimPanel/.web-server-pid">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="composer.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SimPanel/composer.json">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="composer.lock" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SimPanel/composer.lock">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="AppKernel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SimPanel/app/AppKernel.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name=".htaccess" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SimPanel/app/.htaccess">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -531,40 +303,6 @@
               <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
-            <path>
-              <item name="SimPanelFull" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SimPanelFull" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SimPanelFull" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SimPanelFull" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SimPanelFull" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SimPanelFull" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="FtpBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SimPanelFull" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SimPanelFull" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="FtpBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="GameServers" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -638,12 +376,12 @@
       <workItem from="1518774121578" duration="2974000" />
       <workItem from="1518779073031" duration="6404000" />
       <workItem from="1519740409854" duration="4594000" />
-      <workItem from="1519809057493" duration="281000" />
+      <workItem from="1519809057493" duration="1300000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39693000" />
+    <option name="totallyTimeSpent" value="40712000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1920" height="1080" extended-state="6" />
@@ -685,19 +423,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/admin/templates/server.template.admin.html.twig" />
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/ServerTemplateController.php" />
-    <entry file="file://$PROJECT_DIR$/src/ApiBundle/Controller/ApiGameServerController.php" />
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/SecurityControllerController.php" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/security/login.html.twig" />
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Security/LoginAuthenticator.php" />
-    <entry file="file://$PROJECT_DIR$/app/config/security.yml" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/settings/general/user/user.general.settings.base.html.twig" />
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/GeneralAdminPanelSettingsController.php" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/settings/general/admin/admin.general.settings.tab.general.html.twig" />
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/AdminProfileController.php" />
-    <entry file="file://$PROJECT_DIR$/web/config.php" />
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml.dist" />
     <entry file="file://$PROJECT_DIR$/app/Resources/views/admin.base.html.twig" />
     <entry file="file://$PROJECT_DIR$/app/Resources/views/settings/general/admin/admin.general.settings.base.html.twig" />
     <entry file="file://$PROJECT_DIR$/app/Resources/views/settings/general/admin/admin.general.settings.tab.whmcs.html.twig" />
@@ -747,10 +472,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SimPanel/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimPanel/app/Resources/views/admin.base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimPanel/app/AppCache.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimPanel/install.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimPanel/.web-server-pid">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimPanel/composer.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimPanel/composer.lock">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimPanel/app/AppKernel.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimPanel/app/.htaccess">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimPanel/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimPanel/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimPanel/phpunit.xml.dist">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimPanel/app/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/SimPanel/app/Resources/views/FtpBundle/GameServers/view.game.server.files.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
-          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+          <caret line="8" column="64" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="64" />
         </state>
       </provider>
     </entry>
