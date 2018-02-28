@@ -193,6 +193,10 @@ class NetworkServerService
         $cmd = "DeleteTemplate -i ". $template->getId();
         $this->runCMD($cmd);
 
+        $defaultConfig = $this->em->getRepository('ServerBundle:defaultConfiguration')->find($template->getConfigId());
+        $this->em->remove($defaultConfig);
+        $this->em->flush();
+
         $this->em->remove($template);
         $this->em->flush();
 
