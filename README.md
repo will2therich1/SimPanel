@@ -1,6 +1,8 @@
 SimPanel
 =====
 
+NOTE: THIS IS NOT COMPLETE AND IS STILL IN DEVELOPMENT! USE AT OWN RISK
+
 SimPanel - The Simple Gamepanel.
 
 SimPanel is designed to be a simple panel for GameServer Managers to install and use.
