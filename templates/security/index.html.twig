@@ -29,7 +29,11 @@
                             <div class="content">
 
                                 {% if error is defined %}
+
+                                    {% if error != '' %}
                                     <div class="alert alert-danger">{{ error }}</div>
+                                    {% endif %}
+
                                 {% endif %}
 
                                 <form id="login-form" action="{{ path("loginPage") }}" method="post">

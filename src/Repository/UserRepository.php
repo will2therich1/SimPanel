@@ -1,8 +1,13 @@
 <?php
-
+/**
+ * SimPanel User Repository
+ *
+ * @author William Rich
+ * @copyright https://servers4all.documize.com/s/Wm5Pm0A1QQABQ1xw/simpanel/d/WnDQ5EA1QQABQ154/simpanel-license
+ */
 namespace App\Repository;
 
-use App\Entity\Core\User;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;

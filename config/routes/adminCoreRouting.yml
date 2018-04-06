@@ -1,0 +1,6 @@
+adminIndex:
+      path: /admin
+      controller: App\Controller\Admin\Core\AdminCoreController::index
+userIndex:
+      path: /admin/users
+      controller: App\Controller\Admin\Core\AdminCoreController::userIndexPage

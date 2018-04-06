@@ -3,9 +3,9 @@ security:
     providers:
         user_db_provider:
             entity:
-                class: App\Entity\Core\User
+                class: App\Entity\User
     encoders:
-        App\Entity\Core\User:
+        App\Entity\User:
             algorithm: bcrypt
             cost: 10
 

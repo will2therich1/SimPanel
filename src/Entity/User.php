@@ -1,6 +1,11 @@
 <?php
-
-namespace App\Entity\Core;
+/**
+ * SimPanel User Entity
+ *
+ * @author William Rich
+ * @copyright https://servers4all.documize.com/s/Wm5Pm0A1QQABQ1xw/simpanel/d/WnDQ5EA1QQABQ154/simpanel-license
+ */
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
@@ -364,5 +369,32 @@ class User implements AdvancedUserInterface, \Serializable
     {
         // TODO: Implement eraseCredentials() method.
     }
+
+    /**
+     * Gets the user info and returns this in an array
+     *
+     * @return array
+     *          Array of user information
+     */
+    public function getUserInfo(){
+        // Generate the user information
+        $firstName = $this->getFirstName();
+        $lastName = $this->getLastName();
+        $fullName = $firstName . " " . $lastName;
+        $id = $this->getId();
+        $username = $this->getUsername();
+        $email = $this->getEmail();
+        // Prepare data
+        $data = [];
+        $data['id'] = $id;
+        $data['name'] = $fullName;
+        $data['username'] = $username;
+        $data['email'] = $email;
+        $data['firstName'] = $firstName;
+        $data['lastName'] = $lastName;
+        $data['subUser'] = $this->getSubUser();
+        return $data;
+    }
+
 
 }
