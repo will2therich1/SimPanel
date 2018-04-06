@@ -1,16 +1,71 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="Powered By" content="PoisonPanel">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <meta name="Developers" content="Servers4All">
+    <title>Servers4All Panel</title>
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
 
-        {% block javascripts %}
-            <script src="{{ asset('build/js/app.js') }}"></script>
-        {% endblock %}
-    </body>
+    <!-- Custom Font Icons CSS-->
+    <link rel="stylesheet" href="{{ asset('css/font.css') }}">
+    <!-- Google fonts - Muli-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{{ asset('css/style.green.css') }}">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/button-pagination.css') }}">
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 
-</html>
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+    {% block stylesheets %}{% endblock %}
+
+</head>
+<body>
+{% block navbar %}{% endblock %}
+{% block sidebar %}{% endblock %}
+
+
+{% block body %}{% endblock %}
+
+
+<footer class="footer">
+    <div class="footer__block block no-margin-bottom">
+        <div class="container-fluid text-center">
+            <!-- Please do not remove the backlink to us unless you support us at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+            <p class="no-margin-bottom">2017-18 &copy; SimPanel. Design by <a href="https://bootstrapious.com">Bootstrapious</a>. Developed by Servers4All &nbsp- Version:
+                {#{{ branding.version }}#}
+            </p>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+<!-- Javascript files-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"> </script>
+<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('vendor/jquery.cookie/jquery.cookie.js') }}"></script>
+<script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
+<script src="{{ asset('js/front.js') }}"></script>
+<!-- Latest compiled and minified JavaScript -->
+
+{% block javascripts %}{% endblock %}
+
+</body></html>

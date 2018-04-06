@@ -1,14 +1,25 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+        user_db_provider:
+            entity:
+                class: App\Entity\Core\User
+    encoders:
+        App\Entity\Core\User:
+            algorithm: bcrypt
+            cost: 10
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
-
+            anonymous: ~
+            provider: user_db_provider
+            form_login:
+                login_path: loginPage
+                check_path: loginPage
+                csrf_token_generator: security.csrf.token_manager
             # activate different ways to authenticate
 
             # http_basic: true
@@ -20,5 +31,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, role: ROLE_ADMIN }
+        - { path: ^/user, role: ROLE_USER }
