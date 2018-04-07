@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="dc0e96ba-391c-4f7f-8f26-99a6b75a7766" name="Hetzner" url="http://195.201.20.223">
+        <fileTransfer host="195.201.20.223" port="22" rootFolder="/var/www/html/symfony/sites/dev/simpanel" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

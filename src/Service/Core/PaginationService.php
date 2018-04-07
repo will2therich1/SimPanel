@@ -59,9 +59,44 @@ class PaginationService
         if ($request->get('limit') !== null && $request->get('limit') !== '') {
             $limit = $request->get('limit');
         } else {
-            $limit = 0;
+            $limit = 10;
         }
         return $limit;
+    }
+
+    /**
+     * @param $url - The url for the pagination to link to.
+     * @param $offset - The current Offset
+     * @param $limit - The current Limit
+     *
+     * @return array
+     *        Returns array containing the two necessary links
+     */
+    public function createPagination($url, $offset, $limit)
+    {
+        // Setting the limit
+        $nextLimit = $limit + 10;
+
+        if ($limit == 10) {
+            $lastLimit = 10;
+        } else {
+            $lastLimit = $limit - 10;
+        }
+        // Setting the offset
+        $nextOffset = $offset + 10;
+        if ($offset == 0) {
+            $lastOffset = 0;
+        } else {
+            $lastOffset = $offset - 10;
+        }
+        // Create the links
+        $nextPageLink = "$url?limit=" . $nextLimit . "&offset=" . $nextOffset;
+        $lastPageLink = "$url?limit=" . $lastLimit . "&offset=" . $lastOffset;
+
+        $data['nextlink'] = $nextPageLink;
+        $data['lastlink'] = $lastPageLink;
+
+        return $data;
     }
 
 

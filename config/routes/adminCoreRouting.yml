@@ -1,6 +1,21 @@
 adminIndex:
       path: /admin
       controller: App\Controller\Admin\Core\AdminCoreController::index
-userIndex:
+adminUserIndex:
       path: /admin/users
       controller: App\Controller\Admin\Core\AdminCoreController::userIndexPage
+adminAdminIndex:
+      path: /admin/admins
+      controller: App\Controller\Admin\Core\AdminCoreController::adminIndexPage
+adminUserCreate:
+      path: /admin/users/create
+      controller: App\Controller\Admin\Core\AdminUserController::userCreatePage
+adminUserView:
+      path: /admin/users/{id}
+      controller: App\Controller\Admin\Core\AdminUserController::userViewPage
+adminAdminCreate:
+      path: /admin/admins/create
+      controller: App\Controller\Admin\Core\AdminAdminController::adminCreatePage
+adminAdminView:
+      path: /admin/admins/{id}
+      controller: App\Controller\Admin\Core\AdminAdminController::adminViewPage

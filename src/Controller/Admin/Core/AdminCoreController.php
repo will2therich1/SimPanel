@@ -40,7 +40,18 @@ class AdminCoreController extends Controller
 
     public function index()
     {
-        return $this->render('admin_core/index.html.twig' , $this->dataCompiler->createDataArray('Dash'));
+        $dataArray = $this->dataCompiler->createDataArray('Dash');
+
+        try {
+            $dataArray['block'] = array(
+                'users' => $this->getUserCount(),
+                'admins' => $this->getAdminCount()
+            );
+        } catch (\Exception $e) {
+            error_log("Failed to get counts for users,admins & network servers error as follows: " . $e->getMessage());
+        }
+
+        return $this->render('admin_core/index.html.twig' , $dataArray);
     }
 
     public function userIndexPage(Request $request, PaginationService $paginationService)
@@ -67,39 +78,42 @@ class AdminCoreController extends Controller
             {
                 // Query Via name.
                 $queryBuilder->select('u')
-                  ->from('App:User', 'u')
-                  ->where('u.username LIKE :name')
-                  ->andWhere('u.admin = 0')
-                  ->setMaxResults($limit)
-                  ->setFirstResult($offset)
-                  ->setParameter('name', '%' . $formData['name'] . '%');
+                    ->from('App:User', 'u')
+                    ->where('u.username LIKE :name')
+                    ->andWhere('u.admin = 0')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset)
+                    ->setParameter('name', '%' . $formData['name'] . '%');
 
             }elseif ($formData['id'] !== null){
 
                 // Query searching via Id
                 $queryBuilder->select('u')
-                  ->from('App:User', 'u')
-                  ->where('u.id = :id')
-                  ->andWhere('u.admin = 0')
-                  ->setMaxResults($limit)
-                  ->setFirstResult($offset)
-                  ->setParameter('id', $formData['id']);
+                    ->from('App:User', 'u')
+                    ->where('u.id = :id')
+                    ->andWhere('u.admin = 0')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset)
+                    ->setParameter('id', $formData['id']);
 
             }else{
                 $dataArray['error'] = "You need to input data into one of the fields before searching";
                 $queryBuilder->select('u')
-                  ->from('App:User', 'u')
-                  ->where('u.admin = 0')
-                  ->setMaxResults($limit)
-                  ->setFirstResult($offset);
+                    ->from('App:User', 'u')
+                    ->where('u.admin = 0')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset);
             }
         }else{
             $queryBuilder->select('u')
-              ->from('App:User', 'u')
-              ->where('u.admin = 0')
-              ->setMaxResults($limit)
-              ->setFirstResult($offset);
+                ->from('App:User', 'u')
+                ->where('u.admin = 0')
+                ->setMaxResults($limit)
+                ->setFirstResult($offset);
         }
+
+        // Get pagination links
+        $dataArray['pages'] = $paginationService->createPagination('/admin/user', $offset , $limit);
 
         // Get the user Result
         $result = $queryBuilder->getQuery()->execute();
@@ -107,6 +121,76 @@ class AdminCoreController extends Controller
         $dataArray['form'] = $form->createView();
         $dataArray['users'] = $result;
         return $this->render('admin_core/users/users.index.html.twig' , $dataArray);
+
+    }
+
+    public function adminIndexPage(Request $request, PaginationService $paginationService)
+    {
+        $dataArray = $this->dataCompiler->createDataArray('Users');
+
+        // Build our form
+        $form = $this->createSearchForm();
+        // Handle the current request
+        $form->handleRequest($request);
+        // Create the query builder
+        $queryBuilder = $this->em->createQueryBuilder();
+
+        // Get our offsets and limits
+        $offset = $paginationService->getOffset($request);
+        $limit = $paginationService->getLimit($request);
+
+        // Form validation and submission
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $formData = $form->getData();
+
+            if($formData['name'] !== null)
+            {
+                // Query Via name.
+                $queryBuilder->select('u')
+                    ->from('App:User', 'u')
+                    ->where('u.username LIKE :name')
+                    ->andWhere('u.admin = 1')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset)
+                    ->setParameter('name', '%' . $formData['name'] . '%');
+
+            }elseif ($formData['id'] !== null){
+
+                // Query searching via Id
+                $queryBuilder->select('u')
+                    ->from('App:User', 'u')
+                    ->where('u.id = :id')
+                    ->andWhere('u.admin = 1')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset)
+                    ->setParameter('id', $formData['id']);
+
+            }else{
+                $dataArray['error'] = "You need to input data into one of the fields before searching";
+                $queryBuilder->select('u')
+                    ->from('App:User', 'u')
+                    ->where('u.admin = 1')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset);
+            }
+        }else{
+            $queryBuilder->select('u')
+                ->from('App:User', 'u')
+                ->where('u.admin = 1')
+                ->setMaxResults($limit)
+                ->setFirstResult($offset);
+        }
+
+        // Get pagination links
+        $dataArray['pages'] = $paginationService->createPagination('/admin/user', $offset , $limit);
+
+        // Get the user Result
+        $result = $queryBuilder->getQuery()->execute();
+        // Create the data array
+        $dataArray['form'] = $form->createView();
+        $dataArray['users'] = $result;
+        return $this->render('admin_core/admins/admins.index.html.twig' , $dataArray);
 
     }
 
@@ -147,6 +231,37 @@ class AdminCoreController extends Controller
           ->getForm();
 
         return $form;
+    }
+
+    /**
+     * Counts the amount of users in the database
+     *
+     * @return string - Returns a string with the amount of admins in the database
+     * @throws \Exception - If something goes wrong!
+     */
+    public function getUserCount()
+    {
+        $queryBuilder = $this->em->createQueryBuilder();
+        $userCountQuery = $queryBuilder->select('count(u)')
+            ->from('App:User', 'u')
+            ->Where('u.admin = 0');
+        $userCountQueryCount = $userCountQuery->getQuery()->getSingleScalarResult();
+        return $userCountQueryCount;
+    }
+    /**
+     * Counts the amount of admins in the database
+     *
+     * @return string - Returns a string with the amount of admins in the database
+     * @throws \Exception - If something goes wrong!
+     */
+    public function getAdminCount()
+    {
+        $queryBuilder = $this->em->createQueryBuilder();
+        $userCountQuery = $queryBuilder->select('count(u)')
+            ->from('App:User', 'u')
+            ->Where('u.admin = 1');
+        $userCountQueryCount = $userCountQuery->getQuery()->getSingleScalarResult();
+        return $userCountQueryCount;
     }
 
 }

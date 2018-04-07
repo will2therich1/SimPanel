@@ -43,17 +43,17 @@
             </div>
         </div><span class="heading">Main</span>
         <ul class="list-unstyled">
-            <li class="{% if active == 'Dash'  %}active{% endif %} "><a href=""><i class="icon-home"></i>Home</a></li>
+            <li class="{% if active == 'Dash'  %}active{% endif %} "><a href="{{ path('adminIndex') }}"><i class="icon-home"></i>Home</a></li>
             <li class="{% if active == 'User'  %}active{% endif %} "><a href="#dashvariants" aria-expanded="false" data-toggle="collapse"> <i class="icon-user-outline"></i>Users </a>
                 <ul id="dashvariants" class="collapse list-unstyled">
-                    <li><a href="{{ path('userIndex') }}">View Users</a></li>
-                    <li><a href="">Add Users</a></li>
+                    <li><a href="{{ path('adminUserIndex') }}">View Users</a></li>
+                    <li><a href="{{ path('adminUserCreate') }}">Add Users</a></li>
                 </ul>
             </li>
             <li class="{% if active == 'Admin'  %}active{% endif %} "><a href="#dashvariants-2"  aria-expanded="false" data-toggle="collapse"> <i class="icon-light-bulb"></i>Admins</a>
                 <ul id="dashvariants-2" class="collapse list-unstyled">
-                    <li><a href="">View Admins</a></li>
-                    <li><a href="">Add Admins</a></li>
+                    <li><a href="{{ path('adminAdminIndex') }}">View Admins</a></li>
+                    <li><a href="{{ path('adminAdminCreate') }}">Add Admins</a></li>
                 </ul>
             </li>
             <li class="{% if active == 'Network'  %}active{% endif %} "><a href="#dashvariants-3" aria-expanded="false" data-toggle="collapse"> <i class="icon-chart"></i>Network </a>
