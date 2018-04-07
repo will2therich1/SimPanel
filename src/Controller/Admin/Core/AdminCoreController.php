@@ -42,7 +42,8 @@ class AdminCoreController extends Controller
         try {
             $dataArray['block'] = array(
                 'users' => $this->getUserCount(),
-                'admins' => $this->getAdminCount()
+                'admins' => $this->getAdminCount(),
+                'servers' => $this->getNetworkServerCount(),
             );
         } catch (\Exception $e) {
             error_log("Failed to get counts for users,admins & network servers error as follows: " . $e->getMessage());
@@ -327,4 +328,18 @@ class AdminCoreController extends Controller
         return $userCountQueryCount;
     }
 
+    /**
+     * Counts the amount of network servers in the database
+     *
+     * @return string - Returns a string with the amount of admins in the database
+     * @throws \Exception - If something goes wrong!
+     */
+    public function getNetworkServerCount()
+    {
+        $queryBuilder = $this->em->createQueryBuilder();
+        $serverCountQuery = $queryBuilder->select('count(u)')
+            ->from('App:NetworkServer', 'u');
+        $serverCountQueryCount = $serverCountQuery->getQuery()->getSingleScalarResult();
+        return $serverCountQueryCount;
+    }
 }
