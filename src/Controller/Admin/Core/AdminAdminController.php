@@ -1,11 +1,16 @@
 <?php
+/**
+ * The admin symfony controller.
+ *
+ * @author William Rich
+ * @copyright https://servers4all.documize.com/s/Wm5Pm0A1QQABQ1xw/simpanel/d/WnDQ5EA1QQABQ154/simpanel-license
+ */
 
 namespace App\Controller\Admin\Core;
 
 use App\Service\User\UserManagementService;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Service\Core\DataCompiler;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,7 +39,7 @@ class AdminAdminController extends Controller
     public function adminViewPage($id, Request $request, UserManagementService $usm)
     {
         $userToView = $this->em->getRepository('App:User')->find($id);
-        $dataArray = $this->dataCompiler->createDataArray('User');
+        $dataArray = $this->dataCompiler->createDataArray('Admin');
         $dataArray['error'] = '';
 
         $error = false;
@@ -152,7 +157,7 @@ class AdminAdminController extends Controller
 
     public function adminCreatePage(Request $request , UserManagementService $usm)
     {
-        $dataArray = $this->dataCompiler->createDataArray('User');
+        $dataArray = $this->dataCompiler->createDataArray('Admin');
 
         $form = $this->createFormBuilder()
             ->add('first_name', TextType::class , array(

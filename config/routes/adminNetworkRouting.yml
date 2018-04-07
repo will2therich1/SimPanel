@@ -1,0 +1,3 @@
+adminNetworkCreate:
+      path: /admin/network/create
+      controller: App\Controller\Admin\Network\AdminNetworkServerController::createNetworkServer

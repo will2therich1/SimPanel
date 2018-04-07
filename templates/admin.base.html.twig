@@ -58,8 +58,8 @@
             </li>
             <li class="{% if active == 'Network'  %}active{% endif %} "><a href="#dashvariants-3" aria-expanded="false" data-toggle="collapse"> <i class="icon-chart"></i>Network </a>
                 <ul id="dashvariants-3" class="collapse list-unstyled">
-                    <li><a href="">View Network Servers</a></li>
-                    <li><a href="">Add Network Servers</a></li>
+                    <li><a href="{{ path('adminNetworkIndex') }}">View Network Servers</a></li>
+                    <li><a href="{{ path('adminNetworkCreate') }}">Add Network Servers</a></li>
                 </ul>
             </li>
         </ul>

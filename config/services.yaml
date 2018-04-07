@@ -2,8 +2,13 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    encryption:
+        enc_secret: 123yiwqjhee72xasdasdh8023qx07bh
+        enc_iv: u27eydhgstuyahst
+        enc_cypher: aes-256-ctr
 
 services:
+
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -28,6 +33,9 @@ services:
     App\Controller\Security\:
         resource: '../src/Controller/Security'
         tags: ['controller.service_arguments']
+
+    App\Service\Security\EncryptionService:
+         arguments: ['%encryption%']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

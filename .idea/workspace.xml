@@ -13,152 +13,7 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AdminCoreController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Admin/Core/AdminCoreController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="562">
-              <caret line="53" column="70" lean-forward="false" selection-start-line="53" selection-start-column="70" selection-end-line="53" selection-end-column="70" />
-              <folding>
-                <element signature="e#231#270#0#PHP" expanded="true" />
-                <element signature="e#1508#4093#0#PHP" expanded="false" />
-                <element signature="e#2115#3657#0#PHP" expanded="false" />
-                <element signature="e#3441#3657#0#PHP" expanded="false" />
-                <element signature="e#4099#6687#0#PHP" expanded="false" />
-                <element signature="e#4968#4978#0#PHP" expanded="true" />
-                <element signature="e#6623#6665#0#PHP" expanded="true" />
-                <element signature="e#7033#7308#0#PHP" expanded="false" />
-                <element signature="e#7350#7621#0#PHP" expanded="false" />
-                <element signature="e#8258#8268#0#PHP" expanded="true" />
-                <element signature="e#8827#8837#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admins.index.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/admin_core/admins/admins.index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="120" lean-forward="false" selection-start-line="9" selection-start-column="120" selection-end-line="9" selection-end-column="120" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/security/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#12#26#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/admin_core/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="108" lean-forward="false" selection-start-line="27" selection-start-column="108" selection-end-line="27" selection-end-column="108" />
-              <folding>
-                <element signature="e#12#32#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdminUserController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Admin/Core/AdminUserController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="968">
-              <caret line="238" column="56" lean-forward="false" selection-start-line="238" selection-start-column="56" selection-end-line="238" selection-end-column="56" />
-              <folding>
-                <element signature="e#45#88#0#PHP" expanded="true" />
-                <element signature="e#869#5589#0#PHP" expanded="false" />
-                <element signature="e#1002#1012#1#PHP" expanded="true" />
-                <element signature="e#1308#1707#0#PHP" expanded="false" />
-                <element signature="e#1759#2141#0#PHP" expanded="false" />
-                <element signature="e#2192#2571#0#PHP" expanded="false" />
-                <element signature="e#2225#2480#1#PHP" expanded="false" />
-                <element signature="e#2621#2998#0#PHP" expanded="false" />
-                <element signature="e#3045#3413#0#PHP" expanded="false" />
-                <element signature="e#3463#3633#0#PHP" expanded="false" />
-                <element signature="e#3742#5412#0#PHP" expanded="false" />
-                <element signature="e#5536#5568#0#PHP" expanded="true" />
-                <element signature="e#5840#6162#0#PHP" expanded="false" />
-                <element signature="e#6213#6533#0#PHP" expanded="false" />
-                <element signature="e#6583#6901#0#PHP" expanded="false" />
-                <element signature="e#6948#7260#0#PHP" expanded="false" />
-                <element signature="e#7314#7681#0#PHP" expanded="false" />
-                <element signature="e#7743#8078#0#PHP" expanded="false" />
-                <element signature="e#8128#8298#0#PHP" expanded="false" />
-                <element signature="e#9396#9430#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdminAdminController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Admin/Core/AdminAdminController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2055">
-              <caret line="139" column="50" lean-forward="false" selection-start-line="139" selection-start-column="50" selection-end-line="139" selection-end-column="50" />
-              <folding>
-                <element signature="e#5539#5574#0#PHP" expanded="true" />
-                <element signature="e#9405#9441#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="create.admin.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/admin_admin/create.admin.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="79" lean-forward="false" selection-start-line="20" selection-start-column="79" selection-end-line="20" selection-end-column="79" />
-              <folding>
-                <element signature="e#12#32#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="view.admin.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/admin_admin/view.admin.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="adminCoreRouting.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/routes/adminCoreRouting.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="15" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.base.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/admin.base.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="55" column="58" lean-forward="false" selection-start-line="55" selection-start-column="58" selection-end-line="55" selection-end-column="58" />
-              <folding>
-                <element signature="e#2985#3000#0#Twig" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -184,15 +39,28 @@
         <option value="$PROJECT_DIR$/translations/messages.en.yml" />
         <option value="$PROJECT_DIR$/src/Command/SimpanelNewAdminCommand.php" />
         <option value="$PROJECT_DIR$/src/Command/SimpanelNewUserCommand.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Admin/Core/AdminUserController.php" />
         <option value="$PROJECT_DIR$/src/Service/User/UserManagementService.php" />
         <option value="$PROJECT_DIR$/templates/admin_admin/create.admin.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Admin/Core/AdminAdminController.php" />
         <option value="$PROJECT_DIR$/templates/admin_core/admins/users.index.html.twig" />
-        <option value="$PROJECT_DIR$/config/routes/adminCoreRouting.yml" />
-        <option value="$PROJECT_DIR$/templates/admin.base.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Admin/Core/AdminCoreController.php" />
         <option value="$PROJECT_DIR$/templates/admin_core/index.html.twig" />
+        <option value="$PROJECT_DIR$/config/services.yaml" />
+        <option value="$PROJECT_DIR$/src/Entity/NetworkServer.php" />
+        <option value="$PROJECT_DIR$/config/routes/adminCoreRouting.yml" />
+        <option value="$PROJECT_DIR$/templates/admin_core/network/users.index.html.twig" />
+        <option value="$PROJECT_DIR$/templates/admin_core/admins/admins.index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Service/Core/DataCompiler.php" />
+        <option value="$PROJECT_DIR$/src/Service/Security/EncryptionService.php" />
+        <option value="$PROJECT_DIR$/src/Service/Network/NetworkServerService.php" />
+        <option value="$PROJECT_DIR$/config/routes/adminNetworkRouting.yml" />
+        <option value="$PROJECT_DIR$/templates/admin.base.html.twig" />
+        <option value="$PROJECT_DIR$/templates/admin_network_server/create.network.server.html.twig" />
+        <option value="$PROJECT_DIR$/templates/admin_core/network/network.index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Service/Security/GoogleAuthenticatorService.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Admin/Core/AdminCoreController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Admin/Core/AdminUserController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Admin/Core/AdminAdminController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Admin/Network/AdminNetworkServerController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/DefaultController.php" />
       </list>
     </option>
   </component>
@@ -330,76 +198,13 @@
             <path>
               <item name="SimPanel" type="b2602c69:ProjectViewProjectNode" />
               <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SimPanel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="routes" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SimPanel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="SimPanel" type="b2602c69:ProjectViewProjectNode" />
               <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SimPanel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SimPanel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Core" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SimPanel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Repository" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SimPanel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Service" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SimPanel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Service" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Core" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SimPanel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Service" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="User" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SimPanel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SimPanel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SimPanel" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="admin_core" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Command" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="SimPanel" type="b2602c69:ProjectViewProjectNode" />
@@ -421,15 +226,16 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Will\Documents\SimPanel\src\Controller\Admin\Network" />
       <recent name="C:\Users\Will\Documents\SimPanel\templates\admin_user" />
       <recent name="C:\Users\Will\Documents\SimPanel\src\Controller\Admin\Core" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Will\Documents\SimPanel\templates\admin_core" />
+      <recent name="C:\Users\Will\Documents\SimPanel\config\routes" />
       <recent name="C:\Users\Will\Documents\SimPanel\templates" />
       <recent name="C:\Users\Will\Documents\SimPanel\src\Controller\Admin\Core" />
       <recent name="C:\Users\Will\Documents\SimPanel\templates\admin_user" />
-      <recent name="C:\Users\Will\Documents\SimPanel\src\Command" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -464,16 +270,15 @@
       <workItem from="1518462973750" duration="775000" />
       <workItem from="1518728095837" duration="1152000" />
       <workItem from="1523112832176" duration="640000" />
-      <workItem from="1523114668720" duration="12595000" />
+      <workItem from="1523114668720" duration="16694000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17532000" />
+    <option name="totallyTimeSpent" value="21631000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32979852" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
@@ -481,7 +286,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19830328" sideWeight="0.49791667" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27291667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27291667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -509,20 +314,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/User.php" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/admin.base.html.twig" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/base.full.html.twig" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.main.html.twig" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.base.html.twig" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.general.security.whmcs.main.html.twig" />
-    <entry file="file://$PROJECT_DIR$/src/UserBundle/Controller/AccountController.php" />
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/doctrine/User.orm.yml" />
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/User.php" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/admin.base.html.twig" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/base.full.html.twig" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/admin.base.html.twig" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/base.full.html.twig" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.main.html.twig" />
     <entry file="file://$PROJECT_DIR$/app/Resources/views/userBundle/accountSettings/user.settings.base.html.twig" />
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/doctrine/User.orm.yml" />
     <entry file="file://$PROJECT_DIR$/app/config/parameters.yml.dist" />
@@ -552,24 +343,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Command/SimpanelBuildJsCommand.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="6" selection-end-column="3" />
-          <folding>
-            <element signature="e#6#189#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Service/Core/PaginationService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="778">
-          <caret line="98" column="8" lean-forward="false" selection-start-line="98" selection-start-column="8" selection-end-line="98" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -594,16 +367,6 @@
           <caret line="0" column="36" lean-forward="false" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="36" />
           <folding>
             <element signature="e#12#32#0#Twig" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Service/Core/DataCompiler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
-          <folding>
-            <element signature="e#232#255#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -640,126 +403,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/UserRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="36" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Service/User/UserManagementService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="72" column="61" lean-forward="false" selection-start-line="72" selection-start-column="61" selection-end-line="72" selection-end-column="61" />
-          <folding>
-            <element signature="e#220#260#0#PHP" expanded="true" />
-            <element signature="e#3998#5283#0#PHP" expanded="false" />
-            <element signature="e#5799#5809#1#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin_admin/view.admin.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin_admin/create.admin.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="79" lean-forward="false" selection-start-line="20" selection-start-column="79" selection-end-line="20" selection-end-column="79" />
-          <folding>
-            <element signature="e#12#32#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/Core/AdminAdminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2055">
-          <caret line="139" column="50" lean-forward="false" selection-start-line="139" selection-start-column="50" selection-end-line="139" selection-end-column="50" />
-          <folding>
-            <element signature="e#5539#5574#0#PHP" expanded="true" />
-            <element signature="e#9405#9441#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes/adminCoreRouting.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="15" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin.base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="55" column="58" lean-forward="false" selection-start-line="55" selection-start-column="58" selection-end-line="55" selection-end-column="58" />
-          <folding>
-            <element signature="e#2985#3000#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/Core/AdminUserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="968">
-          <caret line="238" column="56" lean-forward="false" selection-start-line="238" selection-start-column="56" selection-end-line="238" selection-end-column="56" />
-          <folding>
-            <element signature="e#45#88#0#PHP" expanded="true" />
-            <element signature="e#869#5589#0#PHP" expanded="false" />
-            <element signature="e#1002#1012#1#PHP" expanded="true" />
-            <element signature="e#1308#1707#0#PHP" expanded="false" />
-            <element signature="e#1759#2141#0#PHP" expanded="false" />
-            <element signature="e#2192#2571#0#PHP" expanded="false" />
-            <element signature="e#2225#2480#1#PHP" expanded="false" />
-            <element signature="e#2621#2998#0#PHP" expanded="false" />
-            <element signature="e#3045#3413#0#PHP" expanded="false" />
-            <element signature="e#3463#3633#0#PHP" expanded="false" />
-            <element signature="e#3742#5412#0#PHP" expanded="false" />
-            <element signature="e#5536#5568#0#PHP" expanded="true" />
-            <element signature="e#5840#6162#0#PHP" expanded="false" />
-            <element signature="e#6213#6533#0#PHP" expanded="false" />
-            <element signature="e#6583#6901#0#PHP" expanded="false" />
-            <element signature="e#6948#7260#0#PHP" expanded="false" />
-            <element signature="e#7314#7681#0#PHP" expanded="false" />
-            <element signature="e#7743#8078#0#PHP" expanded="false" />
-            <element signature="e#8128#8298#0#PHP" expanded="false" />
-            <element signature="e#9396#9430#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/Core/AdminCoreController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="53" column="70" lean-forward="false" selection-start-line="53" selection-start-column="70" selection-end-line="53" selection-end-column="70" />
-          <folding>
-            <element signature="e#231#270#0#PHP" expanded="true" />
-            <element signature="e#1508#4093#0#PHP" expanded="false" />
-            <element signature="e#2115#3657#0#PHP" expanded="false" />
-            <element signature="e#3441#3657#0#PHP" expanded="false" />
-            <element signature="e#4099#6687#0#PHP" expanded="false" />
-            <element signature="e#4968#4978#0#PHP" expanded="true" />
-            <element signature="e#6623#6665#0#PHP" expanded="true" />
-            <element signature="e#7033#7308#0#PHP" expanded="false" />
-            <element signature="e#7350#7621#0#PHP" expanded="false" />
-            <element signature="e#8258#8268#0#PHP" expanded="true" />
-            <element signature="e#8827#8837#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin_core/admins/admins.index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="120" lean-forward="false" selection-start-line="9" selection-start-column="120" selection-end-line="9" selection-end-column="120" />
           <folding />
         </state>
       </provider>
@@ -769,7 +416,33 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="e#12#26#0#Twig" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/Core/PaginationService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="778">
+          <caret line="98" column="8" lean-forward="false" selection-start-line="98" selection-start-column="8" selection-end-line="98" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/Core/SettingService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/UserRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="6" selection-end-column="3" />
+          <folding>
+            <element signature="e#6#179#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -779,8 +452,235 @@
         <state relative-caret-position="459">
           <caret line="27" column="108" lean-forward="false" selection-start-line="27" selection-start-column="108" selection-end-line="27" selection-end-column="108" />
           <folding>
+            <element signature="e#12#32#0#Twig" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/services.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/NetworkServerRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/NetworkServer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="54" column="5" lean-forward="false" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin_admin/create.admin.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="37" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="31" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/Network/NetworkServerService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="657">
+          <caret line="55" column="34" lean-forward="false" selection-start-line="55" selection-start-column="34" selection-end-line="55" selection-end-column="34" />
+          <folding>
+            <element signature="e#121#157#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes/adminCoreRouting.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/Security/GoogleAuthenticatorService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="3" lean-forward="false" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+          <folding>
+            <element signature="e#6#261#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin_core/network/network.index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="44" column="24" lean-forward="false" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin_network_server/create.network.server.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="14" lean-forward="false" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+          <folding>
             <element signature="e#12#32#0#Twig" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin.base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="61" column="60" lean-forward="false" selection-start-line="61" selection-start-column="60" selection-end-line="61" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin_core/admins/admins.index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="623">
+          <caret line="60" column="41" lean-forward="false" selection-start-line="60" selection-start-column="41" selection-end-line="60" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes/adminNetworkRouting.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/Security/EncryptionService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+          <folding>
+            <element signature="e#6#183#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/Core/DataCompiler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="57" column="20" lean-forward="false" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/Core/AdminCoreController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#6#189#0#PHP" expanded="true" />
+            <element signature="e#940#1452#0#PHP" expanded="false" />
+            <element signature="e#1458#4043#0#PHP" expanded="false" />
+            <element signature="e#2065#3607#0#PHP" expanded="false" />
+            <element signature="e#3391#3607#0#PHP" expanded="false" />
+            <element signature="e#4049#6639#0#PHP" expanded="false" />
+            <element signature="e#9263#10290#0#PHP" expanded="false" />
+            <element signature="e#9453#9728#0#PHP" expanded="false" />
+            <element signature="e#9770#10041#0#PHP" expanded="false" />
+            <element signature="e#10505#10858#0#PHP" expanded="false" />
+            <element signature="e#11073#11427#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/Core/AdminUserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding>
+            <element signature="e#1491#1890#0#PHP" expanded="false" />
+            <element signature="e#1942#2324#0#PHP" expanded="false" />
+            <element signature="e#2375#2754#0#PHP" expanded="false" />
+            <element signature="e#2408#2663#1#PHP" expanded="false" />
+            <element signature="e#2804#3181#0#PHP" expanded="false" />
+            <element signature="e#3228#3596#0#PHP" expanded="false" />
+            <element signature="e#3646#3816#0#PHP" expanded="false" />
+            <element signature="e#3925#5595#0#PHP" expanded="false" />
+            <element signature="e#6023#6345#0#PHP" expanded="false" />
+            <element signature="e#6396#6716#0#PHP" expanded="false" />
+            <element signature="e#6766#7084#0#PHP" expanded="false" />
+            <element signature="e#7131#7443#0#PHP" expanded="false" />
+            <element signature="e#7497#7864#0#PHP" expanded="false" />
+            <element signature="e#7926#8261#0#PHP" expanded="false" />
+            <element signature="e#8311#8481#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/Core/AdminAdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Admin/Network/AdminNetworkServerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="26" lean-forward="false" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+          <folding>
+            <element signature="e#241#275#0#PHP" expanded="true" />
+            <element signature="e#5404#5458#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="3" lean-forward="true" selection-start-line="1" selection-start-column="3" selection-end-line="1" selection-end-column="3" />
+          <folding>
+            <element signature="e#6#208#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/User/UserManagementService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="37" column="32" lean-forward="false" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
+          <folding>
+            <element signature="e#3998#5283#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Command/SimpanelBuildJsCommand.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="6" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/services_test.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

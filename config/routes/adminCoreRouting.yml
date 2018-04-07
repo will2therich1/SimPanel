@@ -7,6 +7,9 @@ adminUserIndex:
 adminAdminIndex:
       path: /admin/admins
       controller: App\Controller\Admin\Core\AdminCoreController::adminIndexPage
+adminNetworkIndex:
+      path: /admin/network
+      controller: App\Controller\Admin\Core\AdminCoreController::networkIndexPage
 adminUserCreate:
       path: /admin/users/create
       controller: App\Controller\Admin\Core\AdminUserController::userCreatePage

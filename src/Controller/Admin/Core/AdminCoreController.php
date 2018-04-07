@@ -6,8 +6,6 @@
  * @copyright https://servers4all.documize.com/s/Wm5Pm0A1QQABQ1xw/simpanel/d/WnDQ5EA1QQABQ154/simpanel-license
  */
 
-
-
 namespace App\Controller\Admin\Core;
 
 use App\Service\Core\PaginationService;
@@ -15,7 +13,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Service\Core\DataCompiler;
 
@@ -183,7 +180,7 @@ class AdminCoreController extends Controller
         }
 
         // Get pagination links
-        $dataArray['pages'] = $paginationService->createPagination('/admin/user', $offset , $limit);
+        $dataArray['pages'] = $paginationService->createPagination('/admin/admins', $offset , $limit);
 
         // Get the user Result
         $result = $queryBuilder->getQuery()->execute();
@@ -191,6 +188,72 @@ class AdminCoreController extends Controller
         $dataArray['form'] = $form->createView();
         $dataArray['users'] = $result;
         return $this->render('admin_core/admins/admins.index.html.twig' , $dataArray);
+
+    }
+
+    public function networkIndexPage(Request $request, PaginationService $paginationService)
+    {
+        $dataArray = $this->dataCompiler->createDataArray('Users');
+
+        // Build our form
+        $form = $this->createSearchForm();
+        // Handle the current request
+        $form->handleRequest($request);
+        // Create the query builder
+        $queryBuilder = $this->em->createQueryBuilder();
+
+        // Get our offsets and limits
+        $offset = $paginationService->getOffset($request);
+        $limit = $paginationService->getLimit($request);
+
+        // Form validation and submission
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $formData = $form->getData();
+
+            if($formData['name'] !== null)
+            {
+                // Query Via name.
+                $queryBuilder->select('u')
+                    ->from('App:NetworkServer', 'u')
+                    ->where('u.server_name LIKE :name')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset)
+                    ->setParameter('name', '%' . $formData['name'] . '%');
+
+            }elseif ($formData['id'] !== null){
+
+                // Query searching via Id
+                $queryBuilder->select('u')
+                    ->from('App:NetworkServer', 'u')
+                    ->where('u.id = :id')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset)
+                    ->setParameter('id', $formData['id']);
+
+            }else{
+                $dataArray['error'] = "You need to input data into one of the fields before searching";
+                $queryBuilder->select('u')
+                    ->from('App:NetworkServer', 'u')
+                    ->setMaxResults($limit)
+                    ->setFirstResult($offset);
+            }
+        }else{
+            $queryBuilder->select('u')
+                ->from('App:NetworkServer', 'u')
+                ->setMaxResults($limit)
+                ->setFirstResult($offset);
+        }
+
+        // Get pagination links
+        $dataArray['pages'] = $paginationService->createPagination('/admin/network', $offset , $limit);
+
+        // Get the user Result
+        $result = $queryBuilder->getQuery()->execute();
+        // Create the data array
+        $dataArray['form'] = $form->createView();
+        $dataArray['servers'] = $result;
+        return $this->render('admin_core/network/network.index.html.twig' , $dataArray);
 
     }
 
