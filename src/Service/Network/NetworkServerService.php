@@ -9,10 +9,11 @@
 namespace App\Service\Network;
 
 
-use App\Service\Core\SettingService;
 use App\Service\Security\EncryptionService;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\NetworkServer;
+use phpseclib\Crypt\RSA;
+use phpseclib\Net\SSH2;
 
 class NetworkServerService
 {
@@ -25,6 +26,19 @@ class NetworkServerService
      * @var EncryptionService $encService
      */
     private $encService;
+
+    /**
+     * @var NetworkServer
+     */
+    private $server;
+
+    /**
+     * Location where the daemon stores its scripts
+     *
+     * @var string
+     */
+    protected $scriptLocation = "/usr/local/sp/bin/";
+
 
     public function __construct(EntityManagerInterface $em , EncryptionService $encryptionService)
     {
@@ -63,6 +77,44 @@ class NetworkServerService
         $newServer->setConnectionStatus('New');
 
         return $newServer;
+    }
+
+    /**
+     * Gets the network server via its id.
+     *
+     * @param $id - id of the server
+     * @return NetworkServer|null|object - Server object
+     */
+    public function getServerById($id)
+    {
+        return $this->em->getRepository('App:NetworkServer')->find($id);
+    }
+
+    public function connectionTest($id)
+    {
+        // Set our variables
+        $server = $this->getServerById($id);
+
+        $host = $server->getServerIp();
+        $loginUser = $server->getLoginUser();
+        $sshKey = $server->getSshKey($this->encryptionService);
+        $sshKeyPassword = $server->getSshKeyPassword($this->encryptionService);
+        // Load our key file
+        $keyFile = new RSA();
+        $keyFile->loadKey($sshKey);
+
+        if ($sshKeyPassword !== '') {
+            error_log("Setting Password");
+            $keyFile->setPassword($sshKeyPassword);
+        }
+        // Try our connection
+        try {
+            $connection = new SSH2($host);
+            $connectionTest = $connection->login($loginUser, $keyFile);
+            return $connectionTest;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
 }

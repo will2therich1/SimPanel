@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -147,4 +148,26 @@ class AdminNetworkServerController extends Controller
         return $this->render('admin_network_server/create.network.server.html.twig' , $dataArray);
 
     }
+
+    public function testNetworkServerConnectionAPI(Request $request, NetworkServerService $networkServerService, $id)
+    {
+        try {
+            $networkServerService->connectionTest($id);
+            if ($networkServerService) {
+                $returnData = array(
+                    'connected' => true,
+                );
+            }
+        } catch (\Exception $e) {
+            $returnData = array(
+                'connected' => false,
+            );
+        }
+
+        $returnJson = json_encode($returnData);
+
+        return new JsonResponse($returnJson);
+
+    }
+
 }

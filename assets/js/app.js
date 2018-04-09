@@ -1,11 +1,13 @@
 import Vue from 'vue';
-
-import test from './components/Test';
+import serverTest from './components/serverTest';
 
 
 new Vue({
   el: '#app',
   components: {
-    appTest: test,
-  }
-})
+      apptestserver: serverTest,
+  },
+  methods: {
+
+  },
+});

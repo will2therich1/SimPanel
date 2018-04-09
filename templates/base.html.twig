@@ -36,30 +36,32 @@
     {% block stylesheets %}{% endblock %}
 
 </head>
+
 <body>
 {% block navbar %}{% endblock %}
 {% block sidebar %}{% endblock %}
 
-
 {% block body %}{% endblock %}
-
 
 <footer class="footer">
     <div class="footer__block block no-margin-bottom">
         <div class="container-fluid text-center">
             <!-- Please do not remove the backlink to us unless you support us at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
             <p class="no-margin-bottom">2017-18 &copy; SimPanel. Design by <a href="https://bootstrapious.com">Bootstrapious</a>. Developed by Servers4All &nbsp- Version:
-                {#{{ branding.version }}#}
+                {{ branding.version }}
             </p>
         </div>
     </div>
 </footer>
+
 </div>
 </div>
 <!-- Javascript files-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"> </script>
+<script src="{{ asset('build/js/app.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendor/jquery.cookie/jquery.cookie.js') }}"></script>
 <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
