@@ -36,17 +36,17 @@ To be finished
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/will2therich/SimPanel/blob/Symfony4-Master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/will2therich/SimPanel/tags). 
 
 ## Authors
 
 * **William Rich** - *Project Lead* - [Servers4All](https://github.com/will2therich)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/will2therich/SimPanel/blob/Symfony4-Master/Contributors.md) who participated in this project.
 
 ## License
 
