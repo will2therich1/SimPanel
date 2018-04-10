@@ -152,8 +152,8 @@ class AdminNetworkServerController extends Controller
     public function testNetworkServerConnectionAPI(Request $request, NetworkServerService $networkServerService, $id)
     {
         try {
-            $networkServerService->connectionTest($id);
-            if ($networkServerService) {
+            $connection = $networkServerService->connectionTest($id);
+            if ($connection) {
                 $returnData = array(
                     'connected' => true,
                 );
@@ -161,6 +161,7 @@ class AdminNetworkServerController extends Controller
         } catch (\Exception $e) {
             $returnData = array(
                 'connected' => false,
+                'error' => $e->getMessage(),
             );
         }
 

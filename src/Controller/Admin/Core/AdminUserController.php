@@ -11,7 +11,6 @@ namespace App\Controller\Admin\Core;
 use App\Service\User\UserManagementService;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Service\Core\DataCompiler;
 use Doctrine\ORM\EntityManagerInterface;

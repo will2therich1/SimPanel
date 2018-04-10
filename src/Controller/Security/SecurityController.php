@@ -9,7 +9,6 @@ namespace App\Controller\Security;
 
 use App\Service\Core\DataCompiler;
 use App\Service\Security\GoogleAuthenticatorService;
-use Psr\Log\InvalidArgumentException;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -163,8 +162,6 @@ class SecurityController extends Controller
             }
         }
         $dataArray['form'] = $tfaForm->createView();
-
-        dump($dataArray);
 
         return $this->render('security/tfa.html.twig' , $dataArray);
 

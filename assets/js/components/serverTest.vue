@@ -15,6 +15,7 @@
                     let responseData = JSON.parse(response.data);
                     if (responseData.connected == false){
                         alert("Failed to connect to server");
+                        console.log("Error connecting was: " + responseData.error);
                     }else{
                         alert("Connected to server");
                     }
