@@ -1,12 +1,14 @@
 <?php
 /**
- * Security controller dealing with login & logout & TFA
+ * Security controller dealing with login & logout & TFA.
  *
  * @author William Rich
  * @copyright https://servers4all.documize.com/s/Wm5Pm0A1QQABQ1xw/simpanel/d/WnDQ5EA1QQABQ154/simpanel-license
  */
+
 namespace App\Controller\Security;
 
+use App\Entity\User;
 use App\Service\Core\DataCompiler;
 use App\Service\Security\GoogleAuthenticatorService;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,23 +20,24 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class SecurityController extends Controller
 {
-
     /**
-     * Handles system logins
+     * Handles system logins.
      *
-     * @param Request $request
+     * @param Request             $request
      * @param AuthenticationUtils $authenticationUtils
-     * @param DataCompiler $dataCompiler
+     * @param DataCompiler        $dataCompiler
+     *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function login(Request $request, AuthenticationUtils $authenticationUtils , DataCompiler $dataCompiler)
+    public function login(Request $request, AuthenticationUtils $authenticationUtils, DataCompiler $dataCompiler)
     {
         // Get the error from the authentication utility
         $error = $authenticationUtils->getLastAuthenticationError();
 
         // Get the shortned error message not the full one
-        if ($error !== null) {
+        if (null !== $error) {
             $error = $error->getMessage();
         }
 
@@ -49,9 +52,10 @@ class SecurityController extends Controller
     }
 
     /**
-     * Handles system logouts
+     * Handles system logouts.
      *
      * @param Request $request
+     *
      * @return RedirectResponse
      */
     public function logout(Request $request)
@@ -69,7 +73,6 @@ class SecurityController extends Controller
      */
     public function loginRedirect(Request $request)
     {
-
         $user = $this->getUser();
 
         // Get the user roles, and TFA status
@@ -77,26 +80,25 @@ class SecurityController extends Controller
         $session = $request->getSession();
         $tfaStatus = $user->getTfaStatus();
 
-        if ($tfaStatus == 1) {
+        if (1 == $tfaStatus) {
             $tfaConfirmed = $session->get('tfaConfirmed');
-            if ($tfaConfirmed !== 1)
-            {
+            if (1 !== $tfaConfirmed) {
                 return new RedirectResponse('/tfa');
             }
-        }else{
-            $session->set('tfaConfirmed' , 1);
+        } else {
+            $session->set('tfaConfirmed', 1);
         }
 
         // Check if they have the admin role
         if (isset($roles['USER_ROLE_2'])) {
             // Verify the admin role
-            if ($roles['USER_ROLE_2'] === 'ROLE_ADMIN') {
+            if ('ROLE_ADMIN' === $roles['USER_ROLE_2']) {
                 // If they are an admin then we will take them to the admin area
                 return new RedirectResponse('/admin');
             }
         } else {
             // Else if they are a user then we take them to the user area
-                return new RedirectResponse('/user');
+            return new RedirectResponse('/user');
         }
 
         // Incase nothing matches than to the login page with you!
@@ -104,46 +106,52 @@ class SecurityController extends Controller
     }
 
     /**
-     * Authenticates a users TFA Status
+     * Authenticates a users TFA Status.
      *
-     * @param Request $request
+     * @param Request                    $request
      * @param GoogleAuthenticatorService $tfaService
-     * @param DataCompiler $dataCompiler
+     * @param DataCompiler               $dataCompiler
      *
      * @throws - When something goes wrong w/caching
      *
      * @return \Symfony\Component\HttpFoundation\Response | RedirectResponse
      */
-    public function tfaVerificationPage(Request $request, GoogleAuthenticatorService $tfaService , DataCompiler $dataCompiler)
+    public function tfaVerificationPage(Request $request, GoogleAuthenticatorService $tfaService, DataCompiler $dataCompiler)
     {
         // Get vars
         $user = $this->getUser();
+
         $session = $request->getSession();
         $tfaSession = $session->get('tfaConfirmed');
 
-        if ($tfaSession == 1) $this->redirectToRoute('login_check');
-        if ($user->getTfaStatus() == 0) $this->redirectToRoute('login_check');
+        if (1 == $tfaSession) {
+            return new RedirectResponse('/login_check');
+        }
+        if (0 === $user->getTfaStatus()) {
+            return new RedirectResponse('/login_check');
+        }
+        dump($user->getTfaStatus());
         $dataArray = $dataCompiler->createDataArray('tfa');
 
         $tfaForm = $this->createFormBuilder()
-          ->add('TFA_Code', TextType::class , array(
-            'attr' => array(
+          ->add('TFA_Code', TextType::class, [
+            'attr' => [
               'class' => 'input-material',
               'id' => 'tfa_code',
               'placeholder' => 'TFA Code',
               'required' => true,
-            ),
+            ],
             'label' => 'TFA Code',
             'required' => true,
-          ))
-          ->add('Verify', SubmitType::class , array(
-            'attr' => array(
+          ])
+          ->add('Verify', SubmitType::class, [
+            'attr' => [
               'class' => 'btn btn-primary',
               'id' => 'inputHorizontalSuccess',
               'placeholder' => '',
               'style' => 'margin-top: 15px;',
-            ),
-          ))
+            ],
+          ])
           ->getForm();
 
         $tfaForm->handleRequest($request);
@@ -158,13 +166,11 @@ class SecurityController extends Controller
                 $session->set('tfaConfirmed', 1);
                 $this->redirectToRoute('login_check');
             } else {
-                $dataArray['error'] = "Failed to verify your TFA Code";
+                $dataArray['error'] = 'Failed to verify your TFA Code';
             }
         }
         $dataArray['form'] = $tfaForm->createView();
 
-        return $this->render('security/tfa.html.twig' , $dataArray);
-
+        return $this->render('security/tfa.html.twig', $dataArray);
     }
-
 }

@@ -2,12 +2,8 @@ parameters:
     git_dir: .
     bin_dir: vendor/bin
     tasks:
-        phpcsfixer:
-            config_file: ~
-            config: ~
-            fixers: []
-            level: psr2
-            verbose: true
+        phpcsfixer2:
+            config: .php_cs
         phplint: ~
         securitychecker:
               lockfile: ./composer.lock

@@ -33,3 +33,4 @@ security:
     access_control:
         - { path: ^/admin, role: ROLE_ADMIN }
         - { path: ^/user, role: ROLE_USER }
+        - { path: ^/tfa, role: IS_AUTHENTICATED_FULLY }

@@ -1,0 +1,6 @@
+adminProfileInformation:
+      path: /admin/account
+      controller: App\Controller\Admin\Profile\AdminProfileMainController::profileIndexPage
+adminProfilePassword:
+      path: /admin/account/password
+      controller: App\Controller\Admin\Profile\AdminProfileMainController::profilePasswordPage
