@@ -1,8 +1,10 @@
 ID: ID
 'First Name': 'First Name'
-'Last Name': 'Lasr Name'
+'Last Name': 'Last Name'
 Username: Username
 Email: Email
 Update: Update
 Search: Search
 Name: Name
+TFA Code: TFA Code
+Verify: Verify

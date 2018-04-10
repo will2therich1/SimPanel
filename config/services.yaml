@@ -37,5 +37,12 @@ services:
     App\Service\Security\EncryptionService:
          arguments: ['%encryption%']
 
+    TfaSecurityListener:
+        class: App\Service\Security\TfaListener
+        arguments: ['@service_container']
+        tags:
+          - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+          - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

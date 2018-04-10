@@ -39,6 +39,8 @@ class AdminCoreController extends Controller
     {
         $dataArray = $this->dataCompiler->createDataArray('Dash');
 
+        $this->getUser();
+
         try {
             $dataArray['block'] = array(
                 'users' => $this->getUserCount(),
@@ -47,6 +49,7 @@ class AdminCoreController extends Controller
             );
         } catch (\Exception $e) {
             error_log("Failed to get counts for users,admins & network servers error as follows: " . $e->getMessage());
+            $dataArray['block'] = ['users' => 'unknown' , 'admins' => 'unknown' , 'servers' => 'unknown'];
         }
 
         return $this->render('admin_core/index.html.twig' , $dataArray);

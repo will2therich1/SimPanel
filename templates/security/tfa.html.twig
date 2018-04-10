@@ -16,9 +16,9 @@
                                         {{ branding.panelName }}
                                     </h1>
                                 </div>
-                                <p>Please Log In<br>
+                                <p>Welcome {{ currentUser.name }}<br>
                                     <!-- Please do not remove this unless you support us at https://servers4all.co.uk. It is part of the license conditions. Thank you for understanding :)-->
-                                    <small>Developed By Servers4All</small>
+                                    <small>Since you have two factor authentication enabled you now need to verify your code before using the panel. If you are having issues please contact the support team</small>
                                 </p>
                             </div>
                         </div>
@@ -36,28 +36,9 @@
 
                                 {% endif %}
 
-                                <form id="login-form" action="{{ path("loginPage") }}" method="post">
-                                    <div class="form-group">
-                                        <input autocomplete="off" id="username" type="text" name="_username"
-                                               value="{{ form.username is defined ? form.username : '' }}" required=""
-                                               class="input-material">
-                                        <label for="login-username" class="label-material">User Name</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <input autocomplete="off" id="password" type="password" name="_password"
-                                               required class="input-material">
-                                        <label for="login-password" class="label-material">Password</label>
-                                    </div>
-                                    <input type="hidden" name="_target_path" value="{{ path('login_check') }}"/>
-
-                                    <input type="hidden" name="_csrf_token"
-                                           value="{{ csrf_token('authenticate') }}"
-                                    >
-
-                                    <input id="login" type='submit' name="_submit" class="btn btn-primary"
-                                           value='Login'> </input>
-                                </form>
-                                <a href="#" class="forgot-pass">Forgot Password?</a><br>
+                                {{ form_start(form) }}
+                                {{ form_widget(form) }}
+                                {{ form_end(form) }}
 
                             </div>
                         </div>

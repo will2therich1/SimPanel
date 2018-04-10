@@ -13,7 +13,9 @@ namespace App\Service\Core;
 use App\Entity\Setting;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 class DataCompiler
 {
@@ -33,6 +35,11 @@ class DataCompiler
     private $user;
 
     /**
+     * @var FilesystemAdapter - The cache
+     */
+    private $cache;
+
+    /**
      * DataCompiler constructor.
      * @param EntityManagerInterface $em
      */
@@ -45,6 +52,7 @@ class DataCompiler
         $this->em = $em;
         $this->settingService = $settingService;
         $this->user = $tokenStorage->getToken()->getUser();
+        $this->cache = new FilesystemAdapter('app.cache');
     }
 
     /**
@@ -53,16 +61,62 @@ class DataCompiler
      * @param $active  string - currently active page in order to set what is active in the front end
      * @param $tab   string - For use when in tabbed pages to show currently opened tab
      *
+     * @throws \Psr\Cache\InvalidArgumentException
      * @return array - Returns the data array.
      */
     public function createDataArray($active , $tab = null)
     {
-        return [
+
+        $this->getCachedSiteInfo();
+
+        $dataArray =[
             'active' => $active,
-            'branding' => $this->settingService->getSiteInformation(),
-            'currentUser' => $this->user->getUserInfo(),
+            'branding' => $this->getCachedSiteInfo(),
         ];
+
+        if ($this->user instanceof User){
+            $dataArray['currentUser'] = $this->user->getUserInfo();
+        }else{
+            $dataArray['currentUser'] = '';
+        }
+
+        return $dataArray;
+
+
     }
+
+    /**
+     * Refresh's/gets the cached branding information for the site.
+     *
+     * @return mixed
+     * @throws \Psr\Cache\InvalidArgumentException
+     */
+    private function getCachedSiteInfo()
+    {
+        $brandingCache = $this->cache->getItem('branding-cache');
+
+        if ($brandingCache->get() == null){
+            $brandingCache->set($this->settingService->getSiteInformation());
+            $brandingCache->tag('branding-cache');
+            $brandingCache->expiresAfter(\DateInterval::createFromDateString('1 hour'));
+
+            $this->cache->save($brandingCache);
+        }
+        return $brandingCache->get();
+    }
+
+    /**
+     * Deletes the current cache for branding and reinstates it to deal with updates.
+     *
+     * @return bool
+     * @throws \Psr\Cache\InvalidArgumentException
+     */
+    public function refreshBrandingCache() {
+        $this->cache->deleteItem('branding-cache');
+        $this->getCachedSiteInfo();
+        return true;
+    }
+
 
 
 }

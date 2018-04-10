@@ -4,3 +4,9 @@ loginPage:
 logout:
     path: /logout
     controller: App\Controller\Security\SecurityController::logout
+login_check:
+    path: /login_check
+    controller: App\Controller\Security\SecurityController::loginRedirect
+tfa_check:
+    path: /tfa
+    controller: App\Controller\Security\SecurityController::tfaVerificationPage
