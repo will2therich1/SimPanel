@@ -1,14 +1,12 @@
 <?php
 /**
- * The Service for setting & getting settings
+ * The Service for setting & getting settings.
  *
  * @author William Rich
  * @copyright https://servers4all.documize.com/s/Wm5Pm0A1QQABQ1xw/simpanel/d/WnDQ5EA1QQABQ154/simpanel-license
  */
 
-
 namespace App\Service\Core;
-
 
 use App\Entity\Setting;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class SettingService
 {
     /**
-     * @var EntityManagerInterface $em - Doctrine Interface
+     * @var EntityManagerInterface - Doctrine Interface
      */
     private $em;
 
@@ -24,6 +22,7 @@ class SettingService
 
     /**
      * SettingService constructor.
+     *
      * @param EntityManagerInterface $em
      */
     public function __construct(EntityManagerInterface $em)
@@ -32,14 +31,14 @@ class SettingService
     }
 
     /**
-     * Gets a setting
+     * Gets a setting.
      *
      * @param $name  string - Name of the setting
      * @param $default   string - The setting default to be created if it dosen't exist
      *
      * @return Setting - Returns the Setting object;
      */
-    public function getSetting($settingName , $default = 0)
+    public function getSetting($settingName, $default = 0)
     {
         // Get the settings repo
         $settings = $this->em->getRepository('App:Setting');
@@ -63,6 +62,7 @@ class SettingService
             $newSetting->setSettingUpdatedTime(new \DateTime());
             $this->em->persist($newSetting);
             $this->em->flush();
+
             return $newSetting;
         }
 
@@ -76,19 +76,19 @@ class SettingService
     }
 
     /**
-     * Sets a setting
+     * Sets a setting.
      *
      * @param $settingName - Name of the setting to set
      * @param $settingValue - Value of the setting
      *
-     * @throws \Exception - When a error occours setting the setting.
-     * @return bool - true if the update works correctly.
+     * @throws \Exception - When a error occours setting the setting
      *
+     * @return bool - true if the update works correctly
      */
     public function setSetting($settingName, $settingValue)
     {
         // Get the setting using the get setting function
-        $setting = $this->getSetting($settingName , $settingValue);
+        $setting = $this->getSetting($settingName, $settingValue);
         // Set the settings value
         $setting->setSettingValue($settingValue);
         // Persist the setting
@@ -97,32 +97,30 @@ class SettingService
         // Try to update the DB
         try {
             $this->em->flush();
+
             return true;
-        }catch(\Exception $e){
-            return new \Exception("An Error occoured updated the setting with message " . $e->getMessage());
+        } catch (\Exception $e) {
+            return new \Exception('An Error occoured updated the setting with message '.$e->getMessage());
         }
     }
 
     /**
-     *
      * Queries the database to get the branding options.
-     * This is called on every page load so optimisation will never go a miss
+     * This is called on every page load so optimisation will never go a miss.
      *
      * @return array
      */
     public function getSiteInformation()
     {
         $returnArray = [];
-        $returnArray['panelName'] = $this->getSetting('PanelName' , 'SimPanel')->getSettingValue();
+        $returnArray['panelName'] = $this->getSetting('PanelName', 'SimPanel')->getSettingValue();
         $returnArray['panelNamePart1'] = $this->getSetting('PanelNamePart1', 'Sim')->getSettingValue();
         $returnArray['PanelNamePart2'] = $this->getSetting('PanelNamePart2', 'Panel')->getSettingValue();
-        $returnArray['PanelNameShortPart1'] = $this->getSetting('PanelNameShortPart1' , 'S')->getSettingValue();
-        $returnArray['PanelNameShortPart2'] = $this->getSetting('PanelNameShortPart2' , 'P')->getSettingValue();
+        $returnArray['PanelNameShortPart1'] = $this->getSetting('PanelNameShortPart1', 'S')->getSettingValue();
+        $returnArray['PanelNameShortPart2'] = $this->getSetting('PanelNameShortPart2', 'P')->getSettingValue();
         $returnArray['termsandconditions'] = $this->getSetting('TermsAndConditions', 'To Be filled in by the panel admins')->getSettingValue();
         $returnArray['version'] = SettingService::APP_VERSION;
 
         return $returnArray;
     }
-
-
 }

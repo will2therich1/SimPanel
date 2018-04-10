@@ -1,6 +1,6 @@
 <?php
 /**
- * Symfony command to build JS assets
+ * Symfony command to build JS assets.
  *
  * @author William Rich
  * @copyright https://servers4all.documize.com/s/Wm5Pm0A1QQABQ1xw/simpanel/d/WnDQ5EA1QQABQ154/simpanel-license
@@ -9,9 +9,7 @@
 namespace App\Command;
 
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -31,11 +29,10 @@ class SimpanelBuildJsCommand extends Command
 
         $command = shell_exec('yarn build');
 
-        if (strpos($command, 'ERROR') == false) {
+        if (false == strpos($command, 'ERROR')) {
             $io->success($command);
         } else {
             $io->error($command);
         }
-
     }
 }

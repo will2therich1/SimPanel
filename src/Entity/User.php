@@ -1,10 +1,11 @@
 <?php
 /**
- * SimPanel User Entity
+ * SimPanel User Entity.
  *
  * @author William Rich
  * @copyright https://servers4all.documize.com/s/Wm5Pm0A1QQABQ1xw/simpanel/d/WnDQ5EA1QQABQ154/simpanel-license
  */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -289,19 +290,18 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function getRoles()
     {
-        if ($this->getAdmin() == 1) {
-            $roles = array(
-              'USER_ROLE' => "ROLE_USER",
-              'USER_ROLE_2' => "ROLE_ADMIN",
-            );
+        if (1 == $this->getAdmin()) {
+            $roles = [
+              'USER_ROLE' => 'ROLE_USER',
+              'USER_ROLE_2' => 'ROLE_ADMIN',
+            ];
         } else {
-            $roles = array(
-              'USER_ROLE' => "ROLE_USER",
-            );
+            $roles = [
+              'USER_ROLE' => 'ROLE_USER',
+            ];
         }
 
         return $roles;
-
     }
 
     public function getAdmin(): ?int
@@ -328,21 +328,20 @@ class User implements AdvancedUserInterface, \Serializable
     /** @see \Serializable::serialize() */
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
           $this->id,
           $this->username,
           $this->password,
-        ));
+        ]);
     }
 
     /** @see \Serializable::unserialize() */
     public function unserialize($serialized)
     {
-        list (
+        list(
           $this->id,
           $this->username,
-          $this->password,
-          ) = unserialize($serialized);
+          $this->password) = unserialize($serialized);
     }
 
     public function isAccountNonExpired()
@@ -371,16 +370,17 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Gets the user info and returns this in an array
+     * Gets the user info and returns this in an array.
      *
      * @return array
-     *          Array of user information
+     *               Array of user information
      */
-    public function getUserInfo(){
+    public function getUserInfo()
+    {
         // Generate the user information
         $firstName = $this->getFirstName();
         $lastName = $this->getLastName();
-        $fullName = $firstName . " " . $lastName;
+        $fullName = $firstName.' '.$lastName;
         $id = $this->getId();
         $username = $this->getUsername();
         $email = $this->getEmail();
@@ -393,8 +393,7 @@ class User implements AdvancedUserInterface, \Serializable
         $data['firstName'] = $firstName;
         $data['lastName'] = $lastName;
         $data['subUser'] = $this->getSubUser();
+
         return $data;
     }
-
-
 }

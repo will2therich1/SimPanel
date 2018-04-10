@@ -29,12 +29,11 @@ class AdminUserController extends Controller
      */
     private $em;
 
-    public function __construct(DataCompiler $dataCompiler , EntityManagerInterface $em)
+    public function __construct(DataCompiler $dataCompiler, EntityManagerInterface $em)
     {
         $this->dataCompiler = $dataCompiler;
         $this->em = $em;
     }
-
 
     public function userViewPage($id, Request $request, UserManagementService $usm)
     {
@@ -44,76 +43,74 @@ class AdminUserController extends Controller
 
         $error = false;
 
-        if ( $id == '')
-        {
-           return false;
+        if ('' == $id) {
+            return false;
         }
 
         $form = $this->createFormBuilder()
-            ->add('id', TextType::class , array(
-                'attr' => array(
+            ->add('id', TextType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'ID',
                     'readonly' => true,
                     'value' => $userToView->getId(),
-                ),
+                ],
                 'label' => 'ID',
                 'required' => true,
-            ))
-            ->add('first_name', TextType::class , array(
-                'attr' => array(
+            ])
+            ->add('first_name', TextType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'First Name',
                     'value' => $userToView->getFirstName(),
-                ),
+                ],
                 'label' => 'First Name',
                 'required' => true,
-            ))
-            ->add('last_name', TextType::class , array(
-                'attr' => array(
+            ])
+            ->add('last_name', TextType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'Last Name',
                     'value' => $userToView->getLastName(),
-                ),
+                ],
                 'label' => 'Last Name',
                 'required' => true,
-            ))
-            ->add('username', TextType::class , array(
-                'attr' => array(
+            ])
+            ->add('username', TextType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'Username',
                     'value' => $userToView->getUsername(),
-                ),
+                ],
                 'label' => 'Username',
                 'required' => true,
-            ))
-            ->add('email', TextType::class , array(
-                'attr' => array(
+            ])
+            ->add('email', TextType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'Email',
                     'value' => $userToView->getEmail(),
-                ),
+                ],
                 'label' => 'Email',
                 'required' => true,
-            ))
-            ->add('Update', SubmitType::class , array(
-                'attr' => array(
+            ])
+            ->add('Update', SubmitType::class, [
+                'attr' => [
                     'class' => 'btn btn-primary',
                     'style' => 'margin: 10px;',
-                ),
-            ))
+                ],
+            ])
             ->getForm();
 
         $form->handleRequest($request);
 
         // Form Submit handler!
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
 
             // Update the user!
@@ -122,18 +119,18 @@ class AdminUserController extends Controller
 
             // Ensure usernames and emails are unique
             try {
-                if ($usm->checkIfEmailAndUsernameAreUnique($formData['username'] , $id)) {
+                if ($usm->checkIfEmailAndUsernameAreUnique($formData['username'], $id)) {
                     $userToView->setUsername($formData['username']);
                 } else {
                     $dataArray['error'] .= 'ERROR: Username is not unique not being updated, ';
                 }
-                if ($usm->checkIfEmailAndUsernameAreUnique($formData['email'] , $id)) {
+                if ($usm->checkIfEmailAndUsernameAreUnique($formData['email'], $id)) {
                     $userToView->setEmail($formData['email']);
                 } else {
                     $dataArray['error'] .= 'ERROR: Email is not unique not being updated,';
                 }
             } catch (\Exception $e) {
-                $dataArray['error'] .= "ERROR: An error occoured checking that the username & emails are unique. Error message:" . $e->getMessage() . $e->getFile() . $e->getLine() . $e->getCode() . '/n';
+                $dataArray['error'] .= 'ERROR: An error occoured checking that the username & emails are unique. Error message:'.$e->getMessage().$e->getFile().$e->getLine().$e->getCode().'/n';
             }
 
             try {
@@ -145,87 +142,86 @@ class AdminUserController extends Controller
                     $dataArray['success'] = "User has been updated,If you don't see the changes you may need to refresh.";
                 }
             } catch (\Exception $e) {
-                $dataArray['error'] = "An Error occoured with the message: " . $e->getMessage();
+                $dataArray['error'] = 'An Error occoured with the message: '.$e->getMessage();
             }
         }
 
         $dataArray['form'] = $form->createView();
         $dataArray['user'] = $userToView;
 
-        return $this->render('admin_user/view.user.html.twig' , $dataArray);
+        return $this->render('admin_user/view.user.html.twig', $dataArray);
     }
 
-    public function userCreatePage(Request $request , UserManagementService $usm)
+    public function userCreatePage(Request $request, UserManagementService $usm)
     {
         $dataArray = $this->dataCompiler->createDataArray('User');
 
         $form = $this->createFormBuilder()
-            ->add('first_name', TextType::class , array(
-                'attr' => array(
+            ->add('first_name', TextType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'First Name',
-                ),
+                ],
                 'label' => 'First Name',
                 'required' => true,
-            ))
-            ->add('last_name', TextType::class , array(
-                'attr' => array(
+            ])
+            ->add('last_name', TextType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'Last Name',
-                ),
+                ],
                 'label' => 'Last Name',
                 'required' => true,
-            ))
-            ->add('username', TextType::class , array(
-                'attr' => array(
+            ])
+            ->add('username', TextType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'Username',
-                ),
+                ],
                 'label' => 'Username',
                 'required' => true,
-            ))
-            ->add('email', TextType::class , array(
-                'attr' => array(
+            ])
+            ->add('email', TextType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'Email',
-                ),
+                ],
                 'label' => 'Email',
                 'required' => true,
-            ))
-            ->add('password', PasswordType::class , array(
-                'attr' => array(
+            ])
+            ->add('password', PasswordType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'Password',
-                ),
+                ],
                 'label' => 'Password, if not filled in a password will be generated.',
                 'required' => false,
-            ))
-            ->add('password_confirm', PasswordType::class , array(
-                'attr' => array(
+            ])
+            ->add('password_confirm', PasswordType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'confirmPassword',
-                ),
+                ],
                 'label' => 'Confirm password.',
                 'required' => false,
-            ))
-            ->add('Create', SubmitType::class , array(
-                'attr' => array(
+            ])
+            ->add('Create', SubmitType::class, [
+                'attr' => [
                     'class' => 'btn btn-primary',
                     'style' => 'margin: 10px;',
-                ),
-            ))
+                ],
+            ])
             ->getForm();
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
 
             $userData['first name'] = $formData['first_name'];
@@ -241,16 +237,14 @@ class AdminUserController extends Controller
                 $user = $usm->createUser($userData);
                 $this->em->persist($user);
                 $this->em->flush();
-                $dataArray['success'] = "User created!";
+                $dataArray['success'] = 'User created!';
             } catch (\Exception $e) {
-                $dataArray['error'] = "An Error occoured creating the user. the message is as follows: " . $e->getMessage();
+                $dataArray['error'] = 'An Error occoured creating the user. the message is as follows: '.$e->getMessage();
             }
-
         }
-
 
         $dataArray['form'] = $form->createView();
 
-        return $this->render('admin_user/create.user.html.twig' , $dataArray);
+        return $this->render('admin_user/create.user.html.twig', $dataArray);
     }
 }

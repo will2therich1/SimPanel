@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: Will
  * Date: 07/04/2018
- * Time: 21:20
+ * Time: 21:20.
  */
 
 namespace App\Service\Network;
-
 
 use App\Service\Security\EncryptionService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,12 +17,12 @@ use phpseclib\Net\SSH2;
 class NetworkServerService
 {
     /**
-     * @var EntityManagerInterface $em;
+     * @var EntityManagerInterface;
      */
     private $em;
 
     /**
-     * @var EncryptionService $encService
+     * @var EncryptionService
      */
     private $encService;
 
@@ -33,22 +32,20 @@ class NetworkServerService
     private $server;
 
     /**
-     * Location where the daemon stores its scripts
+     * Location where the daemon stores its scripts.
      *
      * @var string
      */
-    protected $scriptLocation = "/usr/local/sp/bin/";
+    protected $scriptLocation = '/usr/local/sp/bin/';
 
-
-    public function __construct(EntityManagerInterface $em , EncryptionService $encryptionService)
+    public function __construct(EntityManagerInterface $em, EncryptionService $encryptionService)
     {
         $this->em = $em;
         $this->encService = $encryptionService;
     }
 
     /**
-     *
-     * Creates us a new network Server
+     * Creates us a new network Server.
      *
      * @param array $serverData - The server data array as defined below
      *
@@ -60,12 +57,12 @@ class NetworkServerService
      * array['server ssh key password'] - the password for servers ssh key - NOT NEEDED IF NO PASSWORD
      *
      * @throws \Exception - If anything goes wrong!
+     *
      * @return NetworkServer - The new server object
      */
     public function createNewNetworkServer($serverData)
     {
         $newServer = new NetworkServer();
-
 
         $newServer->setServerName($serverData['server name']);
         $newServer->setServerIp($serverData['server ip']);
@@ -83,6 +80,7 @@ class NetworkServerService
      * Gets the network server via its id.
      *
      * @param $id - id of the server
+     *
      * @return NetworkServer|null|object - Server object
      */
     public function getServerById($id)
@@ -103,18 +101,18 @@ class NetworkServerService
         $keyFile = new RSA();
         $keyFile->loadKey($sshKey);
 
-        if ($sshKeyPassword !== '') {
-            error_log("Setting Password");
+        if ('' !== $sshKeyPassword) {
+            error_log('Setting Password');
             $keyFile->setPassword($sshKeyPassword);
         }
         // Try our connection
         try {
             $connection = new SSH2($host);
             $connectionTest = $connection->login($loginUser, $keyFile);
+
             return $connectionTest;
         } catch (Exception $e) {
             return false;
         }
     }
-
 }

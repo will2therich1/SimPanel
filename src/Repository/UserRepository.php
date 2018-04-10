@@ -1,10 +1,11 @@
 <?php
 /**
- * SimPanel User Repository
+ * SimPanel User Repository.
  *
  * @author William Rich
  * @copyright https://servers4all.documize.com/s/Wm5Pm0A1QQABQ1xw/simpanel/d/WnDQ5EA1QQABQ154/simpanel-license
  */
+
 namespace App\Repository;
 
 use App\Entity\User;

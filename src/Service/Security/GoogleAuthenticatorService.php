@@ -6,11 +6,10 @@
  * @copyright 2012 Michael Kliewe
  * @license http://www.opensource.org/licenses/bsd-license.php BSD License
  *
- * @link http://www.phpgangsta.de/
+ * @see http://www.phpgangsta.de/
  */
 
 namespace App\Service\Security;
-
 
 class GoogleAuthenticatorService
 {
@@ -21,7 +20,9 @@ class GoogleAuthenticatorService
      * 16 characters, randomly chosen from the allowed base32 characters.
      *
      * @param int $secretLength
+     *
      * @throws \Exception - cant find source of random
+     *
      * @return string
      */
     public function createSecret($secretLength = 16)
@@ -41,32 +42,33 @@ class GoogleAuthenticatorService
                 $rnd = false;
             }
         }
-        if ($rnd !== false) {
+        if (false !== $rnd) {
             for ($i = 0; $i < $secretLength; ++$i) {
                 $secret .= $validChars[ord($rnd[$i]) & 31];
             }
         } else {
             throw new Exception('No source of secure random');
         }
+
         return $secret;
     }
 
     /**
      * Calculate the code, with given secret and point in time.
      *
-     * @param string $secret
+     * @param string   $secret
      * @param int|null $timeSlice
      *
      * @return string
      */
     public function getCode($secret, $timeSlice = null)
     {
-        if ($timeSlice === null) {
+        if (null === $timeSlice) {
             $timeSlice = floor(time() / 30);
         }
         $secretkey = $this->_base32Decode($secret);
         // Pack time into binary string
-        $time = chr(0) . chr(0) . chr(0) . chr(0) . pack('N*', $timeSlice);
+        $time = chr(0).chr(0).chr(0).chr(0).pack('N*', $timeSlice);
         // Hash it with users secret key
         $hm = hash_hmac('SHA1', $time, $secretkey, true);
         // Use last nipple of result as index/offset
@@ -79,6 +81,7 @@ class GoogleAuthenticatorService
         // Only 32 bits
         $value = $value & 0x7FFFFFFF;
         $modulo = pow(10, $this->_codeLength);
+
         return str_pad($value % $modulo, $this->_codeLength, '0', STR_PAD_LEFT);
     }
 
@@ -88,39 +91,40 @@ class GoogleAuthenticatorService
      * @param string $name
      * @param string $secret
      * @param string $title
-     * @param array $params
+     * @param array  $params
      *
      * @return string
      */
-    public function getQRCodeGoogleUrl($name, $secret, $title = null, $params = array())
+    public function getQRCodeGoogleUrl($name, $secret, $title = null, $params = [])
     {
-        $width = !empty($params['width']) && (int)$params['width'] > 0 ? (int)$params['width'] : 200;
-        $height = !empty($params['height']) && (int)$params['height'] > 0 ? (int)$params['height'] : 200;
-        $level = !empty($params['level']) && array_search($params['level'],
-            array('L', 'M', 'Q', 'H')) !== false ? $params['level'] : 'M';
-        $urlencoded = urlencode('otpauth://totp/' . $name . '?secret=' . $secret . '');
+        $width = !empty($params['width']) && (int) $params['width'] > 0 ? (int) $params['width'] : 200;
+        $height = !empty($params['height']) && (int) $params['height'] > 0 ? (int) $params['height'] : 200;
+        $level = !empty($params['level']) && false !== array_search($params['level'],
+            ['L', 'M', 'Q', 'H']) ? $params['level'] : 'M';
+        $urlencoded = urlencode('otpauth://totp/'.$name.'?secret='.$secret.'');
         if (isset($title)) {
-            $urlencoded .= urlencode('&issuer=' . urlencode($title));
+            $urlencoded .= urlencode('&issuer='.urlencode($title));
         }
-        return 'https://chart.googleapis.com/chart?chs=' . $width . 'x' . $height . '&chld=' . $level . '|0&cht=qr&chl=' . $urlencoded . '';
+
+        return 'https://chart.googleapis.com/chart?chs='.$width.'x'.$height.'&chld='.$level.'|0&cht=qr&chl='.$urlencoded.'';
     }
 
     /**
      * Check if the code is correct. This will accept codes starting from $discrepancy*30sec ago to $discrepancy*30sec from now.
      *
-     * @param string $secret
-     * @param string $code
-     * @param int $discrepancy This is the allowed time drift in 30 second units (8 means 4 minutes before or after)
+     * @param string   $secret
+     * @param string   $code
+     * @param int      $discrepancy      This is the allowed time drift in 30 second units (8 means 4 minutes before or after)
      * @param int|null $currentTimeSlice time slice if we want use other that time()
      *
      * @return bool
      */
     public function verifyCode($secret, $code, $discrepancy = 1, $currentTimeSlice = null)
     {
-        if ($currentTimeSlice === null) {
+        if (null === $currentTimeSlice) {
             $currentTimeSlice = floor(time() / 30);
         }
-        if (strlen($code) != 6) {
+        if (6 != strlen($code)) {
             return false;
         }
         for ($i = -$discrepancy; $i <= $discrepancy; ++$i) {
@@ -129,6 +133,7 @@ class GoogleAuthenticatorService
                 return true;
             }
         }
+
         return false;
     }
 
@@ -142,6 +147,7 @@ class GoogleAuthenticatorService
     public function setCodeLength($length)
     {
         $this->_codeLength = $length;
+
         return $this;
     }
 
@@ -160,7 +166,7 @@ class GoogleAuthenticatorService
         $base32chars = $this->_getBase32LookupTable();
         $base32charsFlipped = array_flip($base32chars);
         $paddingCharCount = substr_count($secret, $base32chars[32]);
-        $allowedValues = array(6, 4, 3, 1, 0);
+        $allowedValues = [6, 4, 3, 1, 0];
         if (!in_array($paddingCharCount, $allowedValues)) {
             return false;
         }
@@ -183,9 +189,10 @@ class GoogleAuthenticatorService
             }
             $eightBits = str_split($x, 8);
             for ($z = 0; $z < count($eightBits); ++$z) {
-                $binaryString .= (($y = chr(base_convert($eightBits[$z], 2, 10))) || ord($y) == 48) ? $y : '';
+                $binaryString .= (($y = chr(base_convert($eightBits[$z], 2, 10))) || 48 == ord($y)) ? $y : '';
             }
         }
+
         return $binaryString;
     }
 
@@ -196,7 +203,7 @@ class GoogleAuthenticatorService
      */
     protected function _getBase32LookupTable()
     {
-        return array(
+        return [
             'A',
             'B',
             'C',
@@ -230,7 +237,7 @@ class GoogleAuthenticatorService
             '6',
             '7', // 31
             '=',  // padding char
-        );
+        ];
     }
 
     /**
@@ -257,6 +264,6 @@ class GoogleAuthenticatorService
             $result |= (ord($safeString[$i]) ^ ord($userString[$i]));
         }
         // They are only identical strings if $result is exactly 0...
-        return $result === 0;
+        return 0 === $result;
     }
 }
