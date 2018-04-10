@@ -20,12 +20,10 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-
 class AdminNetworkServerController extends Controller
 {
-
     /**
-     * @var EncryptionService $encryptionService
+     * @var EncryptionService
      */
     private $encryptionService;
 
@@ -43,9 +41,9 @@ class AdminNetworkServerController extends Controller
      * AdminNetworkServerController constructor.
      *
      * @param EncryptionService $encryptionService
-     * @param DataCompiler $dataCompiler
+     * @param DataCompiler      $dataCompiler
      */
-    public function __construct(EncryptionService $encryptionService , DataCompiler $dataCompiler , EntityManagerInterface $em)
+    public function __construct(EncryptionService $encryptionService, DataCompiler $dataCompiler, EntityManagerInterface $em)
     {
         $this->encryptionService = $encryptionService;
         $this->dataCompiler = $dataCompiler;
@@ -57,72 +55,71 @@ class AdminNetworkServerController extends Controller
         $dataArray = $this->dataCompiler->createDataArray('Network');
 
         $form = $this->createFormBuilder()
-            ->add('server_name', TextType::class , array(
-                'attr' => array(
+            ->add('server_name', TextType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'Server Name',
-                ),
+                ],
                 'label' => 'Server Name',
                 'required' => true,
-            ))
-            ->add('server_ip', TextType::class , array(
-                'attr' => array(
+            ])
+            ->add('server_ip', TextType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'Server Ip',
-                ),
+                ],
                 'label' => 'Server IP',
                 'required' => true,
-            ))
-            ->add('server_port', TextType::class , array(
-                'attr' => array(
+            ])
+            ->add('server_port', TextType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'Server FTP Port',
-                ),
+                ],
                 'label' => 'Server FTP Port',
                 'required' => true,
-            ))
-            ->add('login_user', TextType::class , array(
-                'attr' => array(
+            ])
+            ->add('login_user', TextType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'spd',
-                ),
+                ],
                 'label' => 'Server Login User',
                 'required' => true,
-            ))
-            ->add('server_ssh_private_key', TextareaType::class , array(
-                'attr' => array(
+            ])
+            ->add('server_ssh_private_key', TextareaType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'Paste in your ssh key here',
-                ),
+                ],
                 'label' => 'SSH Private Key',
                 'required' => true,
-            ))
-            ->add('server_ssh_private_key_password', PasswordType::class , array(
-                'attr' => array(
+            ])
+            ->add('server_ssh_private_key_password', PasswordType::class, [
+                'attr' => [
                     'class' => 'form-control form-control-success',
                     'id' => 'inputHorizontalSuccess',
                     'placeholder' => 'SSH Private key password if set!',
-                ),
+                ],
                 'label' => 'SSH Key password',
                 'required' => false,
-            ))
-            ->add('Create', SubmitType::class , array(
-                'attr' => array(
+            ])
+            ->add('Create', SubmitType::class, [
+                'attr' => [
                     'class' => 'btn btn-primary',
                     'style' => 'margin: 10px;',
-                ),
-            ))
+                ],
+            ])
             ->getForm();
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
             $serverData['server name'] = $formData['server_name'];
             $serverData['server ip'] = $formData['server_ip'];
@@ -131,22 +128,19 @@ class AdminNetworkServerController extends Controller
             $serverData['server ssh key'] = $formData['server_ssh_private_key'];
             $serverData['server ssh key password'] = $formData['server_ssh_private_key_password'];
 
-
             try {
                 $server = $networkServerService->createNewNetworkServer($serverData);
                 $this->em->persist($server);
                 $this->em->flush();
-                $dataArray['success'] = "Server created!";
+                $dataArray['success'] = 'Server created!';
             } catch (\Exception $e) {
-                $dataArray['error'] = "An Error occoured creating the admin. the message is as follows: " . $e->getMessage();
+                $dataArray['error'] = 'An Error occoured creating the admin. the message is as follows: '.$e->getMessage();
             }
-
         }
 
-
         $dataArray['form'] = $form->createView();
-        return $this->render('admin_network_server/create.network.server.html.twig' , $dataArray);
 
+        return $this->render('admin_network_server/create.network.server.html.twig', $dataArray);
     }
 
     public function testNetworkServerConnectionAPI(Request $request, NetworkServerService $networkServerService, $id)
@@ -154,21 +148,19 @@ class AdminNetworkServerController extends Controller
         try {
             $connection = $networkServerService->connectionTest($id);
             if ($connection) {
-                $returnData = array(
+                $returnData = [
                     'connected' => true,
-                );
+                ];
             }
         } catch (\Exception $e) {
-            $returnData = array(
+            $returnData = [
                 'connected' => false,
                 'error' => $e->getMessage(),
-            );
+            ];
         }
 
         $returnJson = json_encode($returnData);
 
         return new JsonResponse($returnJson);
-
     }
-
 }
