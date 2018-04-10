@@ -67,7 +67,6 @@ class DataCompiler
     public function createDataArray($active , $tab = null)
     {
 
-        $this->getCachedSiteInfo();
 
         $dataArray =[
             'active' => $active,
