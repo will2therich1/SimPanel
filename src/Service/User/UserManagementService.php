@@ -24,10 +24,20 @@ class UserManagementService
      */
     private $user;
 
+    /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
     public function __construct(EntityManagerInterface $em, TokenStorageInterface $tokenStorage)
     {
         $this->em = $em;
-        $this->user = $tokenStorage->getToken()->getUser();
+        $this->tokenStorage = $tokenStorage;
+    }
+
+    public function storeUser()
+    {
+        $this->user = $this->tokenStorage->getToken()->getUser();
     }
 
     /**

@@ -54,10 +54,18 @@ class SimpanelNewAdminCommand extends Command
         $userField['subuser'] = 0;
         $userField['admin'] = 1;
 
+        $io->title('Creating a new user');
+        $io->progressStart(count($fields));
+
         foreach ($fields as $field) {
+            $io->newLine();
             $fieldInput = $io->ask('Please provide the users: '.$field);
             $userField[$field] = $fieldInput;
+            $io->progressAdvance(1);
         }
+
+        $io->newLine();
+        $io->section('Thanks, Creating!');
 
         try {
             $user = $this->ums->createUser($userField);
