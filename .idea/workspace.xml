@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9012b8e-9cb9-4a6f-9dfb-8b6c3ab7724c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/simpanel-symf4.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/simpanel-symf4.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grumphp.yml" beforeDir="false" afterPath="$PROJECT_DIR$/grumphp.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/Network/AdminNetworkServerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/Network/AdminNetworkServerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -75,8 +69,8 @@
       <file leaf-file-name="grumphp.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grumphp.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+            <state relative-caret-position="340">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
             </state>
           </provider>
         </entry>
@@ -85,7 +79,7 @@
         <entry file="file://$PROJECT_DIR$/.php_cs.dist">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="160">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
@@ -490,7 +484,7 @@
       <workItem from="1523112832176" duration="640000" />
       <workItem from="1523114668720" duration="23505000" />
       <workItem from="1523297456664" duration="5580000" />
-      <workItem from="1523349782268" duration="9181000" />
+      <workItem from="1523349782268" duration="9534000" />
     </task>
     <task id="LOCAL-00001" summary="Adds caching for data called on every load - much faster!&#10;Starts implementing the new TFA methods via a listener and new page!">
       <created>1523359165736</created>
@@ -517,7 +511,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43203000" />
+    <option name="totallyTimeSpent" value="43556000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="0" width="1920" height="1080" extended-state="6" />
@@ -912,7 +906,7 @@
     <entry file="file://$PROJECT_DIR$/.php_cs.dist">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
@@ -928,8 +922,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grumphp.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+        <state relative-caret-position="340">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
