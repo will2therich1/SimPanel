@@ -1,7 +1,7 @@
 # SimPanel
 <a href="https://codeclimate.com/github/will2therich/SimPanel/maintainability"><img src="https://api.codeclimate.com/v1/badges/dbf9b4a7c27ebaf0ecf9/maintainability" /></a>
 
-A panel dedicated to making a server hosts life easier. designed for big & small implementations. All open source and all good! Currently designed to support ALL steamcmd installation games. External support is planned
+A panel dedicated to making a server hosts life easier. designed for big & small implementations. All open source and all good! Currently designed to support all steamcmd installation games. External support is planned
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
