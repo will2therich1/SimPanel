@@ -1,5 +1,6 @@
 # SimPanel
 <a href="https://codeclimate.com/github/will2therich/SimPanel/maintainability"><img src="https://api.codeclimate.com/v1/badges/dbf9b4a7c27ebaf0ecf9/maintainability" /></a>
+[![CodeFactor](https://www.codefactor.io/repository/github/will2therich/simpanel/badge)](https://www.codefactor.io/repository/github/will2therich/simpanel)
 
 A panel dedicated to making a server hosts life easier. designed for big & small implementations. All open source and all good! Currently designed to support all steamcmd installation games. External support is planned
 ## Getting Started
